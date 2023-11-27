@@ -1,0 +1,168 @@
+\documentclass{article} 
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[toc,page]{appendix}
+\usepackage{array}
+%%BIBLIO%%
+\usepackage[
+    %backend=biber,
+    style=numeric,
+    sorting=none
+]{biblatex}
+\usepackage{caption}
+\usepackage{capt-of}
+\usepackage{chemist}
+\usepackage[babel]{csquotes}
+\usepackage{eso-pic}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{fullwidth}
+\usepackage{gensymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{makecell}
+\usepackage{mathptmx} % curly L
+\usepackage{placeins}
+\usepackage{tabulary}
+\usepackage{tasks}
+\usepackage{titlesec}
+\usepackage{subcaption}
+\usepackage{wrapfig, lipsum}
+\usepackage{xcolor}
+
+\definecolor{oxfordblue}{RGB}{0,32,68}
+\definecolor{greenforest}{RGB}{34,139,34}
+\definecolor{darkbrown}{RGB}{63, 42, 20}
+\definecolor{darkgrey}{RGB}{105,105,105}
+\definecolor{darkpink}{RGB}{219,112,147}
+
+\addbibresource{mybiblio.bib}
+\hypersetup{%
+    citecolor={blue},
+    pdfborder = {0 0 0},
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+	anchorcolor=red,
+	linktocpage
+}
+
+% Tabular data
+\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Footnotes
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+% Centred columns in table of fixed length
+% Needs \usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For the glossary
+\usepackage[automake, acronym, nomain, nonumberlist]{glossaries}
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
+\makeglossaries
+
+\newacronym{atlas}{ATLAS}{A Toroidal LHC ApparatuS}
+\newacronym{ckm}{CKM}{Cabibbo–Kobayashi–Maskawa}
+\newacronym{ftag}{FTAG}{Flavour Tagging Group}
+\newacronym{dl}{DL}{Deep Learning}
+\newacronym{dl1}{DL1}{Deep Learner 1 Model}
+\newacronym{dl1r}{DL1r}{Deep Learner 1 Model with RNNIP input}
+\newacronym{dl1d}{DL1d}{Deep Learner 1 Model with DIPS input}
+\newacronym{dips}{DIPS}{Deep Impact Parameter Sets}
+\newacronym{gnn}{GNN}{Graph Neural Network}
+\newacronym{gn1}{GN1}{Graph Network 1 Model}
+\newacronym{gn2}{GN2}{Graph Network 2 Model}
+\newacronym{ip}{IP}{Impact Parameter}
+\newacronym{ml}{ML}{Machine Learning}
+\newacronym{mc}{MC}{Monte Carlo}
+\newacronym{pv}{PV}{Primary Vertex}
+\newacronym{qcd}{QCD}{Quantum Chromodynamics}
+\newacronym{rnnip}{RNNIP}{Recurrent Neural Network Impact Parameter}
+\newacronym{roc}{ROC}{Receiver Operating Characteristic}
+\newacronym{sf}{SF}{Scale Factors}
+\newacronym{sm}{SM}{Standard Model}
+\newacronym{sv1}{SV1}{Secondary Vertex method 1}
+\newacronym{sv}{SV}{Secondary Vertex}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Maxence DRAGUET}
+\title{DPhil Thesis}
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center 
+\vspace*{2cm}
+\textsc{\LARGE University of Oxford}\\[0.5cm] 
+\textsc{\large Doctorate of Philosophy}\\[0.3cm]
+\textsc{\large Particle Physics}\\[2.5cm]
+
+{\LARGE \bfseries \color{oxfordblue} DPhil Thesis\\[0.7cm]} 
+\HRule \\[0.4cm]
+{\huge \bfseries \color{oxfordblue} Advanced Machine Learning Applications for the Study of the Dance of the Higgs and Heavy Flavour Quarks at ATLAS}\\[0.4cm] 
+\HRule \\[1.5cm]
+
+    \begin{minipage}{0.4\textwidth}
+    \begin{center}
+    {\textit{Candidate}\\[0.2cm]
+    \Large Maxence DRAGUET}\\[0.3cm]
+     {\textit{Supervisor}\\[0.2cm]
+    \Large Daniela BORTOLETTO}\\
+		
+    \end{center}
+    \end{minipage}
+
+\begin{figure}[b]
+\centering
+{\large 2020-2024}\\[1cm]
+\includegraphics[scale=0.15]{Images/Oxford_Logo.png}\\[1cm] 
+\end{figure}
+\vfill 
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+\printglossary[type=\acronymtype,title=List of Abbreviations]
+
+\newpage
+\input{Sections/C0_Abstract}
+
+\newpage
+\input{Sections/C1_Intro}
+
+\newpage
+\input{Sections/C2_Theory}
+
+\newpage
+\input{Sections/C3_ATLAS}
+
+\newpage
+\input{Sections/C4_FTAG}
+
+\newpage
+\input{Sections/C5_VH}
+
+\newpage
+\printbibliography
+
+% \listoffigures
+
+\pagebreak
+\end{document}
