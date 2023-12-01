@@ -1,0 +1,92 @@
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[toc,page]{appendix}
+\usepackage{array}
+%%BIBLIO%%
+\usepackage[
+    %backend=biber,
+    style=numeric,
+    sorting=none
+]{biblatex}
+\usepackage{caption}
+\usepackage{capt-of}
+\usepackage{chemist}
+\usepackage[babel]{csquotes}
+\usepackage{eso-pic}
+\usepackage{fancyhdr} % for headers and footers
+\usepackage[Sonny]{fncychap}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{fullwidth}
+\usepackage{gensymb}
+\usepackage[left=2 cm, right=2 cm, top=2 cm, bottom=2 cm]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{makecell}
+\usepackage{mathptmx} % curly L
+\usepackage{placeins}
+\usepackage{subcaption}
+\usepackage{tabulary}
+\usepackage{tasks}
+\usepackage{titlesec}
+\usepackage{tcolorbox}  % for box summaries
+\usepackage{wrapfig, lipsum}
+\usepackage{xcolor}
+
+\definecolor{oxfordblue}{RGB}{0,32,68}
+\definecolor{greenforest}{RGB}{34,139,34}
+\definecolor{darkbrown}{RGB}{63, 42, 20}
+\definecolor{darkgrey}{RGB}{105,105,105}
+\definecolor{darkpink}{RGB}{219,112,147}
+
+\addbibresource{mybiblio.bib}
+\hypersetup{%
+    citecolor={blue},
+    pdfborder={0 0 0},
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+	anchorcolor=red,
+	linktocpage
+}
+
+% Tabular data
+\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Footnotes
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+% Centred columns in table of fixed length
+% Needs \usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+% For the glossary
+\usepackage[acronym, nomain, nonumberlist, nopostdot, nogroupskip]{glossaries}
+\usepackage{glossary-mcols}
+\renewcommand*{\glspostdescription}{} % Removes dots at the end of each entry.
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
+
+% Headers & Footers
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhf{}
+\fancyhead[L]{\small Chapter \thechapter: \leftmark}
+\fancyhead[R]{\small  University of Oxford}
+\lfoot{}
+\cfoot{\thepage}
+\interfootnotelinepenalty=10000
+\setlength{\marginparwidth}{25mm}
+\newlength\FHright
+\setlength\FHright{0 mm}
+
+\pagestyle{fancy}
