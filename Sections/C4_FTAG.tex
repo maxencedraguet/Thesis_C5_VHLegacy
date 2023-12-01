@@ -89,9 +89,9 @@ In order to establish a meaningful benchmark for the newly trained taggers, the 
 
 Figure \ref{fig:DL1dtt} presents the \gls{roc} curves on the $t\bar{t}$ (left) and $Z'$ (right) samples for  $b$-tagging. These \gls{roc} plots show, on the $x$-axis, the $b$-tagging efficiency ($\epsilon^b_b$ ) versus, on the $y$-axis, the rejection $\mathcal{R}^b_Y$ for $Y \in$ [$c$, light]. The two bottom sub-plots present the ratio of the c-jet rejection and light-jet rejection curves to the blue ones. This blue curve is the recommended \gls{dl1r} performance and serves as the baseline of the comparison, while the new tagger \gls{dl1d} is plotted in orange. Figure \ref{fig:DL1dz} shows the same plots for $c$-tagging, with respect to $b$- and light-jet rejection.  The important observation is the clear gain obtained when replacing \gls{rnnip} with \gls{dips}. Both the $b$- and $c$-tagging performance of \gls{dl1d} clearly dominate the \gls{dl1r} version, with a significant improvement in background flavour rejection for all tagging efficiency considered, as summarised in Table \ref{tab:max-perf}. The largest improvement in performance is obtained for $b$-tagging on the $t\bar{t}$ process, corresponding to a lower jet momentum. \\
 
-In the light-rejection from $b$-jets \gls{roc} curves in Figure \ref{fig:DL1dtt}, there is an elbow in the curve at high $b$-jet efficiency. This effect is also present in the $b$-rejection from $c$-tagging, in Figure \ref{fig:\glsDL1dz}. Both correspond to a set of, respectively, light-jets and $b$-jets that do not overlap with the $b$-jets $b$-tagging and $c$-jets $c$-tagging discriminants distributions, as shown in Figures \ref{fig:scoreDL1dtt} and \ref{fig:scoreDL1dz}. These ``background`` jets are easily removed from the core set of ``signal'' jets due to internal differences between the flavours and the discrete nature of some sub-taggers used.  \\
+In the light-rejection from $b$-jets \gls{roc} curves in Figure \ref{fig:DL1dtt}, there is an elbow in the curve at high $b$-jet efficiency. This effect is also present in the $b$-rejection from $c$-tagging, in Figure \ref{fig:DL1dz}. Both correspond to a set of, respectively, light-jets and $b$-jets that do not overlap with the $b$-jets $b$-tagging and $c$-jets $c$-tagging discriminants distributions, as shown in Figures \ref{fig:scoreDL1dtt} and \ref{fig:scoreDL1dz}. These ``background`` jets are easily removed from the core set of ``signal'' jets due to internal differences between the flavours and the discrete nature of some sub-taggers used.  \\
 
-The background rejections of the various taggers for $b$-tagging ($c$-tagging) as a function of the jet transverse momentum at a fixed $b$-efficiency of 70\% ($c$-efficiency of 30\%) per region displayed are shown in Figure \ref{fig:pt\glsDL1dtt} (Figure \ref{fig:ptDL1dz}). Throughout the $p_T$ range considered, \gls{dl1d} outperforms the \gls{dl1r} tagger. The low $p_T$ $b$-rejection from $c$-jets is noticeably better for the retrained tagger compared to \gls{dl1r}. 
+The background rejections of the various taggers for $b$-tagging ($c$-tagging) as a function of the jet transverse momentum at a fixed $b$-efficiency of 70\% ($c$-efficiency of 30\%) per region displayed are shown in Figure \ref{fig:pt\DL1dtt} (Figure \ref{fig:ptDL1dz}). Throughout the $p_T$ range considered, \gls{dl1d} outperforms the \gls{dl1r} tagger. The low $p_T$ $b$-rejection from $c$-jets is noticeably better for the retrained tagger compared to \gls{dl1r}. 
 
 %
 \begin{center}
@@ -166,14 +166,14 @@ The background rejections of the various taggers for $b$-tagging ($c$-tagging) a
 \includegraphics[scale=0.5]{Images//FTAG/Reprocessed/plotting_variables/scores_DL1_zprime_300.pdf}
 }
 \caption{Distribution of \gls{dl1d} $b$-tagging discriminant for the different jet flavours, evaluated on $t\bar{t}$ (left) and $Z'$ (right).}
-\label{fig:score\gls{dl1d}tt}
+\label{fig:scoreDL1dtt}
 \centerline{
 \includegraphics[scale=0.5]{Images/FTAG/Reprocessed/plotting_variables_c/scores_DL1_ttbar_c_299.pdf}
 \includegraphics[scale=0.5]{Images/FTAG/Reprocessed/plotting_variables_c/scores_DL1_zprime_c_299.pdf}
 }
 %\vspace{-0.3cm}
 \caption{Distribution of \gls{dl1d} $c$-tagging discriminant for the different jet flavours, evaluated on $t\bar{t}$ (left) and $Z'$ (right).}
-\label{fig:score\gls{dl1d}z}
+\label{fig:scoreDL1dz}
 \end{figure}
 \end{center}
 %
@@ -191,7 +191,7 @@ The background rejections of the various taggers for $b$-tagging ($c$-tagging) a
 \includegraphics[scale=0.425]{Images//FTAG/Reprocessed/plotting_eff_vs_pt/pT_vs_beff_u_zp_300.pdf}
 }
 \caption{Background flavour rejections at a fixed $b$-tagging efficiency of 70\% (per region shown) for the various taggers. Top: $t\bar{t}$; bottom: $Z'$; left: $c$-rejection; right: light-rejection. For each plot, the bottom panel presents the ratio to the recommended \gls{dl1r}.}
-\label{fig:pt\gls{dl1d}tt}
+\label{fig:ptDL1dtt}
 \bigskip
 \centerline{
 \includegraphics[scale=0.425]{Images//FTAG/Reprocessed/plotting_eff_vs_pt_c/pT_vs_beff_c_tt_299.pdf}
@@ -201,7 +201,7 @@ The background rejections of the various taggers for $b$-tagging ($c$-tagging) a
 \includegraphics[scale=0.425]{Images//FTAG/Reprocessed/plotting_eff_vs_pt_c/pT_vs_beff_u_zp_299.pdf}
 }
 \caption{Background flavour rejections at a fixed $c$-tagging efficiency of 30\% (per region shown) for the various taggers. Top: $t\bar{t}$; bottom: $Z'$; left: $b$-rejection; right: light-rejection. For each plot, the bottom panel presents the ratio to the recommended \gls{dl1r}.}
-\label{fig:pt\gls{dl1d}z}
+\label{fig:ptDL1dz}
 \end{figure}
 \end{center}
 
