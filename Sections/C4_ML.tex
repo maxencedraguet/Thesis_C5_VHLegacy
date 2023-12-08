@@ -1,0 +1,103 @@
+\chapter{Machine Learning and Deep Learning}
+
+\section{Introduction}
+This chapter is entirely dedicated to a review of relevant \gls{ml} and \gls{dl} methods in the context of \gls{hep}. As for every other fields of science and technology, the recent advancements in the domain of \gls{ai} have introduced a shift of paradigm in particle physics. Before continuing with the review, some definitions of these different terms is suggested to decrypt their meaning.
+
+\subsection{Definitions}
+\subsubsection{Artificial Intelligence}
+Artificial Intelligence encapsulates any piece of software, any \textit{programs}, that mimics an aspect of human intelligence. A non-exhaustive list of these aspects include: 
+\begin{itemize}
+    \item \textit{Reasoning}, the ability to conduct logical thoughts down to conclusions, 
+    \item \textit{Inferring}, the ability to connect logical statements to induce new statements,
+    \item \textit{Creativity}, the ability to generate new information. 
+    \item \textit{Acting}, the ability to change the environment, particularly studied in the field of robotics. 
+\end{itemize}
+\gls{ai} is a large field of study that contains among many the area of robotics, natural language processing, computer vision, generative models, reinforcement learning. Artificial intelligence is broadly separated into three levels of performance, of which only the first one is currently accessible: 
+\begin{enumerate}
+    \item Narrow Intelligence: representing artificial intelligence capabilities on a specific problem, for which the underlying software is uniquely trained. This field includes \textit{reactive \gls{ai}}, where a model would be trained to output an optimal move based on current conditions only (e.g., the IBM chess player Deep Blue), and \textit{limited memory \gls{ai}}, where a model is able to draw knowledge from past data to make decision (e.g., any \gls{ml} model, such as the OpenAI chatGPT chat-box).
+    \item Artificial General Intelligence: representing an artificial intelligence capable of matching human problem-solving skills. In particular, this hypothetical setting would let a machine learn new tasks on its own and extrapolate from its existing knowledge. 
+    \item Artificial Super Intelligence: describes a hypothetical type of intelligence able to exceed human abilities and exhibit independent control of thoughts. 
+\end{enumerate}
+
+The inception of reactive \gls{ai} can be found in the research into games in the 50s and 60s. This approach saw the rise of algorithms capable of searching for the optimal move in large search spaces of possible actions using heuristics, human-passed knowledge of useful features of the specific environment of the game (e.g., the point system for chess pieces, with a queen being worth more than a simple pion). In this reactive approach, neither the rules of the game nor the decision process are learnt. The former is forced into the search logic and the latter is the outcome of the search process.
+
+\subsubsection{Machine Learning} 
+Machine Learning underpins the field of narrow \gls{ai} with limited memory capabilities. It represents a shift of paradigm in \gls{ai}: moving away from human-declared logic-based rules written in a specific syntax \[\textrm{\textit{If x happens, do y}},\] it automates the representation and update with mathematical models of both the dataspace ($\mathcal{D}$) and the learning process: \[\forall\, x \in \mathcal{D}, \textrm{ do }f(x) = \hat{y}; \textrm{ update }f(x) \textrm{ given } (x, y).\] In this respect, both the internal representation of the rules and the decision-making is underpinned by the trained mathematical model $f$.\\
+Two general steps are combined into a model defined by learnable parameters: 
+\begin{enumerate}
+    \item Learning: the parameters of the model are updated based on a specified training or fit procedure, depending on whether the training will be progressively exposed to the data points of a training dataset or directly exposed to entirety of the set. The objective is to align the output of the model with the expected behaviour: given the couple $(x, y)$, let $f(x) = \hat{y} \rightarrow y$ under training convergence - this means the model $f$ has to become an unbias estimate of the label $y$. 
+    \item Inferring: a trained model has to give its output on a new data point: $f(a) = \hat{b}$.
+\end{enumerate}
+The training process will depend on the type of model being deployed. These can be broadly separated into two fields:
+\begin{itemize}
+    \item Classical machine learning: includes decision trees (XGBoost, \gls{bdt} or \gls{mva}, random forest, ...), Support Vector Machine (SVM), logistic regression, kernel methods, ...
+    \item Deep Learning (\gls{dl}): these methods are based on a core module call the Artificial Neural Network. This module is stacked into layers of given width, meaning a given number of neurons, and several layers of such modules are then connected along depth. 
+\end{itemize}
+
+\subsubsection{Deep Learning} 
+Deep Learning corresponds to a specific set of methods who have quickly grown in popularity around 2010, with widely advertised results on competitive benchmark tasks in pattern recognition, as exemplified by the super-human performance of the \textit{DanNet} \cite{DanNet} model based on \gls{cnn}s \cite{NIPS1989_53c3bce6}. The basis of any \gls{dl} method is the Artificial Neural Network, a logical unit built to mimic the functioning of a human neuron. These neurons are then combined into layers of any numbers of neurons (the width of the layer) and the layers themselves are stacked into depth, with deeper layer receiving as input the output of earlier neurons. Different \gls{dl} models are constructed by modifying the structure of the layers - in particular, the input, output, and activation function used - and the transfer the information between neurons, be that between layers, depth-wise, or  between neurons, width-wise.\\
+The task of a \gls{ml} model can be mutlifold the amount of human intervention \cite{Murphy_ML}: 
+\begin{itemize}
+    \item Classification: the task of assigning a label to a data sample, e.g., this jet is labelled a $b$-jet. The general case is multiclass, with $n$ labels possible, while a particular and common case is the binary classification case ($n = 2$).
+    \item Regression: the task of predicting a continuous variable based on a data sample, e.g., the momentum of the particle is 15 GeV/$c$. 
+    \item Feature extraction: given a dataset with specific features, reconstruct new features, e.g., given a set of tracks, reconstruct the secondary vertex. This case is a multidimensional case of regression combined with classificiation (do the tracks share a vertex?).
+    \item Generation: given a sample of 1 million $t\bar{t}$ events, sample 10 new data points from the underlying statistical model. 
+    \item Anomaly detection: identify and flag rare events in a dataset
+\end{itemize}
+
+There exist different paradigms of \gls{ml} models, divided mostly along the lines of the amount of human intervention \cite{Murphy_ML}:
+\begin{itemize}
+    \item \textit{Supervised learning}: the data used for training is endowed with the information the model must extrapolate. It is therefore restrain to generate information target directly by the learning process. Classificiation and regression are the most common examples.
+    \item \textit{Unsupervised learning}: the data is not endowed with the information the model must learn to infer. The model is therefore trained with an objective to optimise without human intervention, and must discover patterns and insights without any guidance. Generative models and clsutering are prime examples.
+    \item \textit{Semi-supervised learning}: also called \textit{weak supervision}, is a paradigm combining the two above. The model is mostly unsupervised but can benefit from some labelled cases or human input (a technique also named \textit{active learning}). A prime example is that a clustering tasks followed by a classification of the formed clusters. This is particularly fruitful when the cost of labelling the data is expensive, as is the case with real human data but thankfully not so in the case of particle physics data.
+    \item Reinforcement Learning:
+    \item 
+\end{itemize}
+
+Given how important \gls{dl} methods have become in all technological fields, this chapter is primarily dedicated to introducing some of its approaches relevant to \gls{hep}. This form of \gls{ai} is indeed specifically well-suited to the setting of the \gls{atlas} experiment, as it enjoys:
+\begin{itemize}
+    \item large datasets of both real and simulated data are readily available,
+    \item thanks to advanced \gls{mc}-based simulation programs, the simulated data points are faithful representations of the real data,
+    \item the data and data-model from which the data originates is well understood in physics, the former coming from measurements from well-calibrated detectors and the second from crafted theories of the field. 
+\end{itemize}
+
+
+\section{Machine Learning Methods for Physics}
+High-energy physicists enjoy a special relationship with \gls{ml} methods. Experimental particle physics largely relies on statistical analyses of complex and large datasets, be that simulated using \gls{mc} methods or collected from sophisticated detector apparata. A typical physics analysis can be described as the succession of four main steps:
+\begin{enumerate}
+    \item Data collection: real data is collected from a detector exposed to the underlying physics desired, e.g., at CERN placing and callibrating the \gls{atlas} detector at an interaction point of the \gls{lhc} to collect proton-proton collision data. 
+    \item Simulated data is generated to match the condition of collection of the real data - in terms detector effects and operational conditions such as energy, \gls{pu} and luminosity. This simulated data englobes the best of our current theorical knowledge of the law of physics. 
+    \item An analysis strategy is established, with objective to similarly restrict the full dataset of both simulated and real data to a portion of the data-space that is most sensitive to the search signal or process. The sensitivity aspect underlies the need to take into account limited knowledge of the theorical physics, limited precision of the apparata, limited statistics of both simulations and data collected. To optimise the analysis, selection rules are derived based on physically accessible information, e.g., the centre-of-mass energy, presence of leptons, or the transverse momentum \pt.
+    \item With the optimally selected set of real and simulated data, a statistical model is built to quantify the agreement of the measured data with the expectations from the theory under the conditions of the experiment. This is most often achieved through a likelihood computation.
+\end{enumerate}
+
+Modern advanced machine learning has the potential to improve all steps of this process:
+\begin{enumerate}
+    \item The operationial side of running the detector and the accelerator pipeline can benefit from \gls{rl} methods for improved control of the different electronic device. Triggers, an essential component of the \gls{atlas} experiment can be upgraded to use sophisticated \gls{dl} model running online thanks to a hardware back-bone built on \gls{fpga}s.
+    \item Simulating a dataset through \gls{mc} approach is a computationally intensive task. Each event must pass through a selection of probabilistic step, with only a sastifying all requirements ending in the usable sample. This process can be speed-up and optimised significantly, but the costs remain significant to generate sample of sufficient statistics. Generative \gls{ai} has the potential to accelerate this step by giving statistical model that are possible to sample efficiently. \gls{gan} and \gls{vae} have been shown to perform the sampling step in a competitive amount of time. However, a key limitation of these stasticial approach is their limited ability to encorporate the sophisticated theorical model required to simulate the data, with any discrepancy or unclosure introducing levels of disagreement that are counter-productive for the final objective of the physics analyses.
+    \item This is where \gls{ml} methods have been most successfully applied in particle physics, where they really shine. Historically, physicists have relied on a cut-base approach to select their data: they painfully analyse relevant variables to the physics problem to try and identify the best features to use to restrict the dataspace through manually-set restrictions. For example, in a measurement of $Z$-bosons decaying to two charged leptons $l^+l^-$ search, restricting the invariant mass of the lepton pair $m_{l^+l^-}$ to lie close the $Z$-boson rest mass $m_Z \approx 91.19$ GeV/$c^2$ is beneficial, as most of the search process will be found there. Machine learning is able to entirely bypass this need, learning directly from an appropriate set of signal and background datasets a transformation of the input data features to a discriminant optimising the separation of signal from background. 
+    \item The likelihood function of the constructed statistical test, verifying the level of agreement between the real data and the theory through the simulated sample, can be directly learnt by a model given access to both sets. Furthermore, anamoly detection settings, such as those in the search for unknown resonance, can be derived using model \gls{ml} in an unsupervised setting, thereby automatiting the discovery process directly and requiring only real data. 
+\end{enumerate}
+
+\subsection{Decision Trees}
+
+\subsection{Boosted Decision Trees}
+
+\subsection{Artificial Neural Network}
+
+\subsection{Multilayer Perceptron}
+
+\subsection{Recurrent Neural Network}
+
+\subsection{Convolutional Neural Network}
+
+\subsection{Graph Neural Network}
+
+\subsection{The rise of the Transformer}
+
+\subsection{Generative Models: GAN \& VAE}
+
+\subsection{Reinforcment Learning}
+
+\section{Training and Optimising Deep Learning Models}
+
