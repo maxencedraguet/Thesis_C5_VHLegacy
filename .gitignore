@@ -7,3 +7,5 @@ main.o*
 main.r*
 main.s*
 main.toc
+*vscode*
+*DS_Store

@@ -50,8 +50,7 @@ There exist different paradigms of \gls{ml} models, divided mostly along the lin
     \item \textit{Supervised learning}: the data used for training is endowed with the information the model must extrapolate. It is therefore restrain to generate information target directly by the learning process. Classificiation and regression are the most common examples.
     \item \textit{Unsupervised learning}: the data is not endowed with the information the model must learn to infer. The model is therefore trained with an objective to optimise without human intervention, and must discover patterns and insights without any guidance. Generative models and clsutering are prime examples.
     \item \textit{Semi-supervised learning}: also called \textit{weak supervision}, is a paradigm combining the two above. The model is mostly unsupervised but can benefit from some labelled cases or human input (a technique also named \textit{active learning}). A prime example is that a clustering tasks followed by a classification of the formed clusters. This is particularly fruitful when the cost of labelling the data is expensive, as is the case with real human data but thankfully not so in the case of particle physics data.
-    \item Reinforcement Learning:
-    \item 
+    \item\textit{Reinforcement Learning}: this paradigm of \gls{ml} is dedicated to the setting of a game theoretic environment. An agent must explore its environment and can act by choosing a specific policy. In \gls{rl}, the objective is for the agent to learn how to construct the most optimal policy to satisfy a reward function.
 \end{itemize}
 
 Given how important \gls{dl} methods have become in all technological fields, this chapter is primarily dedicated to introducing some of its approaches relevant to \gls{hep}. This form of \gls{ai} is indeed specifically well-suited to the setting of the \gls{atlas} experiment, as it enjoys:
@@ -67,7 +66,9 @@ High-energy physicists enjoy a special relationship with \gls{ml} methods. Exper
 \begin{enumerate}
     \item Data collection: real data is collected from a detector exposed to the underlying physics desired, e.g., at CERN placing and callibrating the \gls{atlas} detector at an interaction point of the \gls{lhc} to collect proton-proton collision data. 
     \item Simulated data is generated to match the condition of collection of the real data - in terms detector effects and operational conditions such as energy, \gls{pu} and luminosity. This simulated data englobes the best of our current theorical knowledge of the law of physics. 
-    \item An analysis strategy is established, with objective to similarly restrict the full dataset of both simulated and real data to a portion of the data-space that is most sensitive to the search signal or process. The sensitivity aspect underlies the need to take into account limited knowledge of the theorical physics, limited precision of the apparata, limited statistics of both simulations and data collected. To optimise the analysis, selection rules are derived based on physically accessible information, e.g., the centre-of-mass energy, presence of leptons, or the transverse momentum \pt.
+    \item The detector of a modern particle physics experiment is a complex set of sub-detector system sensitive to different physical phenomena, as described in chapter %\ref{.}
+    This low-level information collected by different device must be processed and recombine to generate \textit{objects}, aggregated information that often hold physical interpretation. For examples, from hits in the tracking detector a track can be fitted and some of its physical properties, such as \pt reconstructed. This task corresponding to a mapping from \textit{low}-level $\rightarrow$ \textit{high}-level measurement information can benefit from \gls{ml} in many ways. Broadly, \gls{ml}-based method can offer scalable, efficient, and precise solutions to this object reconstruction step. 
+    \item An analysis strategy is established, with objective to similarly restrict the full dataset of both simulated and real data to a portion of the data-space that is most sensitive to the search signal or process. The sensitivity aspect underlies the need to take into account limited knowledge of the theorical physics, limited precision of the apparata, limited statistics of both simulations and data collected. To optimise the analysis, selection rules are derived based on physically accessible information, e.g., the centre-of-mass energy, presence of leptons, the transverse momentum \pt, and other high-level object reconstructed in the previous step.
     \item With the optimally selected set of real and simulated data, a statistical model is built to quantify the agreement of the measured data with the expectations from the theory under the conditions of the experiment. This is most often achieved through a likelihood computation.
 \end{enumerate}
 
@@ -75,13 +76,66 @@ Modern advanced machine learning has the potential to improve all steps of this 
 \begin{enumerate}
     \item The operationial side of running the detector and the accelerator pipeline can benefit from \gls{rl} methods for improved control of the different electronic device. Triggers, an essential component of the \gls{atlas} experiment can be upgraded to use sophisticated \gls{dl} model running online thanks to a hardware back-bone built on \gls{fpga}s.
     \item Simulating a dataset through \gls{mc} approach is a computationally intensive task. Each event must pass through a selection of probabilistic step, with only a sastifying all requirements ending in the usable sample. This process can be speed-up and optimised significantly, but the costs remain significant to generate sample of sufficient statistics. Generative \gls{ai} has the potential to accelerate this step by giving statistical model that are possible to sample efficiently. \gls{gan} and \gls{vae} have been shown to perform the sampling step in a competitive amount of time. However, a key limitation of these stasticial approach is their limited ability to encorporate the sophisticated theorical model required to simulate the data, with any discrepancy or unclosure introducing levels of disagreement that are counter-productive for the final objective of the physics analyses.
-    \item This is where \gls{ml} methods have been most successfully applied in particle physics, where they really shine. Historically, physicists have relied on a cut-base approach to select their data: they painfully analyse relevant variables to the physics problem to try and identify the best features to use to restrict the dataspace through manually-set restrictions. For example, in a measurement of $Z$-bosons decaying to two charged leptons $l^+l^-$ search, restricting the invariant mass of the lepton pair $m_{l^+l^-}$ to lie close the $Z$-boson rest mass $m_Z \approx 91.19$ GeV/$c^2$ is beneficial, as most of the search process will be found there. Machine learning is able to entirely bypass this need, learning directly from an appropriate set of signal and background datasets a transformation of the input data features to a discriminant optimising the separation of signal from background. 
-    \item The likelihood function of the constructed statistical test, verifying the level of agreement between the real data and the theory through the simulated sample, can be directly learnt by a model given access to both sets. Furthermore, anamoly detection settings, such as those in the search for unknown resonance, can be derived using model \gls{ml} in an unsupervised setting, thereby automatiting the discovery process directly and requiring only real data. 
+    \item \gls{dl} is particularly well-suited for the object reconstruction task. Important examples in \gls{atlas} are identifying particles in the detector (e.g., $\tau$ identification), reconstructing missing transverse energe ($E_T$) in the triggers, and classifying heavy-flavour jets - as exemplified in the next chapter of this thesis dedicated to flavour tagging. 
+    \item Historically, physicists have relied on a cut-base approach to select their data: they painfully analyse relevant variables to the physics problem to try and identify the best features to use to restrict the dataspace through manually-set restrictions. For example, in a measurement of $Z$-bosons decaying to two charged leptons $l^+l^-$ search, restricting the invariant mass of the lepton pair $m_{l^+l^-}$ to lie close the $Z$-boson rest mass $m_Z \approx 91.19$ GeV/$c^2$ is beneficial, as most of the search process will be found there. Machine learning is able to entirely bypass this need, learning directly from an appropriate set of signal and background datasets a transformation of the input data features to a discriminant optimising the separation of signal from background. 
+    \item The likelihood function of the constructed statistical test, verifying the level of agreement between the real data and the theory through the simulated sample, can be directly learnt by a model given access to both sets. Furthermore, anamoly detection settings, such as those in the search for unknown resonances, can be derived using model \gls{ml} in an unsupervised setting, thereby automating the discovery process and requiring only real data. 
 \end{enumerate}
 
+One of the focus of this thesis can be broadly summarised as contributing to step 2 in the aformentioned list: developping \gls{dl}-tools for improved object reconstruction. The analysis presented in the latter part of this document also introduces some classical \gls{ml} technique of data selection - step 3. The rest of this chapter consists in a review of the relevant \gls{ml} methods. 
+
 \subsection{Decision Trees}
+\gls{dt}, also called textit{Classification and Regression Trees} (CART) are the bread and butter of any data analysis. They are simple to train, give a good ground performance for both classification and regression tasks, and are white box model - meaning they are easy to interpret. Underlying the model is a recursive partitioning approach of the input space \cite{Murphy_ML}. Labelling a partition step as \textit{node}, the tree structures emmerges from a \textit{root} state that is subsquently partitioned along different branches with one \textit{leaf} per final region. The splits are done along a feature of the input space, and the method accept both discrete categorical values (e.g., the label of a lepton as $e, \mu, \tau$) and continuous values (e.g., $m_l$). A simple classification tree structure can be represented as the following tree:
+
+\Tree[.\textit{$x_i \leq c_i$} [.{True \\\textit{$x_j \geq c_j$}} [.True 1 ]
+            [.False 0 ]]
+        [.{False \\\textit{$x_k \leq c_k$}} [.True 0 ]
+            [.{False \\{\textit{$x_l$} is \textit{$e$}}} [.True 0 ]
+                            [.False 1 ]]]]
+
+At each node there is a learnt condition with $x_i, x_j, x_k$ being continuous features of the dataset that are cut on $c_i, c_j, c_k$ and $c_l$ is a categorical feature (is the lepton an electron). The leaf values are the output of the tree in different regions defined by the combination of successive selections - here a binary variable. \\
+Finding the optimal set of partitions of a dataset is an NP-complete problem and therefore intractable for large datasets. To build a tree, a greedy approach must be adopted - meaning a heuristically successively choosing the most optimal step at each stage with no guarantee to find a local optimum with no guarantee of reaching a global optimum. The chosen split is selected based on a defined \textit{cost} by Equation \ref{eq:DTcost}.
+
+\begin{equation}\label{eq:DTcost}
+    (j^*, t^*) = \arg\min_{j\in \{1, ..., D\},\, t \in T_j} \min \left(\text{cost} (\{x_i, y_i : x_{ij} \leq t\}) + \text{cost}(\{x_i, y_i : x_j > t\}) \right)
+\end{equation}
+where $T_j$ is the set of possible thresholds, $x_j$, $y_j$ are the features and label (or regressive objective). For categorical variable, the inequality $x_j >< t$ would be typically converted in a value equality $x_j == t$. The \textit{cost} function will depend on the objective of the tree, with the regression case using the error function \[cost(D) : \sum_{i\in D}(y_i - \bar{y})^2,\] and for a classification the typical loss would be one of the following:
+\begin{itemize}
+    \item \textbf{Missclassification rate}: $\frac{1}{|D|} \sum_{i \in D} \mathbb{I}(y_i \neq \hat{y})$, where $D$ is the data in the leaf of the tree. 
+    \item \textbf{Statistical entropy}: by defining the class-condidition probability $\pi_c = \frac{1}{|D|} \sum_{i \in D} \mathbb{I}((y_i) \neq c)$, where $\mathbb{I}$ is the identity function ($\mathbb{I}(x) = 1$ if $x$ is True, else $0$) the entropy over the ($C$) classes is defined as in Equation \ref{eq:statEntropy}. 
+    \begin{equation}\label{eq:statEntropy}
+        H(\vec{\pi}) = - \sum_{c=1}^C \pi_c \log \pi_c.
+    \end{equation}
+    \item \textbf{Information Gain}: an equivalent formulation to the entropy, where the gain in information that should be maximised is the relative change in entropy by adding a selection on feature $X_j$: 
+    \[ \text{Gain}(X_j < t, Y) = H(Y) - H(Y | X_j < t) \]
+    \item \textbf{Gini}: computes the expected error rate: \[\sum_{c=1}^C \pi_c (1 - \pi_c).\]
+\end{itemize}
+
+
+The pseudocode algorithm to train a \gls{dt} with this update rule is summarised in Algorithm \ref{ag:DT}. 
+
+\begin{algorithm}
+    \caption{Recursive Procedure to Train a Decision Tree}
+    \begin{algorithmic}
+    \Function{fitTree}{node, $D$, depth}
+        \State $\text{node.prediction} \gets \text{mean}(\{y_i : i \in $D$\})$ 
+        \State $(j^*, t^*, D_L, D_R) \gets \text{split}(D)$
+        \If{\text{not worthSplitting}(\text{depth}, \text{cost}, $D_L$, $D_R$)}
+            \State \Return node
+        \Else
+            \State node.left $\gets$ FITTREE(node, $D_L$, depth + 1)
+            \State node.right $\gets$ FITTREE(node, $D_R$, depth + 1)
+            \State \Return node
+        \EndIf
+    \EndFunction
+    \end{algorithmic}
+    \label{ag:DT}
+    \end{algorithm}
+\gls{dt} can overfit a dataset and regularisation serves as an important step to avoid this unwanted behaviour. For trees, a natural procedure to avoid overtraining is to interrupt the growth of the tree when it is no longer worth doing so - a criterion that is hard to decide \textit{a priori} - or to \textit{prune} the tree, which implies the removes nodes or branches that contribute little to the overall performance. A simpler way to regularise the performance by reducing the variance of the estmate of the model is to train several trees with different subsets of the data chosen randomly with replacement and aggregate the results into a single prediction. This statistical technique of using ensemble of predictors is refered to as \textit{bagging}. To further decorrelate the performance of the different predictors, these can be reduced to a subset of the input features, thereby forming a \textit{random foret}.
 
 \subsection{Boosted Decision Trees}
+Another extension to the simple decision trees is to introduce the concept of \textit{boosting}, a method called Boosted Decision Trees (BDT) but also XGBoost and, importantly in particle physics, \gls{mva}. Boosting is a greedy algorithm leveraging a weak learner or predictor (e.g., a \gls{dt}) and applying it sequentially to weighted versions of the data, with a larger weight given to missclassified / miss-regressed datapoints. This method is hugely popular in data science, having earned the title \textit{Best off-the-shelf classifier in the world} \cite{bagging_ML}. 
+
+\gls{bdt} resist better to overtraining thanks to the regularisation effect of boosting. 
 
 \subsection{Artificial Neural Network}
 
