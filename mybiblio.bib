@@ -78,7 +78,7 @@
       url           = "https://cds.cern.ch/record/2255226",
 }
 
-@inproceedings{NIPS2017_f22e4747,
+@inproceedings{NIPS2017f22e4747,
  author = {Zaheer, Manzil and Kottur, Satwik and Ravanbakhsh, Siamak and Poczos, Barnabas and Salakhutdinov, Russ R and Smola, Alexander J},
  booktitle = {Advances in Neural Information Processing Systems},
  publisher = {Curran Associates, Inc.},
@@ -468,16 +468,16 @@ year={2015},
 }
 
 
-@inproceedings{NIPS1989_53c3bce6,
+@inproceedings{NIPS198953c3bce6,
 	author = {LeCun, Yann and Boser, Bernhard and Denker, John and Henderson, Donnie and Howard, R. and Hubbard, Wayne and Jackel, Lawrence},
 	booktitle = {Advances in Neural Information Processing Systems},
 	editor = {D. Touretzky},
 	publisher = {Morgan-Kaufmann},
 	title = {Handwritten Digit Recognition with a Back-Propagation Network},
-	url = {https://proceedings.neurips.cc/paper_files/paper/1989/file/53c3bce66e43be4f209556518c2fcb54-Paper.pdf},
+	url = {\url{https://proceedings.neurips.cc/paper_files/paper/1989/file/53c3bce66e43be4f209556518c2fcb54-Paper.pdf}},
 	volume = {2},
 	year = {1989},
-	bdsk-url-1 = {https://proceedings.neurips.cc/paper_files/paper/1989/file/53c3bce66e43be4f209556518c2fcb54-Paper.pdf}
+	bdsk-url-1 = {\url{https://proceedings.neurips.cc/paper_files/paper/1989/file/53c3bce66e43be4f209556518c2fcb54-Paper.pdf}}
 }
 
 @article{DanNet,
@@ -490,21 +490,18 @@ year={2015},
     doi = {10.1109/CVPR.2012.6248110}
 }
 
-@book{Murphy_ML,
-author = {Murphy, Kevin P.},
-title = {Machine Learning: A Probabilistic Perspective},
-year = {2012},
-isbn = {0262018020},
-publisher = {The MIT Press},
+@book{MurphyML,
+    author = {Murphy, Kevin P.},
+    title = {Machine Learning: A Probabilistic Perspective},
+    year = {2012},
+    isbn = {0262018020},
+    publisher = {The MIT Press},
 }
 
-
-@article{bagging_ML,
+@article{baggingML,
 	abstract = {Bagging predictors is a method for generating multiple versions of a predictor and using these to get an aggregated predictor. The aggregation averages over the versions when predicting a numerical outcome and does a plurality vote when predicting a class. The multiple versions are formed by making bootstrap replicates of the learning set and using these as new learning sets. Tests on real and simulated data sets using classification and regression trees and subset selection in linear regression show that bagging can give substantial gains in accuracy. The vital element is the instability of the prediction method. If perturbing the learning set can cause significant changes in the predictor constructed, then bagging can improve accuracy.},
 	author = {Breiman, Leo},
-	date = {1996/08/01},
-	date-added = {2023-12-08 15:30:03 +0100},
-	date-modified = {2023-12-08 15:30:03 +0100},
+	date = {1996},
 	doi = {10.1007/BF00058655},
 	id = {Breiman1996},
 	isbn = {1573-0565},
@@ -512,8 +509,39 @@ publisher = {The MIT Press},
 	number = {2},
 	pages = {123--140},
 	title = {Bagging predictors},
-	url = {https://doi.org/10.1007/BF00058655},
+	url = {\url{https://doi.org/10.1007/BF00058655}},
 	volume = {24},
 	year = {1996},
-	bdsk-url-1 = {https://doi.org/10.1007/BF00058655}
+}
+
+
+@article{Adaboost,
+	abstract = {In the first part of the paper we consider the problem of dynamically apportioning resources among a set of options in a worst-case on-line framework. The model we study can be interpreted as a broad, abstract extension of the well-studied on-line prediction model to a general decision-theoretic setting. We show that the multiplicative weight-update Littlestone--Warmuth rule can be adapted to this model, yielding bounds that are slightly weaker in some cases, but applicable to a considerably more general class of learning problems. We show how the resulting learning algorithm can be applied to a variety of problems, including gambling, multiple-outcome prediction, repeated games, and prediction of points in Rn. In the second part of the paper we apply the multiplicative weight-update technique to derive a new boosting algorithm. This boosting algorithm does not require any prior knowledge about the performance of the weak learning algorithm. We also study generalizations of the new boosting algorithm to the problem of learning functions whose range, rather than being binary, is an arbitrary finite set or a bounded segment of the real line.},
+	author = {Yoav Freund and Robert E Schapire},
+	doi = {https://doi.org/10.1006/jcss.1997.1504},
+	issn = {0022-0000},
+	journal = {Journal of Computer and System Sciences},
+	number = {1},
+	pages = {119-139},
+	title = {A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting},
+	url = {https://www.sciencedirect.com/science/article/pii/S002200009791504X},
+	volume = {55},
+	year = {1997},
+	bdsk-url-1 = {https://www.sciencedirect.com/science/article/pii/S002200009791504X},
+	bdsk-url-2 = {https://doi.org/10.1006/jcss.1997.1504}
+}
+
+
+@article{gradientBoosting,
+	author = {Jerome H. Friedman},
+	doi = {10.1214/aos/1013203451},
+	journal = {The Annals of Statistics},
+	keywords = {boosting, decision trees, Function estimation, robust nonparametric regression},
+	number = {5},
+	pages = {1189 -- 1232},
+	publisher = {Institute of Mathematical Statistics},
+	title = {Greedy function approximation: A gradient boosting machine.},
+	url = {https://doi.org/10.1214/aos/1013203451},
+	volume = {29},
+	year = {2001},
 }

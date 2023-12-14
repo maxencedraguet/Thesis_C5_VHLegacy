@@ -1,4 +1,4 @@
-% !TEX root = /Users/maxencedraguet/Desktop/DPhil/Thesis/main.tex
+% !TEX root = /Users/maxencedraguet/Desktop/DPhil/Thesis/main
 \documentclass[12pt,a4paper]{report} 
 \input{utils/preamble.tex}
 
@@ -12,36 +12,39 @@
 \begin{document}
 
 \begin{titlepage}
+\pagecolor{oxfordblue}    
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \center 
 \vspace*{2cm}
-\textsc{\LARGE University of Oxford}\\[0.5cm] 
-\textsc{\large Doctorate of Philosophy}\\[0.3cm]
-\textsc{\large Particle Physics}\\[2.5cm]
+\textsc{\LARGE \color{white} University of Oxford}\\[0.5cm] 
+\textsc{\large \color{white} Lincoln College}\\[1cm]
+\textsc{\Large \color{white} Doctorate of Philosophy}\\[0.3cm]
+\textsc{\large \color{white} Particle Physics}\\[2cm]
 
-{\LARGE \bfseries \color{oxfordblue} DPhil Thesis\\[0.7cm]} 
-\HRule \\[0.4cm]
-{\huge \bfseries \color{oxfordblue} Advanced Machine Learning Applications for the Study of the Dance of the Higgs and Heavy Flavour Quarks at ATLAS}\\[0.4cm] 
-\HRule \\[1.5cm]
-
+%{\LARGE \bfseries \color{white} DPhil Thesis\\[0.7cm]} 
+{\color{white} \HRule} \\[0.4cm]
+\textsc{\huge \bfseries \color{white} Advanced Machine Learning Applications for the Higgs and Heavy Flavour Quarks at ATLAS}\\[0.4cm] 
+{\color{white} \HRule}\\[1.5cm]
+\color{white}
     \begin{minipage}{0.4\textwidth}
     \begin{center}
-    {\textit{Candidate}\\[0.2cm]
+    \textsc{Candidate\\[0.2cm]
     \Large Maxence DRAGUET}\\[0.3cm]
-     {\textit{Supervisor}\\[0.2cm]
+    \textsc{Supervisor\\[0.2cm]
     \Large Daniela BORTOLETTO}\\
 		
     \end{center}
     \end{minipage}
 
+\vfill 
 \begin{figure}[b]
 \centering
-{\large 2020-2024}\\[1cm]
-\includegraphics[scale=0.15]{Images/Oxford_Logo.png}\\[1cm] 
+{\large \color{white} 2020-2024}\\[1cm]
+\includegraphics[scale=0.15]{Images/Oxford_Logo.png}
 \end{figure}
-\vfill 
 \end{titlepage}
+\pagecolor{white}    
 
 {\pagestyle{plain}
 \tableofcontents
@@ -54,7 +57,7 @@
 \input{Sections/C0_Abstract}
 
 \newpage
-%%\input{Sections/C1_Intro}
+%\input{Sections/C1_Intro}
 
 \newpage
 \input{Sections/C2_Theory}
@@ -65,10 +68,10 @@
 \newpage
 \input{Sections/C4_ML}
 
-\newpage
+%\newpage
 %\input{Sections/C4_FTAG}
 
-\newpage
+%\newpage
 %\input{Sections/C5_VH}
 
 \newpage
@@ -77,7 +80,6 @@
 \printbibliography
 
 % \listoffigures
-
 \pagebreak
 }
 \end{document}

@@ -41,13 +41,18 @@
 \usepackage{wrapfig, lipsum}
 \usepackage{xcolor}
 
+% Colours
 \definecolor{oxfordblue}{RGB}{0,32,68}
 \definecolor{greenforest}{RGB}{34,139,34}
 \definecolor{darkbrown}{RGB}{63, 42, 20}
 \definecolor{darkgrey}{RGB}{105,105,105}
 \definecolor{darkpink}{RGB}{219,112,147}
 
+% Biblio
 \addbibresource{mybiblio.bib}
+
+% Ref
+
 \hypersetup{%
     citecolor={blue},
     pdfborder={0 0 0},
@@ -80,19 +85,91 @@
 \renewcommand*{\glspostdescription}{} % Removes dots at the end of each entry.
 \renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
 
+% Chapter style
+\newcommand{\stylecolor}{\color{oxfordblue}} 
+\ChNameUpperCase
+\ChRuleWidth{0pt}
+\ChNumVar{\stylecolor\fontsize{40}{42}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChNameVar{\stylecolor\Large\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\Huge\stylecolor\sc}
+
 % Headers & Footers
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
-\fancyhead[L]{\small Chapter \thechapter: \leftmark}
-\fancyhead[R]{\small  University of Oxford}
+\fancyhead[L]{\small \color{oxfordblue} \textbf{\textit{\textsc{Chapter \thechapter: \leftmark}}}}
+\fancyhead[R]{\small \color{oxfordblue} \textbf{\textit{University of Oxford}}}
 \lfoot{}
 \cfoot{\thepage}
 \interfootnotelinepenalty=10000
 \setlength{\marginparwidth}{25mm}
+
 \newlength\FHright
 \setlength\FHright{0 mm}
 
 \pagestyle{fancy}
+
+% For the fancy chapter marking colour on the right
+\usepackage[
+  scale=1,
+  angle=0,
+  opacity=1,
+  contents={}
+]{background}
+\usetikzlibrary{calc}
+
+\pagestyle{fancy}
+
+\newcounter{chapshift}
+\addtocounter{chapshift}{-1}
+
+% the list of colors to be used (add more if needed)
+\newcommand\BoxColor{%
+  %\ifcase\thechapshift blue!30\or red!30\or olive!30\or magenta!30\else yellow!30\fi}
+  \ifcase\thechapshift oxfordblue\or oxfordblue\or oxfordblue\or oxfordblue\else oxfordblue\fi}
+
+\newcommand\ChapFrame{%
+  \AddEverypageHook{%
+    \ifodd\value{page}
+      \backgroundsetup{contents={%
+        \begin{tikzpicture}[overlay,remember picture]
+          \node[
+            fill=\BoxColor,
+            inner sep=2pt,
+            rectangle,
+            text width=0.8cm,
+            text height=3cm,
+            align=center,
+            anchor=north east
+          ] 
+          at ($ (current page.north east) + (-0cm,-2*\thechapshift cm) $) 
+          {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][t]{3.cm}{%
+              \raggedright\textcolor{white}{\\\scshape \thechapter}}}};
+        \end{tikzpicture}%
+      }%
+    }  
+    \else
+      \backgroundsetup{contents={%
+        \begin{tikzpicture}[overlay,remember picture]
+        \node[
+          fill=\BoxColor,
+          inner sep=2pt,
+          rectangle,
+          text width=0.8cm,
+          text height=3cm,
+          align=center,
+          anchor=north east
+        ] 
+        at ($ (current page.north east) + (-0cm,-2*\thechapshift cm) $) 
+        {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][t]{3.cm}{%
+            \raggedright\textcolor{white}{\\\scshape \thechapter}}}};
+        \end{tikzpicture}%
+      }%
+    }  
+    \fi
+  \BgMaterial}%
+  \stepcounter{chapshift}%
+}
 
 
 % Useful short cut for physics:

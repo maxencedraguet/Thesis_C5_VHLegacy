@@ -1,4 +1,5 @@
-\chapter{Machine Learning and Deep Learning}
+\chapter{\color{oxfordblue} Machine Learning \& Deep Learning}
+\ChapFrame
 
 \section{Introduction}
 This chapter is entirely dedicated to a review of relevant \gls{ml} and \gls{dl} methods in the context of \gls{hep}. As for every other fields of science and technology, the recent advancements in the domain of \gls{ai} have introduced a shift of paradigm in particle physics. Before continuing with the review, some definitions of these different terms is suggested to decrypt their meaning.
@@ -35,8 +36,8 @@ The training process will depend on the type of model being deployed. These can 
 \end{itemize}
 
 \subsubsection{Deep Learning} 
-Deep Learning corresponds to a specific set of methods who have quickly grown in popularity around 2010, with widely advertised results on competitive benchmark tasks in pattern recognition, as exemplified by the super-human performance of the \textit{DanNet} \cite{DanNet} model based on \gls{cnn}s \cite{NIPS1989_53c3bce6}. The basis of any \gls{dl} method is the Artificial Neural Network, a logical unit built to mimic the functioning of a human neuron. These neurons are then combined into layers of any numbers of neurons (the width of the layer) and the layers themselves are stacked into depth, with deeper layer receiving as input the output of earlier neurons. Different \gls{dl} models are constructed by modifying the structure of the layers - in particular, the input, output, and activation function used - and the transfer the information between neurons, be that between layers, depth-wise, or  between neurons, width-wise.\\
-The task of a \gls{ml} model can be mutlifold the amount of human intervention \cite{Murphy_ML}: 
+Deep Learning corresponds to a specific set of methods who have quickly grown in popularity around 2010, with widely advertised results on competitive benchmark tasks in pattern recognition, as exemplified by the super-human performance of the \textit{DanNet} \cite{DanNet} model based on \gls{cnn}s \cite{NIPS198953c3bce6}. The basis of any \gls{dl} method is the Artificial Neural Network, a logical unit built to mimic the functioning of a human neuron. These neurons are then combined into layers of any numbers of neurons (the width of the layer) and the layers themselves are stacked into depth, with deeper layer receiving as input the output of earlier neurons. Different \gls{dl} models are constructed by modifying the structure of the layers - in particular, the input, output, and activation function used - and the transfer the information between neurons, be that between layers, depth-wise, or  between neurons, width-wise.\\
+The task of a \gls{ml} model can be mutlifold the amount of human intervention \cite{MurphyML}: 
 \begin{itemize}
     \item Classification: the task of assigning a label to a data sample, e.g., this jet is labelled a $b$-jet. The general case is multiclass, with $n$ labels possible, while a particular and common case is the binary classification case ($n = 2$).
     \item Regression: the task of predicting a continuous variable based on a data sample, e.g., the momentum of the particle is 15 GeV/$c$. 
@@ -45,7 +46,7 @@ The task of a \gls{ml} model can be mutlifold the amount of human intervention \
     \item Anomaly detection: identify and flag rare events in a dataset
 \end{itemize}
 
-There exist different paradigms of \gls{ml} models, divided mostly along the lines of the amount of human intervention \cite{Murphy_ML}:
+There exist different paradigms of \gls{ml} models, divided mostly along the lines of the amount of human intervention \cite{MurphyML}:
 \begin{itemize}
     \item \textit{Supervised learning}: the data used for training is endowed with the information the model must extrapolate. It is therefore restrain to generate information target directly by the learning process. Classificiation and regression are the most common examples.
     \item \textit{Unsupervised learning}: the data is not endowed with the information the model must learn to infer. The model is therefore trained with an objective to optimise without human intervention, and must discover patterns and insights without any guidance. Generative models and clsutering are prime examples.
@@ -84,7 +85,7 @@ Modern advanced machine learning has the potential to improve all steps of this 
 One of the focus of this thesis can be broadly summarised as contributing to step 2 in the aformentioned list: developping \gls{dl}-tools for improved object reconstruction. The analysis presented in the latter part of this document also introduces some classical \gls{ml} technique of data selection - step 3. The rest of this chapter consists in a review of the relevant \gls{ml} methods. 
 
 \subsection{Decision Trees}
-\gls{dt}, also called textit{Classification and Regression Trees} (CART) are the bread and butter of any data analysis. They are simple to train, give a good ground performance for both classification and regression tasks, and are white box model - meaning they are easy to interpret. Underlying the model is a recursive partitioning approach of the input space \cite{Murphy_ML}. Labelling a partition step as \textit{node}, the tree structures emmerges from a \textit{root} state that is subsquently partitioned along different branches with one \textit{leaf} per final region. The splits are done along a feature of the input space, and the method accept both discrete categorical values (e.g., the label of a lepton as $e, \mu, \tau$) and continuous values (e.g., $m_l$). A simple classification tree structure can be represented as the following tree:
+\gls{dt}, also called textit{Classification and Regression Trees} (CART) are the bread and butter of any data analysis. They are simple to train, give a good ground performance for both classification and regression tasks, and are white box model - meaning they are easy to interpret. Underlying the model is a recursive partitioning approach of the input space \cite{MurphyML}. Labelling a partition step as \textit{node}, the tree structures emmerges from a \textit{root} state that is subsquently partitioned along different branches with one \textit{leaf} per final region. The splits are done along a feature of the input space, and the method accept both discrete categorical values (e.g., the label of a lepton as $e, \mu, \tau$) and continuous values (e.g., $m_l$). A simple classification tree structure can be represented as the following tree:
 
 \Tree[.\textit{$x_i \leq c_i$} [.{True \\\textit{$x_j \geq c_j$}} [.True 1 ]
             [.False 0 ]]
@@ -92,7 +93,19 @@ One of the focus of this thesis can be broadly summarised as contributing to ste
             [.{False \\{\textit{$x_l$} is \textit{$e$}}} [.True 0 ]
                             [.False 1 ]]]]
 
-At each node there is a learnt condition with $x_i, x_j, x_k$ being continuous features of the dataset that are cut on $c_i, c_j, c_k$ and $c_l$ is a categorical feature (is the lepton an electron). The leaf values are the output of the tree in different regions defined by the combination of successive selections - here a binary variable. \\
+At each node there is a learnt condition with $x_i, x_j, x_k$ being continuous features of the dataset that are cut on $c_i, c_j, c_k$ and $c_l$ is a categorical feature (is the lepton an electron). The leaf values are the output of the tree in different regions defined by the combination of successive selections - here a binary variable. An example of a thus defined region is shown in Figure \ref{fig:tree-ex}, where a tree with two nodes is able to isolate most of the blue class from the red class with the region limited by green lines, corresponding to both conditions $x_1 \geq c_2$ and $x_2 \geq c_2$ being satisfied.
+
+\begin{figure}[h!]
+    \center
+    \begin{minipage}[c]{0.3\textwidth}
+        \caption{Binary classification with two features. A decision tree applies two successive cuts $c_1$ and $c_2$ to isolate the blue class from the red.}\label{fig:tree-ex}
+      \end{minipage}
+      \begin{minipage}[c]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{Images/ML/scatterPlot.png}
+      \end{minipage}
+\end{figure}
+
+    
 Finding the optimal set of partitions of a dataset is an NP-complete problem and therefore intractable for large datasets. To build a tree, a greedy approach must be adopted - meaning a heuristically successively choosing the most optimal step at each stage with no guarantee to find a local optimum with no guarantee of reaching a global optimum. The chosen split is selected based on a defined \textit{cost} by Equation \ref{eq:DTcost}.
 
 \begin{equation}\label{eq:DTcost}
@@ -114,7 +127,7 @@ where $T_j$ is the set of possible thresholds, $x_j$, $y_j$ are the features and
 The pseudocode algorithm to train a \gls{dt} with this update rule is summarised in Algorithm \ref{ag:DT}. 
 
 \begin{algorithm}
-    \caption{Recursive Procedure to Train a Decision Tree}
+    \caption{Recursive Procedure to Train a Decision Tree \cite{MurphyML}}
     \begin{algorithmic}
     \Function{fitTree}{node, $D$, depth}
         \State $\text{node.prediction} \gets \text{mean}(\{y_i : i \in $D$\})$ 
@@ -129,13 +142,63 @@ The pseudocode algorithm to train a \gls{dt} with this update rule is summarised
     \EndFunction
     \end{algorithmic}
     \label{ag:DT}
-    \end{algorithm}
-\gls{dt} can overfit a dataset and regularisation serves as an important step to avoid this unwanted behaviour. For trees, a natural procedure to avoid overtraining is to interrupt the growth of the tree when it is no longer worth doing so - a criterion that is hard to decide \textit{a priori} - or to \textit{prune} the tree, which implies the removes nodes or branches that contribute little to the overall performance. A simpler way to regularise the performance by reducing the variance of the estmate of the model is to train several trees with different subsets of the data chosen randomly with replacement and aggregate the results into a single prediction. This statistical technique of using ensemble of predictors is refered to as \textit{bagging}. To further decorrelate the performance of the different predictors, these can be reduced to a subset of the input features, thereby forming a \textit{random foret}.
+\end{algorithm}
+
+\gls{dt} can overfit a dataset and regularisation serves as an important step to avoid this unwanted behaviour. For trees, a natural procedure to avoid overtraining is to interrupt the growth of the tree when it is no longer worth doing so - a criterion that is hard to decide \textit{a priori} - or to \textit{prune} the tree, which implies the removes nodes or branches that contribute little to the overall performance. A simpler way to regularise the performance by reducing the variance of the estmate of the model is to train several trees with different subsets of the data chosen randomly with replacement and aggregate the results into a single prediction, for example by taking the average over each base learners: \[ y(x) = \frac{1}{N_l} \sum_{i=1}^{N_l} y_i(x),\] for $N_l$ base learner making prediction $y_i(x)$ given the input features $x$. This statistical technique of using ensemble of predictors is refered to as \textit{bagging}. To further decorrelate the performance of the different predictors, these can be reduced to a subset of the input features, thereby forming a \textit{random foret}.\\
+For the following discussion, the model is built on a training dataset $ \{(x_1, y_1), ..., (x_N, y_N)\}$ with input vectors $x_i \in \{\mathbb{R} \otimes \mathbb{D}\}^d$ of $d$ features that are real or discrete ($\mathbb{D}$) and $y \in \mathbb{R}^d$ is a $d$-dimension real vector that serves as output to be predicted by the model.
 
 \subsection{Boosted Decision Trees}
-Another extension to the simple decision trees is to introduce the concept of \textit{boosting}, a method called Boosted Decision Trees (BDT) but also XGBoost and, importantly in particle physics, \gls{mva}. Boosting is a greedy algorithm leveraging a weak learner or predictor (e.g., a \gls{dt}) and applying it sequentially to weighted versions of the data, with a larger weight given to missclassified / miss-regressed datapoints. This method is hugely popular in data science, having earned the title \textit{Best off-the-shelf classifier in the world} \cite{bagging_ML}. 
+Another extension to the simple decision trees is to introduce the concept of \textit{boosting}, a method called Boosted Decision Trees (BDT) and, importantly in particle physics, \gls{mva}. Boosting is a greedy algorithm leveraging a weak learner or predictor (e.g., a \gls{dt}) and applying it sequentially to weighted versions of the data, with a larger weight given to missclassified / miss-regressed datapoints. This method is hugely popular in data science, having earned the title \textit{``best off-the-shelf classifier in the world''} \cite{baggingML}. Two particularly useful approaches are adaptive boosting (AdaBoost) \cite{Adaboost} and gradient boosting \cite{gradientBoosting}, both combining an ensemble of $L$ weak learners $f_i$ ($i = 1, ..., L$) into a strong learner \[F(x) = \sum_{i=1}^L f_i(x).\] 
 
-\gls{bdt} resist better to overtraining thanks to the regularisation effect of boosting. 
+\paragraph{AdaBoost:} combines the $L$ weak learners $h_i$ with adaptive weights $\alpha_i$ to improve the ensemble performance as \[\hat{f}(x) = \sum_{i=1}^L \alpha_i h_i(x),\] where $\hat{f}$ is the boosted model, and the successive boosting stages $f_T = \sum_{i=1}^{T \leq L} \alpha_i h_i(x)$ define stronger and stronger boosted variants of the model. At each iteration $m$ of the training process ($m = 1, ..., L$), a weight $w_i^m$ is assigned to each training sample (indexed by $i$) proportional to the current error or loss: $L(y_i, f_{t-1}(x_i))$, where the typical case for AdaBoost is binary classification with $y_i \in {-1, 1}$. The error in AdaBoost is the exponential loss on the datapoint of Equation \ref{eq:adaboosterror}. 
+
+\begin{equation}\label{eq:adaboosterror}
+    E = L(y, f_m(x)) = \sum_{i=1}^N \exp\left(-y_i f_m(x_i)\right) = \sum_{i=1}^N \exp\left(-y_i (f_{m-1}(x_i) + \alpha_m h_m(x_i))\right)
+\end{equation}
+Equation \ref{eq:adaboosterror} can be re-expressed to highlight the weight $w_{i,m}$ applied to each datapoint $(x_i, y_i)$ at step $m$ as : \[\sum_{i=1}^N w_{i,m} \exp\left(-\alpha_m y_i h_m(x_i)\right),\] where $w_{i,m} = \exp\left(-y_i f_{m-1}(x_i)\right)$. \\
+The weak learner at step $m$ is applied to the weighted version of the dataset with weights $w_{i,m}$ with optimal weights $\alpha_m$ found by minimising the error to be \[\alpha_m = \frac{1}{2} \log \frac{1 - \epsilon_m}{\epsilon_m},\] where $\epsilon_m$ is the ratio of miss-classified weights: $\epsilon_m = \sum_i w_{i,m} \mathbb{I}(y_i \neq h_m(x_i)) / \sum_i w_{i,m}$. The AdaBoost algorithm is summarised in Algorithm \ref{algo:adaboost}.
+
+\begin{algorithm}
+    \caption{Adaboost for Binary Classification with Exponential Loss \cite{MurphyML}}
+    \label{algo:adaboost}
+    \begin{algorithmic}
+    \State Initialize weights: $w_i = \frac{1}{N}$, where $N$ is the number of samples.
+    \For{$m = 1$ to $M$}
+        \State Fit a classifier $h_m(x)$ to the training set using weights $w$.
+        \State Compute $\epsilon_m = \sum_i w_{i,m} \mathbb{I}(y_i \neq h_m(x_i)) / \sum_i w_{i,m}$.
+        \State Compute $\alpha_m = \log\left(\frac{1 - \epsilon_m}{\epsilon_m}\right)$.
+        \State Update weights: $w_i \leftarrow w_i \, \exp(\alpha_m \cdot \mathbb{I}(y_i \neq h_m(x_i)))$.
+    \EndFor
+    \State \Return $f(x) = \text{sgn}\left(\sum_{m=1}^M \alpha_m h_m(x)\right)$
+    \end{algorithmic}
+\end{algorithm}
+
+\paragraph{Gradient boosting:} is a generic approach which does not require a specific derivation for each loss function. The objective is to minimise the empirical risk, the expected value of the loss function $L$ on the training set as shown in Equation \ref{eq:empRisk}: 
+\begin{equation}\label{eq:empRisk}
+    \hat{f}  = \arg \min_f \mathbb{E}_{x,y} L(y, f(x))
+\end{equation}
+where $f(x) = (f(x_1), ..., f(x_N))$ is the output of the learner on the training set. As the name suggests, the approach leverages gradient descent to find the optimal $\hat{f}$. At step $m$, the gradient of the loss $L(f)$ is evaluated at $f = f_{m-1}$ as \[ g_{i,m} = \left[ \frac{\partial  L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f= f_{m-1}}, \] which is then used to update the learner with a step \[ f_m = f_{m-1} - \alpha g_{m}\] of step-length $\alpha_m$ chosen to minimise the residual loss $L(y, f_{m-1} - \alpha_m g_{m})$. 
+
+For the specific case of gradient boosted decision trees, at step $m$ a \gls{dt} $h_m(x)$ is fitted to the pseudo-residuals. This \gls{dt} $h_m$ at step $m$ defines $J_m$ disjoint regions through its leaves with predictions $b_{jm}$ in each $j = 1, ... J_m$ regions: \[ h_m(x) = \sum_{j=1}^{J_m} b_{jm} \textbf{1}_{R_{jm}}(x),\] where $\textbf{1}_{R_{jm}}(x)$ is the indicator function - equals to 1 when $x \in R_{jm}$ and 0 otherwise. The update to the model is chosen so that: \[f_m(x) = f_{m-1} + \gamma_m h_m(x),\] with $\gamma_m$ selected by minimising the empirical risk of the updated model: \[ \gamma_m = \arg \min_{\gamma} \sum_{i=1}^N L(y_i, f_{m-1}(x_i) + \gamma h_m(x_i)).\]
+
+\begin{algorithm}
+    \caption{Gradient Boosting \cite{MurphyML}}
+    \label{algo:gradient_boosting}
+    \begin{algorithmic}
+    \State Initialize $f_0(x) = \arg\min_\alpha \,\sum_{i=1}^N L(y_i, h(x_i; \alpha))$
+    \For{$m = 1$ to $M$}
+        \State Compute the gradient residual $\forall i$: $g_{i,m} = -\left[\frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}\right]_{f(x_i) = f_{m-1}(x_i)}$
+        \State Train weak learner $h_m$ on the dataset $\{(x_i, r_{i,m})\}_{i=1}^N$
+        \State Compute $\alpha_m$ by minimising $\sum_{i=1}^N(g_{i,m} - \alpha_m h_m(x_i))$
+        \State Update $f_m(x) = f_{m-1}(x) + \nu \alpha_m h_m(x)$
+    \EndFor
+    \State \Return $f(x) = f_M(x)$
+    \end{algorithmic}
+\end{algorithm}
+
+The full algorithm for Gradient Boosting is mentioned in Algorithm \ref{algo:gradient_boosting}, where the update rule is added a \textit{learning rate} hyperparameter $\nu$ to introduce regularisation and reduce the risk of overfitting. By keeping $0 < \nu \leq 1$, reduces the ability of the model to fully adapt to the training error, thereby improving generalisation. The price is a slower updating of the model and therefore a more demanding computational time. Further regularising techniques are bootstrap aggregation - training each weak learn on a random subset of the data -, limiting the number of leaves, or more generally penalising model of larger complexity - removing branches that do not reduce the loss by a minimal amount. 
+
+\gls{bdt} resist better to overtraining thanks to the regularisation effect of boosting and the different techniques described in thi section. An undiserable feature of boosting is the loss of direct interpretability of the decision. 
 
 \subsection{Artificial Neural Network}
 
