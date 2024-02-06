@@ -39,10 +39,10 @@ A historical perspective on the evolution of performance for the different tagge
 \section{DL1 Family of Models: DL1r \& DL1d}
 This family of tagger is built with a hierarchical approach, combining low-level algorithms that are independentely optimised into a final \gls{dnn} network of a few layers to output a final prediction. Not all low-level modules are based on \gls{dl}, with some instead directly implementing physics-motivated algorithms. They consist of \cite{Paganini:2289214}:
 \begin{itemize}
-\item Jet Fitter: a vertexing algorithm based on a Kalman filter to reconstruct the topology and fit the decay chain \gls{pv} $\rightarrow$ $B$ $\rightarrow$ $D$ with the assumption that the vertices of the weakly decaying B/D-hadrons tend to align with the \gls{pv} \cite{ATL-PHYS-PUB-2018-025}. 
-\item \gls{sv1}: combining a secondary vertex finder and a tagger to offer flavour discrimination information. The former, based on the VKalVrt vertex reconstruction package \cite{Kostyukhin:685551}, returns a list of candidate secondary vertices with measured quantities assigned to each vertex. The latter derives jet weights based on discriminative variables and computes properties of the \gls{sv}, such as the mass. 
-\item \gls{ip} likelihood: IP2D and IP3D are both likelihood-based methods to assign flavour-discriminating weights based, respectively, on the transversal and global impact parameters significance (corresponding to the reweighted \gls{ip} variables by their respective uncertainties) of the tracks \cite{ATLAS:2017bcq}. 
-\item Track collection analyser: either with \gls{rnnip} \cite{ATL-PHYS-PUB-2017-003} or \gls{dips} \cite{ATL-PHYS-PUB-2020-014}. These are \gls{dl} approaches to extract discrimination information on the set of tracks associated with a jet. These taggers are further described later in this section.  
+  \item \gls{ip} likelihood: IP2D and IP3D are likelihood-ratio templates in 2D and 3D to assign flavour-discriminating weights based, respectively, on the transversal and global impact parameters significance (corresponding to the reweighted \gls{ip} variables by their respective uncertainties) $S_{d_0}$ (35 bins) and $S_{z_0}$ (20 bins) of the tracks, and 14 bins of track catogarisation for IP3D \cite{ATLAS:2017bcq}. For the three flavours, this results in $35 \times 20 \times 14 \times 3 = 29,400$ final bins, which each probability being computed per track. The likelihood assigned to the jet assumes the tracks are independent and is therefore calculated as the product of the per-track likelihoods. A discriminant is derived from the conditional log-likelihood, e.g., $D_{IP3D,f}\sum_{i \in \textrm{tracks}} \log\frac{p_b^i}{p_{\textrm{light}}^i}$ with $f= c$ or light \cite{ATL-PHYS-PUB-2015-022}.
+  \item Track collection analyser: either with \gls{rnnip} \cite{ATL-PHYS-PUB-2017-003} or \gls{dips} \cite{ATL-PHYS-PUB-2020-014}. These are \gls{dl} approaches to extract discrimination information on the set of tracks associated with a jet. These taggers are further described later in this chapter.  
+  \item \gls{sv1}: combining a secondary vertex finder and a tagger to offer flavour discrimination information. The former, based on the VKalVrt vertex reconstruction package \cite{Kostyukhin:685551}, returns a list of candidate secondary vertices with measured quantities assigned to each vertex. The latter derives jet weights based on discriminative variables and computes properties of the \gls{sv}, such as the mass. 
+  \item Jet Fitter: a vertexing algorithm based on a Kalman filter to reconstruct the topology and fit the decay chain \gls{pv} $\rightarrow$ $B$ $\rightarrow$ $D$ with the assumption that the vertices of the weakly decaying B/D-hadrons tend to align with the \gls{pv} \cite{ATL-PHYS-PUB-2018-025}. 
 \end{itemize}
 
 \begin{figure}[h!]
@@ -74,11 +74,105 @@ where $N^{X-tagged}_{Y-jets}$ and $N_{Y-jets}$ are respectively the number of $X
 
 These high-level models are trained on \gls{mc} simulated data samples and need to be calibrated on real data to deliver an unbiased estimate, by deriving \glspl{sf} weights correcting the predictions for each jet. Uncertainties are derived on the predicted score and passed along to analyses using the tool. The novel algorithm introduced in this work is the \gls{dl1d} tagger, which relies on the \gls{dips} sub-tagger to extract correlations between the tracks.  
 
-\subsubsection{RNNIP}
-The \gls{rnnip} tagger runs on arbitrary-length input sequences made of track features, as ordered by the absolute transverse \gls{ip} significance, to extract tagging information from correlations between tracks \cite{ATL-PHYS-PUB-2017-003}. The vector of track features includes the transverse and longitudinal impact parameter significances, the jet $p_T$ fraction carried by the track, the distance between the track and the jet axis, and a learned 2D embedding of the track quality \cite{Paganini:2289214}. It outputs a probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light].
+\subsection{RNNIP}
+The \gls{rnnip} tagger runs on arbitrary-length input sequences made of track features, as ordered by the absolute transverse \gls{ip} significance $|S_{d_0}|$, to extract tagging information from correlations between tracks \cite{ATL-PHYS-PUB-2017-003}. The vector of track features, described in greater details in Table \ref{tab:rnnipVar}, includes the transverse and longitudinal impact parameter significances, the jet $p_T$ fraction carried by the track, the distance between the track and the jet axis, and a learned 2D embedding of the track quality \cite{Paganini:2289214}. It outputs a probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light, $\tau$].
 
-\subsubsection{DIPS}
-The \gls{dips} tagger, based on the Deep Sets architecture \cite{NIPS2017_f22e4747}, is a \gls{gnn} approach to model the correlations between an arbitrary number of tracks. Two NNs are trained in this effort. A model $\Phi$ maps each individual track feature vector (similar to \gls{rnnip}) to a latent space (forming the nodes of the graph). The representations of each track in this latent space are then concatenated by a simple summation operation (the edges of the graph) and given as input to a secondary \gls{nn} model $F$ outputting the predicted probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light] (the prediction of the graph). This approach has several advantages over \gls{rnnip}, mainly the physically motivated permutation-invariance of the input and the improved training/evaluation time thanks to a more parallelisable architecture. Furthermore, the performance delivered by \gls{dips} is observed to globally outperform \gls{rnnip} \cite{ATL-PHYS-PUB-2020-014}. 
+\begin{figure}[h!]
+  \center
+  \includegraphics[scale=0.6]{Images/FTAG/rnnip_structure.png}
+  \caption{Diagram of the \gls{rnnip} tagger for flavour tagging, from \cite{Paganini:2289214}. The input consists in track features augmented with an embedding of track categories. Tracks are then ordered by absolute transverse \gls{ip} significance and fed through an \gls{lstm} core. The unrolled sequence outputed from this \gls{lstm} is padded to a fixed size and processed by a \gls{dnn} to output the per-flavour probabilities.} 
+  \label{fig:rnnipModel}
+\end{figure}
+
+The architecture of \gls{rnnip} is a \gls{rnn}-based model leveraging an \gls{lstm} core, as depicted in Figure \ref{fig:rnnipModel}. The arbitrary-length sequence fed as input is mapped by the \gls{lstm} cell with 100 hidden dimension into a 50-dimensional vector. This vector is then processed by a 20 unit fully-connected feed-forward neural network outputing the per-flavour probabilities by computing the softmax of the last layer's output. To avoid overfitting, a dropout value of 0.2 is applied to the \gls{lstm} cell. 
+
+\begin{table}[h]
+  \begin{center}
+      \begin{tabular}{C{3cm}|C{13cm}} 
+      	 \hline \hline
+          Track Variables & Description  \\ \hline \hline
+          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, whith $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the point of closest approach is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
+          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, whith $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
+          $p_T^{\textrm{frac}}$   & the fraction of the reconstructed jet $p_T^{\textrm{jet}}$ carried by the track $p_T^{\textrm{frac}} = p_T^{\textrm{track}} / p_T^{\textrm{jet}}$. \\ \hline
+          $\Delta R$(track, jet) & the geometrical distance in 2D angle between the track direction and jet axis $\Delta R = \sqrt{(\phi_{\textrm{track}} - \phi_{\textrm{jet}})^2 + (\eta_{\textrm{track} - \eta_{\textrm{jet}}})^2}$. \\ \hline
+          Category       & A 2D representation of the track quality learnt by an embedding layer. The categorisation is based on the number of observed, expected and missing hits in the different layers of the tracker (silicon pixel and strip detectors) \cite{ATL-PHYS-PUB-2015-022}.  \\ \hline
+      \end{tabular}
+    \caption{Track variables passed to the initial version of the \gls{rnnip} model \cite{ATL-PHYS-PUB-2017-003}. Later versions removed the category embedding and added the per-track hit information shown for \gls{dips} in Table \ref{tab:dipsVar}.}
+    \label{tab:rnnipVar}
+  \end{center}
+\end{table}
+
+\gls{rnnip} is designed to capture correlations between the tracks of a jet, a rich information explicitely missing from the \gls{ip}-based discriminant of IP2D and IP3D due to the factorisation of the likelihood. Some degree of correlation is expected between tracks, as these can emerge from the same secondary or tertiary vertex of the displaced decay in $b$- and $c$-jets. It removes the cumbersome procedure to built likelihood templates, which demand large amount of data to scale to finer bin resolution and is computationally expensive as the number of bins scales exponentially with the number of variables. Tests shown that \gls{rnnip} is effective at building a discriminant, delivering superior performances to the \gls{ip}-based approaches with only ~40 \% of the parameters (11,636 trainable parameters for \gls{rnnip})\cite{Paganini:2289214}.
+
+\subsection{DIPS}
+The \gls{dips} tagger, based on the Deep Sets architecture \cite{NIPS2017f22e4747} and depicted in Figure \ref{fig:dipsModel}, is a \gls{gnn}-based approach alternative to \gls{rnnip} to model the correlations between an arbitrary number of tracks \cite{ATL-PHYS-PUB-2020-014}. As introduced in Chapter \ref{chapter-GNN}, such a model is composed of two fully-connected feed-forward neural network. A first \gls{dnn} called the \textit{track network} $\Phi$ maps each individual track feature vector - similar to the input of \gls{rnnip} - to a latent space representing the nodes of a graph.
+
+The representations of each track in this latent space are then pooled by a simple summation operation - representing the unweighted edges of a fully connected graph - and given as input to a secondary \gls{dnn}, called the \textit{jet network} $F$, outputting the predicted probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light, $\tau$] - representing the global attribute of the graph ($u$ in the notation of Chapter \ref{chapter-GNN}). 
+In summary, \gls{dips} computes the following Equation on the set of track features $\{ p_i \}$, 
+with $i = 1, ..., N$ for arbitrarily-sized jets of $N$ tracks:
+
+\begin{equation}
+  Dips( \{p_1, ..., p_N \} ) = F\left( \sum_{i=1}^N \Phi(p_i) \right),
+\end{equation}
+with \gls{dips} outputing the per-flavour probabilities. The separation of computation into a per-track embedding and a per-jet processing after a size-indepent pooling performed by the sumation operator allows the model to process unordered sets of variable size. The track features used as inputs are described in Table \ref{tab:dipsVar}.
+
+\begin{figure}[h!]
+  \center
+  \includegraphics[scale=0.5]{Images/FTAG/dips_structure.png}
+  \caption{Diagram of the \gls{dips} tagger for flavour tagging, from \cite{ATL-PHYS-PUB-2020-014}. The input consists in a set of $N$ tracks each represented by a feature vector. Each track is embedded by a \gls{dnn} track network $\Phi$ into a fixed-dimension vector. All embedded track vectors are then pooled by summation to a fixed-size vector. The last step is to process this vector with another \gls{dnn} jet network $F$ outputing the per-flavour probabilities. The number and width of layers presented here are the nominal architecture.} 
+  \label{fig:dipsModel}
+\end{figure}
+
+\begin{table}[h]
+  \begin{center}
+      \begin{tabular}{C{3cm}|C{13cm}} 
+      	 \hline \hline
+          Variables & Description  \\ \hline
+          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, whith $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the point of closest approach is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
+          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, whith $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
+          $\log p_T^{\textrm{frac}}$   & Logarithm of the fraction of the reconstructed jet $p_T^{\textrm{jet}}$ carried by the track $\log p_T^{\textrm{frac}} = \log p_T^{\textrm{track}} / p_T^{\textrm{jet}}$. \\ \hline
+          $\log \Delta R$(track, jet) & Logarithm of the geometrical distance in 2D angle between the track direction and jet axis $\log \Delta R = \log \sqrt{(\phi_{\textrm{track}} - \phi_{\textrm{jet}})^2 + (\eta_{\textrm{track} - \eta_{\textrm{jet}}})^2}$. \\ \hline
+          IBL hits      & Number of hits recorded in the \gls{ibl} - 0, 1, or 2. \\ \hline
+          PIX1 hits       & Number of hits in the innermost pixel layer, after the \gls{ibl} - 0, 1, or 2.  \\ \hline
+          Shared IBL hits & Number of hits in the \gls{ibl} that are shared by more than one track. \\ \hline
+          Split IBL hits  & Number of split hits in the \gls{ibl}, that are created by multiple charged particles. \\ \hline
+          nPixHits        & Total number of hits in all the pixel layers.\\ \hline
+          Shared pixel hits & Number of shared hits in the pixel layers.\\ \hline
+          Split pixel hits  & Number of split hits in the pixel layers.\\ \hline
+          nSCTHits          & Total number of hits in the \gls{sct} layers. \\ \hline
+          Shared SCT hits   & Number of shared hits in the \gls{sct} layers.\\ \hline \hline
+      \end{tabular}
+      \caption{Track variables passed to the \gls{dips} model and later versions of the \gls{rnnip} model \cite{ATL-PHYS-PUB-2020-014}. Compared to the initial \gls{rnnip} variables of Table \ref{tab:rnnipVar}, the $p_T^{\textrm{frac}}$ and $\Delta R$ are passed as log values to reduce the magnitude of the long tail observed at large values and improve the training time.}
+    \label{tab:dipsVar}
+  \end{center}
+\end{table}
+
+This approach has several advantages over \gls{rnnip}, mainly the physically motivated permutation-invariance of the input and the improved training and evaluation time thanks to a more parallelisable architecture, as the track embedding performed by $\Phi$ can be massively parallalised on \gls{gpu}. These motivations are translated in an appreciable performance delivered by \gls{dips}, which is observed to globally peform better than \gls{rnnip} (using the same variables as \gls{dips}) and at a reduced computational cost \cite{ATL-PHYS-PUB-2020-014}. The performance can be assessed from Figure \ref{fig:dipsrnnipPerf}, presenting the \gls{roc} curves for baselines trainings of \gls{dips} and \gls{rnnip} in terms of light- and $c$-rejection for $b$-jet tagging on the same held-out $t\bar{t}$ evaluation sample.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[scale=0.4]{Images/FTAG/dipsrnnipL.png}
+      \caption{Light-rejection.} 
+      \label{fig:diverseGNNfull}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[scale=0.4]{Images/FTAG/dipsrnnipC.png}
+      \caption{$c$-rejection.} 
+      \label{fig:pullsFTAGmp}
+  \end{subfigure}
+  \caption{Light- (left) and $c$-rejection (right) as a function of $b$-jet tagging efficiency for \gls{rnnip} (green) and \gls{dips} (purple), taken from \cite{ATL-PHYS-PUB-2020-014}. Each curve and error bands show, respectively, the mean and standard deviation of the rejections for 5 trainings per algorithm. The bottom panel shows the ratio with respect to \gls{rnnip}, showing a clear performance gain for \gls{dips} at all $b$-jet efficiency considered.}
+  \label{fig:dipsrnnipPerf}
+\end{figure} 
+
+The faster training time allowed the Collaboration to focus on optimisation studies of the track selection and features passed to the network. This led to a hyperparameter optimisation campagin on the number of layers and nodes per layer of the two \gls{nn} in \gls{dips}, as well as the track embedding space. Batch normalisation gave better result than dropout \cite{ATL-PHYS-PUB-2020-014}.
+
+
+\subsection{Training of \gls{dips} with Variable Radius Jets for Run 3}
+Charged particles emitted in the hadronisation of a quark or a gluon jets leave a collection of tracks in the \gls{atlas} detector. This information is particularly important for flavour tagging, as they give experimentalists a good handle on the dynamic of the hadronisation shower, with key characteristics of for each flavour emerging from the jet structure. These hints are essential for performant flavour taggers. In the first geneation of classifier of the DL1 family, one of the essential components in the low-level algorithms' family is a dedicated \gls{ml} model fed a set of tracks. While \gls{rnnip} orders them by $p_T$ in order to establish an ordered sequence as input to the \gls{rnn} core
 
 \subsection{Training of DL1d \& DL1r for Run 3}
 The ATLAS Collaboration continuously updates its software, updating specific methods to adopt new techniques, maintaining its many tools and adding capabilities. In preparation for the new run of the \gls{lhc} that started in 2021, ATLAS has improved its reconstruction software. As such, important elements used by flavour tagging methods have changed, requiring to retrain all taggers to ensure optimal performance under the new conditions. This work presents the first ATLAS study of the retraining of \gls{dl1r} on the new release (R22) and the first training of \gls{dl1d}, including the \gls{dips} sub-tagger in the complete flavour tagging tools. Other important novelties of this work are the possible inclusion of $\tau$-jets in the model's predictions and a new technique to efficiently process the training data into high statistics dataset using importance sampling. The interest of including $\tau$ stems from their tendency to be miss-classified as $c$-jets when hadronically decaying, as both particles commonly leave three particles in the detector. The resulting taggers are observed to efficiently identify $\tau$-jets thereby providing a new way to perform $\tau$-identification and improving $c$-jet tagging. However, due to the widespread use of the \gls{ftag} algorithms and the difficulties arising in calibrating a tagger with exceptionally good rejection against $\tau$-jets, these are not included in the default version of the tagger nor in the results shown here, but are actively under study for the new generation of tagger in the GN family. \\ 

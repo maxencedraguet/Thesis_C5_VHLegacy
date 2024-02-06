@@ -463,7 +463,7 @@ For example, for an image of size 100 $\times$ 100, a \gls{dnn} would require 10
     \item \textit{Interpretability:} The internal workings of \gls{cnn} is challenging to interpret, making them somewhat of a "black box".
 \end{itemize}
 
-\subsection{Graph Neural Networks}
+\subsection{Graph Neural Networks}\label{chapter-GNN}
 In the last few years, \gls{gnn} have gained significant attention for their ability to model and analyse complex relationships within graph-structured data \cite{graphNetRef}. Originally designed for tasks such as node classification and link prediction, \gls{gnn}s have found applications in diverse domains such as social networks modelling, recommendation systems, and physics, for modelling the dynamic of a $N$-body system, performing tracks reconstruction, and identifying particles.\\
 \gls{gnn}s operate on graph-structured data, where nodes or vertices represent entities, and edges represent relationships between these entities. The functioning of \gls{gnn}s involves iterative aggregation of information from neighbouring nodes and updating of the edges, allowing them to capture local and global structures as defined by the graph. This is achieved through the use of message-passing mechanisms. An interesting feature of graphs is that the input information does not need to be given a rigid structure. Consequently, graph based-methods have a much greater representation power than image- or sequence-based ones. Graphs are in fact able to represent abritrary relational structures, as defined by the graph through its directional weighted edges \cite{graphInductiveBias}. A particular feature arising from this property is that graph are permutation equivariant: the order of nodes can be rearranged without impact. \\
 
