@@ -1,0 +1,67 @@
+
+\subsection{Optimising GN2}\label{chap-GN2Opt}
+The state-of-the-art flavour tagger at ATLAS is, at the time writing, built on the \gls{gn2} architecture. Naturally, fine-tuning the model is required to further push the performance higher. Many studies are currently being carried out to deliver yet a stronger tagger than the \gls{gn2} version presented in this thesis. An non-exhaustive lists of ongoing research directions include: 
+\begin{itemize}
+  \item Optimising the track selection and the jet reconstruction type. Moving towards yet a looser selection and letting the network sift through a larger set of background tracks could deliver further performance. Assessing the effect of modelling uncertainties is however of particular importance for these modiciations.
+  \item The inclusion of neutral constituent information. Tracks are reconstructed from hits in semiconductor-based detectors. Such hits are only recorded for charged particles flying through the active regions of the sensors. This entirely misses neutral particles, from neutrons, neutral pions and kaons, and neutrinos. All but the latters leave energy in the calorimeters that is measurable and accessible. Studies are ongoing to add this information to the set of tracks. 
+  \item The inclusion of leptonic information. 40\% of $b$-hadrons include either an $e$ or a $\mu$ in the jet cone \cite{Tanabashi:2018oca}. As seen with \gls{gn1}, the inclusion of a leptonic information in the set of tracks led to a significant performance increase. Studies are ongoing to build a finer lepton-information analyser within \gls{gn2}.
+  \item Hadronic decays of $\tau$ are a major source of backgrounf for analysis focusing on $c$-jet tagging, due to similar signatures. Including theses leptonic decays in the classification objective has been seen to deliver promising results in initial studies. 
+  \item Finer output classes categorisation. Currently, the simple labelling scheme requires combining topologies with significant differences, for example purely hadronic and semi-leptonic decays of $b$-jets. Allowing for greater flexibility in the definition of classes allows the model to fully utilise the unique signature of each class. 
+  \item Integrating further expert information into the design is known to deliver a great boost to performance. Studies are ongoing to upgrade the set of auxiliary tasks, in particular for secondary vertex fitting and reconstruction. A \gls{gn2} model able to reliably reconstruct this information would have a use case in the ATLAS experiment beyond heavy-flavour jet tagging, while benefitting from improved performance for this essential task.  
+\end{itemize}
+
+Larger design considerations as studied in the above list are paramount to a well-functioning tagger. An equally essential endeavour is to fine-tunie an architecture to extract the best performance from a chosen data processing strategy. This section focuses on some initial studies to perform \gls{hpo} and network architecture search for \gls{gn2}. The essential challenge is that a test of higher a change to a hyperparameter or to the model architecture requires to fully train a gls{gn2} model with the new choices. This is a costly process, as a single epoch of the \gls{gn2} takes roughly ~28 min for 2 NVIDIA A100 \gls{gpu} each fed data by 20 \gls{cpu} to perform 1 epoch on a 30M jets dataset with batchsize 2k split on the \gls{gpu}. \gls{gn2} has many hyperparameters that should be optimised to deliver optimal performance, among which the most relevant are: initial $lr$, maximal $lr$, end $lr$, the weights of the 2 auxiliary tasks, the amount of weight decay, the batchisze, and the float precision. Architecture-level changes are the embedding dimension (output of the initialiser and as input and output of each transformer encoder), the depth of the initialiser, the number of layers and heads in the transformer encoder, the size of the transformer output, the auxiliary tasks \gls{dnn}, the activation functions, and the specific loss functions and their class-weights used. \\
+
+Unfortunately, access to \gls{gpu} was, at the time of writing, limited for members of the Collaboration. Most of the computing power leveraged to train advanced \gls{ml} models such as \gls{gn2} is accessed on high-performance cluster of institutes members belong to. In this respect, a promising area of development is being pursued by \gls{cern}, with the introduction of a Kubeflow-backed served hosted on \textit{ml.cern.ch} \cite{KubeflowCern}. Kubeflow, created by Google and now backed by the Cloud Native Computing Foundation, is an open-source framework built on Kubernetes to perform machine learning operations such as training, inference, deployment, and hyperparameter optimisation. The project aims to centralise the \gls{gpu} resources of the different \gls{cern} experiments into a single centralised cluster with datastorage, efficient I/O reading capabilities, and dedicated \gls{gpu} nodes. Katib, Kubeflow's dedicated \gls{hpo} workload, is a promising approach to perform effective hyperparameter optimisation with state-of-the-art autoML techniques, which automate and refine the strategy to test and converge on the best hyperparameters \cite{george2020katib}. At the time of writing, the server was still in a testing phase with little hardware accessible, thereby removing it from consideration as a possible solution to carry out the full \gls{hpo} of \gls{gn2}. However, the salt framework \gls{gn2} is trained with was adapted to run on Kubeflow platform and tests showed promising possibilites for the Collaboration. Being accessible to any member of the ATLAS Collaboration, it greatly ``democratises'' access to projects requiring powerful computing power for insitutes lacking a \gls{hpc}. \\
+
+Large \gls{nn}, for example large language models, develop in the future at ATLAS will require cluster designed for machine learning, with many \gls{gpu} accessible on dedicated nodes for splitting the process. This paradigm of computing is markedly different from the typical grid-base distributed computing deployed in particle physics experiments. While \gls{mc}-based samples and sub-sampled datasets can be effectivly processed in parallel by autonomous parallel jobs, Machine learning however requires communication between the different jobs to keep the weights of the model being updated during training synchronised on the different \gls{gpu}. A fast connexion between these \gls{gpu} is essential, as is having fast read access to the full datasets due to the need to loop over the whole data for each epoch during training. Distributing the computation across different \gls{hpc} geographically distant, as is common with the current \gls{cern} computing grid, is not effective for this purpose. The \gls{cern} Kubeflow server is an exciting area of development for future computational needs of ATLAS. Furthermore, having a framework compatible with Kubeflow allows operating on multiple platforms, giving the flexibility to scale resource access for computationally demanding tasks, such as \gls{hpo}. For example, Google Cloud is Kubeflow-compatible and host a larger amount of \gls{gpu}, but so are other large cloud providers such as Amazon Web Service and Microsoft's Azure. Salt can be effectivly trained on one of these cloud prodividers or the \gls{cern}'s Kubeflow with no noticeable distinction for the user. \\
+
+While leveraging a large amount of computing power is the natural solution to the challenging task of \gls{hpo} of a ``large'', by ATLAS standards, neural network models, a more refined technique can be exploited in the present case. Recent works suggest that the optimal hyperparameters of a nominal model can be estimated from a smaller model \cite{yang2021tuning}. Here smaller refers to either the depth - the number of layers - or the width - the number of neurons per layer or, in the case of a transformer, the number of heads in the multihead attention - of the neural network. Ref \cite{pmlr-v139-yang21c} establishes the mathematical foundation backing this surprising behaviour of deep neural network: the \gls{mup}. The rest of this section is dedicated to introducing and defining the maximal update parametrisation before establishing its relevance for \gls{hpo}. \\
+
+\subsubsection{Maximal Update Parametrisation}
+The maximal update parametrisation is first and foremost a \textit{parametrisation}. In this context, the parametrisation of a neural network refers to the definition of the weights of each individual neurons, the way they are initialised, and how they are updated from a given optimisation algorithms, such as Adam or \gls{sgd} \cite{adamPaper}. In the presented context, the default or \textit{standard} parametrisation (SP) refers to a parametrisation of the weights following the so-called LeCun parametrisation \Cite{LeCun2012}. Such parametrisation 
+
+\begin{table}[h]
+  \begin{center}
+      \begin{tabular}{c|c|c} 
+      	 \hline \hline
+          \multicolumn{3}{c}{Initialisation} \\
+            & SP  & \gls{mup}  \\ \hline
+          $w^{L_\textrm{inp}}$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{inp}}}\right)$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{inp}}}\right)$                                         \\ 
+          $w^{L_\textrm{hid}}$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{hid}}}\right)$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{hid}}}\right)$                                         \\ 
+          $w^{L_\textrm{out}}$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{out}}}\right)$ & ~ $\mathcal{N}\left(0, \frac{1}{d^{\textrm{in}}_{L_\textrm{out}}\times d^{\textrm{in}}_{L_\textrm{out}}}\right)$  \\ 
+          $b^{L} \forall L$ & 0 & 0  \\  \hline \hline
+          \multicolumn{3}{c}{Adam Learning Rate} \\ 
+          & SP  & \gls{mup}  \\ \hline
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{inp}}$  & $\eta$ & $\eta$                                          \\ 
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{hid}}$  & $\eta$ & $\frac{\eta}{d^{\textrm{in}}_{L_\textrm{hid}}}$ \\ 
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{out}}$  & $\eta$ & $\frac{\eta}{d^{\textrm{in}}_{L_\textrm{out}}}$ \\
+          $\eta_{b, \textrm{sgd}}^{L} \forall L$     & $\eta$ & $\eta$                                          \\  \hline \hline
+          \multicolumn{3}{c}{SGD Learning Rate} \\ 
+          & SP  & \gls{mup}  \\ \hline
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{inp}}$  & $\eta$ & $\frac{\eta}{d^{\textrm{in}}_{L_\textrm{inp}}}$ \\ 
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{hid}}$  & $\eta$ & $\eta$                                          \\ 
+          $\eta_{w, \textrm{sgd}}^{L_\textrm{out}}$  & $\eta$ & $\frac{\eta}{d^{\textrm{in}}_{L_\textrm{out}}}$ \\
+          $\eta_{b, \textrm{sgd}}^{L} \forall L$     & $\eta$ & $\frac{\eta}{d^{\textrm{in}}_{L_\textrm{inp}}}$ \\  \hline \hline
+      \end{tabular}
+    \caption{Comparing the Standard Parametrisation (SP) to the Maximal Update Parametrisation ($\muP$), as defined in Ref \cite{yang2021tuning} based on the work of Ref \cite{pmlr-v139-yang21c}.}
+    \label{tab:max-perf}
+  \end{center}
+\end{table}
+
+\gls{mup} turns out to be the unique parametrisation that maximally updates the weights of a neural network. Here, ``\textit{maximal update}'' refers to the size of the update of a network of width tending towards infinity. For such a hypotethical model useful only for theorical considerations, the updates naturally must be independent of the width, otherwise they would become infinite leading the model to be unstable. 
+
+
+
+\subsection{GN2X: a GN2 variant for Boosted Higgs Bosons Decay to Heavy Flavours}\label{chap-GN2X}
+
+\section{Calibration}
+
+\section{Conclusion}
+This chapter introduces the novel tagger \gls{dl1d} to the set of flavour tagging tools available in ATLAS. Based on the \gls{dips} sub-tagger, \gls{dl1d} is found to have improved background rejections at a fixed working point for both $b$- and $c$-tagging. In parallel to the development of this new tagger, the preprocessing pipeline has been revamped and several changes to the input features list and model architecture were explored in order to deliver the best-performing tagger to the collaboration. 
+\clearpage
+
+
+\begin{tcolorbox}[colback=oxfordblue!5,colframe=blue!40!black,title=Summary of the Chapter]
+In this chapter, the \gls{ftag} world is introduced. 
+\end{tcolorbox}

@@ -107,10 +107,9 @@
       title         = "{GEANT4--a simulation toolkikt. GEANT4. A Simulation
                        toolkit}",
       journal       = "Nucl. Instrum. Methods Phys. Res., A",
-      number  = "CERN-IT-2002-003",
+      number        = "CERN-IT-2002-003",
       volume        = "506",
       pages         = "250-303. 54 p",
-      month         = "Jul",
       year          = "2002",
       url           = "https://cds.cern.ch/record/602040",
 }
@@ -134,6 +133,43 @@ year={2015},
       url           = "https://cds.cern.ch/record/2811135",
       note          = "All figures including auxiliary figures are available at
                        https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PUBNOTES/ATL-PHYS-PUB-2022-027",
+}
+
+@techreport{ATL-PLOT-FTAG-2023-01,
+      author        = "{ATLAS Collaboration}",
+      title         = "{Jet Flavour Tagging With GN1 and DL1d. Generator dependence, Run 2 and Run 3 data agreement studies}",
+      institution   = "CERN",
+      reportNumber  = "ATL-PLOT-FTAG-2023-01",
+      address       = "Geneva",
+      year          = "2023",
+      url           = "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PLOTS/FTAG-2023-01/",
+}
+
+@misc{duperrin2023flavour,
+      title={Flavour tagging with graph neural networks with the ATLAS detector}, 
+      author={Arnaud Duperrin},
+      year={2023},
+      eprint={2306.04415},
+      archivePrefix={arXiv},
+      primaryClass={hep-ex}
+}
+
+@misc{smith2018disciplined,
+      title={A disciplined approach to neural network hyperparameters: Part 1 -- learning rate, batch size, momentum, and weight decay}, 
+      author={Leslie N. Smith},
+      year={2018},
+      eprint={1803.09820},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@misc{smith2018superconvergence,
+      title={Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates}, 
+      author={Leslie N. Smith and Nicholay Topin},
+      year={2018},
+      eprint={1708.07120},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
 }
 
 @article{ATLAS:2012yve, 
@@ -379,7 +415,6 @@ year={2015},
 
 @article{atlas:FTAGRUN2,
   author = {ATLAS Collaboration},
-  date = {2023/07/31},
 	doi = {10.1140/epjc/s10052-023-11699-1},
 	id = {Aad2023},
 	isbn = {1434-6052},
@@ -398,6 +433,28 @@ year={2015},
   note = {Accessed: 2023-04-21}
 }
 
+@misc{KubeflowCern,
+  title = {ml.cern.ch},
+  howpublished = {\url{https://ml.docs.cern.ch}},
+  note = {Accessed: 2024-02-16}
+}
+
+@misc{realKubeflow,
+  title = {Kubeflow},
+  howpublished = {\url{https://www.kubeflow.org/}},
+  note = {Accessed: 2024-02-16}
+}
+
+@misc{george2020katib,
+    title={A Scalable and Cloud-Native Hyperparameter Tuning System},
+    author={Johnu George and Ce Gao and Richard Liu and Hou Gang Liu and Yuan Tang and Ramdoot Pydipaty and Amit Kumar Saha},
+    year={2020},
+    eprint={2006.02085},
+    archivePrefix={arXiv},
+    primaryClass={cs.DC}
+}
+
+https://github.com/kubeflow/kubeflow
 
 @techreport{Chisholm:2743096,
       author        = "{ATLAS Collaboration}",
@@ -960,7 +1017,6 @@ booktitle = "Conference on Empirical Methods in Natural Language Processing (EMN
 doi = {10.1088/1126-6708/2009/06/059},
 url = {https://dx.doi.org/10.1088/1126-6708/2009/06/059},
 year = {2009},
-month = {jun},
 publisher = {},
 volume = {2009},
 number = {06},
@@ -1017,4 +1073,54 @@ journal = {Journal of High Energy Physics},
       eprint={2002.08772},
       archivePrefix={arXiv},
       primaryClass={cs.LG}
+}
+
+
+@misc{smith2023differentiable,
+      title={Differentiable Vertex Fitting for Jet Flavour Tagging}, 
+      author={Rachel E. C. Smith and Inês Ochoa and Rúben Inácio and Jonathan Shoemaker and Michael Kagan},
+      year={2023},
+      eprint={2310.12804},
+      archivePrefix={arXiv},
+      primaryClass={hep-ex}
+}
+
+
+@InProceedings{pmlr-v139-yang21c,
+  title = 	 {Tensor Programs IV: Feature Learning in Infinite-Width Neural Networks},
+  author =       {Yang, Greg and Hu, Edward J.},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {11727--11737},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {18--24 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/yang21c/yang21c.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/yang21c.html},
+}
+@inproceedings{yang2021tuning,
+title={Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer},
+author={Greg Yang and Edward J Hu and Igor Babuschkin and Szymon Sidor and Xiaodong Liu and David Farhi and Nick Ryder and Jakub Pachocki and Weizhu Chen and Jianfeng Gao},
+booktitle={Advances in Neural Information Processing Systems},
+editor={A. Beygelzimer and Y. Dauphin and P. Liang and J. Wortman Vaughan},
+year={2021},
+url={https://openreview.net/forum?id=Bx6qKuBM2AD}
+}
+
+
+@inbook{LeCun2012,
+  address = {Berlin, Heidelberg},
+	author = {LeCun, Yann A. and Bottou, L{\'e}on and Orr, Genevieve B. and M{\"u}ller, Klaus-Robert},
+	booktitle = {Neural Networks: Tricks of the Trade: Second Edition},
+	doi = {10.1007/978-3-642-35289-8_3},
+	editor = {Montavon, Gr{\'e}goire and Orr, Genevi{\`e}ve B. and M{\"u}ller, Klaus-Robert},
+	isbn = {978-3-642-35289-8},
+	pages = {9--48},
+	publisher = {Springer Berlin Heidelberg},
+	title = {Efficient BackProp},
+	url = {https://doi.org/10.1007/978-3-642-35289-8_3},
+	year = {2012},
+	bdsk-url-1 = {https://doi.org/10.1007/978-3-642-35289-8_3}
 }
