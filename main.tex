@@ -1,5 +1,5 @@
 %!TEX root = /Users/maxencedraguet/Desktop/DPhil/Thesis/main.tex
-\documentclass[12pt,a4paper]{report} 
+\documentclass[11pt,a4paper]{report} 
 \input{utils/preamble.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,7 +69,7 @@
 %\input{Sections/C4_ML}
 
 \newpage
-%\input{Sections/C4_FTAG}
+\input{Sections/C4_FTAG}
 \input{Sections/C4_FTAG2}
 
 %\newpage
@@ -77,14 +77,17 @@
 
 \newpage
 {\pagestyle{plain}
+\begin{singlespace}
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
+\end{singlespace}
+
+% \listoffigures
+\pagebreak
+}
 
 %\newpage
 %\appendix
 %\input{Appendices/A_FTAG.tex}
 
-% \listoffigures
-\pagebreak
-}
 \end{document}
