@@ -2,38 +2,55 @@
 \ChapFrame
 
 \textit{
-This chapter focuses on an essential task in the ATLAS experiment: identifying particles flying through the detector. This objective of assigning labels is referred to as tagging. An important family of particules to be tagged are quarks, and disentangling which specific flavour of the quarks should be assigned to an observed signal is called flavour tagging. Free quarks and gluons hadronise as per the rules of \gls{qcd}, forming large number of particles that can themselves further decay. Such a dynamic results in a many particles radiating within a clone centred around the inital flavoured particle, a structure referred to as a jet. Consequently, this chapter introduces method to tag jets, to identify the flavour of the initial parton. In particular, the first training of \gls{dl1d} is described in details, as well as the hyperparameter optimisation of \gls{gn2}.
+The focus of this chapter is on an essential task in the ATLAS experiment: identifying particles flying through the detector. This objective of assigning labels to reconstructed particles from measurements is referred to as tagging. An important family of particules to be tagged are quarks, and disentangling which specific flavour of the quarks should be assigned to an observed signal is called flavour tagging. Free quarks and gluons hadronise as per the rules of \gls{qcd}, forming large number of particles that can themselves further decay. Such a dynamic results in a many particles radiating within a clone centred around the inital flavoured particle, a structure referred to as a jet. Consequently, this chapter introduces method to tag jets, as labelled by the flavour of the initial parton. In particular, the different algortihms and methods relevant for this task developped during the during of the author's contribution to ATLAS are reviewed, with the first trainings of DIPS, DL1d, GN1, and GN2 described in details as well as early studies of the hyperparameter optimisation of GN2.
 }
 
 \section{Heavy-Flavour Jet Tagging}
-A fundamental ingredient in any ATLAS analysis is the ability to correctly identify particles in the aftermath of a collision, from $\tau$-leptons, to $b$- and $c$-quarks, and gluons $g$. Having well-calibrated and optimally performing b- and c-tagging tools is of primary importance in studies of the Higgs boson couplings to $b$- and $c$-quarks. It is also critical for top $t$-quark measurements and searches for extensions of the \gls{sm}. As described by the theory of \gls{qcd}, colour-charged objects, such as a $b$- or a $c$-quark, undergo hadronisation to form collections of colourless hadrons. These hadrons, mostly $B$ for $b$-quark and $D$ for $c$-quark, are unstable and further decay in the volume of the detector. Such a succession of decays leaves a collection of particles within a cone oriented in the direction of the original parton, an easily recognisable pattern referred to as a \textit{jet}. From an analysis of the complicated structure of the jet, the flavour of the initially decaying particle can be reconstructed. This is the task of \textit{flavour tagging}. In the ATLAS experiment, the tool to achieve this identification, called \textit{tagger}, is developed and maintained centrally by the \gls{ftag}. \\
+A fundamental ingredient in any ATLAS analysis is the ability to correctly identify particles in the aftermath of a collision, from $\tau$-leptons, to $b$- and $c$-quarks, and gluons $g$. Having well-calibrated and optimally performing b- and c-tagging tools is of primary importance in studies of the Higgs boson couplings to $b$- and $c$-quarks. It is also critical for top $t$-quark measurements and searches for extensions of the \gls{sm}. As described by the theory of \glsfirst{qcd}, colour-charged objects, such as a $b$- or a $c$-quark, undergo hadronisation to form collections of colourless hadrons. These hadrons, mostly $B$ for $b$-quark and $D$ for $c$-quark, are quasi-stable and further decay in the volume of the detector. Such a succession of decays leaves a collection of particles within a cone oriented in the direction of the original parton, an easily recognisable pattern referred to as a \textit{jet}. From an analysis of the complicated structure of the jet, the flavour of the initially decaying particle can be reconstructed. The labelling scheme applied to jet consist in identifying the hadron associated to the jet: a $b$-jet must contain at least one $b$-hadron, a $c$-jet at least one $D$-hadron and no $b$-hadron, and if none of these hadrons are found the jet is said to be a light-jet, thereby grouping $u$-, $d$-, and $s$-quarks with gluons $g$. This is the task of \textit{flavour tagging}, and the tool to achieve this identification is called a \textit{tagger}. \\
 
-Tagging $b$-jets benefits from a particularly advantageous configuration: the $b$ is the lightest element of the third generation and must decay through a flavour-changing process. Because of the \gls{sm} all value of the $V_{bc}$ \gls{ckm} matrix element, this decay process is suppressed, giving $b$-hadrons a characteristically long-lifetime and decay length $(c\tau)_{B} \sim 400$  $\mu$m \cite{Tanabashi:2018oca}. When considering boosted objects with a Lorentz $\gamma$ factor above unity, the location of the $b$-hadron decay, called  \gls{sv}, can be reconstructed by the ATLAS pixel detector \cite{Aad:2019aic}. Other important variables describing the decay of $b$-hadrons are the \glspl{ip} $d_0$ and $z_0$ of charged particles emanating from the \gls{sv}. As shown in Figure \ref{fig:bjet}, $d_0$ and $z_0$ are the transversal and longitudinal distances from the primary vertex to the perigee\footnote{The point of closest approach.} of the track associated with the charged particle. For a $b$-jet, either or both of the \glspl{ip} can be large thanks to the long lifetime of the associated hadron. Other characteristics of $b$-jets are the large number of particles in the final state following their hadronisation, a property described as \textit{high multiplicity} which is due to the large mass of the $b$-quark, and the likely presence of leptons in the jet cone, as 40\% of the decays of $b$-hadrons including either an $e$ or a $\mu$ \cite{Tanabashi:2018oca}. \\
+\subsection{Decay Topology}
+When a $b$-quark is produced, such as in the aftermath of a hard scatter due to a proton-proton collision, it quickly undergoes the process of hadronisation to neutralise its free colour-charge. This process leading free quarks and gluons to a final state of hadrons and leptons is intrinsically non-perturbative and can only be described with phenomenological models of framgentation \cite{Webber:419784}. The family of $b$-hadrons is composed of different ensemble of a bottom quark $b$ with one or more light quarks. These include the $B$-mesons, mainly $B^0=d\bar{b}$, $B^-=\bar{u}b$, $B^+=u\bar{b}$, and the strange and charmed $B$-mesons, and baryons, such as the $\Lambda_b^0=udb$ \cite{ATL-PHYS-PUB-2014-008}. For $b$-quarks, the hadronisation process is hard and most ($\sim$ 70-80\%) of the quark momentum is passed to the $b$-hadron \cite{Webber:419784}. Tagging $b$-jets benefits from a particularly advantageous configuration: the $b$ is the lightest element of the third generation of quarks and must decay through a flavour-changing process through the weak interaction. Because of the relatively small \gls{sm} value of the $V_{bc}$ \gls{ckm} matrix element, decay processes involving a transition $b \rightarrow c$ are suppressed, giving $b$-hadrons a characteristically long proper lifetime $\tau_B \approx 1.5$ ps corresponding to a proper decay length $c\tau_{B} \sim 450$ $\mu$m \cite{Tanabashi:2018oca}. In the laboratory frame and considering the boost of the $b$-hadron given by a Lorentz $\gamma$ factor ($\gamma > 1$) and $\beta = v/c \approx 1$ in the high energy limit, the distance travelled is given by \[d = \gamma \beta c \tau_B \approx \gamma c \tau_B.\] In the high-energy limit, $\gamma \approx E_B / m_B$, where the mass of $B$-hadrons is in the range 5-6 GeV. Consequently, a 50 GeV $b$-hadron decays at a distance of $d \approx 4.5$ mm from the primary vertex which can be resolved. This distance travelled, also called the $b$-hadron radius $L_{xy}$, further increases with jet $p_T$ and at transverse momentum above $\sim$500 GeV even overpasses the first detector layer of the \gls{ibl}, located at a distance of roughly 33 mm from the centre of ATLAS as shown in Figure \ref{fig:bhaddecay}. The location of the $b$-hadron decay can often be reconstructed by the ATLAS detector, and the reconstructed point of decay is called \gls{sv} \cite{Aad:2019aic}. Some important variables describing the decay of $b$-hadrons are the \glspl{ip} $d_0$ and $z_0$ of the charged particles emanating from the \gls{sv}. As shown in Figure \ref{fig:bjet}, $d_0$ and $z_0$ are the transversal and longitudinal distances from the primary vertex to the perigee\footnote{The point of closest approach.} of the track associated with the charged particle. For a $b$-jet, the \glspl{ip} can be large thanks to the long lifetime of the associated hadron. On average, a $b$-hadron decays weakly to four or five charged stable particles \cite{ATL-PHYS-PUB-2014-008}. Another characteristic of $b$-jets is the likely presence of leptons in the jet cone, as 40\% of the decays of $b$ and $c$-hadrons are semi-leptonic and include either an $e$ or a $\mu$ \cite{Tanabashi:2018oca}. \\
 
 \begin{figure}[h!]
 \center
-\includegraphics[scale=0.6]{Images/bjet}
-\caption{Representation of a $b$-jet.} 
-\label{fig:bjet}
+\begin{subfigure}[b]{0.48\textwidth}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Images/bjet}
+  \caption{Representation of a $b$-jet \cite{bjetimage}.}
+  \label{fig:bjet}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+  \centering
+  \includegraphics[width=0.98\textwidth]{Images/FTAG/intro/bhaddecay.png}
+  \caption{$b$-hadron decay radius as a function of jet $p_T$ reconstructed for $b$-jets in a $Z'$ events with the IBL and pixel layers indicated, from \cite{VanStroud:2869719}. Error bars show the standard deviation of $L_{xy}$ in each $p_T$ bin.} 
+  \label{fig:bhaddecay}
+\end{subfigure}
 \end{figure}
 
-On the contrary, tagging $c$-jets, being at an intermediate scale between light- ($u$, $d$, $s$, and gluons) and $b$-jets, is much more challenging. The decay length for charged (neutral) $D$-hadrons, $(c\tau)_D \sim 300$ $(100)$ $\mu$m \cite{Tanabashi:2018oca}, is smaller than for $b$-hadrons and is difficult to resolve with the currently deployed tracker. The decay chain of $b$-hadrons often includes $D$-hadrons, making a clean separation of $c$-jets from $b$-jets harder. Compared to $b$-jets, $c$-jets have a lower multiplicity which leads to $\tau$-jets being easily mistaken for $c$-jets, as these leptons can hadronically decay into a sufficiently large number of particles to mimic a jet in the detector. For all these reasons, less effort has been historically dedicated to constructing $c$-taggers in ATLAS. The task is however gaining particular attention due to the focus on the challenging $H \rightarrow c\bar{c}$ search \cite{Aaboud:2018fhh}. This chapter presents the development of a novel $b$- and $c$-tagger for the ATLAS experiment.
+While $b$-jets benefit from an advantageous topology, tagging $c$-jets proves much more challenging as they are at an intermediate scale between light- ($u$, $d$, $s$, and gluons) and heavy flavour jets. A $c$-jet must contain at least one $c$-hadron, from either a $D$-meson (e.g., $D^+=c\bar{d}$, $D^-=d\bar{c}$, $D^0=c\bar{u}$) or a $c$-baryon (e.g., $\Lambda_c^+:udc$). The average decay length for charged (neutral) $D$-mesons, $c\tau_D \sim 300$ $(100)$ $\mu$m \cite{Tanabashi:2018oca}, is smaller than for $b$-hadrons and is harder to resolve with the currently deployed tracker. The decay chain of $b$-hadrons often includes a $c$-hadron, making a clean separation of $c$-jets from $b$-jets harder. Compared to $b$-jets, $c$-jets have a lower final state charged particle multiplicity, on average 4. This lets $\tau$-jets easily being mistaken for $c$-jets, as these leptons can hadronically decay into a similar number of particles to mimic a jet in the detector. For all these reasons, less effort has been historically dedicated to constructing $c$-taggers in ATLAS. The task is however gaining particular attention due to the focus on the challenging $H \rightarrow c\bar{c}$ search \cite{Aaboud:2018fhh, Collaboration:2721696, arXiv:2205.05550}. The focus of this chapter is on the development of novel taggers to identify $b$- and $c$-jet for the ATLAS experiment during the 2020-2024 period, overlaping with the end of Run 2 (2015-2018) analyses and the begining of Run 3 (2022-2026).
 
-\section{Flavour Tagging at ATLAS}
+\subsection{Flavour Tagging at ATLAS}
 In the ATLAS experiment, a choice was made to develop centrally a tagger to be used by the whole collaboration. It relies on a dedicated set of algorithms to perform simultaneously $b$- and $c$-tagging and is continuously improved to meet the requirements of the physics program. Currently, all adopted approaches rely on \gls{dl} methods, given their vastly superior effectiveness. This area of research has been evolving rapidly in recent times due to the community adopting advanced methods from the field of \gls{ai}. As such, various models have been introduced and the last two generations can be split into two categories: 
 \begin{enumerate}
-  \item The DL1 family are \gls{dl} models built in a hierarchical way. These \gls{dl} methods rely on high-level features reconstructed by sub-algorithms based on physics variables, such as the tracks \glspl{ip}, and the reconstruction of secondary vertices. The most important models in this family are those including a \gls{dl} sub-model to analyse tracks with either a \gls{rnn} approach for \gls{dl1r}, leveraging the \gls{rnnip} sub-tagger, and a Deep Set approaches for \gls{dl1d}, leveraging the \gls{dips} sub-tagger. This last tagger is, at the moment of writing this thesis, the current state-of-the-art deployable tagger for \gls{atlas}. Algorithms from this family were developped for Run 2 of the ATLAS experiment \cite{atlas:FTAGRUN2}, with \gls{dl1d} behind developped towards the end of this data campaign.
-  \item The GN family of taggers are built on more advanced \gls{dl} method, as they move away from the hierarchical approach of the DL1 family and directly analyse track and jet information in a unique complex architecture. The GN family is based either on a full Graph Attention Network (\gls{gat}) for \gls{gn1}, and a Transformer encoder for \gls{gn2}. This lighter algorithm pipeline greatly simplifies the maintenance and turnaround time for modification, making the process of updating the taggers nimbler and easier to tailor to specific applications. The GN taggers greatly outperform the DL1 family and represent an exciting area of progress for future analysis requiring precise flavour jets tagging. These methods are being integrated in the ATLAS software stack with objective to be integrated in analyses of the ongoing Run 3.  
+  \item The DL1 family are \gls{dl} models built in a hierarchical way. These \gls{dl} methods rely on high-level features reconstructed by sub-algorithms based on physics variables, such as the tracks \glspl{ip}, and the reconstruction of secondary vertices \cite{ATL-PHYS-PUB-2015-022}. The most important models in this family are those including a \gls{dl} sub-model to analyse tracks with either a \gls{rnn} approach for \gls{dl1r} \cite{ATLAS:2017bcq}, leveraging the \gls{rnnip} sub-tagger \cite{ATL-PHYS-PUB-2017-003}, and a Deep Set approaches for \gls{dl1d}, leveraging the \gls{dips} sub-tagger \cite{ATL-PHYS-PUB-2020-014}. This last tagger is, at the moment of writing this thesis, the state-of-the-art deployable tagger for \gls{atlas} in the ATLAS software \cite{ATL-SOFT-PUB-2021-001}. Algorithms from this family were developped for Run 2 of the ATLAS experiment \cite{atlas:FTAGRUN2}, with \gls{dl1d} behind developped towards the end of this data campaign.
+  \item The GN family of taggers are built on more advanced \gls{dl} method, as they move away from the hierarchical approach of the DL1 family and directly analyse track and jet information in a unique complex architecture. The GN family is based either on a full Graph Attention Network (\gls{gat}) for \gls{gn1}, and a Transformer encoder for \gls{gn2} \cite{ATL-PHYS-PUB-2022-027, ATL-PLOT-FTAG-2023-01, duperrin2023flavour}. This lighter algorithm pipeline greatly simplifies the maintenance and turnaround time for modification, making the process of updating the taggers nimbler and easier to tailor to specific applications. The GN taggers greatly outperform the DL1 family and represent an exciting area of progress for future analysis requiring precise flavour jets tagging. These methods are being integrated in the ATLAS software stack with objective to be integrated in analyses of the ongoing Run 3 \cite{ATL-SOFT-PUB-2021-001}.  
 \end{enumerate}
 
 \begin{figure}[h!]
   \center
-  \includegraphics[scale=0.3]{Images/FTAG/storyFtag.png}
-  \caption{Comparison of the performance of \gls{ftag} models introduced through the years. Light and $c$-jet rejection are plotted for different taggers at a fixed $b$-jet tagging efficiency of 70\% on a common $t\bar{t}$ evaluation sets. The multiplicative factors in the bars are with respect to the DL1 model performance.} 
+  \includegraphics[width=0.8\textwidth]{Images/FTAG/storyFtag.png}
+  \caption{Comparison of the performance of flavour tagging models introduced through the years, from \cite{ATL-PLOT-FTAG-2023-01}. Light and $c$-jet rejections are plotted for different taggers at a fixed $b$-jet tagging efficiency of 70\% on a common $t\bar{t}$ evaluation sets. The multiplicative factors in the bars are with respect to the bare DL1 model performance.} 
   \label{fig:storyFtag}
 \end{figure}
 
-A historical perspective on the evolution of performance for the different taggers mentioned is presented in Figure \ref{fig:storyFtag}, showing a remarkable continuous increase in light- and $c$-jet rejections at a fixed $b$-tagging efficiency of 70\% on a $t\bar{t}$ dataset. The analysis presented in the latter part of this thesis was carried out in the span of 2021-2024, and was therefore restricted to tools and methods available to the experimental team during this period. As such, due to the need to calibrate the GN taggers as explained latter in this chapter, the second family of tagger was not yet ready for deployement, making the first family still relevant to explore. Furthemore, some special use of flavour taggers still require the DL1 family, such as in triggers, and as inputs to other methods, like the $X_{bb}$ tagger identifying pairs of $b\bar{b}$ and $c\bar{c}$ produced by heavy resonance decays such as a Higgs or a $W$. 
+A historical perspective on the evolution of performance for the different taggers mentioned is presented in Figure \ref{fig:storyFtag}, showing a remarkable continuous increase in light- and $c$-jet rejections at a fixed $b$-tagging efficiency of 70\% on a $t\bar{t}$ dataset. The analysis presented in the latter part of this thesis was carried out in the span of 2021-2024, and was therefore restricted to tools and methods available to the experimental team during this period. As such, due to the need to calibrate the GN taggers as explained latter in Section \ref{chap-calibration} of this chapter, the second family of taggers based on graphs was not yet ready for deployement, making the first family still relevant to explore. Furthemore, some specialised use of flavour taggers and early Run 3 analyses still required the DL1 family, such as the $X_{bb}$ tagger identifying pairs of $b\bar{b}$ and $c\bar{c}$ produced by heavy resonance decays such as a Higgs or a $W$, as described in Section \ref{chap-GN2X}. All the taggers described in this chapter have been integrated in the ATLAS software \cite{ATL-SOFT-PUB-2021-001}. Some early studies of the future performance of the \gls{dl1d} and \gls{gn1} taggers with the updated \gls{itk} detector at the high-luminosity \gls{lhc} as been performed in Ref \cite{ATL-PHYS-PUB-2022-047}.
+
+\subsection{Datasets}\label{ftagdatasets}
+The $p_T$ spectrum studied by ATLAS covers a wide range of energies, extending up to 7 TeV. In order to train models able to perform on this large phase space, two datasets are typically combined and described in this section. Each dataset is based from simulated proton-proton collisions at a centre of mass energy $\sqrt{s}$ = 13 TeV. The lower $p_T$ phase space is simulated with the \gls{sm} top-antitop quark pair production $t\bar{t}$ process with at least one $W$ boson produced decaying leptonically, while a \gls{bsm} $Z'$ process is used for the higher momentum region. The latter simulates a modified $Z$ boson from the \gls{sm} with an increased mass to generate a relatively flat jet $p_T$ spectrum of up to 6 TeV. This $Z'$ boson decays in similar proportions to a pair of $b$, $c$, and light-jets. All simulations include realistic effects present in the real data, such as multiple proton-proton interactions per bunch crossing, so-called \glsfirst{pu}, with an average value of $\mu = 40$. Other effects including in the simulations are the detector response from prior and posterior bunch crossing (in-time pile-up) as well the activity from the rest of the event (underlying event). \\
+
+Events in the $t\bar{t}$ samples are simulated using \uppercase{POWHEGBOX V2} generators to next-to-leading (NLO) order in the strong coupling constant $\alpha_s$ \cite{PaoloNason_2004, StefanoFrixione_2007, StefanoFrixione_20072, POWHEGBOX}. The hard scatter matrix element is computed for proton-proton collision with the \uppercase{NNPDF3.0NNLO} set of parton distribution functions (PDF) \cite{PDFLHCrun2}, and the simulated hard scatter events are interfaced with \uppercase{PYTHIA 8.230} \cite{SJOSTRAND2015159} using the A14 parameter tune \cite{ATL-PHYS-PUB-2014-021} and the \uppercase{NNPDF2.3LO} PDFs for the parton shower, hadronisation, and underlying event simulations \cite{BALL2013244}. Studies in Refs \cite{ATL-PHYS-PUB-2016-020, ATL-PHYS-PUB-2020-023} showed these to be the optimal choice to correctly model the top quark $p_T$ and the number of additional jets in the event, with the $h_{\textrm{damp}}$ parameter set at 1.5 the mass of the top-quark $m_{\textrm{top}} = 172.5$ GeV. The $Z'$ events are fully simualted with \uppercase{PYTHIA 8.212}, A14 tune and the \uppercase{NNPDF2.3LO} PDFs. The decays of $b$- and $c$-hadrons are performed by \uppercase{EvtGEN} v1.6.0 \cite{LANGE2001152}. \\
+
+The detector reconstruction effect of ATLAS and the modelling of the interaction between long-lived hadrons and the detector material are simulated with a dedicated software \cite{ATLASSimulationInfra} built on GEANT4 \cite{Agostinelli:602040}. Jets are selected in the phase space region defined by $|\eta| < 2.5$ and $p_T > 20$ GeV, with no overlapping with prompt generator-level $e$ or $\mu$ from the $W$ decay allowed. Pile-up contamination is further reduced by an additional standard selection using the \glsfirst{jvt} algorithm at a tight working point for jets with $p_T < 60$ GeV and $|\eta| < 2.4$ \cite{ATLAS-CONF-2014-018}. Tracks are associated to jets using a $\Delta R$ association cone of width decreasing with $p_T$ ($\Delta R \approx 0.45$ at $p_T =$ 20 GeV and $\Delta R \approx 0.25$ at $p_T > 200$ GeV). Tracks within the cones of several jets are associated to jet with minimal $\Delta R(\textrm{track, jet})$. The label of the jet is inferred from the presence of a truth-level hadron within the cone $\Delta R(\textrm{hadron, jet}) < 0.3$ centred around the jet axis.
 
 \section{DL1 Family of Models: DL1r \& DL1d}
 This family of tagger is built with a hierarchical approach, combining low-level algorithms that are independentely optimised into a final \gls{dnn} network of a few layers to output a final prediction. Not all low-level modules are based on \gls{dl}, with some instead directly implementing physics-motivated algorithms. They consist of \cite{Paganini:2289214, atlas:FTAGRUN2}:
@@ -69,9 +86,9 @@ A jet is $X$-tagged if the $D_X$ discriminant score is above a set threshold con
 \begin{equation}
 \epsilon^X_Y = \frac{N^{X-tagged}_{Y-jets}}{N_{Y-jets}} \quad \textrm{and} \quad \mathcal{R}^X_Y = \frac{1}{\epsilon^X_Y},
 \end{equation}
-where $N^{X-tagged}_{Y-jets}$ and $N_{Y-jets}$ are respectively the number of $X$-tagged $Y$-flavoured jets and the total number of $Y$-flavoured jets. \\
+where $N^{X-tagged}_{Y-jets}$ and $N_{Y-jets}$ are respectively the number of $X$-tagged $Y$-flavoured jets and the total number of $Y$-flavoured jets. The $f$-rejection is the inverse miss-tagged efficiency of flavour $f$.  \\
 
-These high-level models are trained on \gls{mc} simulated data samples and need to be calibrated on real data to deliver an unbiased estimate, by deriving \glspl{sf} weights correcting the predictions for each jet. Uncertainties are derived on the predicted score and passed along to analyses using the tool. The novel algorithm introduced in this work is the \gls{dl1d} tagger, which relies on the \gls{dips} sub-tagger to extract correlations between the tracks.  
+These high-level models are trained on \gls{mc} simulated data samples, as mentioned in Section \ref{ftagdatasets}, and need to be calibrated on real data to deliver an unbiased estimate, by deriving \glspl{sf} weights correcting the predictions for each jet as described in Section \ref{chap-calibration}. Uncertainties are derived on the predicted score and passed along to analyses using the tool. The novel algorithm of this family introduced in this work is the \gls{dl1d} tagger, which relies on the \gls{dips} sub-tagger to extract correlations between the tracks.  
 
 \subsection{RNNIP}
 The \gls{rnnip} tagger runs on arbitrary-length input sequences made of track features, as ordered by the absolute transverse \gls{ip} significance $|S_{d_0}|$, to extract tagging information from correlations between tracks \cite{ATL-PHYS-PUB-2017-003}. The vector of track features, described in greater details in Table \ref{tab:rnnipVar}, includes the transverse and longitudinal impact parameter significances, the jet $p_T$ fraction carried by the track, the distance between the track and the jet axis, and a learned 2D embedding of the track quality \cite{Paganini:2289214}. It outputs a probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light, $\tau$].
@@ -83,25 +100,25 @@ The \gls{rnnip} tagger runs on arbitrary-length input sequences made of track fe
   \label{fig:rnnipModel}
 \end{figure}
 
-The architecture of \gls{rnnip} is a \gls{rnn}-based model leveraging an \gls{lstm} core, as depicted in Figure \ref{fig:rnnipModel}. The arbitrary-length sequence fed as input is mapped by the \gls{lstm} cell with 100 hidden dimension into a 50-dimensional vector. This vector is then processed by a 20 unit fully-connected feed-forward neural network outputing the per-flavour probabilities by computing the softmax of the last layer's output. To avoid overfitting, a dropout value of 0.2 is applied to the \gls{lstm} cell. 
+The architecture of \gls{rnnip} is a \gls{rnn}-based model leveraging an \gls{lstm} core, as depicted in Figure \ref{fig:rnnipModel}. The arbitrary-length sequence fed as input is mapped by the \gls{lstm} cell with a 100-unit hidden layer into a 50-dimensional vector. This vector is then processed by a 20-unit fully-connected feed-forward neural network outputing the per-flavour probabilities by computing the softmax of the last layer's output. To avoid overfitting, a dropout value of 0.2 is applied to the \gls{lstm} cell. 
 
 \begin{table}[h]
   \begin{center}
       \begin{tabular}{C{3cm}|C{13cm}} 
       	 \hline \hline
           Track Variables & Description  \\ \hline \hline
-          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, whith $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the point of closest approach is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
-          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, whith $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
-          $p_T^{\textrm{frac}}$   & the fraction of the reconstructed jet $p_T^{\textrm{jet}}$ carried by the track $p_T^{\textrm{frac}} = p_T^{\textrm{track}} / p_T^{\textrm{jet}}$. \\ \hline
-          $\Delta R$(track, jet) & the geometrical distance in 2D angle between the track direction and jet axis $\Delta R = \sqrt{(\phi_{\textrm{track}} - \phi_{\textrm{jet}})^2 + (\eta_{\textrm{track} - \eta_{\textrm{jet}}})^2}$. \\ \hline
-          Category       & A 2D representation of the track quality learnt by an embedding layer. The categorisation is based on the number of observed, expected and missing hits in the different layers of the tracker (silicon pixel and strip detectors) \cite{ATL-PHYS-PUB-2015-022}.  \\ \hline
+          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, with $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the perigee is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
+          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, with $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the perigee of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
+          $p_T^{\textrm{frac}}$   & Fraction of the reconstructed jet $p_T^{\textrm{jet}}$ carried by the track $p_T^{\textrm{frac}} = p_T^{\textrm{track}} / p_T^{\textrm{jet}}$. \\ \hline
+          $\Delta R$(track, jet) & Geometrical distance in 2D angle between the track direction and jet axis $\Delta R = \sqrt{(\phi_{\textrm{track}} - \phi_{\textrm{jet}})^2 + (\eta_{\textrm{track} - \eta_{\textrm{jet}}})^2}$. \\ \hline
+          Category       & 2D representation of the track quality learnt by an embedding layer. The categorisation is based on the number of observed, expected and missing hits in the different layers of the tracker (silicon pixel and strip detectors) \cite{ATL-PHYS-PUB-2015-022}.  \\ \hline
       \end{tabular}
     \caption{Track variables passed to the initial version of the \gls{rnnip} model \cite{ATL-PHYS-PUB-2017-003}. Later versions removed the category embedding and added the per-track hit information shown for \gls{dips} in Table \ref{tab:dipsVar}.}
     \label{tab:rnnipVar}
   \end{center}
 \end{table}
 
-\gls{rnnip} is designed to capture correlations between the tracks of a jet, a rich information explicitely missing from the \gls{ip}-based discriminant of IP2D and IP3D due to the factorisation of the likelihood. Some degree of correlation is expected between tracks, as these can emerge from the same secondary or tertiary vertex of the displaced decay in $b$- and $c$-jets. It removes the cumbersome procedure to built likelihood templates, which demand large amount of data to scale to finer bin resolution and is computationally expensive as the number of bins scales exponentially with the number of variables. Tests shown that \gls{rnnip} is effective at building a discriminant, delivering superior performances to the \gls{ip}-based approaches with only $\sim$40 \% of the parameters (11,636 trainable parameters for \gls{rnnip})\cite{Paganini:2289214}.
+\gls{rnnip} is designed to capture correlations between the tracks of a jet, a rich information explicitely missing from the \gls{ip}-based discriminant of IP2D and IP3D due to the factorisation of the likelihood. Some degree of correlation is expected between tracks, as these can emerge from the same secondary or tertiary vertex of the displaced decay in $b$- and $c$-jets. It removes the cumbersome procedure to built likelihood templates, which demands large amount of data to scale to finer bin resolution and is computationally expensive due to the number of bins scaling exponentially with the number of variables. Early tests showed that \gls{rnnip} is effective at building a discriminant, delivering superior performances to the \gls{ip}-based approaches with only $\sim$40 \% of the parameters - 11,636 trainable parameters for \gls{rnnip} \cite{Paganini:2289214}.
 
 \subsection{DIPS}
 The \gls{dips} tagger, based on the Deep Set architecture \cite{NIPS2017f22e4747} and depicted in Figure \ref{fig:dipsModel}, is a \gls{gnn}-based alternative approach to \gls{rnnip} to model the correlations between an arbitrary number of tracks \cite{ATL-PHYS-PUB-2020-014}. As introduced in Chapter \ref{chapter-GNN}, such a model is composed of two fully-connected feed-forward neural network. A first \gls{dnn} called the \textit{track network} $\Phi$ maps each individual track feature vector - similar to the input of \gls{rnnip} - to a latent space representing the nodes of a graph. The representations of each track in this latent space are then pooled by a simple summation operation - representing the unweighted edges of a fully connected graph - and given as input to a secondary \gls{dnn}, called the \textit{jet network} $F$, outputting the predicted probability $p_X$ for the jet to belong to flavour $X$ $\in$ [$b$, $c$, light, $\tau$]. This last network represents the global attribute of the graph $u$, in the notation of Chapter \ref{chapter-GNN}. 
@@ -123,8 +140,8 @@ to output the per-flavour probabilities. The separation of computation into a pe
       \begin{tabular}{C{3cm}|C{13cm}} 
       	 \hline \hline
           Variables & Description  \\ \hline
-          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, whith $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the point of closest approach is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
-          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, whith $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
+          $S_{d_0}$      & Lifetime signed transverse \gls{ip} significance $d_0 / \sigma_{d_0}$, with $d_0$ the transverse \gls{ip} - the transverse distance from the \gls{pv} to the point of closest approach (perigee) of the track - and $\sigma_{d_0}$ the error on $d_0$. If the perigee is in front (behind) the \gls{pv} with respect to the jet direction, the sign is positive (negative). \\ \hline
+          $S_{z_0}$      & Lifetime signed longitudinal \gls{ip} significance $z_0 / \sigma_{z_0}$, with $z_0$ the longitudinal \gls{ip} - the longitudinal distance from the \gls{pv} to the perigee of the track - and $\sigma_{z_0}$ the error on $z_0$. A sign is assigned as per the prescription of $S_{d_0}$. \\ \hline
           $\log p_T^{\textrm{frac}}$   & Logarithm of the fraction of the reconstructed jet $p_T^{\textrm{jet}}$ carried by the track $\log p_T^{\textrm{frac}} = \log p_T^{\textrm{track}} / p_T^{\textrm{jet}}$. \\ \hline
           $\log \Delta R$(track, jet) & Logarithm of the geometrical distance in 2D angle between the track direction and jet axis $\log \Delta R = \log \sqrt{(\phi_{\textrm{track}} - \phi_{\textrm{jet}})^2 + (\eta_{\textrm{track} - \eta_{\textrm{jet}}})^2}$. \\ \hline
           IBL hits      & Number of hits recorded in the \gls{ibl} - 0, 1, or 2. \\ \hline
@@ -148,14 +165,14 @@ This approach has several advantages over \gls{rnnip}, mainly the physically mot
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[scale=0.4]{Images/FTAG/dipsrnnipL.png}
+      \includegraphics[width=0.98\textwidth]{Images/FTAG/dipsrnnipL.png}
       \caption{Light-rejection.} 
       \label{fig:dipsrnnipPerfL}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[scale=0.4]{Images/FTAG/dipsrnnipC.png}
+      \includegraphics[width=0.98\textwidth]{Images/FTAG/dipsrnnipC.png}
       \caption{$c$-rejection.} 
       \label{fig:dipsrnnipPerfC}
   \end{subfigure}
@@ -163,14 +180,7 @@ This approach has several advantages over \gls{rnnip}, mainly the physically mot
   \label{fig:dipsrnnipPerf}
 \end{figure} 
 
-The training times on the same \gls{gpu} hardware for a 48k parameters \gls{dips} model is estimated to take 78 $\pm$ 4 seconds per epoch - averaging over 5 seeds - while a 47k parameters \gls{rnnip} requires roughly thrice as much, 241 $\pm$ 14 seconds per epoch \cite{ATL-PHYS-PUB-2020-014}. The faster training time allowed the Collaboration to focus on optimisation studies of the hyperparameters. THe optimisation campaign focused on three aspects of the \gls{dips} network:
-\begin{enumerate}
-  \item The architecture of the two \gls{nn}, in terms of number of layers and number of nodes per layer, as well as the track embedding space dimension.
-  \item Varying the track selection.
-  \item Adding extra track features as input, in addition to those of Table \ref{tab:dipsVar}.
-\end{enumerate}
-
-Regarding architecture, a grid search over various possible values for the number of layers in $\Phi$ and $F$, number of nodes, and the dimension of the track embedding space showed no significant performance change. The selected architecture is:
+The training times on the same \gls{gpu} hardware for a 48k parameters \gls{dips} model is estimated to take 78 $\pm$ 4 seconds per epoch - averaging over 5 seeds - while a 47k parameters \gls{rnnip} requires roughly thrice as much, 241 $\pm$ 14 seconds per epoch \cite{ATL-PHYS-PUB-2020-014}. The faster training time allowed the Collaboration to focus on optimisation studies of the hyperparameters. The optimisation campaign focused on three aspects of the \gls{dips} network: the architecture of the two \gls{nn}, the track selection, and the set of trac features used as input in addition to those of Table \ref{tab:dipsVar}. Regarding architecture, a grid search over various possible values for the number of layers in $\Phi$ and $F$, number of nodes, and the dimension of the track embedding space showed no significant performance change. The selected architecture is:
 \begin{itemize}
   \item Track network $\Phi$: three layers of 100, 100, and 128 units applied to each track. 
   \item Jet network $F$: four layers of size 100, 100, 100, 30 before the final output of size dictated by the number of flavour to identify. 
@@ -183,14 +193,14 @@ The second optimisation step however uncovered that a variation to the track sel
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[scale=0.55]{Images/FTAG/dipsOptL.png}
+      \includegraphics[width=0.98\textwidth]{Images/FTAG/dipsOptL.png}
       \caption{Light-rejection.} 
       \label{fig:dipsOptRocL}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[scale=0.55]{Images/FTAG/dipsOptL.png}
+      \includegraphics[width=0.98\textwidth]{Images/FTAG/dipsOptL.png}
       \caption{$c$-rejection.} 
       \label{fig:dipsOptRocC}
   \end{subfigure}
@@ -198,7 +208,7 @@ The second optimisation step however uncovered that a variation to the track sel
   \label{fig:dipsOptRoc}
 \end{figure} 
 
-Furthemore, clear benefits are obtained when adding additional track features as input on top of the looser selection, as shown by the orange curve of Figure \ref{fig:dipsOptRoc}, which plots the performance of a loose track selection \gls{dips} trained with the \gls{ip} parameters $d_0$ and $z_0$ as well as the features of Table \ref{tab:dipsVar}.
+Furthemore, clear benefits are obtained when adding additional track features as input on top of the looser selection, as shown by the orange curve of Figure \ref{fig:dipsOptRoc}, which plots the performance of a loose track selection \gls{dips} trained with the per-track \gls{ip} parameters $d_0$ and $z_0$ in addition to the features of Table \ref{tab:dipsVar}.
 
 \begin{figure}[h!]
   \center
@@ -215,28 +225,27 @@ How does \gls{dips} work? Interpretability of machine learning models is an acti
 \begin{equation}
   \frac{\partial D_b}{\partial x_{ik}} = \frac{1}{N} \sum_{j=1}^N \frac{\partial D_b^{j}}{\partial x_{ik}^{j}},
 \end{equation} 
-where $i$ indexes the 8 tracks, $j$ indexes the jet in the sample of size $N$, $x_{ik}$ is the $k^{th}$ feature of the $i^{th}$ jet \cite{ATL-PHYS-PUB-2020-014}. This process effectively indicates the linear sensitivity of the discriminant on the track features. Using the saliency map, one can infer what features to modify to correct the failed tagged assigned to the $b$-jets sample. The most sensitive parameters architectural measured to be the \gls{ip} significances of the first five tracks, and the logarithm of the $p_T^{\textrm{frac}}$ and $\Delta R$ of the track with largest $|s_{d_0}|$. This observation is physically motivated by the dynamic of the harder fragmentation of $b$-quarks, compared to light- and $c$-quarks. Negative gradients are measured for shared and split hits observables, translating into a further incorrect discriminant under linear change of these features. This is also physically motivated, as higher count typically trace back to denser environment where random combinations of hits to form tracks are more likely. However, total hit counts in the different tracker layers have a small positive impact, as these correlate with the reconstruction of the \gls{ip} parameters.
+where $i$ indexes the 8 tracks, $j$ indexes the jet in the sample of size $N$, $x_{ik}$ is the $k^{th}$ feature of the $i^{th}$ jet \cite{ATL-PHYS-PUB-2020-014}. This process effectively indicates the linear sensitivity of the discriminant on the track features. Using the saliency map, one can infer what features to modify to correct the failed tagged assigned to the $b$-jets sample. The most sensitive parameters are measured to be the \gls{ip} significances of the first five tracks, and the logarithm of the $p_T^{\textrm{frac}}$ and $\Delta R$ of the track with largest $|s_{d_0}|$. This observation is physically motivated by the dynamic of the harder fragmentation of $b$-quarks, compared to light- and $c$-quarks. Negative gradients are measured for shared and split hits observables, translating into a further incorrect discriminant under linear change of these features. This is also physically motivated, as higher count typically trace back to denser environment where random combinations of hits to form tracks are more likely. However, total hit counts in the different tracker layers have a small positive impact, as these correlate with the reconstruction of the \gls{ip} parameters.
 
 \subsection{Training of DIPS with Variable Radius Jets for Run 3}\label{chapter:dipsVRtrain}
 The physics program of the \gls{atlas} Collaboration covers a wide range of analyses, targeting different topologies and processes at different energies. With respect to flavour tagging, a particularly relevant aspect is the energy or tranverse momenta of the jets to label. Indeed, flavour tagger are extremely sensitive to the dynamic of the underlying events. At higher energies, corresponding to higher momenta of the hadronised quark or gluon, the jet constituents emenating from the decaying parton tend to be more collimated in the same direction, as they have to share a high initial energy between themselves. This topology confends tracks and blends the rich internal jet dynamics in the measured signature, making tracks separation and secondary or tertiary vertex identification more difficult. Analyses targeting jets from hadronic or semileptonic decays of heavy particles, such as the top $t$-quark, Higgs, or the gauge bosons $W/Z$, can easily produce such highly energetic or \textit{boosted} jets.  \\
 
-So far in this chapter, mentions of ``jets'' were always referring to the object as reconstructed by the anti-$k_T$ algorithm with a fixed radius $R = 0.4$, as introduced in Chapter \ref{chapter-ATLAS}. This reconstruction method proves robust in the hadron collider setting as it both leads to suitably shaped jet structure and \gls{pu}-removing properties. This fixed radius however becomes a hurdle for boosted jet, as their average radius decreases with energy due to the collimation of the jet components. Indeed, the angular separation $\Delta R = \sqrt(\Delta\eta^2 + \Delta \phi^2)$ between the products of a decaying particle $X$ of large mass $m_X$ scales inversely to the transverse momentum \cite{ATLAS:largeRjet}: 
+So far in this chapter, mentions of ``jets'' were always referring to the object as reconstructed by the anti-$k_T$ algorithm with a fixed radius $R = 0.4$ applied to PFLow objects, as introduced in Chapter \ref{chapter-ATLAS}. This reconstruction method proves robust in the hadron collider setting as it both leads to suitably-shaped jet structure and \gls{pu}-removing properties. This fixed radius however becomes a hurdle for boosted jet, as their average radius decreases with energy due to the collimation of the jet components. Indeed, the angular separation $\Delta R = \sqrt(\Delta\eta^2 + \Delta \phi^2)$ between the products of a decaying particle $X$ of large mass $m_X$ scales inversely to the transverse momentum \cite{ATLAS:largeRjet}: 
 \begin{equation}\label{eq:sizeJet}
   \Delta R \approx \frac{2 m_X}{p_T^X}.
 \end{equation}
-At low $p_T^X$, the individually produced particle from the decay are sufficiently separated to be reconstructed as individual objects, hence the \textit{resolved} regime label \cite{ATLAS:2016hcf}. For example, a Higgs decaying to a $b\bar{b}$ pair can be reconstructed as two $b$-jets with small $R$. At higher momentum however, the content of the decay is collimated and overlaps: this is the \textit{boosted} regime. The decaying particle $X$ in such a regime were typically reconstructed as a single large radius jets, to catch the different underlying jets, for example with the anti-$k_T$ method with radius $R = 1.0$. Using such a fixed large radius overestimates the size of boosted jets which are easily contaminated by the \gls{pu}, as well as the underlying event and initial-state radiations.  \\
+At low $p_T^X$, the individually produced particle from the decay are sufficiently separated to be reconstructed as individual objects, hence the \textit{resolved} regime label \cite{ATLAS:2016hcf}. For example, a non-boosted Higgs decaying to a $b\bar{b}$ pair can be reconstructed as two $b$-jets with small $R$. At higher momentum however, the content of the decay is collimated and overlaps: this is the \textit{boosted} regime. The decaying particle $X$ in such a regime is typically reconstructed as a single large radius jets, to catch the different underlying jets, for example with the anti-$k_T$ method with radius $R = 1.0$. Using such a fixed large radius overestimates the size of boosted jets which are easily contaminated by the \gls{pu}, as well as the underlying event and initial-state radiations.  \\
 
-A better approach to model jets from boosted object decays is to reconstruct them with \gls{vr} jet algorithm \cite{vrJetPaper}, as introduced in Chapter \ref{chapter-ATLAS}.  % Chapter with VR JET
-\gls{vr} jets have a size that scales with the inverse of the reconstructed jet momentum, thus correctly following the expected dynamic of Equation \ref{eq:sizeJet}. Such a significant change to the jet reconstruction is bound to have an impact on algorithms learning structure from the jet contents, as is the case of all deep learning-based taggers in this chapter. These models have therefore to be fine-tuned seperately to this new jet-type for optimal performance, which is the focus of this section. \\
+A novel approach to model jets from boosted object decays is to reconstruct them with \gls{vr} jet algorithm \cite{vrJetPaper}, as introduced in Chapter \ref{chapter-ATLAS}. \gls{vr} jets have a size that scales with the inverse of the reconstructed jet momentum, thus correctly following the expected dynamic of Equation \ref{eq:sizeJet}. Such a significant change to the jet reconstruction is bound to have an impact on algorithms learning structure from the jet contents, as is the case of all deep learning-based taggers presented in this chapter. These models have therefore to be fine-tuned seperately to this new jet-type for optimal performance, which is the focus of this section. \\  % Chapter with VR JET
 
 For the \gls{vr}-training, the dataset is composed of three samples simulating proton-proton collisions at $\sqrt{s} = 13$ with the following fractions:
 \begin{enumerate}
-  \item 85 \% of jets are sampled from the top $t$-quark pair production $t\bar{t}$ with a maximal $p_T$ of 400 GeV. At least one of the $W$-boson from the $t$-quark is required to decay leptonically.
+  \item 85 \% of jets are sampled from the $t\bar{t}$ with a maximal $p_T$ of 400 GeV. At least one of the $W$-boson from the $t$-quark is required to decay leptonically.
   \item 7.5\% are sampled from $Z'$ events, where an exotic boson $Z'$ decays as $Z' \rightarrow q\bar{q} \textrm{ or } \tau \bar{\tau}$, with a variable $Z'$ mass to generate a flat $p_T$ spectrum extending the $p_T$-range of the jets studied up to 4 TeV. These jets are required to have a $p_T > 150$ GeV.
   \item 7.5\% are sampled from a simulated graviton process to also increase the range towards higher momenta. These jets are required to have a $p_T > 150$ GeV.
 \end{enumerate}
 
-The reconstruction effect of the ATLAS detector is simulated using GEANT4 \cite{Agostinelli:602040}. Figure \ref{fig:vrjetdist} displays the jet $p_T$ and $|\eta|$ distributions for the hybrid sample as well as the individual samples it is based upon, for a total of 40 $\times$ $10^6$ jets per flavour in \{$b$, $c$, light\}. In order to reach such high statistics, importance sampling is used to over-sample the limited amount of $c$-jets while using all available $b$- and downsampling light-jets. A particularity of the processing is the requirement for the $p_T$ and $|eta|$ spectra to be equally-distributed for all jet flavours, so that these features arising from inherent physics effects in the specific processes simulated cannot be used by the model to discriminate between flavours. The technique implemented is importance sampling with replacement. It selects jets of different flavours to match a target distribution. The importance sampling weights are derived by first deriving the ratio of the target 2D distribution to the per flavour one. Weights above 1 indicate jets in the $i, j$ bin have to be oversampled, while values lower than 1 indicate the typical downsampling requirement. Jets are then iteratively sampled until the sampled distribution of each flavour independentely matches the target distribution. As displayed in Figure \ref{fig:vrjetdisth} where the target were $b$-jets, the thus constructed distribution as the same $p_T$ and $|\eta|$ distributions for all flavours. This work lead to the first implementation of the importance sampling method, now widely used to develop flavour tagging tools.  
+The simulation process is similar to that introduced in Section \ref{ftagdatasets}. Figure \ref{fig:vrjetdist} displays the jet $p_T$ and $|\eta|$ distributions for the hybrid sample as well as the individual samples it is based upon, for a total of 40 $\times$ $10^6$ jets per flavour in \{$b$, $c$, light\}. In order to reach such high statistics, importance sampling is used to over-sample the limited amount of $c$-jets while using all available $b$- and downsampling light-jets. A particularity of the processing is the requirement for the $p_T$ and $|\eta|$ spectra to be equally-distributed for all jet flavours, so that these features arising from inherent physics effects in the specific processes simulated cannot be used by the model to discriminate between flavours. The technique implemented is importance sampling with replacement. It selects jets of different flavours to match a target distribution. The importance sampling weights are derived by first deriving the ratio of the target 2D distribution to the per flavour one. Weights above 1 indicate jets in the $i, j$ bin have to be oversampled, while values lower than 1 indicate the typical downsampling requirement. Jets are then iteratively sampled until the sampled distribution of each flavour individually matches the target distribution. As displayed in Figure \ref{fig:vrjetdisth} for which the target were $b$-jets, the thus constructed distribution as the same $p_T$ and $|\eta|$ distributions for all flavours. This work introduced to the first implementation of the importance sampling method, now widely used to develop flavour tagging tools.  
 
 \begin{figure}[h!]
   \centering
@@ -321,50 +330,41 @@ The optimised \gls{dips} model with 62,167 learnable parameters from the previou
   \label{fig:dipsVRROC}
 \end{sidewaysfigure}
 
-Training \gls{dips} on a dedicated set of \gls{vr}-jets clearly improves performance over relying on the PFlow-trained version, as observed by comparing the blue (\gls{vr}-trained \gls{dips}) to orange curves (PFlow-trained \gls{dips}). At a $b$-tagging efficiency of 77\%, the light-rejection is PFlow-trained \gls{dips} is indeed roughly 40\% lower. However, the $c$-rejection does not benefit as much, being either on par or even lower for the \gls{vr}-trained \gls{dips} on the $t\bar{t}$ samples. This difference in performance indicates an inappropriate choice of $f_c$ value for the $b$-tagging discriminant of the \gls{vr}-trained \gls{dips}. A so-called \textit{flavour fraction scans}, displaying the rejections at a fixed tagging efficiency for different value of the flavour fraction, can lead to a better choice for an equilibrate improvement in both background jet rejections. However, \gls{dips} probabilities are not meant to be used directly as discrimant but rather passed on to the high level algorithm \gls{dl1d}, hence this optimisation is reserved for the final model as presented in Chapter \ref{sec:VRdl1dTrain}. Figures \ref{fig:dipsVRROCttc} to \ref{fig:dipsVRROCgrc} lead to similar conclusions for $c$-tagging.
-
-\clearpage
+Training \gls{dips} on a dedicated set of \gls{vr}-jets clearly improves performance over relying on the PFlow-trained version, as observed by comparing the blue (\gls{vr}-trained \gls{dips}) to orange curves (PFlow-trained \gls{dips}). At a $b$-tagging efficiency of 77\%, the light-rejection is PFlow-trained \gls{dips} is indeed roughly 40\% lower. However, the $c$-rejection does not benefit as much, being either on par or even lower for the \gls{vr}-trained \gls{dips} on the $t\bar{t}$ samples. This difference in performance indicates an inappropriate choice of $f_c$ value for the $b$-tagging discriminant of the \gls{vr}-trained \gls{dips}. A so-called \textit{flavour fraction scans}, displaying the rejections at a fixed tagging efficiency for different value of the flavour fraction, can lead to a better choice for a balanced improvement in both background jet rejections. However, \gls{dips} probabilities are not meant to be used directly as discrimant but rather passed on to the high level algorithm \gls{dl1d}, hence this optimisation is reserved for the final model as presented in Chapter \ref{sec:VRdl1dTrain}. Figures \ref{fig:dipsVRROCttc} to \ref{fig:dipsVRROCgrc} lead to similar conclusions for $c$-tagging.
 
 \subsection{Training of DL1d \& DL1r with PFlow for Run 3}
-The ATLAS Collaboration continuously updates its software, updating specific methods to adopt new techniques, maintaining its many tools and adding capabilities. In preparation for the new run of the \gls{lhc} that started in 2021, ATLAS improved its reconstruction software from release R21 to release R22. As such, important elements used by flavour tagging methods have changed, requiring to retrain all taggers to ensure optimal performance under the new conditions. This work presents the first ATLAS study of the retraining of \gls{dl1r} on the new release R22 and the first training of \gls{dl1d}, including the \gls{dips} sub-tagger in the high -level flavour tagging tool. Other important novelties of this work are the possible inclusion of $\tau$-jets in the model's predictions and a new technique to efficiently process the training data into high statistics dataset using importance sampling, as previously mentioned. The interest of including $\tau$ stems from their tendency to be miss-classified as $c$-jets when hadronically decaying, as both particles commonly leave three particles in the detector. The resulting taggers are observed to efficiently identify $\tau$-jets thereby providing a new way to perform $\tau$-identification and improving $c$-jet tagging. However, due to the widespread use of the \gls{ftag} algorithms and the difficulties arising in calibrating a tagger with excellent rejection against $\tau$-jets, these are not included in the default version of the tagger nor in the results shown here, but are actively under study for the new generation of tagger in the GN family. \\ % Problem: reference to tau tagging but no plots ... add them?
-Two samples from proton-proton collisions at $\sqrt{s} = 13$ are simulated and combined in the datasets:
-\begin{itemize}
-\item $t\bar{t}$ events, with at least one of the $W$-boson from the top-quark decay further decaying leptonically. This latter constrain simplifies the real data selection when callibrating the tagger.
-\item $Z'$ events, where an exotic boson $Z'$ decays as $Z' \rightarrow q\bar{q} \textrm{ or } \tau \bar{\tau}$, with a variable $Z'$ mass to generate a flat $p_T$ spectrum extending the $p_T$-range of the jets studied up to 4 TeV.
-\end{itemize}
-
-For both samples, the ATLAS detector is simulated using GEANT4 \cite{Agostinelli:602040} and PFlow jets are reconstructed using the anti-$k_T$ algorithm with radius $R = 0.4$. These two samples are combined into a single \textit{hybrid} sample to train the taggers, with 70\% of the total number of jets coming from $t\bar{t}$ and the remaining from the $Z'$. The $t\bar{t}$ and $Z'$ samples cover, respectively, a low- and high-$p_T$ region based on a reconstructed $b$-hadron $p_T$ separation threshold of 250 GeV for $b$-jets and a jet $p_T$ of 250 GeV for non-$b$-jets. The relative weights of the two samples was chosen to avoid any discontinuity in the $p_T$ spectrum at the junction, as evidenced in Figure \ref{fig:distTraining}. The final evaluation of the performance of a trained tagger is performed on separated test sets and unfolded over the flavours.\\
+The ATLAS Collaboration continuously updates its software, updating specific methods to adopt new techniques, maintaining its many tools and adding capabilities. In preparation for the current Run 3 of the \gls{lhc} that started in 2022, ATLAS improved its reconstruction software from release 21 (R21) to release 22 (R22). As such, important elements used by flavour tagging methods have changed, requiring to retrain all taggers to ensure optimal performance under the new conditions. This work presents the first ATLAS study of the retraining of \gls{dl1r} on the new release R22 and the first training of \gls{dl1d}, including the \gls{dips} sub-tagger in the high-level flavour tagging tool. Other important novelties of this work are the possible inclusion of $\tau$-jets in the \gls{dl1} model's predictions and a new technique to efficiently process the training data into high statistics dataset using importance sampling, as mentioned in the previous section. The interest of including $\tau$ stems from their tendency to be miss-classified as $c$-jets when hadronically decaying, as both particles commonly leave three particles in the detector. The resulting taggers are observed to efficiently identify $\tau$-jets thereby providing a new way to perform $\tau$-identification and improving $c$-jet tagging. However, due to the widespread use of the \gls{ftag} algorithms and the difficulties arising in calibrating a tagger with excellent rejection against $\tau$-jets, these are not included in the default version of the tagger nor in the results shown here, but are actively under study for the new generation of tagger in the GN family. \\ % Problem: reference to tau tagging but no plots ... add them?
+Two samples, the $t\bar{t}$ and $Z'$ from proton-proton collisions at $\sqrt{s} = 13$, are simulated and combined in the datasets, as described in Section \ref{ftagdatasets}. For both samples, PFlow jets are reconstructed using the anti-$k_T$ algorithm with radius $R = 0.4$. These two samples are combined into a single \textit{hybrid} sample to train the taggers, with 70\% of the total number of jets coming from $t\bar{t}$ and the remaining from the $Z'$. The $t\bar{t}$ and $Z'$ samples cover, respectively, a low- and high-$p_T$ region based on a reconstructed $b$-hadron $p_T$ separation threshold of 250 GeV for $b$-jets and a jet $p_T$ of 250 GeV for non-$b$-jets. They are re-sampled to have the same $p_T-|\eta|$ distributions, as described in the next paragraph. The relative proportion of each sample was chosen to avoid any discontinuity in the $p_T$ spectrum at their junction, as evidenced in Figure \ref{fig:distTraining}. The final evaluation of the performance of a trained tagger is performed on separated test sets of both processes and unfolded over the flavours.\\
 
 \begin{figure}[h!]
   \center
   \includegraphics[width=0.48\textwidth]{Images/FTAG/DL1d/ptdist.png}
   \includegraphics[width=0.48\textwidth]{Images/FTAG/DL1d/etadist.png}
-  \caption{The $p_T$ (left - in MeV) and $|\eta|$ distributions of the resampled $b$-, $c$-, and light-jets in, respectively, blue, orange, and green. The three ses are resampled to have the same $p_T-|\eta|$ 2D distributions, explaining the perfect agreement found in bins of reasonable statistics. The flat $p_T$ spectrum extrending up to several TeV is due to the exotic $Z'$ process generated with varying mass. The large peak at lower $p_T$ is the $t\bar{t}$-process. These sets have 8.3 million jets per flavour.} 
+  \caption{The $p_T$ (left - in MeV) and $|\eta|$ distributions of the resampled $b$-, $c$-, and light-jets in, respectively, blue, orange, and green. The three ses are resampled to have the same $p_T-|\eta|$ 2D distributions. The flat $p_T$ spectrum extending up to several TeV is due to the exotic $Z'$ process generated with varying mass, starting at 150 GeV. The large peak at lower $p_T$ is the $t\bar{t}$-process. These sets have 8.3 million jets per flavour.} 
   \label{fig:distTraining}
 \end{figure}
 
 ATLAS flavour tagging tools are widely used across the Collaboration. It is therefore essential for the taggers not to learn specific features of the processes simulated but to focus on the inherent differences between the studied flavours in order to generalise to other processes. An effective way to limit the importance of the simulated processes is to downsample the hybrid sample in [$p_T - \eta$] bins to have the same number of $b$-, $c$-, and light-jets in each 2D bin. This removes the distinction of kinematic phase space between each flavour due to the process specific physics. To avoid biasing the output of the tagger towards the most likely flavours in the process, each jet-flavour is also required to be equally likely in the training set, a requirement satisfied by having the same yield of $b$-, $c$-, and light-jets. Applying this technique, the total statistics available for the R22 training is of $25 \times 10^{6}$ jets per flavour for training. The $t\bar{t}$ and $Z'$ samples for validation and testing are each made of 1 million jets and are not downsampled to have the same [$p_T - \eta$] distribution nor the same yield of different flavours: they represent a realistic distribution of the underlying processes. The main limitator when downsampling are $c$-jets, as all $c$-jets from the $t\bar{t}$ process are selected which limits the amount of $b$- and light-jet that can be taken. This process is extremely wasteful, using only 17\% (11\%) of all available $b$-jets (light-jets) in the $t\bar{t}$ sample.\\
 
-Training is done with the Umami framework \cite{Umami} based on TensorFlow \cite{tensorflow2015-whitepaper} for 300 epochs with a variable learning rate schedule and the default network structure adopted in the previously released \gls{dl1r} (R21): 8 fully connected \gls{nn} of smoothly-decreasing sizes in [256, 128, 60, 48, 36, 24, 12, 6] with \gls{relu} activation leading to a final softmax layer producing the predicted probabilities for each flavour. While the \gls{dips} probabilities used as inputs to \gls{dl1d} come from a model trained on the new release, the \gls{rnnip} probabilities are still from a model trained on the previous one (R21) \cite{ATL-PHYS-PUB-2017-003, ATL-PHYS-PUB-2020-014}. Indeed, due to its significantly lower performance, \gls{rnnip} is no longer supported in the new release and is included for sake of comparability to the previous techniques. The models at an epoch offering the best combined results in terms of $b$-tagging efficiency and rejection from $b$-jets on the validation set are selected for further analysis. Importantly, every training converged to a fixed set of performance values, with no overtraining occurring.\\
+Training is done with the \uppercase{Umami} framework \cite{UmamiCite} based on TensorFlow \cite{tensorflow2015-whitepaper} for 300 epochs with a variable learning rate schedule and the default network structure adopted in the previously released \gls{dl1r} (R21): 8 fully connected \gls{nn} of smoothly-decreasing sizes in [256, 128, 60, 48, 36, 24, 12, 6] with \gls{relu} activation leading to a final softmax layer producing the predicted probabilities for each flavour. While the \gls{dips} probabilities used as inputs to \gls{dl1d} come from a model trained on the new release, the \gls{rnnip} probabilities are still from a model trained on the previous one (R21) \cite{ATL-PHYS-PUB-2017-003, ATL-PHYS-PUB-2020-014}. Indeed, due to its significantly lower performance, \gls{rnnip} is no longer supported in the new release and is included for sake of comparability to the previous techniques. The models at an epoch offering the best combined results in terms of $b$-tagging efficiency and rejection from $b$-jets on the validation set are selected for further analysis. Importantly, every training converged to a fixed set of performance values, with no overtraining occurring.\\
 
 Several modifications to the model architecture, list of input variables, and preprocessing and training procedures have been explored, with no significant gain observed:
 \begin{itemize}
-\item The preprocessing steps were revised to reduce the size of the evaluation sets for the benefit of the training one. A dual approach, downsampling light-jets and upsampling $c$-jets to the $b$-jets [$p_T - \eta$], has also been implemented. This approach uses importance sampling with replacement to obtain the same fraction of the different flavours and the same $p_T$ and $|\eta|$ distribution. While the performance of the majority classes was observed to improve, the efficiency at tagging the upsampled minority class ($c$-jets) was slightly lower. This trade-off can be controlled by modifying the flavour fractions and thus not result in any significant performance changed. This is likely due to the model saturating its performance given the large dataset available. Other models, such as those from the GN family that have more parameters, have however been observed to make gains from this approach.
+\item The preprocessing steps were revised to reduce the size of the evaluation sets for the benefit of the training one. A dual approach, downsampling light-jets and upsampling $c$-jets to the $b$-jets [$p_T - \eta$], has also been implemented. As previously described, this approach uses importance sampling with replacement to obtain the same fraction of the different flavours and the same $p_T$ and $|\eta|$ distribution. While the performance of the majority classes was observed to improve, the efficiency at tagging the upsampled minority class ($c$-jets) was slightly lower. This trade-off can be compensated by modifying the flavour fractions and thus does not result in any significant performance changed. This is likely due to the model saturating its performance given the large dataset already available. Other models, such as those from the GN family that have more parameters, have however been observed to make gains from the importance sampling approach.
 \item Several modifications to the list of input features have been attempted, with no clear advantage uncovered. Adding pile-up information (the actual number of interactions per crossing and the number of primary vertices were tested) was not observed to have an impact on the tagging efficiency. Adding other variables from \gls{sv1} or JetFitter was also not observed to improve performance. However, a positive observation is that the IP2D and IP3D taggers can both be safely removed without changes to the performance, as the information they add is in all likelihood now covered by the \gls{dips} sub-tagger, thereby reducing the list of sub-taggers to maintain and simplifying the architecture.
-\item The structure of the network and its training procedure, leveraging transfer learning. Using samples produced with an older release of the ATLAS software to pre-train the model was not observed to deliver a boost in performance when later training on the new release. Changing the size of the network and the batch size was also not observed to have a positive effect.
+\item The structure of the network and its training procedure, leveraging transfer learning. Using samples produced with an older release of the ATLAS software (R21) to pre-train the model was not observed to deliver a boost in performance when later training on the new release (R22). Changing the size of the network and the batch size was also not observed to have a positive effect.
 \end{itemize}
 
-The conclusion driven by the lack of improvements from these three attempts is that models built on this simple \gls{dnn} structure with large dataset are likely saturating their performance from the set of input. The performance of the retrained \gls{dl1r} tagger on the new release was found to be in good agreement with the at-the-time recommended \gls{dl1r}, despite using the same training of \gls{rnnip} on the previous release. In order to establish a meaningful benchmark for the newly trained taggers, the performance of the then recommended \gls{dl1r} tagger, trained and evaluated on an analogous set of samples from the previous release (R21), is included in the following results as benchmark under the label \textit{Recom. \gls{dl1r}}. A first look at the new family of taggers is also advertised by plotting the performance of a pre-release \gls{gn1} tagger, although this is discussed in further details in the next Chapter \ref{chap:GN}. \\
+The conclusion driven by the lack of improvements from these three attempts is that models built on this simple \gls{dnn} structure with large dataset are already likely saturating their performance from the set of inputs. The performance of the retrained \gls{dl1r} tagger on the new release was found to be in good agreement with the at-the-time released \gls{dl1r}, despite using the same training of \gls{rnnip} on the previous release. In order to establish a meaningful benchmark for the newly trained taggers, the performance of the then released \gls{dl1r} tagger, trained and evaluated on an analogous set of samples from the previous release (R21), is included in the following results as benchmark under the label \textit{Recom. \gls{dl1r}}. A first look at the new family of taggers is also advertised by plotting the performance of a pre-release \gls{gn1} tagger, although this is discussed in further details in the next Chapter \ref{chap:GN}. \\
 
-Figure \ref{fig:DL1dtt} presents the \gls{roc} curves on the $t\bar{t}$ (left) and $Z'$ (right) samples for  $b$-tagging. These \gls{roc} plots show, on the $x$-axis, the $b$-tagging efficiency ($\epsilon^b_b$ ) versus, on the $y$-axis, the rejection $\mathcal{R}^b_Y$ for $Y \in$ [$c$, light]. The two bottom sub-plots present the ratio of the c-jet rejection and light-jet rejection curves to the blue ones. This blue curve is the recommended \gls{dl1r} performance and serves as the baseline of the comparison, while the new tagger \gls{dl1d} is plotted in orange. Figure \ref{fig:DL1dz} shows the same plots for $c$-tagging, with respect to $b$- and light-jet rejections. The important observation is the clear gain obtained when replacing \gls{rnnip} with \gls{dips}. Both the $b$- and $c$-tagging performance of \gls{dl1d} clearly dominate the \gls{dl1r} versions, with a significant improvement in background flavour rejection for all tagging efficiency considered, as summarised in Table \ref{tab:max-perf}. The largest improvement in performance is obtained for $b$-tagging on the $t\bar{t}$ process, corresponding to a lower jet momentum. This latter points to a dynamical behaviour of the \gls{dips} subtagger that can be traced back to the looser jet selection. Higher momentum jets are more likely to have a larger set of tracks and these tracks tend to be closer to each other due to relativistic boosting. The looser selection forces the \gls{dips} model enduce to sift through a larger set of noisy tracks which brings lower performance at higher momentum, while a gain is obtained at lower momentum from the nicer geometrical separation and smaller initial set.  \\
+Figure \ref{fig:DL1dtt} presents the \gls{roc} curves on the $t\bar{t}$ (left) and $Z'$ (right) samples for $b$-tagging. These \gls{roc} plots show, on the $x$-axis, the $b$-tagging efficiency ($\epsilon^b_b$) versus, on the $y$-axis, the rejection $\mathcal{R}^b_Y$ for $Y \in$ [$c$, light]. The two bottom sub-plots present the ratio of the c-jet rejection and light-jet rejection curves to the blue ones. This blue curve is the recommended \gls{dl1r} performance and serves as the baseline of the comparison, while the new tagger \gls{dl1d} is plotted in orange. Figure \ref{fig:DL1dz} shows the same plots for $c$-tagging, with respect to $b$- and light-jet rejections. The important observation is the clear gain obtained when replacing \gls{rnnip} with \gls{dips}. Both the $b$- and $c$-tagging performance of \gls{dl1d} clearly dominate the \gls{dl1r} versions, with a significant improvement in background flavour rejection for all tagging efficiency considered, as summarised in Table \ref{tab:max-perf}. The largest improvement in performance is obtained for $b$-tagging on the $t\bar{t}$ process, corresponding to a lower jet momentum. This latter points to a dynamical behaviour of the \gls{dips} subtagger that can be traced back to the looser jet selection. Higher momentum jets are more likely to have a larger set of tracks and these tracks tend to be closer to each other due to relativistic boosting. The looser selection forces the \gls{dips} model enduce to sift through a larger set of noisy tracks which brings lower performance at higher momentum, while a gain is obtained at lower momentum from the nicer geometrical separation and smaller initial set.  \\
 
-In the light-rejection from $b$-jets \gls{roc} curves in Figure \ref{fig:DL1dtt}, there is an elbow in the curve at high $b$-jet efficiency. This effect is also present in the $b$-rejection from $c$-tagging, in Figure \ref{fig:DL1dz}. Both correspond to a set of, respectively, light-jets and $b$-jets that do not overlap with the $b$-jets $b$-tagging and $c$-jets $c$-tagging discriminants distributions, as shown in Figures \ref{fig:scoreDL1dtt} and \ref{fig:scoreDL1dz}. These ``background`` jets are easily removed from the core set of ``signal'' jets due to internal differences between the flavours and the discrete nature of some sub-taggers used. \\
+The light-rejection from $b$-jets \gls{roc} curve in Figure \ref{fig:DL1dtt} traces an elbow at high $b$-jet efficiencies. This effect is also present in the $b$-rejection from $c$-tagging, Figure \ref{fig:DL1dz}. Both correspond to a set of, respectively, light-jets and $b$-jets that do not overlap with the $b$-jets $b$-tagging and $c$-jets $c$-tagging discriminants distributions, as shown in Figures \ref{fig:scoreDL1dtt} and \ref{fig:scoreDL1dz}. These ``background`` jets are easily removed from the core set of ``signal'' jets due to inherent differences between the flavours and the discrete nature of some sub-taggers used. \\
 
-The background rejections of the various taggers for $b$-tagging ($c$-tagging) as a function of the jet transverse momentum $p_T$ at a fixed $b$-efficiency of 70\% ($c$-efficiency of 30\%) per region displayed are shown in Figure \ref{fig:ptDL1dtt} (Figure \ref{fig:ptDL1dz}). Throughout the $p_T$ range considered, \gls{dl1d} outperforms the \gls{dl1r} tagger. The low $p_T$ $b$-rejection from $c$-jets is noticeably better for the retrained tagger compared to \gls{dl1r}. The discontinuity of the rejections between the two processes arises from the inclusive $b$-tagging efficiency being computed inclusively per-region and not exclusively for the whole range. 
+The background rejections of the various taggers for $b$-tagging ($c$-tagging) as a function of the jet transverse momentum $p_T$ at an inclusive $b$-efficiency of 70\% ($c$-efficiency of 30\%) per region displayed are shown in Figure \ref{fig:ptDL1dtt} (Figure \ref{fig:ptDL1dz}). Throughout the $p_T$ range considered, \gls{dl1d} outperforms the \gls{dl1r} tagger. The low $p_T$ $b$-rejection from $c$-jets is noticeably better for the newly trained tagger compared to \gls{dl1r}. The discontinuity of the rejections between the two processes arises from the inclusive $b$-tagging efficiency being computed inclusively per-region and not exclusively for the whole range. 
 
 %
 \begin{center}
-\vspace{-1.cm}
 \begin{figure}[h!]
 \centerline{
 \includegraphics[scale=0.45]{Images/FTAG/DL1d/ROC/ttb.png}
@@ -381,8 +381,6 @@ The background rejections of the various taggers for $b$-tagging ($c$-tagging) a
 \label{fig:DL1dz}
 \end{figure}
 \end{center}
-
-\clearpage
 
 \begin{table}[h]
   \begin{center}
@@ -476,21 +474,21 @@ The background rejections of the various taggers for $b$-tagging ($c$-tagging) a
 
 In Figures \ref{fig:DL1dtt} and \ref{fig:DL1dz}, a GN-like tagger trained on 20 million jets from the new family base on \gls{gnn} that was in development at the time is introduced: \gls{gn1} \cite{ATL-PHYS-PUB-2022-027}. This model is based on a graph attention network (\gls{gat}) directly processing low-level inputs, thereby diverging from the traditional ATLAS flavour tagging philosophy of combining several low-level sub-taggers into a high-level one, such as in \gls{dl1d}. As examplified in this plot, the method offersa significant boost in performance and is explored in further details in Chapter \ref{chap:GN}. \\
 
-The \gls{dl1d} model, integrating the Deep Set-based \gls{dips} network in the classical \gls{dl1} hierarchical approach, was a valuable step in the development of a modern performant flavour tagger for ATLAS. Thanks to its simularities with the previous \gls{dl1r} generation of tagger, built with the \gls{rnn}-based \gls{rnnip}, it was smoothly integrated in the processing pipeline of the flavour tagger group. Its quick callibration lead to its rapid introduction to the Collaboration that used it in several analyses, such as di-Higgs searches decaying to $b\bar{b}$ pairs and Run 3 analyses. REF!! To exploit the full potential of the trained model and to catter to specific needs of each experience, several working points were defined and calibrated. An important parameter to control the relative importance of the jet classes to be rejected with the discriminants of Equations \ref{bdisc} and \ref{cdisc}, light and $c$ for $b$-tagging and light and $b$ for $c$-tagging, are the flavour fractions $f_c$ and $f_b$. Naturally, this is a trade-of: for $b$-tagging, a larger $f_c$-value favorised a better $c$-rejection at the cost of a degraded light-rejection. To measure this dependency, flavour fractions scans are performed at a fixed $b$-tagging ($c$-tagging) efficiency of 77\% (30\%) in Figure \ref{fig:DL1dscanfb} (Figure \ref{fig:DL1dscanfc}). 
+The \gls{dl1d} model, integrating the Deep Set-based \gls{dips} network in the classical \gls{dl1} hierarchical approach, was a valuable step in the development of a modern performant flavour tagger for ATLAS. Thanks to its simularities with the previous \gls{dl1r} generation of tagger, built with the \gls{rnn}-based \gls{rnnip}, it was smoothly integrated in the processing pipeline of the flavour tagger group. Its quick callibration lead to its rapid introduction to the Collaboration that used it in several analyses, such as di-Higgs searches decaying to $b\bar{b}$ pairs and Run 3 analyses. To exploit the full potential of the trained model and to catter to specific needs of each experience, several working points were defined and calibrated. An important parameter to control the relative importance of the jet classes to be rejected with the discriminants of Equations \ref{bdisc} and \ref{cdisc}, light and $c$ for $b$-tagging and light and $b$ for $c$-tagging, are the flavour fractions $f_c$ and $f_b$. Naturally, this is a trade-of: for $b$-tagging, a larger $f_c$-value favorised a better $c$-rejection at the cost of a degraded light-rejection. To measure this dependency, flavour fractions scans are performed at a fixed $b$-tagging ($c$-tagging) efficiency of 77\% (30\%) in Figure \ref{fig:DL1dscanfb} (Figure \ref{fig:DL1dscanfc}). % NEED ref of the di-higgs used of DL1d
 
 \begin{figure}[h!]
   \centering
-  \begin{subfigure}[b]{0.98\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
-      \includegraphics[scale=0.65]{Images/FTAG/DL1d/extra_plots/contour_fraction_ttbar_300.pdf}
-      \includegraphics[scale=0.65]{Images/FTAG/DL1d/extra_plots/contour_fraction_zp_300.pdf}
+      \includegraphics[width=0.49\textwidth]{Images/FTAG/DL1d/extra_plots/contour_fraction_ttbar_300.pdf}
+      \includegraphics[width=0.49\textwidth]{Images/FTAG/DL1d/extra_plots/contour_fraction_zp_300.pdf}
       \caption{Flavour fraction $f_c^b$ for $b$-tagging scan: left is $t\bar{t}$ and right $Z'$ test samples.} 
       \label{fig:DL1dscanfb}
   \end{subfigure}\\
-  \begin{subfigure}[b]{0.98\textwidth}
+  \begin{subfigure}[b]{\textwidth}
     \centering % NEED TO CORRECT THE WP for the c-tagging case
-    \includegraphics[scale=0.65]{Images/FTAG/DL1d/extra_plots/contour_fraction_c_ttbar_299.pdf}
-    \includegraphics[scale=0.65]{Images/FTAG/DL1d/extra_plots/contour_fraction_c_zp_299.pdf}
+    \includegraphics[width=0.49\textwidth]{Images/FTAG/DL1d/extra_plots/contour_fraction_c_ttbar_299.pdf}
+    \includegraphics[width=0.49\textwidth]{Images/FTAG/DL1d/extra_plots/contour_fraction_c_zp_299.pdf}
     \caption{Flavour fraction $f_b^c$ for $c$-tagging scan: left is $t\bar{t}$ and right $Z'$ test samples.} 
     \label{fig:DL1dscanfc}
 \end{subfigure}
@@ -498,7 +496,7 @@ The \gls{dl1d} model, integrating the Deep Set-based \gls{dips} network in the c
   \label{fig:DL1dscanf}
 \end{figure} 
 
-With regard to interpretability, it is of course challeging to outright explain the decision process underscoring the predictions of \gls{dl1d}. An effective technique to measure the relative importance of the different variables is to quantify their contribution to the output using Shapley values \cite{Rozemberczki2022TheSV}. This technique for model explanation calculates the average contribution of each input to the output \cite{Rozemberczki2022TheSV}. Figures \ref{fig:DL1dshapb} and \ref{fig:DL1dshapc} present the outcome of applying the framework proposed in Ref. \cite{NIPS2017_7062} to approximate the Shapley values of the inputs to the $b$-tagging $D_b$ and $c$-tagging $D_c$ discriminants of \gls{dl1d}. These so-called \textit{beeswarm} plots measure the impact of the evidence on the output of the model for each input feature. The plots display how each feature' Shapley value modifies the discriminant by moving from a prior background-data distribution expectation to the final model prediction using the real feature. A set of test datapoints of the targeted jet distributions are sampled and, for each, a prior expectation was randomly sampled for the initial test and the impact of using the real value was measured. Positive Shapley values indicate variables having an increasing effect on the discriminant, thereby helping either $b$- or $c$ tagging as per the plot considered. Each datapoint is coloured on a gradient scale from low in blue to high feature-value in red, and the dots pile up to show density of the distribution. Therefore, a feature that has a more weight of its Shapley values distribution at larger value of the feature can be expected to help the model in identifying the main flavour of jets. Conversely, if for large values of the feature the Shapley values are negative, this implies the feature should be minimised for the model discriminant to improve. 
+With regard to interpretability, it is of course challeging to outright explain the decision process underscoring the predictions of \gls{dl1d}. An effective technique to measure the relative importance of the different variables is to quantify their contribution to the output using Shapley values \cite{Rozemberczki2022TheSV}. This technique for model explanation calculates the average contribution of each input to the output \cite{Rozemberczki2022TheSV}. Figures \ref{fig:DL1dshapb} and \ref{fig:DL1dshapc} present the outcome of applying the framework proposed in Ref. \cite{NIPS2017_7062} to approximate the Shapley values of the inputs to the $b$-tagging $D_b$ and $c$-tagging $D_c$ discriminants of \gls{dl1d}. These so-called \textit{beeswarm} plots measure the impact of the evidence on the output of the model for each input feature. The plots display how each feature' Shapley value modifies the discriminant by moving from a prior background-data distribution expectation to the final model prediction using the real feature. A set of test datapoints of the targeted jet distributions are sampled and, for each, a prior expectation was randomly sampled for the initial test and the impact of using the real value was measured. Positive Shapley values indicate variables having an increasing effect on the discriminant, thereby helping either $b$- or $c$ tagging as per the plot considered. Each datapoint is coloured on a gradient scale from low- eature value in blue to high feature value in red, and the dots pile up to show density of the distribution. A feature that has a more weight of its Shapley values distribution at larger values of the feature can be expected to help the model in identifying the main flavour of jets. Conversely, if for large values of the feature the Shapley values are negative, the feature value should be lowered for the model discriminant to improve. 
 
 %\begin{figure}[h!]
 \begin{sidewaysfigure}
@@ -519,14 +517,12 @@ With regard to interpretability, it is of course challeging to outright explain 
   \label{fig:DL1dshapc}
 \end{sidewaysfigure} 
 
-Inspecting Figure \ref{fig:DL1dshapb} reveals some interesting pattern in the \gls{dl1d} network for the task of $b$-tagging. The most important family of feature for this task are the \gls{dips} probabilities, with higher values of $p_b$ correctly identifying the jet as $b$ while higher values of $p_c$ and $p_{\textrm{light}}$ (noted $p_u$) have the opposite effect. The number of 2-track pairs from \gls{sv1} and some JetFitter variables - namely the mass of the vertex, the energy fraction and the number of tracks at the vertex - are also highlighted as important features. This result is in line with the physics-based reasoning about the dynamic behind the jet. Interesting features to consider are the ones formatted as  ``algoName\_isDefaults'': they track whether the base-method ``algoName'' is activated (0 - blue) or not and thus defaulting (1 - red) for the jet. Interestingly, most of the occurences of a defaulting behaviour of \gls{sv1} and JetFitter are associated with a negative Shapley values, demonstrating the validaty of the physics-reasoning behind these methods. IPxD variables generally score low in the ranking, indicating these methods contribute little to the model predictions, an observation confirmed by direct searches over the input features set. Contrasting the Shapley values for $t\bar{t}$ (left) and $Z'$ (right), the same variables roughly rank in the same order with minimal differences due to the different kinematic phase spaces of the two samples. \\
+Inspecting Figure \ref{fig:DL1dshapb} reveals some interesting patterns in the \gls{dl1d} network for the task of $b$-tagging. The most important family of features for this task are the \gls{dips} probabilities, with higher values of $p_b$ correctly identifying the jet as $b$ while higher values of $p_c$ and $p_{\textrm{light}}$ (noted $p_u$) have the opposite effect. The number of 2-track pairs from \gls{sv1} and some JetFitter variables - namely the mass of the vertex, the energy fraction and the number of tracks at the vertex - are also highlighted as important features. These observations are in line with the physics-based reasoning about the dynamic behind the jet: $b$-jets are expected to have a large charged particle multiplicity and the exchange of momentum is hard, with the $b$-hadron taking most of the $b$-quark momentum. Some other interesting features to consider are the ones formatted as  ``algoName\_isDefaults'': they track whether the base-method ``algoName'' is activated (0 - blue) or not and thus defaulting (1 - red) for each jet. Interestingly, most of the occurences of a defaulting behaviour of \gls{sv1} and JetFitter are associated with a negative Shapley values, demonstrating the validaty of the physics-reasoning behind these methods and their active contributions to $b$-tagging. IPxD variables generally score low in the ranking, indicating these methods contribute little to the model predictions and can be safely removed, an observation confirmed by direct searches over the input features set. Contrasting the Shapley values for $t\bar{t}$ (left) and $Z'$ (right), the same variables roughly rank in the same order with minimal differences explained by the change in kinematic phase space between the two samples. \\
 
-The same analysis can be carried out for $c$-tagging, using Figure \ref{fig:DL1dshapc}. In parallel to the discussion on $b$-tagging, the most important features are again the \gls{dips} probabilities with $p_c$ ranking first and contributing the most to $D_c$. Interestingly, the ranking of features is roughly the same as for $D_b$, with most features having a negative impact on $D_c$ when taking larger values. This is the case of most of the JetFitter and \gls{sv1} variables. Defaulting behaviour of these algorithms, occuring when the conditions of a jet do not pass certain requirements, has a positive effect on $D_c$ as expected. Again, the IPxD family of features score low, indicating their small contributions to the output. 
-
-\clearpage
+The same analysis can be carried out for $c$-tagging, with the results displayed in Figure \ref{fig:DL1dshapc}. As discussed for $b$-tagging, the most important features are again the \gls{dips} probabilities with $p_c$ ranking first and contributing the most to $D_c$. Interestingly, the ranking of features is roughly the same as for $D_b$, with most features that had a positive impact on $D_b$ when taking larger values now having a negative impact on $D_c$. This is the case of most of the JetFitter and \gls{sv1} variables. Defaulting behaviour of these algorithms, occuring when the conditions of a jet do not pass certain requirements, often has a positive effect on $D_c$ as expected. Again, the IPxD family of features score low, indicating the limited importance of their contributions to the output. 
 
 \subsection{Training of DL1d on Variable Radius Jets for Run 3}\label{sec:VRdl1dTrain}
-As for \gls{dips}, changing the jet definition from PFlow to \gls{vr}-jets is expected to have a large impact on the performance of the methods described here. Building on from the \gls{vr}-trained \gls{dips} model introduced in section \ref{chapter:dipsVRtrain}, this chapter presents the training of \gls{dl1d} for \gls{vr}-jets. The datasets are similar to those of section \ref{chapter:dipsVRtrain}. The \gls{vr}-trained \gls{dl1d} was trained for 300 epochs with no signs of overtraining. Its performance here is compared to the PFlow version introduced in the previous section, as well as the R21 \gls{dl1r} version trained on \gls{vr}-jets too, and a pre-release \gls{gn1} trained on 20 million \gls{vr}-jets.
+As for \gls{dips}, changing the jet definition from PFlow to \gls{vr}-jets is expected to have a large impact on the performance of the methods described here. Building on from the \gls{vr}-trained \gls{dips} model introduced in Section \ref{chapter:dipsVRtrain}, this section presents the training of \gls{dl1d} for \gls{vr}-jets. The datasets are similar to those of Section \ref{chapter:dipsVRtrain}. The \gls{vr}-trained \gls{dl1d} was trained for 300 epochs with no signs of overtraining. Its performance here is compared to the PFlow version introduced in the previous section, as well as the R21 \gls{dl1r} version trained on \gls{vr}-jets too and a pre-release \gls{gn1} trained on 20 million \gls{vr}-jets.
 
 \begin{sidewaysfigure}
   \vspace{0.6cm}
@@ -575,7 +571,7 @@ As for \gls{dips}, changing the jet definition from PFlow to \gls{vr}-jets is ex
   \label{fig:dl1dVRROC}
 \end{sidewaysfigure}
 
-A clear benefit from retraining on the dedicated \gls{vr}-jet sets is observed on the \gls{roc} curves, with the \gls{vr}-\gls{dl1d} outperforming the PFlow version for all $b$- and $c$-tagging efficiencies considered. Introducing \gls{dips} in the \gls{dl1} architecture has a significant impact on the performance of the tagger and greatly overmatches the \gls{rnnip} contribution. This is further highlighted by Table \ref{tab:max-perf-dl1dVR} reporting the rejections obtained at different \gls{wp}. 
+A clear benefit from retraining on the dedicated \gls{vr}-jet sets is observed on the \gls{roc} curves, with the \gls{vr}-\gls{dl1d} outperforming the PFlow version for all $b$- and $c$-tagging efficiencies considered. Introducing \gls{dips} in the \gls{dl1} architecture has a significant impact on the performance of the tagger and greatly overmatches the \gls{rnnip} contribution. This is further highlighted by Table \ref{tab:max-perf-dl1dVR} reporting the rejections obtained at different \gls{wp} of typical interest in analyses.
 
 \begin{table}[h]
   \begin{center}
@@ -603,410 +599,6 @@ A clear benefit from retraining on the dedicated \gls{vr}-jet sets is observed o
   \end{center}
 \end{table}
 
-From Table \ref{tab:max-perf-dl1dVR}, the new \gls{vr}-trained \gls{dl1d} is found to outperform the PFlow version with the flavour fraction parameter for $b$-tagging $f^b_c$ changed from 0.018 (for PFlow) to 0.1. For $c$-tagging, a clear gain in light rejection comes at a cost of $b$-rejection which can also be corrected by an appropriate change of the flavour fraction parameter for $c$-tagging $f^c_b$, currently set at 0.2. Looking at Figure \ref{fig:DL1dVRscanf}, which displays flavour fractions scans for $b$- and $c$-tagging, one can indeed conclude that this is not an optimal choice, specifically for the 30\% \gls{wp}. \\
+As shown in Table \ref{tab:max-perf-dl1dVR}, the new \gls{vr}-trained \gls{dl1d} is found to outperform the PFlow version with the flavour fraction parameter for $b$-tagging $f^b_c$ changed from 0.018 (for PFlow) to 0.1. For $c$-tagging, a clear gain in light-rejection comes at a cost of $b$-rejection which can also be corrected by an appropriate change of the flavour fraction parameter for $c$-tagging $f^c_b$, currently set at 0.2. As concluded in Figure \ref{apfig:DL1dVRscanf} of Appendix \ref{ap-DL1dVR}, which displays flavour fractions scans for $b$- and $c$-tagging, this choice of $f^c_b$ is not optimal for the 30\% \gls{wp}. \\
 
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[b]{0.98\textwidth}
-      \centering
-      \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac/contour_fraction_ttbar_200.pdf}
-      \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac/contour_fraction_zpext_200.pdf}
-      \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac/contour_fraction_graviton_200.pdf}
-      \caption{Flavour fraction $f_c^b$ for $b$-tagging scans.} 
-      \label{fig:DL1dVRscanfb}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.98\textwidth}
-    \centering % UNreadable: increase font size
-    \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac_c/contour_fraction_ttbar_2000.pdf}
-    \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac_c/contour_fraction_zpext_2000.pdf}
-    \includegraphics[width=0.3\textwidth]{Images/FTAG/VRDL1d/scansfraction/thesis_plot_frac_c/contour_fraction_graviton_2000.pdf}
-    \caption{Flavour fraction $f_b^c$ for $c$-tagging scans.} 
-    \label{fig:DL1dVRscanfc}
-\end{subfigure}
-  \caption{The flavour fractions scans of the VR-t and PFlow-trained DL1d model in blue and red respectively: left is $t\bar{t}$, centre $Z'$, and right the graviton test samples. The chosen values are marked on the curves, displaying on the $y$-axis the $c$-rejection ($b$-rejection) for $b$-tagging ($c$-tagging) vs the light-rejection on the $x$ axis at a fixed working point of 77\% (33\%). Increasing $f_c$ or $f_b$ shifts the marker upwards along the curves. }
-  \label{fig:DL1dVRscanf}
-\end{figure} 
-
-While this physics-motivated architecture optimisation moving from an \gls{rnn}-based to a Deep Set-based track analyser improves the efficiency of the hieararchical model, a clear gain in performance is accessible throught a more radical modification of the architecture as is done with the \gls{gn1} model. This is a classical observation in the world of machine learning: vast amount of low-level noisy data can be better exploited by sophisticated architecture than by using a simple model fed a few highly engineered and reconstructed features, even when these are physically motivated. \gls{gn1} is not based on any first-level physics methods. As will be shown in the next section, tracks themselves are enough to unlock the label of the jet they compose. 
-
-\section{The Graph Neural Network family of Tagger}\label{chap:GN}
-As previously advertised in the PFlow- and \gls{vr}-trained \gls{dl1d}, the new generation of classifiers developped for flavour tagging at ATLAS introduce a fundamental shift in design. It moves away from the hieararchical approach, using low-level specialised methods based on physics-inspired algorithm or neural network as input to a high-level neural network. Instead, a single large neural network operates on a rich set of track information as well as some jet features to directly output the per-flavour probabilities. As suggested in Figure \ref{fig:ftagArchi}, this change to the flavour tagging software stacks greatly simplifies the maintenance and development effort, as all attention can be focused on a single network. This large network is built on a far more powerful and rich architecture with advanced expressive powers, thanks to a modified graph attention network (\gls{gat}) \cite{velickovic2018graph, brody2022how} for \gls{gn1} or a transformer encoder for \gls{gn2} \cite{NIPS_transformerPaper}. 
-
-\begin{figure}[h!]
-  \center
-  \includegraphics[width=0.9\textwidth]{Images/FTAG/GN/Intro/schematics_difference.png}
-  \caption{Comparison of the tagging scheme between the DL1 family (left) and the GN family (right), from \cite{ATL-PHYS-PUB-2022-027}. Solid lines represent reconstructed information while dashed lines represent truth information only accessible from the simulations.} 
-  \label{fig:ftagArchi}
-\end{figure}
-
-\gls{gn1} uses the information associated with charged tracks in a jet to directly output the flavour-tag probabilities, which are then combined into analogous discriminants to Equations \ref{bdisc} and \ref{cdisc}. This constitutes the primary goal of the network and the real point of developping this network. Alongside predicting the flavour of the jet flavour, auxiliary objectives can also be optimised to aid and guide the training. This so-called \textit{multitask} framework is a common way to input expert knowledge in the design of a \gls{ml} method, focusing the attention of the network on spelled out metrics. In this case, two side tasks are passed along due to the physically meaning they highlight:
-\begin{enumerate}
-\item Track origin prediction: a classification task aiming to assign a physical process from which the track arises as described in Table \ref{tab:gnTrackOrigin}. The flavour of a jet is strongly correlated to the origin of the tracks. This task bring the attention of the network to this important element as a form of supervised attention \cite{hwang2021selfsupervised}.
-\item Vertex prediction: a classification task predicting whether two tracks come from the same vertex. The decays of $b$- and $c$-hadrons include secondary and tertiary vertices inside a jet. Highlighting the compatibility of two tracks to share  a vertex allows the model to infer the presence of such vertices. On the truth side, vertices with a distance < 0.1 mm are merged, and tracks labelled as Pileup or Fake are forced not have any shared vertex.
-\end{enumerate}
-These complementary objectives use truth information from the simulation and cannot therefore be predicted at inference time on real data. They improve performance during the training by providing useful information on the content of the jets.  A modified approach, pre-training on the auxiliary objectives and then fine-tuning on the primary objective, was not observed to lead to a gain in performance. \\
-
-\begin{table}[h]
-  \begin{center}
-      \begin{tabular}{cc} 
-      	 \hline \hline
-          Truth Origin & Description \\ \hline
-          Pileup           & From a $pp$ collision other than the primary interaction   \\
-          Fake             & Created from the hits of multiple particles  \\
-          Primary          & Does not originate from any secondary decay  \\
-          fromB            & From the decay of a $b$-hadron  \\
-          fromBC           & From a $c$-hadron decay, which itself is from the decay of a $b$-hadron   \\
-          fromC            & From the decay of a $c$-hadron \\
-          OtherSecondary   & From other secondary interactions and decays  \\ \hline \hline
-      \end{tabular}
-    \caption{Truth origins used to label the physics process leading to the produced tracks, from \cite{ATL-PHYS-PUB-2022-027}. Charged particles and tracks are matches using the truth matching probability \cite{ATLAS-tracks-algo}, and a value below 0.5 is taken to imply the reconstructed track parameters are mis-measured.}
-    \label{tab:gnTrackOrigin}
-  \end{center}
-\end{table}
-
-\begin{table}[h]
-  \begin{center}
-      \begin{tabular}{cc} 
-      	 \hline \hline
-          \multicolumn{2}{c}{Jet Input}\\ \hline
-          $p_t$   & Jet transverse momentum \\ 
-          $\eta$  & Signed jet pseudorapidity \\ \hline \hline
-          \multicolumn{2}{c}{ }\\ 
-          \multicolumn{2}{c}{Track Input}\\ \hline
-          $q/p$             & Track charge divided by momentum (measure of curvature)  \\
-          $d\eta$           & Pseudorapidity of the track, relative to the jet $\eta$ \\
-          $d\phi$           & Azimuthal angle of the track, relative to the jet $\phi$ \\
-          $d_0$             & Closest distance from the track to the PV in the longitudinal plane  \\
-          $z_0 \sin\theta$  & Closest distance from the track to the PV in the transverse plane  \\
-          $\sigma(q/p)$     & Uncertainty on $q/p$ \\
-          $\sigma(\theta)$  & Uncertainty on track polar angle $\theta$ \\
-          $\sigma(\phi)$    & Uncertainty on track azimuthal angle $\phi$ \\
-          $\sigma(d_0)$     & Lifetime signed transverse IP significance \\
-          $\sigma(z_0)$     & Lifetime signed longitudinal IP significance \\
-          nPixHits          & Number of pixel hits \\
-          nSCTHits          & Number of SCT hits \\
-          nIBLHits          & Number of IBL hits \\
-          nBLHits           & Number of B-layer hits \\
-          nIBLShared        & Number of shared IBL hits \\
-          nIBLSplit         & Number of split IBL hits \\
-          nPixShared        & Number of shared pixel hits \\
-          nPixSplit         & Number of split pixel hits \\
-          nSCTShared        & Number of shared SCT hits \\
-          nPixHoles         & Number of pixel holes \\
-          nSCTHoles         & Number of SCT holes \\ \hline \hline
-      \end{tabular}
-    \caption{Input features of the GN family of models, from \cite{ATL-PHYS-PUB-2022-027}.}
-    \label{tab:gnInputVariables}
-  \end{center}
-\end{table}
-
-Being built with a \gls{gnn}, the \gls{gn1} and \gls{gn2} networks are directly adapted to work with variable number of unordered inputs. The input is composed of 21 track with track features listed in Table \ref{tab:gnInputVariables}. Each track is further decorrated with 2 jet-level features: the jet transverse momentum $p_T$ and signed pseudorapidity $\eta$. Tracks are selected based on a selection, slightly modified from the $\gls{dips}$ one: $geq$ 8 hits in the silicon layers with less than 2 shared hits less than 3 holes in the silicon layers, $<$ 2 holes in the pixel detector and tracks must have $p_T > 0.5$ GeV, $|d_0| < 3.5$ mm, and $|z_0 \sin\theta| < 5$mm. A hole is a missing hit that was expected on a layer between two recorded hits of the same track. At most the first 40 tracks associated to a jet are selected for processing as ranked by transverse \gls{ip} significance $s_{d_0}$. The input feature list includes missing information from the track and shared hits to specifically target high $p_T$ jets, where tracks are more collimated and their separation can be unresolvable with the deployed detector technology. The \gls{gn1} and \gls{gn2} models shared the presented properties so far. They however differ in the architecture, which is explored in further details in the next sections. \\
-
-\subsection{GN1: a Graph Attention Network for Flavour Tagging}\label{chap-GN1}
-The architecture of \gls{gn1}, described in Figure \ref{fig:gnnArchitecture}, relies on a modified graph attention network \cite{brody2022how} specifically designed for graph learning on sets, the so-called Set2Graph \cite{serviansky2020set2graph}. The composition of the network architecture was subject to a coarse optimisation of the hyperparameters. The first step takes all tracks, each represented by a vector of features composed of the 21 track features plus the two jet features, and embeds each of these track vectors into a latent space of dimension 64 with a fully-connected feed-forward network with three hidden layers of 64 neurons. This is simular to a track neural network $\Phi$ of a \gls{dips} model. \\
-
-\begin{figure}[h!]
-  \center
-  \includegraphics[width=0.99\textwidth]{Images/FTAG/GN/Intro/gnn_architecture.png}
-  \caption{The architecture of the GN1 network, from \cite{ATL-PHYS-PUB-2022-027}. The combined input is made of the set of tracks, each of which is given a copy of the two jet variables in addition to the track features as per Table \ref{tab:gnInputVariables}. After a first embedding taking the input to an enriched latent representation, a fully connected graph is defined with the embedded tracks as nodes. The output of the graph is a conditional representation that is used in the three training objectives.} 
-  \label{fig:gnnArchitecture}
-\end{figure}
-
-A fully-connected graph is built with the embedded track representation as nodes. For the purpose of this section, each of the nodes of the graph are labelled as $h_i$ with feature vector of dimension 64, and there is one such node per track. The graph network updates the defined graph $G(\mathcal{N})$ into a graph $G'(\mathcal{N}')$, with $\mathcal{N}$ and $\mathcal{N}'$ the set of edges, by aggregating the features of each node $h_i$ and neighbouring nodes $\mathcal{N}_i$ using the operation of Ref. \cite{brody2022how}. In more details, the following 4 steps are applied for a single graph update \cite{ATL-PHYS-PUB-2022-027}:
-\begin{enumerate}
-  \item Each node feature vector is passed through a fully connected layer $W$ producing an updated representation $W\,h_i$ of size 64.
-  \item Pairwise scalar edge scores are computed for each pair of nodes $i$ and $j \in \mathcal{N}$: 
-  \begin{equation}
-    e\left(h_i, h_j\right) = V^T \theta [Wh_i, Wh_j],
-  \end{equation}
-  where $V$ is a second fully-connected feed-forward layer of size 128, $\theta$ is the \gls{relu} activation function, and $[,]$ stands for the concatenation operation. 
-  \item Attention weights are derived from the pairwise edge scores, using a softmax over all $j$ per node $h_i$:
-  \begin{equation}
-    a_{i,j} = \textrm{softmax}_j\left(e(h_i, h_j)\right).
-  \end{equation}
-  \item The final step is to aggregate the information to update each node $h_i$ into $h'_i$ by computing the attention weighted sum over each node representation: 
-  \begin{equation}
-    h'_i = \sum_j a_{i,j} \,.\, W h_j.
-  \end{equation} 
-\end{enumerate}
-
-For \gls{gn1}, 2 heads attention with 3 such graph network layers applied in succession were found to deliver optimal performance and no overtraining. The output of the graph network is said to be a conditional track representation as it combines each track representation and its neighbours. The ordering of the conditional tracks is kept similar to that of the original track to support matching of track to their truth information. Furthermore, a global reperesentation is derived by combinijng the conditional track representation with learnable attention weights. This rich conditional and global representations can then be used as inputs for the three objectives, implemented with three distrinct feed-forward neural networks \cite{ATL-PHYS-PUB-2022-027}:
-\begin{enumerate}
-  \item Jet flavour prediction: performed by a graph classification network fed the global representation only. The primary objective of predicting the jet flavour is done by this network, composed of 4 hidden layers with 128, 64, 32, and 16 neurons respectively, finishing on an output of size 3 with softmax for $b$-, $c$-, and light-jet probabilities (size 4 if $\tau$ are included).
-  \item Track origin prediction: performed by a node classifier processing each conditional track representation with the global representation. This network is built with three layers of reducing size 128, 64, and 32 to finish on the output layers of size 7 with sotmax, matching the 7 classes corresponding to the different truth origins.
-  \item Vertex prediction: performed by a nodes pairs binary classifier that receives every possible combinations of representational tracks as well as the global representation. This network is also made of 3 layers of size 128, 64, and 32 for a final output of size 1 with sigmoid, stating whether the pair of tracks have a common vertex. 
-\end{enumerate}
-
-The architecture of \gls{gn1} is an enhanced version of \gls{dips}, with the track initialiser and graph classifiers corresponding to $\Phi$ and $F$. Added elements are the powerful \gls{gnn} layers and conditional representation pooling layer with attention, as well as the auxiliary objectives. \\
-
-Training \gls{gn1} involves minimising the combining objective $\mathcal{L}_{\textrm{total}}$ of Equation \ref{eq:totalobjgn} \cite{ATL-PHYS-PUB-2022-027}. $\mathcal{L}_{\textrm{flavour}}$ is the categorial cross entropy loss, as defined in Equation \ref{eq:statEntropy}, over the different jet flavours to output the per flavour probabilities. $\mathcal{L}_{\textrm{track}}$ is the categorial cross entropy loss for the track origin prediction averaged over all tracks in a batch. Due to intrinsic differences in the relative frequency of track origins, the contribution of each origin is weighted by their inverse frequency of occurence. Finally, $\mathcal{L}_{\textrm{vertex}}$ is the binary cross-entropy of the track-pair compatibility averaged over all track-pairs in a batch. The importance of matching tracks from $b$- and $c$-hadron is artificially increased by giving them double the weight compared to other track-pairs.
-
-\begin{equation}\label{eq:totalobjgn}
-  \mathcal{L}_{\textrm{total}} = \mathcal{L}_{\textrm{flavour}} + \alpha \, \mathcal{L}_{\textrm{track}} + \beta \, \mathcal{L}_{\textrm{vertex}}.
-\end{equation}
-
-In Equation \ref{eq:totalobjgn}, weights are applied to combined the different tasks that are represented by distinct values, reflecting their specific loss functions and difficulties. Weights of $\alpha = 0.5$ and $\beta = 1.5$ \cite{ATL-PHYS-PUB-2022-027} where found to lead the auxiliary objectives to converge to similar values, giving them equal weighting in $\mathcal{L}_{\textrm{total}}$. The proposed choice for these parameters also let the primary objective $\mathcal{L}_{\textrm{flavour}}$ dominate the global loss, and small variations of $\alpha$ and $\beta$ were not found to significantly impact the performance. The results presented here come from Ref \cite{ATL-PHYS-PUB-2022-027}, where a \gls{gn1} models were trained for 100 epochs with a 30 million jets sample made of 60\% $t\bar{t}$ and 40\% $Z'$, as previously described in this chapter. The validation loss on a statistically independent sample of 500k jets is monitiored, with the epoch minimising it selected for further analysis. The optimiser is based on Adam \cite{adamPaper} with a learning rate of $1e-3$ and a batch size of 4000 jets spread across 4 \gls{gpu}. \\
-
-The results of the training are presented in Figures \ref{fig:GN1rocb} and \ref{fig:GN1rocc} for $b$- and $c$-tagging respectively, where a \gls{dl1r} model retrained on similar inputs to the GN1 with 75 million jets is presented as reference, with a significant caveat being the lack of retraining of the input \gls{rnnip} sub-tagger. The \gls{roc} curves of a GN1 model given an additional track input to those of Table \ref{tab:gnInputVariables} indicating if a track was used in the reconstruction of an electron or a muon is also included as GN1 Lep. At the time of deriving these results, the \gls{dl1d} tagger was yet not officially released and is thus not included. Its performance can be estimated at roughly 20\% to 50\% above \gls{dl1r}, far from the observed gains made by the \gls{gn1} models - as was also displayed in Figures \ref{fig:DL1dshapc} and \ref{fig:DL1dshapb}. 
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[b]{0.98\textwidth}
-      \centering
-      \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ROC/ttb.png}
-      \caption{GN1 and DL1r performance on the $t\bar{t}$ test sample, with $20 < p_T < 250$ GeV.} 
-      \label{fig:GN1ttb}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.98\textwidth}
-    \centering % UNreadable: increase font size
-      \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ROC/zpb.png}
-      \caption{GN1 and DL1r performance on the $Z'$ test sample, with $250 < p_T < 5000$ GeV.} 
-      \label{fig:GN1zpb}
-  \end{subfigure}
-  \caption{ROC curves tracing the $b$-tagging efficiency versus the $c$-jet (left) and light-jet (right) rejections for the $t\bar{t}$ (top) and $Z'$ (bottom) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in red, GN1 in blue, and GN1 Lep in purple. The bottom panels show the ratio with respect to DL1r. The flavour fraction is set at $f^b_c = 0.018$ for DL1r and 0.05 for GN1 and GN1 Lep. The binomial error bands are shown as shaded regions.}
-  \label{fig:GN1rocb}
-\end{figure} 
-
-Most of the improvement in rejections made by \gls{gn1} models can be found a lower tagging efficiencies. At the typical working point of 70\% on the low $p_T$ region defined by $t\bar{t}$, the $c$-jet (light-jet) rejection is 110\% (80\%) above that of \gls{dl1r}. Gains are observed across the considered $p_T$ spectrum, with a gain of 180\% (500\%) at a working point of 30\% - the 30\% working point on $Z'$ corresponds to using the 70\% working point on $t\bar{t}$. The \gls{gn1} version with lepton information further improves the performance, to a $c$-rejection (light-rejection) of 180\% (150\%) at the 70\% \gls{wp} on $t\bar{t}$ and 180\% (600\%) on the $Z'$ at the 30\% \gls{wp}. Part of the measured performance increase with \gls{gn1} is due to the looser track selections leveraged by \gls{gn1} and to a more sophisticated exploitation of the noisy low-level track information. The \gls{gn1} and \gls{dl1r} discriminants for $b$-tagging are presented in Figure \ref{fig:GN1disb}. The distributions for \gls{gn1} moves the $b$-jet distribution to higher values of the discriminants, indicating a higher confidence on the associated $p_b$. \\
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Images/FTAG/GN/GN1/eff/ttb.png}
-  \includegraphics[width=0.8\textwidth]{Images/FTAG/GN/GN1/eff/zpb.png}
-  \caption{Comparing the GN1 and DL1r $b$-tagging discriminants $D_b$ normalised distributions on the $t\bar{t}$ (top) and $Z'$ (bottom) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in dashed lines and GN1 in continuous line. Each flavour is indicated by a different colour: green for $b$-jets, yellow for $c$-jets, and blue for light-jets. The flavour fraction is set at $f^b_c = 0.018$ for DL1r and 0.05 for GN1}
-  \label{fig:GN1disb}
-\end{figure} 
-
-The $c$-tagging performance is presented in Figures \ref{fig:GN1rocc} and \ref{fig:GN1disc}, displaying the \gls{roc} curves and $c$-tagging discriminant distributions $D_c$. \gls{gn1} significantly outperforms \gls{dl1r} for $c$-tagging: both background rejections are doubled on the $t\bar{t}$ sampled at a $c$-tagging \gls{wp} of 25 \%, with a more modest increase on the $Z'$ sample of 60\% for $b$-rejection and 100\% for light-rejection at the same $c$-jet \gls{wp}.
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[b]{0.98\textwidth}
-      \centering
-      \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ROC/ttc.png}
-      \caption{GN1 performance on the $t\bar{t}$ test sample, with $20 < p_T < 250$ GeV.} 
-      \label{fig:GN1ttc}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.98\textwidth}
-    \centering % UNreadable: increase font size
-      \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ROC/zpc.png}
-      \caption{GN1 performance on the $Z'$ test sample, with $250 < p_T < 5000$ GeV.} 
-      \label{fig:GN1zpc}
-  \end{subfigure}
-  \caption{ROC curves tracing the $c$-tagging efficiency versus the $b$-jet (left) and light-jet (right) rejections for the $t\bar{t}$ (top) and $Z'$ (bottom) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in red, GN1 in blue, and GN1 Lep in purple. The bottom panels show the ratio with respect to DL1r. The flavour fraction is set at $f^c_b = 0.2$. The binomial error bands are shown as shaded regions.}
-  \label{fig:GN1rocc}
-\end{figure} 
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Images/FTAG/GN/GN1/eff/ttc.png}
-  \includegraphics[width=0.8\textwidth]{Images/FTAG/GN/GN1/eff/zpc.png}
-  \caption{Comparing the GN1 and DL1r $c$-tagging discriminants $D_c$ normalised distributions on the $t\bar{t}$ (top) and $Z'$ (bottom) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in dashed lines and GN1 in continuous line. Each flavour is indicated by a different colour: green for $b$-jets, yellow for $c$-jets, and blue for light-jets. The flavour fraction is set at $f^c_b = 0.2$.}
-  \label{fig:GN1disc}
-\end{figure} 
-
-As previously explained, the tagging performance is strongly dependent on the jet energy considered, explaining the observed rejections differences between the $t\bar{t}$ and $Z'$ samples. Higher energies correlate with higher transverse momentum $p_T$. More energy in the system introduces a higher multiplicity of fragmentation particles challenging the reconstruction process. The direction of emission of the particles is more collimated and approaches the resolution power of the tracking detector of fixed granularity: different tracks are no longer individually resolvable and their hits merge. Due to relativistic effect, at higher $p_T$ the time of flight of heavy-hadrons increase, delaying their decay further into the detector. Traces left by the heavy-hadrons paths and fragmentation particles introduce inaccuriacies in the reconstructed track parameters \cite{ATLAS-tracks-algo}. This degradation of the track quality impacts the jet tagging performance significantly, as displayed in Figure \ref{fig:GN1ptb} showing the $b$-tagging efficiency as a function of jet $p_T$ for a fixed light-jet rejection of 100 in each bin. \gls{gn1} outperforms \gls{dl1r} across the studied $p_T$ range, with a very significant $b$-efficiency improvement of a factor $\sim$ 2 at high values of $p_T$ above $2.5$ TeV. 
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.45\textwidth]{Images/FTAG/GN/GN1/eff/ptttb.png}
-  \includegraphics[width=0.45\textwidth]{Images/FTAG/GN/GN1/eff/ptzpb.png}
-  \caption{Comparing the GN1 and DL1r $b$-tagging efficiency as a function of jet $p_T$ at a fixed 100 light-jet rejection in each bin on the $t\bar{t}$ (left) and $Z'$ (right) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in dashed lines and GN1 in continuous line. The flavour fraction is set at $f^b_c = 0.018$ for DL1r and 0.05 for GN1 and GN1 Lep.}
-  \label{fig:GN1ptb}
-\end{figure} 
-
-To conclude this chapter on \gls{gn1}, the importance of the auxiliary tasks is discussed by presenting ablations studies removing them iteratively from the full \gls{gn1} model. For this purpose, three variants of \gls{gn1} were trained equivalently to the full \gls{gn1} but without:
-\begin{itemize}
-  \item any auxiliary objectives, leading to a model label ``GN1 No Aux'' only optimising the jet classification objective,
-  \item the vertexing objective but not the track classification one, for the model labelled ``GN1 Vert'',
-  \item the track classification objective without vertex, referred to as ``GN1 TC''.
-\end{itemize}
-Figure \ref{fig:GN1ablb} displays the \gls{roc} curves of theses modified model with respect to the previously introduced \gls{dl1r} and the full \gls{gn1}. Removing either or any of the auxiliary objectives is seen to have a large impact on performance. The \gls{gn1} No Aux model is effectively similar to a \gls{dl1d} model, having similar performance gains with respect to \gls{dl1r}. Remarkably, this performance is obtained from a single network processing tracks without any of the sub-tagger nor methods used by the \gls{dl1} family, effectively underlying the powerful representation power of \gls{gat}. Adding either of the auxiliary task has the same beneficial impact on performance, as GN1 TC and GN1 Vert performs similarly and each is enough to outmatch \gls{dl1r}. The real gain is obtained by adding both auxiliary taks, which further boosts the effectiveness of the model. 
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ablations/ttb.png}
-  \includegraphics[width=0.98\textwidth]{Images/FTAG/GN/GN1/ablations/zpb.png}
-  \caption{ROC curves tracing the $b$-tagging efficiency versus the $c$-rejection (left) and light-rejection (right) for the $t\bar{t}$ (top) and $Z'$ (bottom) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Models compared are DL1r in red, GN1 in blue, and versions of GN1 with missing auxiliary tasks. GN1 No Aux in green has none of the auxiliary, GN1 Vert in purple only the vertexing task, and GN1 TC in orange only the track classification. The flavour fraction is set at $f^b_c = 0.018$ for DL1r and 0.05 for GN1. The binomial error bands are shown as shaded regions.}
-  \label{fig:GN1ablb}
-\end{figure} 
-
-So far, the performance of \gls{gn1} on the primary objective of jet flavour classification has been discussed. The performance on the auxiliary objectives was not initially intended to be leveraged on real data but only to distill information for the primary goal. The track-pairs vertexing performance can be assessed by leveraging the information to perform track finding: grouping sets of tracks that are found to share a vertex with one another into a single vertex. The result is compared to the truth vertex label available in the simulations. Vertices identified by \gls{gn1} as containing tracks coming from a $b$-hadron decay are grouped together, and the same procedure is applied to the truth information. To measure performance, the reconstructed and true vertices are compared as well as the number of tracks correctly assigned. A vertex is correctly identified when it contains at least 65\% of the correct tracks with a purity of at least 50\%. The comparison is only carried out for reconstructed tracks, meaning a 100\% \gls{gn1} efficiency corresponds to correctly identify all possible secondary vertices within the limit of the track reconstruction efficiency. An inclusive reconstruction efficiency in $b$-jets of $\sim$80\% is measured for \gls{gn1}, effectively proving that the model is able to identify $b$-hadron decay vertices. An important caveat is the current restriction is only on finding such vertices, not on a reconstructing them. In order to implement a fully-fledged secondary vertex fitter as an auxiliary objective, the fitting of the vertex must be produced by a differentiable algorithm to allow for backpropagation. This is a promising area of research, given the global interest in accessing this much-used \gls{sv} information. Recent work has been carried out to introduce this task using the differentiable single vertex fitting algorithm of Ref. \cite{smith2023differentiable}. \\
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN1/ablations/ttroc.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN1/ablations/zproc.png}
-  \caption{ROC curves tracing the false positive rate versus the true positive rate of the truth origin classification on the $t\bar{t}$ (left) and $Z'$ (right) test samples, from \cite{ATL-PHYS-PUB-2022-027}. Heavy Flavour is a weighted combination of the FromB, FromBC, and FromC by their relative abundance.}
-  \label{fig:GN1trackperf}
-\end{figure} 
-
-Concerning the track origin classification performance, Figure \ref{fig:GN1trackperf} presents the traditional \gls{roc} curves, comparing the false positive rate (tracks wrongly assigned a label) versus the true positive rate (correctly assigned the label), for the different track origin classes of Table \ref{tab:gnTrackOrigin}. Some classes are combined with weights dictated by the class relative abundance: this is the case of the FromB, FromBC, and FromC classes that are combined as Heavy Flavour, and the Primary and OtherSecondary labels. The \gls{auc} of the \gls{roc} of all groups is above 90\%, indicating good classification performance. The most challenging categories are the Heavy Flavour, Primary, and OtherSecondary tracks, while the Fake and Pileup tracks were most easily identified. The global mean (weighted) \gls{auc} was of 92\% (95\%) on $t\bar{t}$ and 94\% (96\%) on $Z'$ \cite{ATL-PHYS-PUB-2022-027}. This performance is in line with a physics-based intuition, and the $p_T$ effect can be noted by the reduction in \gls{auc} for the Heavy Flavour tracks on the $Z'$ sample. \\
-
-\gls{gn1} proved to be an exciting direction of development for flavour tagging at ATLAS. It showed clear benefit from the previous mentality of building network by combining several algorithms and methods with physics meaning. Embrassing modern advanced machine learning, it relies on a single network built around an advanced graph attention network. While the functioning of the model is less intepretable than the previous \gls{dl1} family of tagger, expert knowledge is still instilled in the model thanks to the multitask paradigm. Building on from this success, an upgrade architecture was developped to accelerate the speed of training and continue pushing the performance of the method ever higher: \gls{gn2}.
-
-\subsection{GN2: a Transformer Encoder for Flavour Tagging}\label{chap-GN2}
-\gls{gn2} is not a radical change on the architecture of \gls{gn1}. Rather, it is a fine-tuned modified model aiming to reproduce the same conceptual processing chain as \gls{gn1}, only with an easier to train and simpler to scale design. The main modifications with respect to \gls{gn1} is the replacement of the computationally complex and expensive graph attention operator by a now famous architecture in machine learning: the transformer \cite{NIPS_transformerPaper}. As described in Chapter \ref{sec:transformer}, the transformer is a remarkably effective and expressive design, both able to extract fine-grained correlations between ordered and unordered tokens in a sequence through the mechanism of attention and to scale to very large network size without suffering from overtraining. By design, transformers combine rich attention computing and regularisation inducing steps which let such network scale significantly in number of parameters while guaranteeing effective parallelisable training on \gls{gpu} hardware. \\
-
-In the case of \gls{gn2}, given the design only requires building a global represenation of the sets of tracks composing a jet, only the encoder part introduced in Ref \cite{NIPS_transformerPaper} and modified in Ref \cite{shleifer2021normformer} is deployed instead of the \gls{gnn} component of Figure \ref{fig:ftagArchi}. A dense summary of the modifications applied when moving from \gls{gn1} to \gls{gn2} is presented in Table \ref{tab:gn2compGN1}. The reference to \gls{gn1} corresponds to the last version of the model that was developped which explains some small modifications with the model described in the previous chapter. Similarly, the \gls{gn2} model described here corresponds to the first publically released model, and this generation is also being refined and improved at the time of writing this thesis. 
-
-\begin{table}[h]
-  \begin{center}
-      \begin{tabular}{c|c|c|c} 
-      	 \hline \hline
-          Modification & Parameter & GN1 & GN2 \\ \hline
-          Hyperparameter  & Trainable parameters & 0.8M & 1.5M \\ 
-          Hyperparameter  & Learning rate & Fixed 1e-3 & One-cycle scheduler\\ 
-          Hyperparameter  & Core unit layers & 3 & 6 \\ 
-          Hyperparameter  & Attention heads & 2 & 8 \\ 
-          Hyperparameter  & Embedding dimension & 128 & 192 \\ \hline
-          Architecture    & Attention Type & \gls{gat}v2 & Scaled dot product \\ 
-          Architecture    & Dense update & No & Yes (dim 256) \\ 
-          Architecture    & Separate value projection & No & Yes \\ 
-          Architecture    & LayerNorm + Dropout & No & Yes \\ \hline
-          Inputs          & Number of training jets & 30M & 192M  \\ \hline \hline
-      \end{tabular}
-    \caption{Main modifications between the last generation of GN1 and the first generation of GN2, taken from \cite{ATL-PLOT-FTAG-2023-01}.}
-    \label{tab:gn2compGN1}
-  \end{center}
-\end{table}
-
-Some significant changes adopted for \gls{gn2} are a learning rate scheduler, a larger embedding space dimension giving a wider and deeper - thanks to the doubling of the number of layers - of the core units (the \gls{gnn} for \gls{gn1} and the transformer for \gls{gn2}), and the introduction of regularising effects from layer normalisation and dropout \cite(ba2016layer). The learning rate scheduler is based on the one-cycle scheduler of Ref \cite{smith2018disciplined}, with some important  parameters described in Table \ref{tab:onecyclescheduler}. This scheduler speeds up the training by initially growing the learning rate to large values, corresponding to large steps in the parameters' optimisation landscape, before annealing progressively the learning rate to small values, helping to converge on a specific minimum \cite{smith2018superconvergence}. The attention implemented in the transformer allows similar physics performance at a reduced memory footprint and training time \cite{duperrin2023flavour}. The improved computational performance of \gls{gn2} made it possible to scale the network up in terms of number of parameters, \gls{gn2} having roughly twice as many parameters as \gls{gn1}, but also in terms of training dataset. \gls{gn2} can indeed be trained on roughly $\times 6$ more jets than \gls{gn1} with the same computing resources. The datasets for the \gls{gn2} training presented here was derived in the same fashions as those of \gls{dl1d} and \gls{gn1}, using importance sampling to fully utilise the $b$- and light-jets statistics. 
-
-\begin{table}[h]
-  \begin{center}
-      \begin{tabular}{c|c} 
-      	 \hline \hline
-          Parameter   & Description \\ \hline
-          LR initial  & Initial value of the learning rate   \\ 
-          LR maximal  & Maximal value of the learning rate, reached at the end of warm up   \\ 
-          LR final    & Value of the learning rate reached at peak epoch    \\ 
-          Warm Up     & Period covering the increase from initial to maximal   \\ 
-          Peak epoch  & Epoch at which LR maximal should be reached   \\ \hline \hline
-      \end{tabular}
-    \caption{The five parameters of the one-cycle scheduler.}
-    \label{tab:onecyclescheduler}
-  \end{center}
-\end{table}
-
-The attention mechanism in the transformer is subtly different from the \gls{gat}, and corresponds to the multihead self-attention process described in Chapter \ref{sec:transformer}. The nodes are updated in a two steps approach: first attention is computed and applied, then a dense layer updates the set of nodes. In more details, the transformer implements the following update on the set of nodes $h_i \in \mathcal{N}$ defining the fully connected graph $G(\mathcal{N})$:
-\begin{enumerate}
-  \item Layer normalisation is applied to the input set of nodes $\mathcal{N}$
-  \item For each attention head, three individual mapping represented by layers $W_q$, $W_k$, and $W_v$ map each node $h_i \in \mathcal{N}$ to three independent representations $W_qh_i$, $W_kh_i$, and $W_vh_i$.
-  \item For each node $h_i \in \mathcal{N}$, edge scores are computed with all nodes $h_j$ using the scaled dot product attention \[e\left(h_i, h_j\right) = \frac{W_q h_i\, . \, W_k h_j}{\sqrt{s}},\] where the $s$ parameter representing the scaling weight is typically taken to be the dimension of matrix $W_k$. 
-  \item The edge scores are turned into attention scores for node $i$, by taking the softmax over all nodes: \[a_{i, j} = \textrm{softmax}_j\left(e(h_i, h_j) \right) \]
-  \item Each node $h_i \in \mathcal{N}$ is updated into a node $h_i' \in \mathcal{N}'$ as: \[h_i' = \sum_j a_{i, j} \,.\, W_v h_j\]
-  \item Using a skip connexion, the updated nodes $\mathcal{N}'$ are added the original nodes $\mathcal{N}$ values. 
-  \item Layer normalisation is applied to the updated nodes $\mathcal{N}'$.
-  \item The updated nodes are passed through a \gls{dnn}.
-  \item The output of the \gls{dnn} is summed to the updated nodes by a skip connexion, given the final updated set of nodes $\mathcal{N}'$.
-\end{enumerate}
-
-The \gls{gn2} model presented here combines 6 such transformer layers with 8 attention heads in total. A comparison of the global performance of this \gls{gn2} model to the \gls{dl1r}, \gls{dl1d}, and \gls{gn1} models is displayed in the $b$-tagging \gls{roc} curves of Figures \ref{fig:GN2rocb}. For this comparison, the \gls{gn2} and \gls{dl1d} models have been retrained on the same datasets, with the \gls{dl1r} and \gls{gn1} models equivalent to those presented in the previous Chapter \ref{chap-GN1}. \gls{gn2} delivers yet another significant boost to performance, drasticaly surpassing the \gls{gn1} rejections at all efficiencies considered. The largest improvement is again obtained at lower $b$-jet efficiencies. Compared to \gls{gn1}, \gls{gn2} delivers $\times 1.5$ ($\times 1.7$) the $c$-rejection (light-rejection) on $t\bar{t}$ at the 70\% $b$-tagging \gls{wp} and $\times 1$ ($\times 1.7$) on $Z'$ at 30\% \gls{wp}. With respect to \gls{dl1d}, the gains in $c$-rejection (light-rejection) are respectively close to $\times 3$ ($\times 2$) for $t\bar{t}$ and $\times 3$ ($\times 4$) on $Z'$. The $c$-rejection on $Z'$ of the \gls{gnn} models is essentially equivalent, although the significantly improved light-rejection of \gls{gn2} indicates its $c$-rejection can be boosted by further increasing its flavour fraction $f^b_c$ above 0.1. \\
-
-Turning to $c$-tagging, as displayed in Figure \ref{fig:GN2rocc}, a similar large performance gained is obtained by the new \gls{gnn} family over the \gls{dl1} one, both in terms of $b$- and light-rejection. \gls{gn2} again introduces a large improvement on top of \gls{gn1}, although their $b$-rejection performance is equivalent on $Z'$. The gains from \gls{gn2} with respect to \gls{gn1} are of a factor $\times 1.3$ ($\times 1.3$) for $b$-rejection (light-rejection) on $t\bar{t}$ at the 30\% \gls{wp}, while they are $\times 1$ ($\times 1.2$) on $Z'$. The comparison to \gls{dl1d} is of $\times 1.9$ ($\times 2.1$) on $t\bar{t}$ and $\times 1.3$ ($\times 1.8$) on $Z'$ at the same \gls{wp}.
-
-\begin{center}
-  \vspace{-1.cm}
-  \begin{figure}[h!]
-  \centerline{
-  \includegraphics[width=0.50\textwidth]{Images/FTAG/GN/GN2/rocs/roc_ttbar.png}
-  \includegraphics[width=0.50\textwidth]{Images/FTAG/GN/GN2/rocs/roc_zp.png}
-  }
-  \caption{The $c$- and light-rejections as a function of the $b$-jet tagging efficiency in the $t\bar{t}$ with $20 < p_T < 250$ GeV (left) and $Z'$ with $250 < p_T < 6000$ GeV (right) test samples. Models compared are DL1r in purple, DL1d in green, GN1 in blue, and GN2 in yellow. The bottom plots show the ratio with respect to the DL1d performance. Flavour fractions are set at $f^b_c = 0.018$ for DL1r and DL1d, 0.05 for GN1, and 0.1 for GN2. Shaded regions represent the binominal error band.}
-  \label{fig:GN2rocb}
-  \bigskip
-  \centerline{
-  \includegraphics[width=0.50\textwidth]{Images/FTAG/GN/GN2/rocs/roc_ttbar_c.png}
-  \includegraphics[width=0.50\textwidth]{Images/FTAG/GN/GN2/rocs/roc_zp_c.png}
-  }
-  \caption{The $b$- and light-rejections as a function of the $c$-jet tagging efficiency in the $t\bar{t}$ with $20 < p_T < 250$ GeV (left) and $Z'$ with $250 < p_T < 6000$ GeV (right) test samples. Models compared are DL1r in purple, DL1d in green, GN1 in blue, and GN2 in yellow. The bottom plots show the ratio with respect to the DL1d performance. Flavour fractions are set at $f^c_b = 0.2$ for all models. Shaded regions represent the binominal error band.}
-  \label{fig:GN2rocc}
-  \end{figure}
-\end{center}
-
-Fixing the $b$-tagging performance at the 77\% working point for both the $t\bar{t}$ and $Z'$, Figure \ref{fig:GNxscansfc} scans the $f^b_c$ flavour fractions for the different models. A clear hierarchy of performance is displayed by these four graphics: \gls{gn2} is occupies in an undisputed way the high rejections parts, followed by \gls{gn1}, \gls{dl1d}, and finally \gls{dl1r}. For $b$-tagging on $Z'$, the $c$-rejection could be further improved with limited impact on light-rejection by a larger $f^b_c$ choice. However, the flavour fractions are optimised for an improved $c$-rejection on $t\bar{t}$, with limited change to the light-rejection across tagger generations. If desired, the light-rejection on $t\bar{t}$ of a \gls{gn2} taggers could be push upwards by lowering the $f^b_c$, reaching values as high as 1800 at a $c$-rej of 4.8. The equivalent \gls{dl1d} performance is a light-rejection of 450 at a $c$-rejection of 4.5, equivalent 25\% of the \gls{gn2} light-rejection. Similarly, \gls{gn2} can reach a $c$-rejection of 19.5 at a ligh-rejection of 110, compared to a maximal $c$-rejection of 9.7 for a light-rejection of 40. \\
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/fraction_scans/FractionScanPlot_tt.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/fraction_scans/FractionScanPlot_zp.png}
-  \caption{The flavour fraction $f^b_c$ scans for $b$-tagging at a fixed working point of 77\% of the different models considered evaluated on the $t\bar{t}$ (left) and $Z'$ (right). The chosen values are marked on the curves, displaying on the $x$-axis the $c$-rejection vs the light-rejection on the $y$ axis. Increasing $f^b_c$ shifts the marker rightwards along the curves. }
-  \label{fig:GNxscansfc}
-\end{figure} 
-
-Figure \ref{fig:GNxscansfb} displays the flavour fraction $f^c_b$ scans for $c$-tagging at the 30\% working point. The same conclusions as for $b$-tagging holds, underlying the overall superiority of \gls{gn2}. The scans for $c$-tagging show a different pattern than the $b$-tagging ones: at large $f^c_b$, the $b$-rejection rapidly increases while for $b$-tagging the $c$-rejection was saturating. This behaviour is due to the clear identification of $b$-jets giving them an outlying distribution compared to the overlap of $c$- and light-jets. \\
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/fraction_scans/FractionScanPlot_tt_c.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/fraction_scans/FractionScanPlot_zp_c.png}
-  \caption{The flavour fraction $f^c_b$ scans for $c$-tagging at a fixed working point of 30\% of the different models considered evaluated on the $t\bar{t}$ (left) and $Z'$ (right). The chosen values are marked on the curves, displaying on the $x$-axis the $b$-rejection vs the light-rejection on the $y$ axis. Increasing $f^c_b$ shifts the marker rightwards along the curves. }
-  \label{fig:GNxscansfb}
-\end{figure} 
-
-% Eff for fixed WP
-Figure \ref{fig:GNxptb_eff} displays the effective per bin $b$-tagging efficiency for inclusive $b$-tagging efficiency of 70\% for $t\bar{t}$ and 30\% for $Z'$ in each $p_T$ region considered. The performance is visibly not uniform across $p_T$, with teh model accomodating specific parts of the $p_T$ spectrum more easily. The region [100, 800] GeV overlapping the two samples is a sweet spot for performance, with more challenging results at lower and higher $p_T$. The performance for $Z'$ in particular reduces dramatically with larger momentum, due to the physics reasons previously explained. Figure \ref{apfig:GNxptc_eff} in Appendix \ref{app-GN2sup} displays the same information for $c$-tagging, leading to the same conclusions. 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_b_eff.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_b_eff.png}
-  \caption{Comparing the different models $b$-tagging efficiency as a function of jet $p_T$ for the inclusive $b$-tagging 70\% working point on the $t\bar{t}$ (left) and 30\% working point on $Z'$ (right). The flavour fraction is set at $f^b_c = 0.018$ for DL1r and DL1d, 0.05 for GN1, and 0.1 for GN2.}
-  \label{fig:GNxptb_eff}
-\end{figure} 
-
-To avoid biasing the analysis with this per-bin performance dependency, Figure \ref{fig:GNxptb_efffixedl} displays the $b$-tagging efficiency distribution across $p_T$ at a fixed per bin light-rejection of 100. The superior capabilities of \gls{gn2} are clearly exhibited across the $p_T$ spectrum. The same conclusion holds for $c$-tagging, as displayed in Figure \ref{apfig:GNxptc_efffixedl} of the appendix. 
-% Eff fixed light
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_b_eff_fixedlight.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_b_eff_fixedlight.png}
-  \caption{Comparing the different models $b$-tagging efficiency as a function of jet $p_T$ at a fixed 100 light-jet rejection per bin on the $t\bar{t}$ (left) and $Z'$ (right) test samples. The flavour fraction is set at $f^b_c = 0.018$ for DL1r and DL1d, 0.05 for GN1, and 0.1 for GN2.}
-  \label{fig:GNxptb_efffixedl}
-\end{figure} 
-
-Inspecting the rejections at a fixed $b$-tagging efficiency of 70\% per bin also leads to concluding the clear superiority of \gls{gn2}. Figures \ref{fig:GNxptb_crejflat} and \ref{fig:GNxptb_urejflat} respectively display the $c$- and light-rejection for a 70\% $b$-efficiency per bin, showing that most of the improvement from \gls{gn2} and \gls{gn1} is in the [100, 800] GeV $p_T$ sweetspot. The same distribution with an inclusive 70\% $b$-tagging efficiency, over the entire $p_T$ regions, are displayed in Figures \ref{apfig:GNxptb_crej} and \ref{apfig:GNxptb_urej} of the appendix. 
-
-\clearpage
-% Rej c - flat btagging
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_flat_c_rej.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_flat_c_rej.png}
-  \caption{Comparing the different models $c$-rejection as a function of jet $p_T$ for the $b$-tagging 70\% working point per bin on the $t\bar{t}$ (left) and the 30\% working point per bin on $Z'$ (right). The flavour fraction is set at $f^b_c = 0.018$ for DL1r and DL1d, 0.05 for GN1, and 0.1 for GN2.}
-  \label{fig:GNxptb_crejflat}
-\end{figure} 
-
-% Rej light -flat  btagging
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_flat_light_rej.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_flat_light_rej.png}
-  \caption{Comparing the different models light-rejection as a function of jet $p_T$ for the $b$-tagging 70\% working point per bin on the $t\bar{t}$ (left) and the 30\% working point per bin on $Z'$ (right). The flavour fraction is set at $f^b_c = 0.018$ for DL1r and DL1d, 0.05 for GN1, and 0.1 for GN2.}
-  \label{fig:GNxptb_urejflat}
-\end{figure} 
-
-%%%
-
-
-% Rej b - flat ctagging
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_flat_b_rej_c.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_flat_b_rej_c.png}
-  \caption{Comparing the different models $b$-rejection as a function of jet $p_T$ for the $c$-tagging 30\% working point per bin on the $t\bar{t}$ (left) and $Z'$ (right). The flavour fraction is set at $f^c_b = 0.2$ for all taggers.}
-  \label{fig:GNxptc_brejflat}
-\end{figure} 
-
-% Rej light -flat  ctagging
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_ttbar_flat_light_rej_c.png}
-  \includegraphics[width=0.48\textwidth]{Images/FTAG/GN/GN2/pt_plots/pt_zp_flat_light_rej_c.png}
-  \caption{Comparing the different models light-rejection as a function of jet $p_T$ for the $c$-tagging 30\% working point per bin on the $t\bar{t}$ (left) and $Z'$ (right). The flavour fraction is set at $f^c_b = 0.2$ for all taggers.}
-  \label{fig:GNxptc_urejflat}
-\end{figure} 
-
-To conclude this section, the $b$- and light-rejection at the 30\% $c$-tagging per bin working point are displayed in Figures \ref{ig:GNxptc_brejflat} and \ref{ig:GNxptc_urejflat} respectively. Clearly, most of the improvements unlocked by \gls{gn2} and \gls{gn1} is to be found in the [100, 800] GeV sweetspot of the $p_T$ spectrum. \\
-
-These results, ableit intermediary as the developpment of the new tagger is still underway at the time of writing, are highly suggestive of the promised performance unleashed by the state-of-the-art \gls{gn2} model. Leveraging a simpler design and a more parallelisable architecture, \gls{gn2} can effectively grow to larger amount of parameters processing ever larger datasets effectively, with no significant overtraining occuring. The story of modern flavour tagging is a story of refining and ever more expressive machine learning. \gls{rnnip} and \gls{dips} required 50-60k parameters, which when used in the high-level algorithm to form \gls{dl1r} and \gls{dl1d} gives rise to models with $\sim$130k parameters. \gls{gn1} revolutionises the approach by adopting a single powerful architecture with $\sim$800k parameters. \gls{gn2} modifies this radical new design to adopt a highly efficient, regularised, and parallelisable model that easily scales the number of parameters to $\sim$1200k, being the first flavour tagger to cross the million parameters threshold. The latest design of \gls{gn2} uses 2.6M parameters, and further tests raised this number up to $\sim$70M parameters. Expert knowledge is passed to the model using supervised attention, framing the intuition as learnable tasks enforced during training. 
+While this physics-motivated architecture optimisation moving from an \gls{rnn}-based to a Deep Set-based track analyser improves the efficiency of the hieararchical model, a clear gain in performance is accessible throught a more radical modification of the architecture as is done with the \gls{gn1} model. This is a classical observation in the world of machine learning: vast amount of low-level noisy data can be better exploited by sophisticated architecture than by using a simple model fed a few highly engineered and reconstructed features, even when these are physically motivated. \gls{gn1} is not based on any physics principles. As will be shown in the next section, tracks themselves contain enough of the rich physics signature required to unlock the label of the jet they compose. 

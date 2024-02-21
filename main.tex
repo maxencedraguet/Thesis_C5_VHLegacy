@@ -46,11 +46,14 @@
 \end{titlepage}
 \pagecolor{white}    
 
-{\pagestyle{plain}
+{
+\begin{singlespace}
+\pagestyle{plain}
 \tableofcontents
 
 \newpage
 \printnoidxglossary[style=mcolindex,type=acronym,title=List of Abbreviations]
+\end{singlespace}
 }
 
 %\newpage
@@ -71,6 +74,7 @@
 \newpage
 \input{Sections/C4_FTAG}
 \input{Sections/C4_FTAG2}
+\input{Sections/C4_FTAG3}
 
 %\newpage
 %\input{Sections/C5_VH}
@@ -80,14 +84,15 @@
 \begin{singlespace}
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
-\end{singlespace}
 
-% \listoffigures
 \pagebreak
-}
 
-%\newpage
-%\appendix
-%\input{Appendices/A_FTAG.tex}
+\newpage
+\appendix
+\input{Appendices/A_FTAG.tex}
+
+\end{singlespace}
+% \listoffigures
+}
 
 \end{document}

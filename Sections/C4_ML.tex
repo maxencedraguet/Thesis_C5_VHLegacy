@@ -38,7 +38,7 @@ The training process closely depends on the type of model being deployed. These 
 \begin{itemize}
     \item \textit{Classification:} the task of assigning discrete variables, also called labels, to a datapoint: e.g., labelling a jet as a $b$-jet. The general case is multiclass, with $n$ labels possible, and a particular common case is binary classification with $n = 2$.
     \item \textit{Regression:} the task of predicting continuous variables of a datapoint: e.g., the momentum of the particle is 15 GeV/$c$. 
-    \item \textit{Features extraction:} given a dataset with specific internal features, reconstruct or extract new features, e.g., given a set of tracks, reconstruct the secondary vertex. A special subcase of this category is embedding datapoints into a different space. The dimension of this final space can be smaller - the case of dimensionality reduction, e.g. performing a projection to a subspace spanned by the principal eigenvetors (those of largest eigenvalues)  with the Primary Component Analysis - or larger when embedding the data into a richer space. 
+    \item \textit{Features extraction:} given a dataset with specific internal features, reconstruct or extract new features, e.g., given a set of tracks, reconstruct the secondary vertex. A special subcase of this category is embedding datapoints into a different space. The dimension of this final space can be smaller - the case of dimensionality reduction, e.g. performing a projection to a subspace spanned by the principal eigenvetors (those of largest eigenvalues) with the Primary Component Analysis - or larger when embedding the data into a richer space. 
     \item \textit{Generation:} output samples from a distribution matching the training dataset distribution. E.g., Given a sample of 1 million $t\bar{t}$ events, sample 10 new datapoints from the underlying statistical model. 
     \item \textit{Anomaly detection:} identify and flag rare events in an unlabelled dataset.
 \end{itemize}
@@ -285,7 +285,7 @@ which, naturally, is satisfied by the sigmoid function. This result can be appli
 \begin{itemize}
     \item The sigmoid function of Equation \ref{eq:sigmoid}.
     \item The hyperbolic tangent function $tanh = \frac{e^x - e^{-x}}{e^x + e^{-x}}$.
-    \item The \gls{relu} function of Equation \ref{eq:relu}
+    \item The \gls{relu} function of Equation \ref{eq:relu} \cite{agarap2019deep}:
     \begin{equation}\label{eq:relu}
         \text{ReLu}(x) = \text{max}(0, x),
     \end{equation}
