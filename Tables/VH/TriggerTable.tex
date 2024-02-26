@@ -1,0 +1,40 @@
+\begin{table}[!htpb]
+    \begin{center}
+      \scriptsize
+      \resizebox{\textwidth}{!}{
+        \begin{tabular}{c|c|c|c|p{7.2cm}} \hline \hline
+           \textbf{ Type } & \textbf{ Trigger Name }        &     \textbf{Period}     &  \textbf{Threshold}     &     \textbf{Description}               
+          \\ \hline \hline
+          \multirow{5}{*}{$\etm$}  
+          & HLT\_xe70\_L1XE50         &      2015               &      70 GeV                    &    
+          \multirow{5}{*}{\parbox{6.6cm}{Seeded using the level L1\_XE50 (L1\_XE55) LAr and Tile calorimeter triggers, 
+                          calibrated at the EM scale, with a threshold of 50(55) GeV.}} \\
+          & HLT\_xe90\_mht\_L1XE50         &      2016 (A-D3)               &      90 GeV                    &     \\
+          & HLT\_xe110\_mht\_L1XE50        &      2016 ($\geq$ D4)              &      110 GeV                   &     \\
+          & HLT\_xe110\_pufit\_L1XE55        &      2017               &      110 GeV                   &    \\
+          & HLT\_xe110\_pufit\_xe70\_L1XE50        &      2018               &      110 GeV                   &    \\
+          \hline \hline
+          \multirow{7}{*}{Electron}  
+          & HLT\_e24\_lhmedium\_L1EM20VH  &  2015  &   24 GeV    &    Seeded using L1 EM20VH level 1 trigger calibrated at the EM scale with a threshold of 20 GeV, require likelihood medium ID.\\
+          & HLT\_e60\_lhmedium            &  2015  &   60 GeV    &    Require likelihood medium ID.\\
+          & HLT\_e120\_lhloose            &  2015  &  120 GeV    &    Require likelihood loose ID.\\
+          & HLT\_e26\_lhtight\_nod0\_ivarloose  &      2016 -- 2018         &         26 GeV     &    Tight likelihood ID required, alignment-robust likelihood tune with no d0 information used, and variable loose isolation required\\
+          & HLT\_e60\_lhmedium(\_nod0)           &      2016 -- 2018        &         60 GeV     &    Medium ID likelihood required\\
+          & HLT\_e140\_lhloose(\_nod0)           &      2016 -- 2018        &         140 GeV    &    Loose ID likelihood required\\
+          & HLT\_e300\_etcut                     &      2018                &         300 GeV    &    No ID requirements. \\
+          \hline \hline
+          \multirow{3}{*}{Muon}  
+          & HLT\_mu20\_iloose\_L1MU15      &      2015           &  20 GeV &   Seeded using L1MU15 level 1 trigger with a threshold of 15 GeV, and requiring loose isolation requirements.\\
+          & HLT\_mu50\                     &      2015 -- 2018   &  50 GeV &   No isolation requirements. \\
+          & HLT\_mu26\_ivarmedium          &      2016 -- 2018   &  26 GeV &   Variable cone medium isolation requirements \\
+          \hline \hline
+        \end{tabular}
+      }
+      \caption{Triggers used during the 2015-2018 data collection period, from the internal documentation.
+               For the HLT that L1 trigger is not mentioned, the default L1 trigger is used. 
+               The default L1 trigger is EM22VHI or EM24VHI for single electron, 
+               MU20 or MU21 for single muon, depends on the data taken period
+               \cite{TwikiTriggerNamingRun2}. }
+      \label{tab:trigs2015_to_2018}
+    \end{center}
+  \end{table}

@@ -28,8 +28,8 @@ Some preliminary studies aiming at combining the different analyses have already
 
 The rest of this chapter focuses on the current state of the $VH (H\rightarrow b\bar{b}/c\bar{c})$ Combined Analysis, as the analysis is not yet concluded. The stage described corresponds to that attained at the end of the first three unblinding approval reviews. Some modifications to the analysis can be expected in the soon-to-be-published result, in particular to the fit framework and main deliverables. The work presented here is largely based on the internal analysis notes of the experimental team and personal work carried out during the duration of the DPhil project. 
 
-\section{Analysis Strategy of the Combined $VH (H\rightarrow b\bar{b}/c\bar{c})$}
-The Combined Analysis is performed with the full ATLAS Run 2 proton-proton collision data, collected from 2015 to 2018, for a total integrated luminosity of 139 fb$^{-1}$ at a centre of mass energy $\sqrt{s} = 13$ TeV. The regions and boundaries between the different regimes of the analysis are illustrated in Figure \ref{fig:ana-strat}. The $VH (H\rightarrow b\bar{b})$ and $VH (H\rightarrow c\bar{c})$ analyses are separated by the required presence of two $b$-tagged jets or a $c$-tagged jets respectively. The $p_T^V$ cut marks the difference between the Higgs candidate reconstruction scheme of the resolved and boosted $VH (H\rightarrow b\bar{b})$: two small radius (R = 0.4) jets below a $p_T^V$ of 400 GeV and above one large radius (R = 1) jets with two $b$-tagged sub-jets made by \glsfirst{vr} track jet associated to the large-$R$ jet.
+\section{Overview of the Combined $VH (H\rightarrow b\bar{b}/c\bar{c})$ Analysis}
+The Combined Analysis is performed with the full ATLAS Run 2 proton-proton collision data, collected from 2015 to 2018, for a total integrated luminosity of 139 fb$^{-1}$ at a centre of mass energy $\sqrt{s} = 13$ TeV. The regions and boundaries between the different regimes of the analysis are illustrated in Figure~\ref{fig:ana-strat}. The $VH (H\rightarrow b\bar{b})$ and $VH (H\rightarrow c\bar{c})$ analyses are separated by the required presence of two $b$-tagged jets or a $c$-tagged jets respectively. The $p_T^V$ cut marks the difference between the Higgs candidate reconstruction scheme of the resolved and boosted $VH (H\rightarrow b\bar{b})$: two small radius (R = 0.4) jets below a $p_T^V$ of 400 GeV and above one large radius (R = 1) jets with two $b$-tagged sub-jets made by \glsfirst{vr} track jet associated to the large-$R$ jet.
 
 \begin{figure}[h!]
 \center
@@ -45,13 +45,16 @@ Flavour tagging plays an essential role in the analysis, splitting the analysis 
 All backgrounds are simulated using \glsfirst{mc} simulation packages, except for the multi-jet which is estimated from a data-driven method\footnote{The top background in 2L is also estimated using data-driven techniques.} in the 1L channel and is negligible in other channels. To reproduce the conditions of the ATLAS detector, simulated samples are passed through the GEANT4 software \cite{Agostinelli:602040} and the ATLAS reconstruction software. The chapter is separated into different section introducing the datasets and simulation (Section \ref{sec-datasets}), a description of the reconstructed object (Section \ref{sec-obj}), the analysis selection and regimes (Section \ref{sec-regimeCat}), the event categorisation (Section \ref{sec-eventCat}), the modelling (Section \ref{sec-modelling}), the fit framework (Section \ref{sec-fitFramework}), and finally the main results (Section \ref{}).
 
 
-\subsection{Datasets \& Simulation}\label{sec-datasets}
+\section{Data and Simulated Samples}\label{sec-datasets}
 ...
 
-\subsection{Objects \& Samples Descriptions}\label{sec-obj}
+\section{Selection and Categorisation}\label{sec-selectionandcat}
+\subsection{Object Selection}\label{sec-obj}
 As introduced in Chapter \ref{chapter-ATLAS}, different types of information is collected by different sub-detectors of ATLAS. These must be combined to reconstruct physics objects. For the $VH (H\rightarrow c\bar{c})$ analysis, the reconstruction strategies of the most important objects are presented in this section. 
 
-\paragraph{Electrons:} are reconstructed by matching a deposit in the EM calorimeter with a track in the \glsfirst{id} \cite{Aaboud:2657964, Aad_2019}. Electrons are required to have a $p_T > 7$ GeV and $|\eta|<2.47$. To identify them, the \textit{loose} working point of a likelihood discriminant is used based on the calorimeter shower shape and the track. The $e$ candidates must satisfy $p_T$-dependent isolation criteria in both the \gls{id} and calorimeter. In the 1L channel, the \textit{tight} likelihood criterion is used with stricter calorimeter isolation requirements to better reject the multi-jet background. The further requirements on the electron selection are lepton channel-dependent and summarised in Table \ref{tbl:elOb}. %reference the electron segment earlier in the thesis.
+\paragraph{Primary Vertex:} events considered in the analysis are required to have at least one primary vertex reconstructed from tracks in the \gls{id} \cite{ATL-PHYS-PUB-2015-026}.
+
+\paragraph{Electrons:} are reconstructed by matching a deposit in the EM calorimeter with a track in the \gls{id} \cite{Aaboud:2657964, Aad_2019}. Electrons are required to have a $p_T > 7$ GeV and $|\eta|<2.47$. They are identified with the \textit{loose} working point of a likelihood discriminant, matching the calorimeter shower shape and the track. The $e$ candidates must satisfy $p_T$-dependent isolation criteria in both the \gls{id} and calorimeter. In the 1L channel, the \textit{tight} likelihood criterion is used with stricter calorimeter isolation requirements to better reject the multi-jet background. The further requirements on the electron selection are lepton channel-dependent and summarised in Table~\ref{tbl:elOb}. %reference the electron segment earlier in the thesis.
 
 \begin{table}[!htbp]
   \begin{center}
@@ -64,14 +67,14 @@ As introduced in Chapter \ref{chapter-ATLAS}, different types of information is 
         \hline\hline
       \end{tabular}
     }
-    \caption{Electron Selection requirements.}
+    \caption{Electron Selection requirements.} % TODO Define BL and d0
     \label{tbl:elOb}
   \end{center}
 \end{table}
 
 A $VH$-Loose with loose likelihood identification is applied to electrons in all channels. Additionally, the $WH$-Signal and $ZH$-Signal criteria are applied in the 1L and 2L channels respectively, with a tighter $p_T$ due to the trigger threshold. The 1L likelihood identification and isolation selections are tighter to suppress the multi-jet background.
 
-\paragraph{Muons:} are reconstructed by matching an energy deposit in the muon detector with information from the \gls{id} and \glsfirst{ms} \cite{Aad:2746302}. They are required to have a $p_T >$ 7 GeV, $|\eta| < 2.7$, to satisfy a \textit{loose} identification criteria and be isolated according to $p_T$ dependant criteria in the \gls{id}. Requirements are summarised in Table \ref{tbl:muonOb} and vary depending on the lepton channel as for electrons. The $VH$-Loose requirement is applied to muons in all channels. The $WH$-Signal and $ZH$-Signal are additionally applied to the 1L and 2L channels respectively, with a stricter track-based isolation used in 1L 
+\paragraph{Muons:} are reconstructed by matching an energy deposit in the muon detector with information from the \gls{id} and \glsfirst{ms} \cite{Aad:2746302}. They are required to have a $p_T >$ 7 GeV, $|\eta| < 2.7$, to satisfy a \textit{loose} identification criteria and be isolated according to $p_T$ dependant criteria in the \gls{id}. Requirements are summarised in Table~\ref{tbl:muonOb} and vary depending on the lepton channel as for electrons. The $VH$-Loose requirement is applied to muons in all channels. The $WH$-Signal and $ZH$-Signal are additionally applied to the 1L and 2L channels respectively, with a stricter track-based isolation used in 1L.
 
 \begin{table}[!htbp]
     \begin{center}
@@ -85,24 +88,58 @@ A $VH$-Loose with loose likelihood identification is applied to electrons in all
           \hline\hline
         \end{tabular}
       }
-      \caption{Muon Selection requirements.}
+      \caption{Muon Selection requirements.} % TODO Define BL and d0
       \label{tbl:muonOb}
     \end{center}
   \end{table}
   
-\paragraph{Taus:} hadronically decaying $\tau$-leptons are identified and vetoed in 1L using an \gls{rnn}-based tagger \cite{ATL-PHYS-PUB-2019-033}. Taus are required to have a $p_T >$ 20 GeV and $|eta| <$ 2.5, with 1 or 3 associated tracks. In 0L and 2L, if the jet passes a \textit{loose} working point requirement for hadronically decaying tau-leptons, it is no longer considered as a jet and cannot be considered as a candidate for reconstruction of the Higgs boson. % TODO find more info from the object notes. % TODO also clarify this last thing about inclusive of tau events.
+\paragraph{Taus:} hadronically decaying $\tau$-leptons are identified and vetoed in 1L using an \gls{rnn}-based tagger \cite{ATL-PHYS-PUB-2019-033}. Taus are required to have a $p_T >$ 20 GeV, $|eta| <$ 2.5, and to have 1 or 3 associated tracks. In 0L and 2L, if the jet passes a \textit{loose} working point requirement for hadronically decaying $\tau$-leptons, it is no longer considered as a jet and cannot be considered as a candidate for reconstruction of the Higgs boson. % TODO find more info from the object notes. % TODO also clarify this last thing about inclusive of tau events.
 
-\paragraph{Missing Transverse Energy:} neutrinos are not detectable in ATLAS and their presence is inferred from momentum imbalance in the transverse plane. $E_T^{\textrm{miss}}$, also called MET, is the negative vectorial sum of the transverse momentum of physics objects\footnote{Electrons, muons, hadronic $\tau$, and jets.} and a track-based \textit{soft term}, to include a contribution from good quality tracks associated with the \glsfirst{pv} but not with any reconstructed physics object \cite{ATLASmetReco}. % TODO This citation is from the VHcc, check in object note it's still relevant.
+\paragraph{Missing Transverse Energy:} neutrinos are not detectable in ATLAS and their presence is inferred from momentum imbalance in the transverse plane to the beam axis. $E_T^{\textrm{miss}}$, also called MET, is the negative vectorial sum of the transverse momentum of physics objects\footnote{Electrons, muons, hadronic $\tau$, and jets.} and a track-based \textit{soft term}, to include a contribution from good quality tracks associated with the \glsfirst{pv} but not with any reconstructed physics object \cite{ATLASmetReco}. % TODO This citation is from the VHcc, check in object note it's still relevant.
 
-\paragraph{Jets:} 3 types of jets reconstructed with the anti-$k_t$ algorithm \cite{Cacciari:2008gp} are used in the analysis:
+\paragraph{Jets:} the analysis uses 3 types of jets, reconstructed with the anti-$k_t$ algorithm \cite{Cacciari:2008gp}:
 \begin{enumerate}
-  \item Small-$R$ jets: are reconstructed from topological clusters of energy deposit in the calorimeter with a radius $R = 0.4$. Used in the resolved regime to reconstruct the Higgs candidate. A jet is considered as \textit{central} if $|\eta| < 2.5$ and $p_T$ > 20 GeV, and as \textit{forward} if 2.5 $\leq |\eta|$ < 4.5 and $p_T > 30$ GeV. Central (forward) jets with a $p_T < 60$ GeV ($p_T < 120$ GeV) are required to be originating for the primary vertex using a jet vertex tagging (\gls{jvt}) algorithm to limit the pile-up background \cite{atlasPUJVT}. \textit{Tight} jet cleaning criteria are applied to suppress non-collision background. % TODO more detail on jet cleaning criteria.
+  \item Small-$R$ jets: are reconstructed from topological clusters of energy deposit in the calorimeter based on the PFlow objects with a radius $R = 0.4$. Used in the resolved regime to reconstruct the Higgs candidate. A jet is considered as \textit{central} if $|\eta| < 2.5$ and $p_T$ > 20 GeV, and as \textit{forward} if 2.5 $\leq |\eta|$ < 4.5 and $p_T > 30$ GeV. Central (forward) jets with a $p_T < 60$ GeV ($p_T < 120$ GeV) are required to originate for the primary vertex as identified by the jet vertex tagger (\gls{jvt}) to limit the pile-up background \cite{atlasPUJVT}. \textit{Tight} jet cleaning criteria are applied to suppress non-collision background. % TODO more detail on jet cleaning criteria.
   \item Large-$R$ jets: are similar to small-$R$ jets with a larger radius $R = 1.0$, and required to have a $p_T > 250$ GeV and $|\eta| < 2$. They are used in the boosted regime to reconstruct the Higgs candidate. 
   \item Variable-$R$ (\gls{vr}) track-jets: are reconstructed with a $p_T$-dependent radius, optimised for double $b$-labelling efficiency of the boosted $H \rightarrow b\bar{b}$ decays \cite{ATL-PHYS-PUB-2017-010}. They are required to have a $p_T > 10$ GeV and $|\eta| < 2.5$. These track-jets are used to reconstruct the $b$-tagged objects inside the large-$R$ jet and for the boosted top-enriched \gls{cr}. 
 \end{enumerate}
+%TODO missing all of the corrections 
 
-calorimeter jets with a radius $R$ = 0.4 reconstructed with the Particle Flow and anti-$k_t$ algorithms \cite{Cacciari:2008gp} are used. A jet is considered as \textit{signal} if it has a $p_T$ > 20 GeV and $|\eta| < 2.5$. It is considered as \textit{forward} if 2.5 $\leq |\eta|$ < 4.5, with a $p_T > 30$ GeV. Because the Higgs candidates are selected based on the tagged flavour and the tagger works up to $|\eta| = 2.5$, due to its reliance on the tracking detectors, only signal jets are considered as candidates. To suppress pile-up jets, which is predominately made of light-jets, a 30 GeV $p_T$ is applied to all non-Higgs candidate jets. For the Higgs candidates, the lower $p_T$ threshold of 20 GeV is kept, as flavour tagging suppresses most of these light-jets. 
+\paragraph{Flavour Tagging:} Jet flavour tagging is perhaps the most important part of the object reconstruction. The latest available Run 2 \gls{dl1r} tagger is used in the analysis for both $b$- and $c$-tagging in the resolved and boosted regime \cite{atlas:FTAGRUN2}. The methodology differs slightly between the two regimes of the analysis due to the different flavour tagging needs: 
+\begin{itemize}
+  \item In the resolved \vhb and \vhc, \gls{dl1r} is used to tag both $b$- and $c$-jets. The so-called \glsfirst{pcft} scheme, illustrated in Figure~\ref{fig:pseudotag}, is deployed to allow for a coherent joint definition and simultaneous calibration of $b$- and $c$-tagged jets, adopting the technique first introduced for 2D $c$-tagging in the \vhc \cite{Collaboration:2721696}. The \gls{dl1r} tagger assigns a $b$-score and a $c$-score to every selected jets. To tag a jet, the associated score must be higher than a specific cutoff value, defined to give a specific selection efficiency in simulated data, also known as a \glsfirst{wp}. From this score, the jet is assigned one of 4 possible labels, base on 2 $b$-tagging \gls{wp} and 2 $c$-tagging \gls{wp} tested in strict successive order. First a 60\% tight $b$-tagging working point (bin 4) is tested, followed by a looser 70\% $b$-\gls{wp} (bin 3). A jet passing these selections is labelled $B$\footnote{The difference between the $b$-tagged bins 3 and 4 is used in the discriminant \gls{bdt} of the analysis}. Otherwise, it is considered for $c$-tagging with first a \textit{tight} working point at 20\% efficiency (bin 2), followed by a \textit{loose} \gls{wp} at an exclusive efficiency of 20\% (bin 1) on the remaining jets - so that 40\% of $c$-jets are effectively selected in the combined tight and loose bins. A jet selected by the tight $c$-tagging \gls{wp} is labelled $T$, and $L$ if it passes the loose \gls{wp}. A jet failing to pass all \gls{wp}s is not tagged and labelled $N$ (bin 0). The $b$-tagging \gls{wp}s are official ATLAS ones for \gls{dl1r}, while those for $c$-tagging are optimised for the purpose of the analysis. The tagging efficiency of each bin is displayed in Table~\ref{tbl:PCFTtageff} displayed the tagging of each bin for the main flavours and $\tau$-leptons.
+  \begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{c|c|cccc}
+          \hline \hline
+          \multirow{2}{*}{PCFT bin} & \multirow{2}{*}{PCFT bin name} & \multicolumn{4}{c}{Jet tagging efficiency $\epsilon_{jet}$}\\
+          & & $b$-jet &  $c$-jet &  light-jet & $\tau$-jet \\ 
+          \hline
+          1 & $c$-loose & 11.5\% & 20.5\% & 6.5\%   & 18.5\%\\
+          2 & $c$-tight & 4.8\%  & 24.2\% & 0.9\%   & 19.5\%\\
+          3 & $b$-70\%  & 11.2\% &  5.2\% & 0.13\%  &  1.7\%\\
+          4 & $b$-60\%  & 58\%   & 2.65\% & 0.051\% & 0.49\%\\
+          \hline \hline
+        \end{tabular}
+      \caption{Jet tagging efficiency for $b$-jet, $c$-jet, light-jet and $\tau$-jet in the \gls{pcft} bins, measured from a PowhegPythia8 simulated sample of semi-leptonic \ttb events, from the internal documentation.}
+     \label{tbl:PCFTtageff}
+    \end{center}
+  \end{table}
 
-Overlap ...
+  The calibration of all five bins of Figure~\ref{fig:pseudotag} was performed simultaneously for the analysis following the methodology described in Ref \cite{atlas:FTAGRUN2}, with some results presented in Appendix \ref{appsec-vh-ftagcal}.
+  
+  \begin{figure}[h!]
+    \center
+      \begin{minipage}[c]{0.69\textwidth}
+        \includegraphics[width=0.98\textwidth]{Images/VH/pseudocontinuous.png}
+      \end{minipage}
+      \begin{minipage}[c]{0.3\textwidth}
+        \caption{The \glsfirst{pcft} scheme used to simultaneously define 2 $b$-tagged, a tight $c$-tagged, a loose $c$-tagged, and a non-tagged bins, from the internal documentation. } 
+        \label{fig:pseudotag}
+      \end{minipage}
+  \end{figure}
+  \item The boosted regime only targets $b$-jets, following the single-purpose tagging used in the standard calibration of the tagger. As such, the standard pseudo-continuous $b$-tagging method is used. The track-jets associated to the leading large-$R$ jet are given a $b$-score based on the per-flavour probabilities outputted by \gls{dl1r}. The 85\% working point is adopted to maximise the signal yield, due to the important statistical limitations in the boosted regime. Track-jets passing this working point are $B$-tagged, otherwise they are untagged $N$. Studies showed that the very loose \gls{dl1r} \gls{wp} gives a better expected statistical significance than the then-available $X_{bb}$ tagger. The official calibration from Ref \cite{atlas:FTAGRUN2} is used, and extended to higher $p_T$ due to the wide range of $p_T$ probed in the analysis using uncertainty extrapolation, as presented in Appendix \ref{appsec-vh-ftagcal}.
+\end{itemize}
+While the analysis was underway, the superior single-jet \gls{gnn} taggers and the boosted objects $GN2X$ tagger introduced in Chapter \ref{chap-ftag} were not yet available as their calibration was an ongoing effort. Furthermore, switching to these new taggers was not feasible from a practical point of view in the timing of the analysis. They represent, however, an exciting avenue for progress in future iterations of this search, in both the resolved and boosted regimes. \\ % TODO check how the wp are defined %TODO also check the fc alue
 
-flavour tagging ...
+\paragraph{Object Overlap:} overlap removal is applied to avoid double-counting electrons, muons, small-$R$ and large-$R$ jets, and hadronically decaying $\tau$'s that pass the object selection.
