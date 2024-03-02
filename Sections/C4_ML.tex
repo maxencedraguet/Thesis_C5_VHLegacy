@@ -153,7 +153,7 @@ The pseudocode algorithm to train a \gls{dt} with the update rule of Equation \r
 \subsection{Boosted Decision Trees}
 A popular extension to the simple decision trees approach is to introduce the concept of \textit{boosting}, leading to models referred to as Boosted Decision Trees (\gls{bdt}) or \gls{mva} in particle physics. Boosting is a greedy algorithm leveraging a weak learner or predictor (e.g., a \gls{dt}) and applying it sequentially to weighted versions of the data, with a larger weight given to missclassified or miss-regressed datapoints, as per the use case. This method is hugely popular in data science, having earned the title \textit{``best off-the-shelf classifier in the world''} \cite{baggingML}. Two particularly useful approaches are adaptive boosting (AdaBoost) \cite{Adaboost} and gradient boosting \cite{gradientBoosting}, both combining an ensemble of $M$ weak learners $f_i$ ($i = 1, ..., M$) into a strong learner $F$: \[F(x) = \sum_{i=1}^M f_i(x).\] For the following discussion, the model is built using a training dataset $ \{(x_1, y_1), ..., (x_N, y_N)\}$ with input vectors $x_i \in \{\mathbb{R} \otimes \mathbb{D}\}^d$ of $d$ features that are real or discrete ($\mathbb{D}$) and $y \in \mathbb{R}^d$ is a $d$-dimension real vector that serves as output to be predicted by the model.
 
-\subsubsection{AdaBoost}
+\subsubsection{AdaBoost}\label{sub-adaboosted}
 AdaBoost combines the $M$ weak learners $f_i$ with adaptive weights $\alpha_i$ to improve the ensemble performance as \[F(x) = \sum_{i=1}^M \alpha_i f_i(x),\] where $F$ is the boosted model, and the successive boosting stages $F_T = \sum_{i=1}^{T \leq M} \alpha_i f_i(x)$ define stronger and stronger boosted variants of the model that combine weak learners $f_i$ with a weight $\alpha_i \in \mathbb{R}$. At each iteration $m$ of the training process ($m = 1, ..., M$), a weak learner $f_m$ is fitted to the training set to minimise a loss function $L(y_i, F_{m}(x_i))$. The loss in AdaBoost is the exponential loss on the datapoints of Equation \ref{eq:adaboosterror}:
 
 \begin{equation}\label{eq:adaboosterror}
@@ -179,7 +179,7 @@ combining the new weak learners $f_m$ with optimal weight $\alpha_m$ to the curr
     \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Gradient boosting}
+\subsubsection{Gradient boosting}\label{sec-gradient-boost}
 Gradient boosting is a generic approach which, contrary to AdaBoost, does not require a specific derivation for each loss function. The objective is to minimise the empirical risk, the expected value of the loss function $L$ on the training set as shown in Equation \ref{eq:empRisk} 
 \begin{equation}\label{eq:empRisk}
     \hat{f}  = \arg \min_f \mathbb{E}_{x,y} L(y, f(x))

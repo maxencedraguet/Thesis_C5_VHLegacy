@@ -1,0 +1,84 @@
+\begin{table}[!htbp]
+  \renewcommand*{\arraystretch}{1.3}
+  \newcommand\textunderset[2]{\ensuremath{\underset{\text{#1}}{\text{#2}}}}
+  \centering
+    % resize a bit the table 
+    \resizebox{1\textwidth}{!}{%
+    \begin{tabular}{c|ccc|ccc}
+      \multicolumn{1}{c}{} & \multicolumn{3}{c|}{Resolved \vhb} &  \multicolumn{3}{c}{Boosted \vhb} 
+      \\\hline \hline
+      \textbf{Settings} & 0L & 1L & 2L & 0L & 1L & 2L
+      \\\hline
+      Boost type 
+        & Gradient boost & Gradient boost & Gradient boost % VHbb Resolved 
+        & Adaboost       & Adaboost       & Adaboost       % VHbb Boosted 
+      \\\hline 
+      Number of trees 
+        & 200 & 600 & 200 % VHbb Resolved 
+        & 800 & 800 & 400 % VHbb Boosted 
+      \\\hline 
+      Maximum depth
+        & 3 & 4 & 4 % VHbb Resolved 
+        & 3 & 3 & 3 % VHbb Boosted 
+      \\\hline 
+      Learning rate ($\beta$) 
+        & 0.5 & 0.5 & 0.5% VHbb Resolved 
+        & 0.5 & 0.35 & 0.3 % VHbb Boosted 
+      \\\hline 
+      Number of cuts
+        & 100 & 100 & 100% VHbb Resolved 
+        & 60  & 60  & 100 % VHbb Boosted 
+      \\\hline 
+      Minimum node size 
+        & 5\% & 5\% & 5\% % VHbb Resolved 
+        & 2\% & 2\% & 7\% % VHbb Boosted 
+      \\ \hline \hline
+    \end{tabular}}%
+  \caption{%
+    Hyperparameters of the BDTs in the 0L, 1L and 2L channels for the \vhb resolved and boosted. All models used the Gini index as separation method, without pruning.}%
+  \label{tbl:MVAHyperparams}
+\end{table}
+
+
+% VHcc use different hyper parameters
+\begin{table}[!htbp]
+  \renewcommand*{\arraystretch}{1.3}
+  \newcommand\textunderset[2]{\ensuremath{\underset{\text{#1}}{\text{#2}}}}
+  \centering
+    % resize a bit the table 
+    %\resizebox{1\textwidth}{!}{%
+    \begin{tabular}{c|cc|c}
+      \multicolumn{1}{c}{} & \multicolumn{2}{c|}{\vhc} &  $VZ{\rightarrow c\bar{c}}$ signal
+      \\\hline \hline
+      \textbf{Settings} & 0L, 1L and most 2L regions & 2  3p-jet, low pTV & 0L, 1L and 2L
+      \\\hline
+      Boost type 
+        & Gradient boost & Adaboost % VHcc
+        & Adaboost                  % VZcc
+      \\\hline 
+      Number of trees 
+        & 600 & 200 % VHcc
+        & 200       % VZcc 
+      \\\hline 
+      Maximum depth
+        & 4 & 4     % VHcc
+        & 4         % VZcc
+      \\\hline 
+      Learning rate ($\beta$) 
+        & 0.5 & 0.15 % VHcc
+        & 0.15       % VZcc 
+      \\\hline 
+      Number of cuts
+        & 100 & 100  % VHcc
+        & 100        % VZcc
+      \\\hline 
+      Minimum node size 
+        & 5\% & 5\%  % VHcc
+        & 5\%        % VZcc
+      \\ \hline \hline
+    \end{tabular}
+  %}
+  \caption{%
+    Hyperparameters of the BDTs in the 0L, 1L and 2L channels of \vhc. The 2L low pTV region mentioned is 75 GeV $<$ pTV $<$ 150 GeV. All models used the Gini index as separation method, without pruning.}%
+  \label{tbl:MVAHyperparams-VHcc}
+\end{table}

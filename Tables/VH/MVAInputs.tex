@@ -1,0 +1,156 @@
+\begin{table}[!htbp]
+    \hspace{-1cm}
+    %\renewcommand*{\arraystretch}{1.3}
+    \newcommand\textunderset[2]{\ensuremath{\underset{\textrm{#1}}{\textrm{#2}}}}
+      %\setlength\aboverulesep{0pt}
+      %\setlength\belowrulesep{0pt}
+      % resize a bit the table 
+      %\resizebox{1\textwidth}{!}{ %
+      \begin{tabular}{c|ccc|ccc|M{7cm}}
+        %\multicolumn{1}{c}{} & \multicolumn{3}{c}{\textunderset{Resolved}{\vhbc}} & \multicolumn{3}{c}{\textunderset{Boosted}{\vhb}} & \multicolumn{1}{c}{}
+        \multicolumn{1}{c}{} & \multicolumn{3}{c|}{\vhbc} & \multicolumn{3}{c}{\vhb} & \multicolumn{1}{c}{}\\
+        \multicolumn{1}{c}{} & \multicolumn{3}{c|}{Resolved} & \multicolumn{3}{c}{Boosted} & \multicolumn{1}{c}{}
+        \\ \hline \hline
+        Variable & 0L & 1L & 2L & 0L & 1L & 2L 
+        \\ \hline
+        $m_{j_1j_2}$ or $m_J$
+            & \checkmark & \checkmark & \checkmark 
+            & \checkmark & \checkmark  & \checkmark 
+            & Mass of Higgs candidate
+        \\ \hline
+        $m_{{j_1 j_2 j_3}}$ 
+            & \checkmark & \checkmark & \checkmark 
+            & & &
+            & Mass of Higgs candidates and leading additional jet
+        \\ \hline
+        $p_T^{j_1}$
+            & \checkmark & \checkmark & \checkmark 
+            & \checkmark & \checkmark & \checkmark 
+            & Leading Higgs candidate $p_T$
+        \\ \hline
+        $p_T^{j_2}$
+            & \checkmark & \checkmark & \checkmark 
+            & \checkmark & \checkmark & \checkmark 
+            & Sub-leading Higgs candidate $p_T$
+        \\ \hline
+        $p_T^{j_3}$ 
+            & & & 
+            & \checkmark & \checkmark & \checkmark 
+            & Leading non-Higgs candidate $p_T$
+        \\ \hline
+        $\sum\limits_{i\neq 1, 2}p_T^{j_i}$ 
+            & \checkmark & \checkmark & \checkmark 
+            & & & 
+            & Sum of non-Higgs jet $p_T$
+        \\ \hline
+        $\Delta R(\textbf{$j_1$}, \textbf{$j_2$}) $
+            & \checkmark & \checkmark & \checkmark 
+            & \checkmark & \checkmark & \checkmark 
+            & Angular separation of Higgs candidates
+        \\ \hline
+        $\mathrm{bin}_{\mathrm{DL1r}}(j_1)$ 
+            & \checkmark & \checkmark & \checkmark
+            & \checkmark & \checkmark & \checkmark 
+            & Tag bin of $j_1$
+        \\ \hline
+        $\mathrm{bin}_{\mathrm{DL1r}}(j_2)$ 
+            & \checkmark & \checkmark & \checkmark
+            & \checkmark & \checkmark & \checkmark 
+            & Tag bin of $j_2$
+        \\ \hline
+        \ptv 
+            & $\equiv E_T^{\textrm{miss}}$ & \checkmark  & \checkmark
+            & $\equiv E_T^{\textrm{miss}}$ & \checkmark  & \checkmark
+            & Vector boson $p_T$
+        \\ \hline
+        $E_T^{\textrm{miss}}$
+            & \checkmark & \checkmark & 
+            & \checkmark & \checkmark & 
+            & Missing transverse energy
+        \\ \hline
+        $E_T^{\textrm{miss}}/\sqrt{S_T}$
+            & & & \checkmark 
+            & & & 
+            & Ratio of \etm to sum of jets $p_T$
+        \\ \hline
+        $|\Delta y(\textbf{$V$},\textbf{$H$})|$
+            & & \checkmark & \checkmark
+            & & \checkmark & \checkmark
+            & Rapidity difference between $V$ and $H$
+        \\ \hline
+        $|\Delta \phi(\textbf{$V$},\textbf{$H$})|$
+            & \checkmark & \checkmark & \checkmark
+            & \checkmark & \checkmark & \checkmark
+            & Azimuthal angle between $V$ and $H$
+        \\ \hline
+        $|\Delta \eta(\textbf{$j_1$},\textbf{$j_2$})|$
+            & \checkmark & & 
+            & & & 
+            & Pseudorapidity distance between Higgs candidates
+        \\ \hline
+        $\min\Delta R(j_i, j)_{i=1,2}$
+            & \checkmark & \checkmark & 
+            & & & 
+            & Smallest angular distance between a Higgs and non-Higgs candidates
+        \\ \hline
+        $\mathrm{min}[\Delta\phi(\textbf{$l$},\textbf{$j_1$} \textrm{~or~} \textbf{$j_2$})]$
+            & & \checkmark  &
+            & & & 
+            & Smallest $\phi$ between the lepton and a Higgs candidate
+        \\ \hline
+        $m_{\textrm{eff}}$
+            & \checkmark & & 
+            & & &
+            & Scalar sum of $p_T$ of all small-$R$ jet and \etm
+        \\ \hline
+        $m_T^W$
+            & & \checkmark &
+            & & &
+            & Transverse mass of the $W$
+        \\ \hline
+        $m_{\textrm{top}}$
+            & & \checkmark &
+            & & &
+            & Mass of reconstructed leptonically decaying top-quark
+        \\ \hline
+        $m_{ll}$
+            & & & \checkmark 
+            & & & 
+            & Mass of di-lepton system
+        \\ \hline
+        $\cos{\theta(\textbf{$l^-$},\textbf{$Z$})}$
+            & & & \checkmark 
+            & & & \checkmark 
+            & $Z$ boson polarisation sensitive angle
+        \\ \hline
+        $(p_T^{l_1} - E_T^{\textrm{miss}})/p_T^W$
+            & & &
+            & & \checkmark & 
+        \\ \hline
+        $p_T^{l}$
+            & & &
+            & & \checkmark & 
+            & \pt imabalance of the lepton and neutrino from $W$ 
+        \\ \hline
+        $N(\textrm{track-jets in }J)$
+            & & & 
+            & \checkmark & \checkmark & \checkmark
+            & Number of track-jets associated to leading-$R$ jet
+        \\ \hline
+        $N(\textrm{add. small R-jets})$
+            & & & 
+            & \checkmark & \checkmark & \checkmark
+            & Number of additional small-$R$ jets not matched
+        \\ \hline
+        Colour
+            & & & 
+            & \checkmark & \checkmark & \checkmark
+            & Variable modelling colour-flow from \gls{qcd}
+        \\ \hline \hline
+      \end{tabular}
+      %}
+      \caption{%
+        The variables used for the 0-, 1- and 2L channels MVA's in the resolved and boosted regimes for the \vhbc combined analysis. The variables are further described in Appendix \ref{ap-MVA}.}%
+      \label{tbl:MVAVars}
+    \end{table}
+  

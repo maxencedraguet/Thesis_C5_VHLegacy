@@ -143,3 +143,75 @@ In the \textit{AllSignal} strategy, the Higgs candidates in the topCR are always
 \end{figure}
 
 For $VH(H\rightarrow c\bar{c})$, the $bc$ and $bl$ components are the most important to constrain. In $VH(H\rightarrow b\bar{b})$, while the $bc$ component is also significant and can benefit from the topCRs, the most important contribution comes from the $bb$ one and is well constrained by the High $\Delta R$ CR, since in a $t\bar{t}$ decay the two produced $b$-jets tend to be separated by a large $\Delta R$ due to the event topology. For the Combined Analysis, the SRs and CRs of both analyses will be considered simultaneously. To show the impact on the $VH(H\rightarrow c\bar{c})$ standalone analysis, the High $\Delta R$ CR from  $VH(H\rightarrow b\bar{b})$ is included to study the effect on the $bc$ and $bl$ components. The aim is to demonstrate these and the $bb$ component can be well constrained with these regions alone, and in particular without the SRs of $VH(H\rightarrow b\bar{b})$. The $VH(H\rightarrow b\bar{b})$ High $\Delta R$ control regions are taken as a single bin of $p_T^V$, because the interest is solely to constrain the top($bb$) normalisation. Figure~\ref{fig:vhbbDRCR} displays the 1L $VH(H\rightarrow b\bar{b})$ High $\Delta R$ CR, which is visibly dominated by the top($bb$). Figure~\ref{fig:vhbbDRCR02L} shows the same region for the [150, 250] GeV $p_T^V$ range with 3 jets in 0L and 2L, showing a significant proportion of $Z$+jets is also included in these regions.  \\
+
+
+\section{MVA Variables}\label{ap-MVA}
+This section is dedicated to the set of variables used to train the various MVAs used in the analysis. Notice that the $H$ candidate is reconstructed by the selected jets sorted by $\pT$ and labelled $j_1$ and $j_2$.
+
+\paragaph{Input variables for the resolved regime:}
+\begin{itemize}
+    \item \ptv: transverse energy of the vector boson. In 0-lepton channel it is equivalent to the missing transverse energy ($E_T^{\textrm{miss}}$); in 1-lepton channel it is the vector sum of $E_T^{\textrm{miss}}$ and the lepton \pt; in 2-lepton channel, it is the vector sum of the 2 charged lepton \pt.
+    \item $p_{\text{T}}^{j_1}$ and $p_{\text{T}}^{j_2}$: transverse momenta of the Higgs candidate jets. $j_1$ refers to the jet with higher \pt.
+    \item $m_{j_1j_2}$ or $m_J$: invariant mass of the reconstructed $H$ system, depending on the analysis regime.
+    \item $\Delta R (j_1,j_2)$: angular distance between the two Higgs-candidate jets, defined as $\Delta R(i,j) = \sqrt{(\Delta\phi(i,j))^2+ (\Delta\eta (i,j))^2}$ with $\Delta\phi(i,j) = \phi_i-\phi_j$ the azimuthal and $\Delta \eta(i,j)= \eta_i-\eta_j$ the pseudorapidity distances.
+    \item $m_{j_1 j_2 j_3}$: invariant mass of two Higgs-candidate jets and the remaining jet with highest \pt. When there are only 2 jets in an event, $m_{j_1 j_2 j_3}=m_{j_1j_2}$.
+    \item $\Delta \phi(\textbf{$V$},\textbf{$H$})$: azimuthal distance between the reconstructed vector boson $V$ and Higgs boson candidates $H$.
+    \item $\mathrm{bin}_{\mathrm{DL1r}(j1)}$, $\mathrm{bin}_{\mathrm{DL1r}(j2)}$: variable showing the tagged-bin the jet or track-jet $j_1$ belongs to (5 possible bins, as defined in Section \ref{sec-selectionandcat}) - the untagged $N$, the loose (70\% WP) and the tight (60\% WP) $b$-tagged, and the loose and the tight $c$-tagged bins. In the MVA, the value of the two Higgs-candidate jets or track-jets are used.
+    \item $\sum\limits_{i\neq 1, 2}p_T^{j_i}$:\pt~sum of non~$H$ candidate jets that have $p_T>20~\text{GeV}$.
+    \item \textbf{0-lepton channel variables}: 
+    \begin{itemize}
+        \item $|\Delta \eta (j_1,j_2)|$: absolute value of the pseudorapidity distances between the two Higgs-candidate jets or track-jets.
+        \item $\min\{\Delta R(j_i, j)\}_{i=1,2}$: the distance in $R$ between the closest $b$- or $c$-tagged Higgs candidate jet and an additional jet with \ptv$>20~\text{GeV}$.
+        \item $m_{\textrm{eff}}$: the scalar sum of the \pt of all small-$R$ jets and $E_T^{\textrm{miss}}$ in the event.
+    \end{itemize}
+    \item \textbf{1-lepton channel variables}:  
+    \begin{itemize}
+        \item $m_T^W$: transverse mass of the $W$ boson candidate reconstructed from the lepton and $E_T^{\textrm{miss}}$, as presented in the 1L-specific selection of Section \ref{subsubsec-0Lsel}.
+        \item $E_T^{\textrm{miss}}$: missing transverse energy. 
+        \item $\Delta y(\textbf{$V$},\textbf{$H$})$: rapidity difference between the $V$ and $H$.
+        \item $\min\left[\Delta\phi(\textbf{$l$},\textbf{$j_i$})\right]_{i=1,2}$: distance in $\phi$ between the lepton and the closest $b$-tagged ($c$-tagged) $H$ candidate jet. 
+        \item $m_{\text{top}}$: reconstructed mass of the leptonically decaying top quark. The longitudinal momentum of the neutrino ($p_{z}^{\nu}$) is first reconstructed the mass of the $W$ boson, and selected to minimise the reconstructed $m_{\text{top}}$ with the 2 Higgs candidates.
+    \end{itemize}
+    \item \textbf{2-lepton channel variables}: 
+    \begin{itemize}
+        \item $m_{ll}$: invariant mass of the di-leptons system.  
+        \item $\cos{\theta(l^-,\textbf{$Z$})}$: $Z$ boson polarisation sensitive angle. 
+        \item $$E_T^{\textrm{miss}}$/\sqrt{S_{\mathrm{T}}}$: the quasi-significance of $E_T^{\textrm{miss}}$ with $S_{\mathrm{T}}$ being the scalar sum of the \pT of the leptons and jets in the event.  
+        \item $\Delta y(\textbf{$V$},\textbf{$H$})$: rapidity difference between the vector boson and Higgs boson candidates. 
+    \end{itemize} 
+\end{itemize}
+
+% new variables: stageB - https://indico.cern.ch/event/1254481/contributions/5270035/attachments/2593141/4475547/MVA%20Stage%20B%20Summary%20(1).pdf
+% stageA - https://indico.cern.ch/event/1221988/contributions/5184468/attachments/2568369/4428463/22_12_15_MVARetrainingCampaignSummary.pdf
+
+\paragaph{Input variables for the boosted regime:}
+\begin{itemize}
+  \item $m_J$: leading-$R$ jet mass, the Higgs candidate.
+  \item \ptv: same as in the resolved regime.
+  \item $p_{T}^{j_1}$, $p_{T}^{j_2}$ and $p_{T}^{j_3}$: transverse momenta of the track-jets inside the $H$ candidate large-$R$ jet, where $j_1$ and $j_2$ are the $b$-tagged sub-jets, and $j_3$ refers to the leading additional jet.
+  \item $\Delta R(j_1,\,j_2)$: angular distance between the two $b$-tagged track-jets.  
+  \item $N(\text{track-jets in $J$})$: the number of track-jets that are associated to the leading large-$R$ jet. 
+  \item $N(\text{add. small $R$-jets})$: the number of additional small-$R$ jets that are not associated to the leading large-$R$ jet, such that $\Delta R (\text{small-$R$ jet, large-$R$ jet}) > 1.0$.  
+  \item  $\Delta \phi(\textbf{$V$},\textbf{$H$})$: same as in the resolved regime.
+  \item Colour: variable exploitting the difference in colour-flow between gluon splittings and decay from gls{qcd} singlets states. Colour is defined here as \[ \textrm{Colour} = \frac{\theta_{j_1j_3}^2 + \theta_{j_2j_3}^2}{\theta_{j_1j_2}^2},\] where $\theta$ is the angle between the indexed jets, $j_3$ is the leading additional jet, and $j_2$ are the $H$ candidate jets.
+  \item $\mathrm{bin}_{\mathrm{DL1r}(j1,\text{trk})}$, $\mathrm{bin}_{\mathrm{DL1r}(j2,\text{trk})}$: corresponds to the tagged-bin the track-jet belongs to (4 possible bins): 
+  the 85\%, the 77\%, the 70\% and 60\% $b$-tagging efficiency bins.
+  \item \textbf{0-lepton channel specific variables}
+  \begin{itemize}
+      \item $E_T^{\textrm{miss}}$: missing transverse energy, same as \ptv.
+  \end{itemize}
+  \item \textbf{1-lepton channel specific variables}
+  \begin{itemize}
+      \item $\Delta y(\vec{V},\vec{\HCand})$: same as in the resolved regime.
+      \item $p_T^l$: transverse momentum of the lepton.
+      \item $(p_T^{l} - E_T^{\textrm{miss}})/p_T^W$:  proxy for the $p_T$ imbalance of the charged lepton and the neutrino of the $W$-boson.
+  \end{itemize}
+  \item \textbf{2-lepton channel specific variables}
+  \begin{itemize}
+      \item $\Delta y(\textbf{$V$},\textbf{$H$})$: same as in the resolved regime.
+      \item $\cos{\theta(\textbf{$l^-$},\textbf{Z})}$: same as in the resolved regime.
+  \end{itemize}
+\end{itemize}
+
+\clearpage
+\input{Appendices/B_VHbb_regPres.tex}
