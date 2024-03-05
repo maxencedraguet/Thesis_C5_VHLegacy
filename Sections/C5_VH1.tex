@@ -50,7 +50,7 @@ The combined analysis is performed on data collected during the Run 2 of the \gl
 
 \input{Tables/VH/MCGen.tex}
 
-Both simulated samples and data are reconstructed with the offline reconstruction software of ATLAS. The \textsc{EvtGen} 1.6.0 program is used to simulate the properties of $b$- and $c$-hadrons decays\footnote{\textsc{EvtGen} 1.7.0 is used for the \textsc{Sherpa} generated samples.} \cite{LANGE2001152}. Pile-up is also included in the simulation, both from multiple interactions in the same and adjacent bunch crossing. This is performed by overlaying events with minimum bias simulated using \textsc{\textsc{Pythia}} 8 with A3 tune and interfaced with the \textsc{NNPDF} 2.3 \gls{pdf}s \cite{SJOSTRAND2015159}. The rest of this section gives more details behind the simulation of the different processes. When relevant, alternative samples generated from a different setup to the nominal samples are introduced. These alternative samples are used to assess modelling uncertainties.
+Both simulated samples and data are reconstructed with the offline reconstruction software of ATLAS. The \textsc{EvtGen} 1.6.0 program is used to simulate the properties of $b$- and $c$-hadrons decays\footnote{\textsc{EvtGen} 1.7.0 is used for the \textsc{Sherpa} generated samples.} \cite{LANGE2001152}. Pile-up is also included in the simulation, both from multiple interactions in the same and adjacent bunch crossing. This is performed by overlaying events with minimum bias simulated using \textsc{\textsc{Pythia}} 8 with A3 tune and interfaced with the \textsc{NNPDF} 2.3 \gls{pdf}s \cite{SJOSTRAND2015159}. The rest of this section gives more details behind the simulation of the different processes. When relevant, alternative samples generated from a different setup to the nominal samples are introduced. These alternative samples are used to assess modelling uncertainties (Section \ref{sec-modStrat}), as summarised in Figure \ref{tab:summary_altsamples}.
 
 \subsection{Signal Processes}
 The analysis targets the \vhb\ and \vhc\ processes, here called \textit{signals}. The leading order (LO) Feynman diagrams contributing to the associated production $VH$ are the $qq$-initiated modes depicted in Figure~\ref{fig:feynloVH}. A gluon-initiated production of $ZH$ is also possible at next-to-leading order (NLO) with a quark loop (mostly top-quark), as depicted in Figure~\ref{fig:feynnloVH}. The \gls{me} calculations are based on the \textsc{Powheg-Box v2} generator \cite{StefanoFrixione_20072, POWHEGBOX}. The $qq$-initiated $VH$ samples have a \textsc{Powheg} generator with the multiscale improved NLO (MiNLO) procedure \cite{powhegHW}, with one-loop amplitudes computed with the GoSam automated software \cite{gosam}. The $qq$-initiated samples simulate \gls{ps}, \gls{ue}, and multiple parton interactions with \textsc{Pythia} 8.245, while the $gg$-initiated use \textsc{Pythia} 8.307 \cite{SJOSTRAND2015159}. Both use the AZNLO tune \cite{measureZGboson} with \gls{pdf}s based on the \textsc{NNPDF3.0NLO} for matrix elements \cite{PDFLHCrun2}. \\
@@ -79,7 +79,7 @@ The inclusive cross-sections for $WH$ and $ZH$ are calculated at NNLO in \gls{qc
 The most important backgrounds in the analyses are simulated with \gls{mc}, except for the multi-jet and the top backgrounds in the 2-lepton channel. These processes and their simulations are detailed in this section.
 
 \subsubsection{$V+$jets}
-The production of a gauge vector boson $V$ in association with jets is the largest background in the analysis. Some of the leading contributing Feynman diagrams to this process that can be selected are presented in Figure~\ref{fig:feynVJ}. Both the $Z+$jets and $W+$jets are simulated with \textsc{Sherpa} 2.2.11 \cite{10.21468/SciPostPhys.7.3.034}, which deliver NLO precision on matrix element computation for up to 2 jets and LO accuracy for between 3 and 5 jets. \gls{ps} and hadronisation are treated by the default \textsc{Sherpa} generator, with the NNLO \gls{pdf}s based on NNPDF3.0nnlo \cite{PDFLHCrun2}. Uncertainties from missing higher orders are evaluated by varying the \gls{qcd} renormalisation ($\mu_r$) and factorisation ($\mu_f$) scales in the matrix elements by respective factors 0.5 and 2. Flavour filtering is applied to generate samples with selected heavy flavour quarks.
+The production of a gauge vector boson $V$ in association with jets is the largest background in the analysis. Some of the leading contributing Feynman diagrams to this process that can be selected are presented in Figure~\ref{fig:feynVJ}. Both the $Z+$jets and $W+$jets are simulated with \textsc{Sherpa} 2.2.11 \cite{10.21468/SciPostPhys.7.3.034}, which deliver NLO precision on matrix element computation for up to 2 jets and LO accuracy for between 3 and 5 jets. \gls{ps} and hadronisation are treated by the default \textsc{Sherpa} generator, with the NNLO \gls{pdf}s based on NNPDF3.0nnlo \cite{PDFLHCrun2}. Uncertainties from missing higher orders are evaluated by varying the \gls{qcd} renormalisation ($\mu_R$) and factorisation ($\mu_F$) scales in the matrix elements by respective factors 0.5 and 2. Flavour filtering is applied to generate samples with selected heavy flavour quarks.
 
 \begin{figure}[h!]
   \center
@@ -91,11 +91,11 @@ The production of a gauge vector boson $V$ in association with jets is the large
 
 \paragraph{Alternative samples} Two sets of alternative samples are available:
 \begin{itemize}
-  \item \textsc{MadGraph FxFx} samples are produced for the modelling studies, using the \textsc{MadGraph5\_aMC\@NLO} 2.6.5 program \cite{madgraph}. This generates the $V$ boson with up to three additional partons in the final state at NLO accuracy. The scales $\mu_r$ and $\mu_f$ are set to 1/2 the transverse mass of all final-state partons + leptons. \textsc{Pythia} 8.240 is interfaced for showering and hadronisation, with the A14 tune and the NNPDF2.3lo \gls{pdf} set with $\alpha_s = 0.13$.
+  \item \textsc{MadGraph FxFx} samples are produced for the modelling studies, using the \textsc{MadGraph5\_aMC@NLO} 2.6.5 program \cite{madgraph}. This generates the $V$ boson with up to three additional partons in the final state at NLO accuracy. The scales $\mu_R$ and $\mu_F$ are set to 1/2 the transverse mass of all final-state partons + leptons. \textsc{Pythia} 8.240 is interfaced for showering and hadronisation, with the A14 tune and the NNPDF2.3lo \gls{pdf} set with $\alpha_s = 0.13$.
   \item \textsc{Sherpa} 2.2.1 \cite{sherpa2.2paper} samples are used as alternative generator as it gives different \ptv distributions to 2.2.11 \cite{simVjet}. These samples are similar to those used in the standalone \vhc \cite{Collaboration:2721696}.
 \end{itemize}
 
-\subsubsection{Top-pair Production}
+\subsubsection{Top-pair Production}\label{subsec-vh-top-samples}
 The \ttb process is the second most important background in the analysis. The leading order Feynman diagram for this process is shown in Figure \ref{fig:feynttb}. The nominal samples are generated for the 0L and 1L channels with \textsc{Powheg} at NLO calculation of the matrix element \cite{StefanoFrixione_2007, PaoloNason_2004}. It is interfaced with \textsc{Pythia} 8.230 with the NNPDF3.0NLO \gls{pdf}s using the A14 tune for \gls{ps}, hadronisation, and \gls{ue} description. Filtering is applied while simulating to enhance statistics. Cross-sections are calculated to NNLO in \gls{qcd}, with resummation of the next-to-next-to-leading logarithmic (NNLL) soft gluon terms \cite{CZAKON20142930}.
 
 \begin{figure}[h!]
@@ -108,10 +108,10 @@ The \ttb process is the second most important background in the analysis. The le
 \paragraph{Alternative samples} Several alternatives are simulated for modelling studies:
 \begin{itemize}
   \item $PH7$: replacing \textsc{Pythia} by \textsc{Herwing} 7.0 with H7UE tune \cite{herwig7R} for parton shower, hadronisation, and \gls{ue}s while keeping the same nominal \textsc{Powheg} setup. This sample is used to systematically vary the parton shower model.
-  \item $aMC$: based on \textsc{MadGraph5\_aMC\@NLO} \cite{madgraph} for NLO hard-scattering matrix element modelling with the nominal \textsc{Pythia} for \gls{ps}, hadronisation, and the \gls{ue} simulation. This samples is used to systematically vary the matrix element prediction.
+  \item $aMC$: based on \textsc{MadGraph5\_aMC@NLO} \cite{madgraph} for NLO hard-scattering matrix element modelling with the nominal \textsc{Pythia} for \gls{ps}, hadronisation, and the \gls{ue} simulation. This sample is used to systematically vary the matrix element prediction.
   \item Weights variations tuning the initial and final state radiations (\gls{isr} and \gls{fsr}) contributions relative to the nominal setup. There are 4 such variations, based on the nominal \textsc{Powheg} + \textsc{Pythia} 8.230:
   \begin{itemize}
-    \item 2 \gls{isr} variations named \textit{RadLow} and \textit{RadHigh}, where the $\mu_r$ and $\mu_f$ scales are doubled and halved\footnote{For \textit{RadHigh}, the \textit{hdamp} parameter is doubled from its nominal value of 1.5 $\times$ $m_{\text{top}}$.}.
+    \item 2 \gls{isr} variations named \textit{RadLow} and \textit{RadHigh}, where the $\mu_R$ and $\mu_F$ scales are doubled and halved\footnote{For \textit{RadHigh}, the \textit{hdamp} parameter is doubled from its nominal value of 1.5 $\times$ $m_{\text{top}}$.}.
     \item 2 \gls{fsr} variations, with an up (down) variation obtained by doubling (halving) the renormalisation scale $\mu_{r,\, FSR}$. % TODO Check these doubling and halving are still true, it's from Maria's thesis
   \end{itemize}
 \end{itemize} 
@@ -133,14 +133,14 @@ The $Wt$ production channel has diagrams overlapping with the \ttb production at
   \item For $Wt$ only, a sample using an alternative overlap removal procedure is produced with the alternative diagram removal (\textit{DR}) scheme \cite{StefanoFrixione_2008} to systematically model the overlap with \ttb. This scheme removes the diagrams in the NLO $Wt$ amplitudes that are doubly-resonnant, when both $t$-quark on-shell. $DR$ was the default scheme in prior iterations of this analysis, but the $DS$ samples showed better agreement with data in the boosted regime and were therefore chosen as nominal.
 \end{itemize}
 
-\subsubsection{Di-boson Process}
-The diboson processes $WW$, $WZ$, and $ZZ$ enter the analysis both as a background, with a hadronically decaying $V$ boson mistaken for the Higgs, and as a cross-check signal. Some leading $qq$-initated Feynman diagrams are depicted in Figure \ref{fig:feyndiV}, with gluon-initiated diagrams also possible via quark-loops. The $qq$-initiated di-boson are simulated similarly to the $V+$jets, using \textsc{Sherpa} 2.2.11 \cite{10.21468/SciPostPhys.7.3.034}. The $gg$-initiated are simulated with the older \textsc{Sherpa} 2.2.2 version. In both case, the cross-sections are computated at NLO precision, with the NNLO \gls{pdf}s based on NNPDF3.0nnlo \cite{PDFLHCrun2} for both the matrix element and parton shower.
+\subsubsection{Diboson Process}
+The diboson processes $WW$, $WZ$, and $ZZ$ enter the analysis both as a background, with a hadronically decaying $V$ boson mistaken for the Higgs, and as a cross-check signal. Some leading $qq$-initated Feynman diagrams are depicted in Figure \ref{fig:feyndiV}, with gluon-initiated diagrams also possible via quark-loops. The $qq$-initiated diboson are simulated similarly to the $V+$jets, using \textsc{Sherpa} 2.2.11 \cite{10.21468/SciPostPhys.7.3.034}. The $gg$-initiated are simulated with the older \textsc{Sherpa} 2.2.2 version. In both case, the cross-sections are computated at NLO precision, with the NNLO \gls{pdf}s based on NNPDF3.0nnlo \cite{PDFLHCrun2} for both the matrix element and parton shower.
 \begin{figure}[h!]
   \center
   \includegraphics[width=0.32\textwidth]{Images/VH/Feynman/diboson.png}
   \includegraphics[width=0.32\textwidth]{Images/VH/Feynman/diW.png}
   \includegraphics[width=0.32\textwidth]{Images/VH/Feynman/diWZ.png}
-  \caption{Feynman diagrams of the di-boson production in the $t$- (left) and $s$-channel (centre \& right). The $t$-channel can lead to any combination of $W$ and $Z$ dependingon theinitial quark-pair.}
+  \caption{Feynman diagrams of the diboson production in the $t$- (left) and $s$-channel (centre \& right). The $t$-channel can lead to any combination of $W$ and $Z$ dependingon theinitial quark-pair.}
   \label{fig:feyndiV}
 \end{figure}
 

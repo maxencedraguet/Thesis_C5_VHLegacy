@@ -1,0 +1,36 @@
+\begin{table}[!htpb] 
+    \begin{center}
+    \selectfont 
+    \centering \resizebox{\columnwidth}{!}{         
+    \begin{tabular}{ l l | l | c | c  } 
+    \hline 
+    \hline 
+    Name & Description & Samples/Categories & Value & Effect \\
+    \hline
+    NF Top     & top norm      & applied to \vhc, 2L channel  & floating & normalisation \\ 
+    NF Topbb   & top$(bb)$ norm    & applied to 0L and 1L channels, decorr in \nj and \ptv & floating & normalisation \\
+    NF Topbqqq & top$(bq/qq)$ norm  & applied to 0L and 1L channels, decorr in \nj and \ptv & floating & normalisation \\ 
+    \hline
+    TopqqbcRatio       & $qq$ / $bc+bl$ ratio & applied to 0L and 1L, top$(qq)$ & 10 \%  & normalisation \\
+    TopblbcRatio       & $bl$ / $bc$ ratio    & applied to 0L and 1L, top$(bl)$ & 5 \%  & normalisation \\
+    Top\_extrap\_from\_CRHigh  &  CRLow+SR / CRHigh ratio   & applied to 0L and 1L, CRLow and SR, Topbb & 2 \% (75-250 GeV) 8 \% (250-400 GeV) & normalisation \\
+    Top\_extrap\_to\_CRLow     &  CRLow / SR ratio          & applied to 1L, CRLow, Topbb & 2.5 \% (75-150 GeV) 9 \% (150-400 GeV) & normalisation \\
+    Top\_extrap\_to\_CRHigh    &  CRHigh / CRLow+SR ratio   & applied to 0L and 1L, CRHigh, Topbqqq & 4 \% (75-250 GeV) 10 \% (250-400 GeV) & normalisation \\
+    Top\_extrap\_to\_CRLow     &  CRLow / SR ratio          & applied to 1L, CRLow, Topbqqq & 2.5 \% (75-250 GeV) 4 \% (250-400 GeV) & normalisation \\
+    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 0L, $Wt(bb)$ & 22 \% (150-250 GeV) 48 \% (250-400 GeV) & normalisation \\
+    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 1L, $Wt(bb)$ & 15 \% (75-150 GeV)  13 \% (150-400 GeV) & normalisation \\
+    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 0L and 1L, $Wt(bqqq)$ & 12 \% (75-250 GeV) 18 \% (250-400 GeV) & normalisation \\
+    Top\_nLepAcc & 0L / 1L ratio & applied to 0L & 2 \% (150-250 GeV) 8 \% (250-400 GeV) & normalisation \\
+    \hline
+    CARL\_ME\_Top & \gls{me} \gls{carl} shape var.   & applied to 0L and 1L & $-$ & shape \\
+    CARL\_PS\_Top & \gls{ps} \gls{carl} shape var.   & applied to 0L and 1L & $-$ & shape \\
+    ISR\_Top   & ISR shape var.  & applied to 0L and 1L & $-$ & shape \\
+    MUR\_Top   & FSR shape var.  & applied to 0L and 1L & $-$ & shape \\
+    WtDR & DS-DR shape var. & applied to 0L and 1L, decorr. between 75-150 and 150+ & $-$ & shape+norm \\
+    \hline
+    \hline
+    \end{tabular}} 
+    \caption{Resolved regime top (\ttb\ + $Wt$) uncertainties.}
+    \label{tab:top_summary}
+    \end{center}
+\end{table}

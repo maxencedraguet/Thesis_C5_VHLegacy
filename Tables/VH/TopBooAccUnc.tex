@@ -1,0 +1,35 @@
+\begin{table}[!htpb] 
+    \begin{center}
+    \selectfont 
+    \centering \resizebox{\columnwidth}{!}{         
+    \begin{tabular}{ l l | l | c | c  } 
+    \hline \hline 
+    Name & Description & Samples/Categories & Value & Effect \\
+    \hline 
+    NF \ttb & \ttb\ norm & applied to top, 0L and 1L channel, all regions, decorr. in \ptv & floating & normalisation \\ %check name
+    ttbarNorm\_boosted & \ttb\ norm & applied to top, 2L channel, all regions & 20 \% & normalisation \\ %check name
+    stopWtNorm\_boosted & $Wt$ norm & applied to $Wt$, 0L \& 1L channel, all regions & 25 \% & normalisation \\ %check name
+    \hline
+    ttbar\_nLepAcc\_boosted  & 0L / 1L ratio & applied to \ttb, 0L  & 6\% (400-600 GeV)  20\% (600+ GeV) & normalisation \\
+    stopWt\_nLepAcc\_boosted & 0L / 1L ratio & applied to $Wt$, 0L  & 20\% (400-600 GeV) 40\% (600+ GeV) & normalisation \\
+    ttbar\_RatioSRTopCR\_boosted    & SR / CR ratio & applied to \ttb, 0L and 1L, SR &  10\% & normalisation \\
+    stopWt\_RatioSRTopCR\_boosted   & CR / SR ratio & applied to $Wt$, 0L and 1L, CR &  20\% & normalisation \\
+    stopWt\_RatioMedHighPtv\_boosted   & $>$ 600 GeV / [400, 600] GeV ratio & applied to $Wt$, 0L and 1L, CR &  20\% & normalisation \\
+    %WtTtbarRatio   &  stop Wt to \ttb\ ratio & applied to top, 0L and 1L & 22 \% (400-600 GeV) 36 \% (600+ GeV) & normalisation \\
+    \hline
+    CARL\_ME\_boosted\_ttbar & \gls{me} \gls{carl} shape var.   & applied to \ttb, 0L and 1L & $-$ & shape \\
+    CARL\_PS\_boosted\_ttbar & \gls{ps} \gls{carl} shape var.   & applied to \ttb, 0L and 1L & $-$ & shape \\
+    CARL\_ME\_boosted\_stopWt  & \gls{me} \gls{carl} shape var. & applied to $Wt$, 0L and 1L & $-$ & shape \\
+    CARL\_PS\_boosted\_stopWt  & \gls{ps} \gls{carl} shape var. & applied to $Wt$, 0L and 1L & $-$ & shape \\
+    WtDR\_400\+ptv & DS-DR shape var. & applied to $Wt$, 0L and 1L & $-$ & shape+norm \\
+    \hline
+    ISR\_400\+ptv\_ttbar & ISR shape var. & applied to \ttb, 0L and 1L & $-$ & shape \\
+    MUR\_400\+ptv\_ttbar & FSR shape var. & applied to \ttb, 0L and 1L & $-$ & shape\\
+    ISR\_400\+ptv\_stopWt & ISR shape var. & applied to $Wt$, 0L and 1L & $-$ & shape \\
+    MUR\_400\+ptv\_stopWt & FSR shape var. & applied to $Wt$, 0L and 1L & $-$ & shape\\
+    \hline \hline
+    \end{tabular} } 
+    \caption{Boosted regime \ttb\ and $Wt$ uncertainties.} 
+    \label{tab:ttbar_summary_boosted}
+    \end{center}
+\end{table} 

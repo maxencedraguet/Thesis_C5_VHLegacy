@@ -1,0 +1,33 @@
+\begin{table}[!htpb] 
+    \begin{center}
+    \selectfont 
+    \centering \resizebox{\columnwidth}{!}{         
+    \begin{tabular}{ c | c | c | c | c  } 
+    \hline 
+    \hline 
+    Name & Description & Samples/Categories & Value & Effect \\
+    \hline
+    \hline
+    stoptNorm & overall uncertainty & applied to 0L and 1L channel, all regions & 17 \% (resolved) & normalisation \\ 
+    \hline
+    stopT\_extrap\_to\_CR       &  CRLow+CRHigh / SR  ratio    & applied to 1L, 75-150 GeV, CRHigh and CRLow         & 3 \%  & normalisation \\
+    stopT\_extrap\_to\_CRLow    &  CRLow / CRHigh ratio       & applied to 1L, 75-150 GeV, CRLow         & 6 \%  & normalisation \\
+    stopT\_extrap\_from\_CRHigh &  CRLow+SR / CRHigh ratio    & applied to 0L and 1L, SR and CRLow, decorr. between 150-250 and 250-400 GeV & 6 \%  & normalisation \\
+    stopT\_extrap\_to\_CRLow    &  CRLow / SRratio           & applied to 0L and 1L, CRLow, decorr. between 150-250 and 250-400 GeV & 17 \% & normalisation \\
+    stopT\_njet\_to\_2J & 2-jet / 3-jet ratio & applied to 0L and 1L, 2-jet region & 15 \% & normalisation \\
+    stopT\_njet\_to\_4J & 4-jet / 2+3-jet ratio & applied to 0L, 4-jet region & 15 \% & normalisation \\
+    stopT\_pTV\_from\_LowPTV & 150-400 GeV / 75-150 GeV $p_{T}^{V}$ ratio  & applied to 0L and 1L, decorr. between 150-250 and 250-400 GeV & 7 \%  & normalisation \\
+    stopT\_pTV\_to\_HighPTV  & 250-400 GeV / 150-250 GeV $p_{T}^{V}$ ratio & applied to 0L and 1L, 250-400 GeV & 15 \%  & normalisation \\
+    Sysstopt\_nLepAcc & 0L / 1L & applied to 0L & 6 \% & normalisation \\
+    \hline
+    CARL\_ME\_stopT & ME CARL shape var.   & applied to 0L and 1L & $-$ & shape \\
+    CARL\_PS\_stopT & PS CARL shape var.   & applied to 0L and 1L & $-$ & shape \\
+    ISR\_stopT  & ISR shape var.  & applied to 0L and 1L & $-$ & shape \\
+    MUR\_Top   & FSR shape var.  & applied to 0L and 1L & $-$ & shape \\
+    \hline
+    \hline
+    \end{tabular}} 
+    \caption{Resolved regime single-top $t$ uncertainties.}
+    \label{tab:stopt_summary}
+    \end{center}
+\end{table}
