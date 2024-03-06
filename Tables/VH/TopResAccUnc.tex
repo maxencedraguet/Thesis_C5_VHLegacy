@@ -2,31 +2,34 @@
     \begin{center}
     \selectfont 
     \centering \resizebox{\columnwidth}{!}{         
-    \begin{tabular}{ l l | l | c | c  } 
-    \hline 
-    \hline 
-    Name & Description & Samples/Categories & Value & Effect \\
+    \begin{tabular}{ l | l | c  } 
+    \hline \hline
+    \textbf{Acceptance Ratio Name} & \textbf{Applied} & \textbf{Value} \\
     \hline
-    NF Top     & top norm      & applied to \vhc, 2L channel  & floating & normalisation \\ 
-    NF Topbb   & top$(bb)$ norm    & applied to 0L and 1L channels, decorr in \nj and \ptv & floating & normalisation \\
-    NF Topbqqq & top$(bq/qq)$ norm  & applied to 0L and 1L channels, decorr in \nj and \ptv & floating & normalisation \\ 
+    Top$(bb)$ normalisation     & 0L \& 1L, decorr in \nj \& \ptv & floating \\
+    Top$(bb)$ normalisation     & \vhc $e\mu$ CR \ 2L & floating \\ 
+    Top$(bq/qq)$ normalisation  & 0L \& 1L, decorr in \nj \& \ptv & floating \\ 
     \hline
-    TopqqbcRatio       & $qq$ / $bc+bl$ ratio & applied to 0L and 1L, top$(qq)$ & 10 \%  & normalisation \\
-    TopblbcRatio       & $bl$ / $bc$ ratio    & applied to 0L and 1L, top$(bl)$ & 5 \%  & normalisation \\
-    Top\_extrap\_from\_CRHigh  &  CRLow+SR / CRHigh ratio   & applied to 0L and 1L, CRLow and SR, Topbb & 2 \% (75-250 GeV) 8 \% (250-400 GeV) & normalisation \\
-    Top\_extrap\_to\_CRLow     &  CRLow / SR ratio          & applied to 1L, CRLow, Topbb & 2.5 \% (75-150 GeV) 9 \% (150-400 GeV) & normalisation \\
-    Top\_extrap\_to\_CRHigh    &  CRHigh / CRLow+SR ratio   & applied to 0L and 1L, CRHigh, Topbqqq & 4 \% (75-250 GeV) 10 \% (250-400 GeV) & normalisation \\
-    Top\_extrap\_to\_CRLow     &  CRLow / SR ratio          & applied to 1L, CRLow, Topbqqq & 2.5 \% (75-250 GeV) 4 \% (250-400 GeV) & normalisation \\
-    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 0L, $Wt(bb)$ & 22 \% (150-250 GeV) 48 \% (250-400 GeV) & normalisation \\
-    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 1L, $Wt(bb)$ & 15 \% (75-150 GeV)  13 \% (150-400 GeV) & normalisation \\
-    WtTtbarRatio   &    $Wt$ / \ttb\ ratio    & applied to 0L and 1L, $Wt(bqqq)$ & 12 \% (75-250 GeV) 18 \% (250-400 GeV) & normalisation \\
-    Top\_nLepAcc & 0L / 1L ratio & applied to 0L & 2 \% (150-250 GeV) 8 \% (250-400 GeV) & normalisation \\
+    Top $bl$ / $bc$ Ratio     & 01L, Top$(bl)$ & 5 \%  \\
+    Top $qq$ / $bc+bl$ ratio  & 01L, Top$(qq)$ & 10 \%  \\
     \hline
-    CARL\_ME\_Top & \gls{me} \gls{carl} shape var.   & applied to 0L and 1L & $-$ & shape \\
-    CARL\_PS\_Top & \gls{ps} \gls{carl} shape var.   & applied to 0L and 1L & $-$ & shape \\
-    ISR\_Top   & ISR shape var.  & applied to 0L and 1L & $-$ & shape \\
-    MUR\_Top   & FSR shape var.  & applied to 0L and 1L & $-$ & shape \\
-    WtDR & DS-DR shape var. & applied to 0L and 1L, decorr. between 75-150 and 150+ & $-$ & shape+norm \\
+    Top$(bb)$ CRLow+SR / CRHigh ratio    & 01L, CRLow, SR, TopCR, Top$(bb)$ & 2 \% (75-250 GeV) 8 \% (250-400 GeV) \\
+    Top$(bb)$ CRLow / SR ratio           & \vhb\ 1L, CRLow, Top$(bb)$ & 2.5 \% (75-150 GeV) 9 \% (150-400 GeV) \\
+    Top$(bq/qq)$ CRHigh / CRLow+SR ratio & 01L, CRHigh, Top$(bq/qq)$ & 4 \% (75-250 GeV) 10 \% (250-400 GeV) \\
+    Top$(bq/qq)$ CRLow / SR ratio        & \vhb\ 1L, CRLow, Top$(bq/qq)$ & 2.5 \% (75-250 GeV) 4 \% (250-400 GeV) \\
+    Top SR / Top $e\mu$ CR               & \vhb\ 2L & 0.8\% \\
+    \hline
+    $Wt$ / \ttb\ ratio & 0L, $Wt(bb)$ & 22 \% (150-250 GeV) 48 \% (250-400 GeV) \\
+    $Wt$ / \ttb\ ratio & 1L, $Wt(bb)$ & 15 \% (75-150 GeV) 13 \% (150-400 GeV) \\
+    $Wt$ / \ttb\ ratio & 01L, $Wt(bqqq)$ & 12 \% (75-250 GeV) 18 \% (250-400 GeV) \\
+    \hline
+    Top 0L / 1L ratio & 0L & 2 \% (150-250 GeV) 8 \% (250-400 GeV) \\ 
+    \hline
+    \gls{carl} ME Top shape & 01L & $-$ \\
+    \gls{carl} PS Top shape & 01L & $-$ \\
+    $Wt$ DS/DR shape + normalisation & $Wt$, 01L & $-$ \\
+    \gls{isr} Top shape & 01L & $-$ \\
+    \gls{fsr} Top shape & 01L & $-$ \\
     \hline
     \hline
     \end{tabular}} 

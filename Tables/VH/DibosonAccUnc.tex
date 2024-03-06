@@ -3,70 +3,73 @@
     \hspace{-1cm}
     \resizebox{1.1\textwidth}{!}
     {
-     \begin{tabular}{ c | c | c | c | c } 
+     \begin{tabular}{ l l | l | c } 
      \hline \hline
-     NP Name & Description & Production mode & Decay component & Applied regions\\ [0.5ex] 
+     \textbf{Acceptance Ratio Name} & \textbf{Production mode} &  \textbf{Decay component} & \textbf{Value \& Application} \\
      \hline 
-     ZZNorm & Total acceptance var. & $qqZZ$ & All & 17\%   \\ 
-     WZNorm & Total acceptance var. & $qqWZ$ & All & 19\%   \\ 
-     WWNorm & Total acceptance var. & $qqWW$ & All & 16\%   \\ 
-     $ggVV$Norm & Total acceptance var. & $ggVV$ & All & 30\% \\ 
+     $ZZ$ normalisation & $qqZZ$ & All & 17\%   \\ 
+     $WZ$ normalisation & $qqWZ$ & All & 19\%   \\ 
+     $WW$ normalisation & $qqWW$ & All & 16\%   \\ 
+     $ggVV$ normalisation & $ggVV$ & All & 30\% \\ 
      \hline
-     ZZ\_nLepAcc\_L0 & 2L to 0L ratio & $qqZZ$ & $VZbb$, $VZcc$ & 2\%-3.5\%-23\% in 2-, 3-, 4-jet 0L  \\ 
-     WZ\_nLepAcc\_L0 & 1L to 0L ratio & $qqWZ$ & $VZbb$, $VZcc$ & 4\%-10\% in 2-, 3-jet 0L  \\
-     WW\_nLepAcc\_L0 & 1L to 0L ratio & $qqWW$ & $VW$bkg & 3\% in 0L \\ 
-     WZlephadbkg\_nLepAcc\_L0 & 1L to 0L ratio & $qqWZ$ & $VZ$bkg & 7\% in 0L    \\
-     WZhadlep\_nLepAcc\_L0 & 2L to 0L ratio & $qqWZ$ & $VW$bkg & 11\% in 0L       \\ 
-     ZZbkg\_nLepAcc\_L0 & 2L to 0L ratio & $qqZZ$ & $VZ$bkg & 12\% in 0L          \\
-     ZZ\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqZZ$ & $VZbb$, $VZcc$ & 20\% in 0L \& 15\%-20\% in 2L     \\ 
-     WZ\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqWZ$ & $VZbb$, $VZcc$ & 12\% in 0L \& 13\%-20\% in 1L     \\ 
-     WZ\_extrap\_to\_CRLow & SR+CRHigh to CRLow ratio & $qqWZ$ & $VZbb$, $VZcc$ & 50\%-18\% in 1L  \\ 
-     WW\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqWW$ & $VW$bkg & 10\% in 0L \& 16\% in 1L        \\ 
-     WZhadlep\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqWZ$ & $VW$bkg & 14\%-12\%-17\% in 0L-1L-2L   \\ 
-     WZlephadbkg\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqZZ$ & $VZ$bkg & 10\% in 0L \&  11 \% in 1L \\ 
-     ZZbkg\_extrap\_to\_CRHigh & SR to CRHigh ratio & $qqWZ$ & $VZbb$, $VZ$bkg & 10\% in 0L \& 28\% in 2L \\ 
-     ZZ\_nJAcc\_J3 & 2-jet to 3-jet ratio & $qqZZ$ & $VZbb$, $VZcc$ & 10\% in 0L \& 7\%-10\% in 2L \\ 
-     WZ\_nJAcc\_J3 & 2-jet to 3-jet ratio & $qqWZ$ & $VZbb$, $VZcc$ & 25\% in 0L \& 20\%-25\% in 1L  \\ 
-     ZZ\_nJAcc\_J4 & 3-jet to 4(4+)-jet ratio & $qqZZ$ & $VZbb$, $VZcc$ & 16\% in 0L \& 30\% in 2L \\ 
-     WZ\_nJAcc\_J4 & 3-jet to 4-jet ratio & $qqWZ$ & $VZbb$, $VZcc$ & 16\% in 0L \\ 
-     WW\_nJAcc\_J3p & 2-jet to 3+-jet ratio & $qqWW$ & $VW$bkg & 12\% in 0L \& 1L \\ 
-     WZhadlep\_nJAcc\_J3p & 2-jet to 3+-jet ratio & $qqWZ$ & $VW$bkg & 13\%-10\%-24\% in 0L-1L-2L  \\  
-     WZlephadbkg\_nJAcc\_J3p & 2-jet to 3+-jet ratio & $qqWZ$ & $VZ$bkg & 14\% in 0L \& 11\% in 1L \\ 
-     ZZbkg\_nJAcc\_J3p & 2-jet to 3+-jet ratio & $qqZZ$ & $VZ$bkg & 10\% in 0L \& 28\% in 2L\\  
-     %WW\_nJAcc\_J4 & 3-jet to 4-jet ratio & $qqWW$ & $VW$bkg & 0L 4-jet \\  % TODO no value? Not found in src
-     WZ\_nJAcc\_J4 & 3-jet to 4+-jet ratio & $qqWZ$ & $VW$bkg & 16\% in 0L \\ % Note: the 4J values are from reading the WSMaker
-     %WZlephadbkg\_nJAcc\_J4 & 3-jet to 4-jet ratio & $qqWZ$ & $VZ$bkg & 0L 4-jet \\   % TODO not found
-     ZZbkg\_nJAcc\_J4 & 3-jet to 4+-jet ratio & $qqZZ$ & $VZ$bkg & 16\% 0L \& 30\% 2L \\  
-     ZZ\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqZZ$ & $VZbb$, $VZcc$ & 3\%-9\% in 0L \& 2L \\ 
-     ZZ\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqZZ$ & $VZbb$, $VZcc$ & 6\% in 2L  \\ 
-     WZ\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqWZ$ & $VZbb$, $VZcc$ & 4\%-16\% in 0L \& 4\% 1L \\ 
-     WZ\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqWZ$ & $VZbb$, $VZcc$ & 2\%-5\% in 1L  \\ 
-     WW\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqWW$ & $VW$bkg & 5\% in 1L  \\ 
-     WZhadlep\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqWZ$ & $VW$bkg & 4\% in 1L \& 2L     \\ 
-     WZlephadbkg\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqWZ$ & $VZ$bkg & 3\% in 1L \& 5\% in 2L \\ 
-     ZZbkg\_ptvAcc\_075-150 & \ptv [150,250] to [75,150] ratio & $qqZZ$ & $VZ$bkg & 4\% 2L \\ 
-     WW\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqWW$ & $VW$bkg & 9\% in 0L \& 1L  \\ 
-     WZhadlep\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqWZ$ & $VW$bkg & 10\% in all channels  \\ 
-     WZlephadbkg\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqWZ$ & $VZ$bkg & 9\% in all channels \\ 
-     ZZbkg\_ptvAcc\_250-400 & \ptv [150,250] to [250,400] ratio & $qqZZ$ & $VZ$bkg & 7\% in 0L \& 2L  \\ 
+     $ZZ$ CRHigh / SR ratio & $qqZZ$ & $VZbb$, $VZcc$ & 20\% (0L) \& 12\%-20\% (2L)     \\ 
+     $WZ$ CRHigh / SR ratio & $qqWZ$ & $VZbb$, $VZcc$ & 12\% (0L) \& 13\%-20\% (1L)     \\ 
+     $WZ$ CRLow / SR+CRHigh ratio & $qqWZ$ & $VZbb$, $VZcc$ & 50\%-18\% in 1L  \\ 
+     $WW$ CRHigh / SR ratio & $qqWW$ & $VW$bkg & 10\% (0L) \& 16\% (1L)        \\ 
+     $W_{\text{had}}Z_{\text{lep}}$ CRHigh / SR ratio & $qqWZ$ & $VW$bkg & 14\%-12\%-17\% in 0-1-2L   \\ 
+     $W_{\text{lep}}Z_{\text{had}}$ CRHigh / SR ratio & $qqZZ$ & $VZ$bkg & 10\% (0L) \& 11 \% (1L) \\ 
+     $ZZ$bkg CRHigh / SR ratio & $qqWZ$ & $VZbb$, $VZ$bkg & 6\% (0L) \& 7\% (2L) \\ 
      \hline
-     ZZQCDscale\_d150 &  \ptv [75,150] to [150,400] \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -3.2\% to 7.8\% in 1L \& 2L \\
-     WZQCDscale\_d150 &  \ptv [75,150] to [150,400] \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -3.1\% to 5.8\% in 1L \& 2L \\
-     ZZQCDscale\_d250 & \ptv [150,250] to [250,400] \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -2.4\% to 8.4\%  \\ 
-     WZQCDscale\_d250 & \ptv [150,250] to [250,400] \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -1.6\% to 7.9\%  \\
-     ZZQCDscale\_dJ3 & 2-jet to 3,4(4+)-jet \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -35.6\% to 19.9\% \\ 
-     WZQCDscale\_dJ3 & 2-jet to 3,4(4+)-jet \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -37.4\% to 16.2\% \\ 
-     ZZQCDscale\_dJ4 &   3-jet to 4(4+)-jet \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -30\% to 32\% in 0L \& 2L \\ 
-     WZQCDscale\_dJ4 &   3-jet to 4(4+)-jet \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -14.7\% to 23.2\% in 0L  \\ 
+     $ZZ$ 3-jet / 2-jet ratio & $qqZZ$ & $VZbb$, $VZcc$ & 10\% in 02L \\ 
+     $WZ$ 3-jet / 2-jet ratio & $qqWZ$ & $VZbb$, $VZcc$ & 22\% in 01L \\ 
+     $ZZ$ 4-jet / 3-jet ratio & $qqZZ$ & $VZbb$, $VZcc$ & 16\% (0L) \& 30\% (2L) \\ 
+     $WZ$ 4-jet / 3-jet ratio & $qqWZ$ & $VZbb$, $VZcc$ & 16\% in 0L \\ 
+     $WW$ 3p-jet / 2-jet ratio & $qqWW$ & $VW$bkg & 12\% in 01L \\ 
+     $W_{\text{had}}Z_{\text{lep}}$ 3p-jet / 2-jet ratio & $qqWZ$ & $VW$bkg & 13\%-10\%-24\% in 0L-1L-2L  \\  
+     $W_{\text{lep}}Z_{\text{had}}$ 3p-jet / 2-jet ratio & $qqWZ$ & $VZ$bkg & 14\% in 0L \& 11\% in 1L \\ 
+     $ZZ$bkg 3-jet / 2-jet ratio & $qqZZ$ & $VZ$bkg & 10\% (0L) \& 13\% (2L)\\  
+     $W_{\text{lep}}Z_{\text{had}}$ 4p-jet / 3-jet ratio & $qqWZ$ & $VZ$bkg & 14\% (0L) \\  
+     $W_{\text{had}}Z_{\text{lep}}$ 4p-jet / 3-jet ratio & $qqWZ$ & $VW$bkg & 13\% (0L) \& 37\% (2L) \\ 
+     $ZZ$bkg 4p-jet / 3-jet ratio & $qqZZ$ & $VZ$bkg & 10\% (0L) \& 42\% (2L) \\  
      \hline
-     Carl\_ZZ\_Sh2211toPwPy8 & \textsc{Powheg} + \textsc{Pythia} 8 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 2L \\ 
-     Carl\_ZZ\_Sh2211toSh221 & \textsc{Sherpa} 2.2.1 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 2L \\
-     Carl\_WZ\_Sh2211toPwPy8 & \textsc{Powheg} + \textsc{Pythia} 8 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L (2L in \vhc\ only) \\
-     Carl\_WZ\_Sh2211toSh221 & \textsc{Sherpa} 2.2.1 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L (2L in \vhc\ only) \\
-     Carl\_WW\_Sh2211toPwPy8 & \textsc{Powheg} + \textsc{Pythia} 8 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L in \vhc\ \\
-     Carl\_WW\_Sh2211toSh221 & \textsc{Sherpa} 2.2.1 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L in \vhc\ \\
-     \gls{qcd} scale shape & \textsc{Sherpa} 2.2.11 \gls{qcd} scale largest shape var. & qqVV & All & Inclusive region in 1L \& 2L \\
-     \gls{ew} shape & \textsc{Sherpa} 2.2.11 \gls{ew} Correction largest shape var. & qqVV & All & Inclusive region in 1L \& 2L \\
+     $ZZ$ 0L / 2L ratio & $qqZZ$ & $VZbb$, $VZcc$ & 2\%-3.5\%-23\% in 2-, 3-, 4-jet 0L  \\ 
+     $W_{\text{had}}Z_{\text{lep}}$ 0L / 2L ratio & $qqWZ$ & $VW$bkg & 10\% in 0L       \\ 
+     $ZZ$bkg 0L / 2L ratio & $qqZZ$ & $VZ$bkg & 13\% in 0L          \\
+     $WZ$ 0L / 1L ratio & $qqWZ$ & $VZbb$, $VZcc$ & 4\%-10\% in 2-, 3-jet 0L  \\
+     $WW$ 0L / 1L ratio & $qqWW$ & $VW$bkg & 6\% in 0L \\       % TODO not in fit!
+     $W_{\text{lep}}Z_{\text{had}}$ 0L / 1L ratio & $qqWZ$ & $VZ$bkg & 4\% in 0L    \\
+     \hline
+     $ZZ$ \ptv 250-400 / 150-250 ratio & $qqZZ$ & $VZbb$, $VZcc$ & 3\%-9\% in 02L \\ 
+     $ZZ$ \ptv 75-150 / 150-250 ratio & $qqZZ$ & $VZbb$, $VZcc$ & 6\% in 2L  \\ 
+     $WZ$ \ptv 250-400 / 150-250 ratio & $qqWZ$ & $VZbb$, $VZcc$ & 4\%-16\% (0L) \& 4\% (1L) \\ 
+     $WZ$ \ptv 75-150 / 150-250 ratio & $qqWZ$ & $VZbb$, $VZcc$ & 2\%-5\% in 1L  \\ 
+     $WW$ \ptv 250-400 / 150-250 ratio & $qqWW$ & $VW$bkg & 7\% in 1L  \\ 
+     $WW$ \ptv 75-150 / 150-250 ratio & $qqWW$ & $VW$bkg & 7\% in 1L  \\ 
+     $W_{\text{had}}Z_{\text{lep}}$ \ptv 75-150 / 150-250 ratio & $qqWZ$ & $VW$bkg & 4\% in 12L     \\ 
+     $W_{\text{lep}}Z_{\text{had}}$ \ptv 75-150 / 150-250 ratio & $qqWZ$ & $VZ$bkg & 5\% (1L) \\ 
+     $ZZ$bkg \ptv 150-250 / 75-150  ratio & $qqZZ$ & $VZ$bkg & 4\% 2L \\ 
+     $WW$ \ptv 250-400 / 150-250 ratio & $qqWW$ & $VW$bkg & 7\% in 01L  \\ 
+     $W_{\text{had}}Z_{\text{lep}}$ \ptv 250-400 / 150-250 ratio & $qqWZ$ & $VW$bkg & 10\% in 012L   \\ 
+     $W_{\text{lep}}Z_{\text{had}}$ \ptv 250-400 / 150-250 ratio & $qqWZ$ & $VZ$bkg & 9\% in 012L \\ 
+     $ZZ$bkg \ptv 250-400 / 150-250 ratio & $qqZZ$ & $VZ$bkg & 8\% in 02L  \\ 
+     \hline
+     \gls{qcd} scale ZZ \ptv 150-400 / 75-150  & $qqZZ$ & $VZbb$, $VZcc$ & -3.2\% to 7.8\% in 12L \\
+     \gls{qcd} scale WZ \ptv 150-400 / 75-150  & $qqWZ$ & $VZbb$, $VZcc$ & -3.1\% to 5.8\% in 12L \\
+     \gls{qcd} scale ZZ \ptv 250-400 / 150-250 & $qqZZ$ & $VZbb$, $VZcc$ & -2.4\% to 8.4\%  \\ 
+     \gls{qcd} scale WZ \ptv 250-400 / 150-250 & $qqWZ$ & $VZbb$, $VZcc$ & -1.6\% to 7.9\%  \\
+     \gls{qcd} scale ZZ 3(p)-jet / 2-jet & $qqZZ$ & $VZbb$, $VZcc$ & -35.6\% to 19.9\% \\ 
+     \gls{qcd} scale WZ 3(p)-jet / 2-jet & $qqWZ$ & $VZbb$, $VZcc$ & -37.4\% to 16.2\% \\ 
+     \gls{qcd} scale ZZ 4(p)-jet / 3-jet & $qqZZ$ & $VZbb$, $VZcc$ & -30\% to 32\% in 02L \\ 
+     \gls{qcd} scale WZ 4(p)-jet / 3-jet & $qqWZ$ & $VZbb$, $VZcc$ & -14.7\% to 23.2\% in 0L  \\ 
+     \hline
+     Carl $ZZ$ PwPy8 / Sh2211 & $qqZZ$ & All & 02L \\ 
+     Carl $ZZ$ Sh221 / Sh2211 & $qqZZ$ & All & 02L \\
+     Carl $WZ$ PwPy8 / Sh2211 & $qqZZ$ & All & 01L (2L in \vhc\ only) \\
+     Carl $WZ$ Sh221 / Sh2211 & $qqZZ$ & All & 01L (2L in \vhc\ only) \\
+     Carl $WW$ PwPy8 / Sh2211 & $qqZZ$ & All & 01L in \vhc\ \\
+     Carl $WW$ Sh221 / Sh2211 & $qqZZ$ & All & 01L in \vhc\ \\
+     \gls{qcd} scale largest shape & qqVV & All & Inclusive region in 12L \\
+     \gls{ew} largest shape & qqVV & All & Inclusive region in 12L \\
      \hline \hline
      \end{tabular}
     }
@@ -80,33 +83,44 @@
     \hspace{-1cm}
     \resizebox{1.1\textwidth}{!}
     {
-     \begin{tabular}{ c | c | c | c | c } 
+    \begin{tabular}{ l l | l | c } 
      \hline \hline
-     NP Name & Description & Production mode & Decay component & Applied regions\\ [0.5ex] 
+     \textbf{Acceptance Ratio Name} & \textbf{Production mode} &  \textbf{Decay component} & \textbf{Value \& Application} \\
      \hline 
-     ZZNorm\_boosted & Total acceptance var. & $qqZZ$ & All & 17\% \\ 
-     WZNorm\_boosted & Total acceptance var. & $qqWZ$ & All & 27\% \\ 
-     WWNorm & Total acceptance var. & $qqWW$ & All & 16\%   \\ 
-     $ggVV$Norm & Total acceptance var. & $ggVV$ & All & 30\% \\ 
+     $ZZ$ normalisation   & $qqZZ$ & All & 17\% \\ 
+     $WZ$ normalisation   & $qqWZ$ & All & 27\% \\ 
+     $WW$ normalisation   & $qqWW$ & All & 16\%   \\ 
+     $ggVV$ normalisation & $ggVV$ & All & 30\% \\ 
      \hline
-     ZZ\_nLepAcc\_boosted\_L0 & 2L to 0L ratio & $qqZZ$ & $VZbb$ & 7\% \\ 
-     WZ\_nLepAcc\_boosted\_L0 & 1L to 0L ratio & $qqWZ$ & $VZbb$ & 7\% \\
-     (ZZ\_nJAcc\_boosted)$^*$ & HP to LP ratio & $qqZZ$ & $VZbb$, $VZcc$ & 10\% 0L LP \\ 
-     (WZ\_nJAcc\_boosted)$^*$ & HP to LP ratio & $qqWZ$ & $VZbb$, $VZcc$ & 15\% 0L \& 1L in LP \\ 
-     ZZ\_ptvAcc\_boosted\_Min400 & \ptv [400,600] to [600,] ratio & $qqZZ$ & $VZbb$, $VZcc$ & 8\% in 0L \& 2L \\ 
-     WZ\_ptvAcc\_boosted\_Min400 & \ptv [400,600] to [600,] ratio & $qqWZ$ & $VZbb$, $VZcc$ & 40\% in 0L \& 7\% in 1L \\ 
+     $ZZ$ LP / HP ratio & $qqZZ$ & $VZbb$, $VZcc$ & 10\% 0L LP \\ 
+     $WZ$ LP / HP ratio & $qqWZ$ & $VZbb$, $VZcc$ & 15\% 01L in LP \\ 
      \hline
-     ZZQCDscale\_d600 & \ptv [400,600] to [600,] \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -1.6\% to 7.6\% in 0L \& 2L \\ 
-     WZQCDscale\_d600 & \ptv [400,600] to [600,] \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -2.2\% to 10.6\% in 0L \& 1L \\ 
-     (ZZQCDscale\_dJ1)$^*$ & HP to LP \gls{qcd} migration & $qqZZ$ & $VZbb$, $VZcc$ & -17.8\% to 16.3\% 0L  \\ 
-     (WZQCDscale\_dJ1)$^*$ & HP to LP \gls{qcd} migration & $qqWZ$ & $VZbb$, $VZcc$ & -42.2\% to 19.2\% 0L \& 1L \\ 
+     $ZZ$ L0 / 2L ratio & $qqZZ$ & $VZbb$ & 7\% \\ 
+     $ZZ$bkg L0 / 2L ratio & $qqZZ$ & $VZ$bkg & 10\% \\ 
+     $W_{\text{had}}Z_{\text{lep}}$bkg L0 / 2L ratio & $qqWZ$ & $VW$bkg& 10\% \\ 
+     $ZZ$ L0 / 2L ratio & $qqZZ$ & $VZbb$ & 7\% \\ 
+     $WZ$ L0 / 1L ratio & $qqWZ$ & $VZbb$ & 7\% \\
+     $WW$ L0 / 1L ratio & $qqWZ$ & $qqWW$ & 10\% \\
+     $W_{\text{lep}}Z_{\text{had}}$bkg L0 / 1L ratio & $qqWZ$ & $VZ$bkg & 10\% \\
      \hline
-     Carl\_ZZ\_Sh2211toPwPy8 & \textsc{Powheg} + \textsc{Pythia} 8 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 2L \\ 
-     Carl\_ZZ\_Sh2211toSh221 & \textsc{Sherpa} 2.2.1 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 2L \\
-     Carl\_WZ\_Sh2211toPwPy8 & \textsc{Powheg} + \textsc{Pythia} 8 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L \\
-     Carl\_WZ\_Sh2211toSh221 & \textsc{Sherpa} 2.2.1 \gls{carl} shape var. & $qqZZ$ & All & 0L \& 1L \\
-     \gls{qcd} scale shape & \textsc{Sherpa} 2.2.11 \gls{qcd} scale largest shape var. & qqVV & All & Inclusive region in 1L \& 2L \\
-     \gls{ew} shape & \textsc{Sherpa} 2.2.11 \gls{ew} Correction largest shape var. & qqVV & All & Inclusive region in 1L \& 2L \\
+     $ZZ$ \ptv $>$600 / 400-600 ratio & $qqZZ$ & $ZZbb$, $ZZcc$ & 8\% in 02L L \\ 
+     $WZ$ \ptv $>$600 / 400-600 ratio & $qqWZ$ & $VZbb$, $VZcc$ & 40\% (0L) - 7\% (1L) \\ 
+     $WW$ \ptv $>$600 / 400-600 ratio & $qqWW$ & $qqWW$ & 10\% in 01L \\ 
+     $W_{\text{lep}}Z_{\text{had}}$bkg  \ptv $>$600 / 400-600 ratio & $qqWZ$ & $VZ$bkg & 30\% in 01L \\ 
+     $W_{\text{had}}Z_{\text{lep}}$bkg  \ptv $>$600 / 400-600 ratio & $qqWZ$ & $VW$bkg & 30\% in 02L \\ 
+     $ZZ$bkg \ptv $>$600 / 400-600 ratio & $qqZZ$ & $VZ$bkg & 10\% in 02L \\ 
+     \hline
+     \gls{qcd} scale $ZZ$ \ptv $>$600 / 400-600 & $qqZZ$ & $VZbb$, $VZcc$ & -1.6\% to 7.6\% in 02L \\ 
+     \gls{qcd} scale $WZ$ \ptv $>$600 / 400-600 & $qqWZ$ & $VZbb$, $VZcc$ & -2.2\% to 10.6\% in 01L \\ 
+     \gls{qcd} scale $ZZ$ LP / HP & $qqZZ$ & $VZbb$, $VZcc$ & -17.8\% to 16.3\% 0L  \\ 
+     \gls{qcd} scale $WZ$ LP / HP & $qqWZ$ & $VZbb$, $VZcc$ & -42.2\% to 19.2\% 01L \\ 
+     \hline
+     Carl $ZZ$ PwPy8 / Sh2211 & $qqZZ$ & All & 02L \\ 
+     Carl $ZZ$ Sh221 / Sh2211 & $qqZZ$ & All & 02L \\
+     Carl $WZ$ PwPy8 / Sh2211 & $qqZZ$ & All & 01L \\
+     Carl $WZ$ Sh221 / Sh2211 & $qqZZ$ & All & 01L \\
+     \gls{qcd} scale largest shape  & qqVV & All & Inclusive region in 12L\\
+     \gls{ew} largest shape & qqVV & All & Inclusive region in 12L  \\
      \hline \hline
      \end{tabular}
     }

@@ -171,14 +171,14 @@ This background is dominant in the 0L and 2L channels, but negligible in 1L. The
     \item \textit{$Z+$ mixed flavours (\zmf)}: $Z+bc$, $Z+bl$, and $Z+cl$ (at least a $b$ or a $c$).
     \item \textit{$Z+$ light flavours (\zlf)}: $Z+l$.
 \end{itemize}
-Each grouping has itws own free floating normalisations, with \zhf\ dominant in \vhb\ and the other two components significant in \vhc. These \gls{fn}s are decorrelated in \ptv\ and jet multiplicities \nj. The modelling of $Z+$jets includes several types of acceptance uncertainties that are applied in 0L and 2L:
+Each grouping has itws own free floating normalisations, with \zhf\ dominant in \vhb\ and the other two components significant in \vhc. These \gls{fn}s are decorrelated in \ptv\ and jet multiplicities \nj\footnote{Except for the 2L with 75 GeV < \ptv\ < 150, where the \Vhb\ 4-jet is merged with 3-jet: to solve this, \vhb\ has an extra \vhf\ \gls{fn} for 3p-jet.}. The modelling of $Z+$jets includes several types of acceptance uncertainties that are applied in 0L and 2L:
 \begin{itemize}[leftmargin=*]
     \item Channel extrapolation 2L $\rightarrow$ 0L uncertainties: for the \zhf, \zmf, and \zlf respectively. 
     \item Flavour composition uncertainties: accounting for the variation on the yields of different flavour in the combinations using the double ratio of Equation \ref{eq-doubleRatio}. These include a comparison of $cc$ to $bb$ for \zhf and of [$bc$, $bl$] to $cl$ for \zmf. They take into account \ptv\ and jet multiplicity \nj\ trends and cover the \vhb\ and \vhc\ sides of the resolved regime. 
     \item Region extrapolation uncertainties: are included to model the acceptance of different region (\gls{sr} and \gls{cr}). They are derived with the double ratio Equation \ref{eq-doubleRatio} from a high purity region to a low purity one depending on the combination:
     \begin{itemize}
         \item \zhf\ and \zmf: constrained mostly in the CRHigh and applied to the \gls{sr}. 
-        \item \zlf: constrained mostly in 1 $LN$-tagged $V+l$ CR. Applied in CRHigh. % TODO, in the text, it says that it's SR - CRHigh, but it's constrained in LN??
+        \item \zlf: constrained mostly in 1 $LN$-tagged $V+l$ CR and the \gls{sr}. Applied in CRHigh. % TODO, in the text, it says that it's SR - CRHigh, but it's constrained in LN??
     \end{itemize}
 \end{itemize}
 The values of the acceptance uncertainties are presented in Table \ref{tbl:zjets_acc_full} of Appendix \ref{appsec-vh-backsigmod}, with a summary mentioned in Table \ref{tab:summary_altsamples}.
@@ -193,31 +193,31 @@ In addition, 4 different shape uncertainties are considered:
 
 \paragraph{Boosted regime:} roughly the same modelling strategy to the resolved regime is applied, with the uncertainties fully detailed in the Appendix Table \ref{tbl:zjets_acc_fullBoos}. The \zhf\ component is left free-floating while the \zmf\ and \zlf\ components have an overall acceptance uncertainty of 35\%. The \zlf\ has no other acceptance uncertainty as it is negligible in the boosted regime. Flavour acceptance uncertainties for \zhf\ and \zmf\ are applied in 0L and 2L. The \zhf\ and \zmf\ also have channel acceptance uncertainties and \gls{sr} $\rightarrow$ topCR acceptance ratios applied in the 0L. Additional \ptv\ extrapolation uncertainties from [400, 600] GeV to $> 600$ GeV is considered in 0L and 2L. Shape uncertainties are derived similarly to the resolved regime. 
 
-\subsubsection{$W+$jets} % TODO boosted
+\subsubsection{$W+$jets}
 The background is dominant in the 1-lepton channel with a residual contribution in 0-lepton mostly due to hadronically decaying $\tau$-lepton. It is split equivalenty to the $Z+$jets background as:   
 \begin{itemize}
     \item \textit{$W+$ heavy flavours (\whf)}: $W+bb$ and $W+cc$
     \item \textit{$W+$ mixed flavours (\wmf)}: $W+bc$, $W+bl$, $W+b\tau$, $W+cl$, and $W+c\tau$ (at least a $b$ or a $c$).
     \item \textit{$W+$ light flavours (\wlf)}: $W+l$, $W+l\tau$, $W+\tau\tau$.
 \end{itemize}
-Each grouping has its own floating normalisation, with \whf signficant in \vhb, while \wmf and \wlf are more important in \vhc. These \gls{fn}s are decorrelated in \ptv\ and jet multiplicities \nj. Acceptance uncertainties, summarised in Table \ref{tab:summary_altsamples} and listed in the Appendix Table \ref{tbl:wjets_acc_full}, are applied in 0L and 1L and include:
+Each grouping has its own floating normalisation, with \whf signficant in \vhb, while \wmf and \wlf are more important in \vhc. These \gls{fn}s are decorrelated in \ptv\ and jet multiplicities \nj\footnote{The only exception is the 1L \wlf in 75 GeV < \ptv < 150 GeV, where a normalisation uncertainty of 25\% is considered.}. Acceptance uncertainties, summarised in Table \ref{tab:summary_altsamples} and listed in the Appendix Table \ref{tbl:wjets_acc_full}, are applied in 0L and 1L and include:
 \begin{itemize}[leftmargin=*]
     \item Channel extrapolation 1L $\rightarrow$ 0L uncertainties: applied in 0L for the \whf, \wmf, and \wlf respectively. 
     \item Flavour composition uncertainties: include a comparison of $cc$ to $bb$ for \whf, of [$bc$, $bl$, $c\tau$, $b\tau$] to $cl$ for \wmf, and of [$l\tau$, $\tau\tau$] to $Wl$ for \wlf. They take into account \ptv\ and jet multiplicity \nj\ trends and cover the \vhb\ and \vhc\ sides of the resolved regime. 
     \item Region extrapolation uncertainties: for the different combinations:
     \begin{itemize}
-        \item \whf: constrained mostly in the \gls{sr} and the $BB$-tagged CRLow, applied to CRHigh in different \ptv\ regions. For \vhb, an extra CRLow $\rightarrow$ SR is applied. 
-        \item \wmf: constrained mostly in 2 $c$-tagged CRHigh and applied to SR.
-        \item \wlf: constrained mostly in 1 $LN$-tagged $V+l$ CR. Applied in CRHigh. % TODO, in the text, it says that it's SR - CRHigh, but it's constrained in LN??
+        \item \whf: constrained mostly in the \gls{sr} + TopCR and the $BB$-tagged CRLow, applied to CRHigh in different \ptv\ regions. For \vhb, an extra CRLow $\rightarrow$ SR+TopCR is applied. 
+        \item \wmf: constrained mostly in 2 $c$-tagged CRHigh and applied to SR+TopCR and CRLow.
+        \item \wlf: constrained mostly in 1 $LN$-tagged $V+l$ CR and the SR. Applied in CRHigh. % TODO, in the text, it says that it's SR - CRHigh, but it's constrained in LN??
     \end{itemize}
     \item Jet multiplicity \nj acceptance: \gls{fn}s are left free floating in \nj (2-jet and 3-jet). For \vhb, the 4-jet category has no dedicated \gls{cr} and a 3-jet $\rightarrow$ 4-jet acceptance is applied to \whf (other components are negligible).
 \end{itemize}
 
 In addition, 4 different types of shape uncertainties are considered similarly to the $Z+$jets.
 
-\paragraph{Boosted regime:} roughly the same modelling strategy is applied, with the uncertainties fully detailed in the Appendix Table \ref{tab:wjets_acc_fullBoos}. The \whf\ component is left free-floating while the \wmf\ and \wlf\ components have an overall acceptance uncertainty of 36\% and 38\% respectively. Flavour acceptance uncertainties are considered for \whf\ and \wmf\ (the components with $\tau$ are negligible). The different components also have channel acceptance uncertainties applied in 0L-channel and \gls{sr} $\rightarrow$ topCR acceptance ratios applied in the 0L- and 1L-channels. Additional \ptv\ extrapolation uncertainties from [400, 600] GeV to $> 600$ GeV is considered in 0L and 1L. Shape uncertainties are derived similarly to the resolved regime. 
+\paragraph{Boosted regime:} roughly the same modelling strategy is applied, with the uncertainties fully detailed in the Appendix Table \ref{tab:wjets_acc_fullBoos}. The \whf\ component is left free-floating while the \wmf\ and \wlf\ components have an overall acceptance uncertainty of 36\% and 38\% respectively. Flavour acceptance uncertainties are considered for \whf\ and \wmf\ from $Wbc$ (the components with $\tau$ are negligible). The different components also have channel acceptance uncertainties applied in 0L-channel and \gls{sr} $\rightarrow$ topCR acceptance ratios applied in the 0L- and 1L-channels. Additional \ptv\ extrapolation uncertainties from [400, 600] GeV to $> 600$ GeV is considered in 0L and 1L. Shape uncertainties are derived similarly to the resolved regime. 
 
-\subsection{Top Modelling}\label{sec-modTop} % TODO boosted?
+\subsection{Top Modelling}\label{sec-modTop} 
 These backgrounds adress the decay of a top-quark $t$, including the \ttb\ pair-production and the single-top $Wt$ production as well as the single-top $t$- and $s$-channels, in order of relative importance. The \ttb\ and single-top $Wt$ are combind into a \textit{Top} component in the resolved regime, while the single-top $t$- and $s$-channels are combined into an other single-top component. The Top background (throughout this chapter, Top will refer to the combination of the \ttb\ \& $Wt$ processes) in 0L and 1L are estimated from \gls{mc} and dedicated Top $BT$ control region. In the resolved regime, the Top is grouped into different components based on three flavour categories:
 \begin{itemize}
     \item Top$(bb)$: mostly in the \vhb\ phase space of the signal regions and the \highdr\ \gls{cr}s thanks to the large initial angle between the emitted top-quark, passed over to the two $b$-quarks.
@@ -259,7 +259,7 @@ In addition, 5 different shape uncertainties are considered for the Top backgrou
 \end{itemize} 
 
 \subsubsection{The Single-Top $t$- \& $s$-Channels in Resolved 0L \& 1L Modelling}
-The single-top $t$- and $s$-channels are mainly negligible in the analysis, except in the \vhb\ resolved at low \ptv, where the $t$-channel reaches a total backgrounds fraction of $\sim$8\% in the 1L 75 GeV < \ptv\ < 150 GeV which quickly reduces with increasing energy\footnote{Except in the CRHigh region where the ratio stays in the 7\%-9\% range.}. In 0L and 1L, the single-top $t$- and $s$-channels are only applied cross-sections uncertainties of 17\% and 4.6\%, respectively. The single-top $t$-channel has several additional acceptance uncertainties derived by double ratio computations with alternative samples to model: % TODO the values for stop-t seems fishy: different in the texts of main and modelling and in the tables ... Here it's main text
+The single-top $t$- and $s$-channels are mainly negligible in the analysis, except in the \vhb\ resolved at low \ptv, where the $t$-channel reaches a total backgrounds fraction of $\sim$8\% in the 1L 75 GeV < \ptv\ < 150 GeV which quickly reduces with increasing energy\footnote{Except in the CRHigh region where the ratio stays in the 7\%-9\% range.}. In 0L and 1L, the single-top $t$- and $s$-channels are only applied cross-sections uncertainties of 17\% and 4.6\%, respectively. The single-top $t$-channel has several additional acceptance uncertainties derived by double ratio computations with alternative samples to model: 
 \begin{itemize}
     \item A channel extrapolation uncertainty of 6\% from 1L to 0L.
     \item Region extrapolations: SR+TopCR $\rightarrow$ CRLow+CRHigh, with an additional CRHigh $\rightarrow$ CRLow\cref{footnote-crlow} uncertainty in 1L, \ptv\ < 150 GeV. For the higher \ptv\ regions, the extrapolations are instead from CRHigh $\rightarrow$ SR+CRLow\cref{footnote-crlow}, with an additional SR $\rightarrow$ CRLow\cref{footnote-crlow} uncertainty due to the higher purity of the CRHigh.
@@ -302,9 +302,9 @@ In the resolved regime, the diboson processes are a small background in the anal
     \item Special \gls{stxs} binning acceptance uncertainties are included between \nj\ and \ptv\ regions for the $VZ$ signal diboson processes, considered by \gls{qcd} scale variations. % TODO need to find this for resolved and put it in ModUncSum table.
 \end{itemize}
 
-For the background components\footnote{Thus excluding the signal-like $VZbb$ and $VZcc$.} $qqWW$, $W_{\text{had}}Z_{\text{lep}}$, $W_{\text{lep}}Z_{\text{had}}$, and $ZZ$ where the had or lep index specifies the type of decay, the acceptances uncertainties included are:
+For the background components\footnote{Thus excluding the signal-like $VZbb$ and $VZcc$.} $WW$, $W_{\text{had}}Z_{\text{lep}}$, $W_{\text{lep}}Z_{\text{had}}$, and $ZZ$ with the ``had'' or ``lep'' subtext specifying the type of decay, the acceptances uncertainties included are:
 \begin{itemize}[leftmargin=*]
-    \item Channel extrapolation uncertainties: two sets covering 1L $\rightarrow$ 0L (for $qqWW$ and $W_{\text{lep}}Z_{\text{had}}$) and 2L $\rightarrow$ 0L (for $ZZ$bkg and $W_{\text{had}}Z_{\text{lep}}$) are included due to the different purities.
+    \item Channel extrapolation uncertainties: two sets covering 1L $\rightarrow$ 0L (for $WW$ and $W_{\text{lep}}Z_{\text{had}}$) and 2L $\rightarrow$ 0L (for $ZZ$bkg and $W_{\text{had}}Z_{\text{lep}}$) are included due to the different purities.
     \item Acceptance in jet multiplicity are included, from low (2-jet) to high jet-multiplicity. First to 3-jet, with a different value for the low \ptv\ (< 150 GeV) region. Then from 3-jet to 4-jet inclusively in \ptv\ for 0L and 2L. These are derived seperately for the different lepton channels. % TODO no value for the 4-jet?
     \item Region extrapolation uncertainties go from the \gls{sr} to the CRHigh, due to the higher diboson purity of the \gls{sr}, separately for the different channels.
     \item Acceptances uncertainties for \ptv: all extrapolation go from the 150 < \ptv\ < 250 GeV region to the other region, due to the higher purity in diboson of the medium \ptv\ range, separately for the different channels.
