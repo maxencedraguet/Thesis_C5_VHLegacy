@@ -1,6 +1,7 @@
 # Clean up the repo
 rm main.a*
 rm main.b*
+rm main.d*
 rm main.f*
 rm main.i*
 rm main.l*
