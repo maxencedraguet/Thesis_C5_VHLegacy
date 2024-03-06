@@ -17,7 +17,7 @@ Several types of experimental uncertainties need to be taken into account for th
 
 \paragraph{Jets} Jets are calibrated in dedicated analyses, of which two reduced sets of uncertainties are propagated to the combined \vhbc for small- and large-$R$ jets. For the small-$R$ jets, these uncertainties cover \textit{in-situ} analyses, $\eta$-intercalibration, flavour composition, punch-through jets, high-$p_T$ hadrons, and pile-up effects as well as the jet energy scale and resolution measured in data \cite{ATLASjesjerMeas, Aad:2854733}. The reduced set is derived by a principal component analysis to preserve correlations in certain regions of jet kinematics. Large-$R$ jets uncertainties for the energy scale and resolution are also estimated from data \cite{ATLAS:2018bip}. An uncertainty covering the calibration discrepancy between data and \gls{mc}-simulations is also included.
 
-\paragraph{Flavour Tagging} A dedicated calibration is performed to derive flavour tagging scale factors in the resolved regime, as described in Section \ref{sec-selectionandcat}, while the common ATLAS uncertainties are used for the boosted regime, as described in \ref{chap-calibration}. These flavour tagging calibration \gls{sf}s are derived by combining data-\gls{mc} efficiency modelling \gls{sf}s and \gls{mc}-\gls{mc} \gls{sf}s to account for parton showering and hadronisation variations. These scale factors are smoothed using a local polynomial kernel estimator to avoid distortions in the kinematic variables \cite{ATL-PHYS-PUB-2020-004}. For each jet flavour, there is one uncertainty per $p_T$ bin in the calibration. A principal component analysis is deployed to reduce the large set of systematic uncertainties to 45 (5) for $b$-jet, 20 (4)for $c$-jet, and 20 (4) for light-jets in the resolved (boosted) regime. An extra uncertainty is added to model the effect of high-$p_T$ jets. Truth tagging uncertainties are covered by these flavour tagging uncertainties.
+\paragraph{Flavour Tagging} A dedicated calibration is performed to derive flavour tagging scale factors in the resolved regime, as described in Section \ref{sec-selectionandcat}, while the common ATLAS uncertainties are used for the boosted regime, as described in \ref{chap-calibration}. These flavour tagging calibration \gls{sf}s are derived by combining data-\gls{mc} efficiency modelling \gls{sf}s and \gls{mc}-\gls{mc} \gls{sf}s to account for parton showering and hadronisation variations. These scale factors are smoothed using a local polynomial kernel estimator to avoid distortions in the kinematic variables \cite{ATL-PHYS-PUB-2020-004}. For each jet flavour, there is one uncertainty per $p_T$ bin in the calibration. A $\tau$-jet uncertainty is derived by copying the $c$-jet values and decorrelating them.. A principal component analysis is deployed to reduce the large set of systematic uncertainties to 45 (5) for $b$-jet, 20 (4)for $c$-jet, and 20 (4) for light-jets in the resolved (boosted) regime. An extra uncertainty is added to model the effect of high-$p_T$ jets. Truth tagging uncertainties are covered by these flavour tagging uncertainties.
 
 %
 \section{Signal \& Background Modelling}\label{sec-mod}
@@ -186,7 +186,7 @@ The values of the acceptance uncertainties are presented in Table \ref{tbl:zjets
 In addition, 4 different shape uncertainties are considered:
 \begin{itemize}
     \item \gls{carl} shape: modelling the difference between \textsc{Sherpa} 2.2.11 and \textsc{MadGraph FxFx}, derived for all components and applied in all analysis regions.
-    \item \textsc{Sherpa} 2.2.1 \ptv\ shape uncertainties to model the data-\gls{mc} mis-modelling of  \ptv\ in \textsc{Sherpa} 2.2.11.
+    \item \textsc{Sherpa} 2.2.1 \ptv\ shape uncertainties to model the data-\gls{mc} mis-modelling of \ptv\ in \textsc{Sherpa} 2.2.11. The growing data-\gls{mc} disagreement with higher \ptv\ is visible in the plots of Appendix Figure \ref{fig:plots_VHcc_2L_topCRemu}.
     \item \gls{qcd} scale shape uncertainties by varying $\mu_R$ and $\mu_F$.
     \item \gls{ew} shape variations that are typically quite small.
 \end{itemize} 
@@ -272,21 +272,15 @@ In addition, \gls{carl} and \gls{isr}/\gls{fsr} shape uncertainties are consider
 For the 2L \vhb\ resolved, data-driven estimates are used, deriving a template in the Top $e\mu$ region for the Top background with an 0.8\% extrapolation uncertainty to the signal region. For \vhc, the Top $e\mu$ region is used as a control region with the Top background left free-floating, to normalise the \gls{mc}-simulated samples.
 
 \subsubsection{Boosted Regime Top Backgrounds} 
-In the boosted regime, the \ttb\ and single-top $Wt$ processes are not combined due to the lack of sensitivity to the latter in the dedicated boosted top control region. The modelling in the boosted regime is fully separated for the different top backgrounds, with more details given in the Appendix Tables \ref{tab:ttbar_summary_boosted} and \ref{tab:stopt_summary_boosted}:
+The modelling in the boosted regime, detailed in the Appendix Tables \ref{tab:ttbar_summary_boosted} and \ref{tab:stopt_summary_boosted}, covers:
 \begin{itemize}[leftmargin=*]
-    \item \ttb: 
+    \item Top (\ttb\ and $Wt$): 
     \begin{itemize}
         \item 1 \gls{fn} per \ptv\ region for 0L and 1L. In 2L, a 20\% normalisation uncertainty is applied. 
         \item Channel extrapolation uncertainties are derived from 1L $\rightarrow$ 0L, split per \ptv.
         \item Region extrapolation uncertainties of 10\% are applied in 0L an 1L from the boosted TopCR to the \gls{sr}.
     \end{itemize}
-    \item Single-top $Wt$-, $t$-, and $s$-channels, in order of importance:
-    \begin{itemize}
-        \item They are not free floated but insead have respectively a 25\%, 10\%, and 4.6\% normalisation uncertainties. % Note that only Wt and s are in 2L it seems  
-        \item Channel extrapolation uncertainties are derived only for $Wt$ from 1L $\rightarrow$ 0L.
-        \item Region extrapolation uncertainties of 20\% for the $Wt$ only are applied from the \gls{sr} to the boosted TopCR.
-        \item \ptv\ extrapolation uncertainties of 20\% are applied only for $Wt$ from [400, 600] GeV to \ptv\ $> 600$ GeV. 
-    \end{itemize}
+    \item Single-top $t$- and $s$-channels, in order of importance, are not free floated but insead have respectively a 10\%, and 4.6\% normalisation uncertainties.
 \end{itemize}
 In addition, boosted shape uncertainties are considered simularly to what is done in the resolved regime 0L and 1L.
 
@@ -319,3 +313,6 @@ In addition, the diboson processes are modelled with different shape uncertainti
 \end{itemize}
 
 \paragraph{Boosted regime:} is modelled similarly to the resolved regime, with the uncertainties fully detailed in Table \ref{table:VV_SysBoos_Summary} of the Appendix. Small contributions from mis-identified $W$ decays as jets or mis-reconstructed leptons contribute. The $ZZ$ and $WZ$ have normalisation uncertainties of 17\% and 27\% respectively. Acceptances uncertainties considered cover the lepton channel acceptance, \ptv\ acceptance and a \gls{stxs}-like uncertainty convering the \ptv\ and \nj\ bins, as is done in the resolved regime.
+
+\subsection{Multi-jet Modelling}\label{sec-modMultiJ} 
+The multi-jet background is negligible in 0L and 2L and in the boosted regime. In 1L, a data-driven estimate is used from a high purity multi-jet control region obtained by inverting the lepton isolation requirements. Shapes are derived by a template fit on the $m_T^W$ distributions in the multi-jet \gls{cr}s. The shapes of the multi-jet are extracted to the \gls{sr}s of the resolved regime, primarily in \vhc, with extrapolation and normalisation uncertainties applied. Top and $W+$jets scale factors are applied to the template to account for the large proportion of these processes in the mutli-jet \gls{cr}s.
