@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 %\usepackage{amsfonts} % it kills \checkmark
 \usepackage{amssymb}
+%\usepackage{bm} % for bold math
 \usepackage[toc,page]{appendix}
 \usepackage{array}
 %%BIBLIO%%
@@ -32,7 +33,7 @@
 \usepackage{enumitem} % to remove the indend of itemize with [leftmargin=*]
 \usepackage{listings}
 \usepackage{makecell}
-\usepackage{mathptmx} % curly L
+%\usepackage{mathptmx} % curly L,% it messes with a lot of things!
 \usepackage{multirow} % For multirows entry in tables
 \usepackage{placeins}
 \usepackage{qtree} % for trees
@@ -185,19 +186,22 @@
 \newcommand{\ptv}{$p_T^V$}
 \newcommand{\nj}{$N_{\text{jet}}$}
 \newcommand{\etm}{$E_T^{\textrm{miss}}$}
+
+
+%\newcommand{\boldvhb}{$\textbf{VH(H} \rightarrow \textbf{b}\boldsymbol{\bar{b}}\textbf{)}$}
+\newcommand{\boldvhb}{$\boldsymbol{VH(H \rightarrow b\bar{b})}$}
+\newcommand{\boldvhc}{$\boldsymbol{VH(H \rightarrow c\bar{c})}$}
+\newcommand{\boldvhbc}{$\boldsymbol{VH(H \rightarrow b\bar{b}/c\bar{c})}$}
+
 \newcommand{\vhb}{$VH(H\rightarrow b\bar{b})$}
 \newcommand{\vhc}{$VH(H\rightarrow c\bar{c})$}
 \newcommand{\vhbc}{$VH(H\rightarrow b\bar{b}/c\bar{c})$}
-
 \newcommand{\whf}{$W+$\textit{hf}}
 \newcommand{\wmf}{$W+$\textit{mf}}
 \newcommand{\wlf}{$W+$\textit{lf}}
 \newcommand{\zhf}{$Z+$\textit{hf}}
 \newcommand{\zmf}{$Z+$\textit{mf}}
 \newcommand{\zlf}{$Z+$\textit{lf}}
-
-
 \newcommand{\ttb}{$t\bar{t}$}
 \newcommand{\highdr}{high $\Delta R$}
 \newcommand{\lowdr}{low $\Delta R$}
-

@@ -1,4 +1,4 @@
-\section{Experimental Uncertainties}\label{sec-unc}
+\section{Experimental Uncertainties}\label{sec-unc} % TODO there's more info in the main fit part
 Several types of experimental uncertainties need to be taken into account for the combind analysis, to cover systematics effect due to the detector performance, the reconstruction of objects such as leptons and jets, and the effects of flavour tagging. Table \ref{tab:ExpSysts} summarises these various contributions that are sources of uncertainty.
 
 \input{Tables/VH/ExpUnc.tex} %TODO check that the ftag uncertainties are still completely decorrelated for the VR track and PFlow
@@ -133,7 +133,7 @@ The combined analysis adopts some common strategy to model the backgrounds and s
 \end{equation}
 where category $A$ ($\text{Cat.}^A$) is the highest purity region and $B$ ($\text{Cat.}^B$) is the region studies. If several alternative generators are used ($i > 1$), the respective double-ratio are summed in quadrature: \[ \text{Total Acceptance Unc} = \sqrt{\sum_i\left(\text{Acceptance Unc}_i\right)^2}.\] If the extrapolation is across several regions $A$, $B$, $C$ of decreasing purity order, the acceptance ratio is decomposed two extrapolations: a first one from $A \rightarrow B+C$, with an additional $B \rightarrow C$ uncertainty. 
 
-\paragraph{Shape uncertainties:} the \gls{bdt} shapes and other kinematic distributions of the processes in the different regions are given some flexibility in the fit by introducing shape uncertainties derived from a comparison of the nominal to the alternative samples. The combined analysis introduces the novel \gls{carl} technique to derive a reweighted shape uncertainty using a neural network \cite{carl}. A \gls{dnn} is trained to discriminate the nominal from an alternative, with the process repeated for each individual alternative sampels. The \gls{carl} output scores is the probability for an event to belong to the alternative sample, which can be used to reweight the nominal distribution into the alternative distribution. The advantage of this technique is the reweighted nominal distributions benefit from a much larger statistics than the alternative ones, thus smoothing out statistical fluctuations and reducing the \gls{mc} statistics uncertainties. An example of such a derived \gls{carl} shape uncertainty for the single-top $Wt$ process \textsc{MadGraph5\_aMC@NLO} in 1-lepton is presented in Figure \ref{fig:carl:resolved_closure_stopWt}. Additional shape uncertainties from \gls{ew} corrections, \gls{qcd} scales, a \ptv\ \textsc{Sherpa} 2.2.1, parton shower alternative for the signal samples, and a shape uncertainty for single-top $Wt$ DS/DR shape are directly derived.
+\paragraph{Shape uncertainties:} the \gls{bdt}, $m_{cc}$ and \ptv\ shapes of the processes in the different regions are given some flexibility in the fit by introducing shape uncertainties derived from a comparison of the nominal to the alternative samples. The combined analysis introduces the novel \gls{carl} technique to derive a reweighted shape uncertainty using a neural network \cite{carl}. A \gls{dnn} is trained to discriminate the nominal from an alternative, with the process repeated for each individual alternative sampels. The \gls{carl} output scores is the probability for an event to belong to the alternative sample, which can be used to reweight the nominal distribution into the alternative distribution. The advantage of this technique is the reweighted nominal distributions benefit from a much larger statistics than the alternative ones, thus smoothing out statistical fluctuations and reducing the \gls{mc} statistics uncertainties. An example of such a derived \gls{carl} shape uncertainty for the single-top $Wt$ process \textsc{MadGraph5\_aMC@NLO} in 1-lepton is presented in Figure \ref{fig:carl:resolved_closure_stopWt}. Additional shape uncertainties from \gls{ew} corrections, \gls{qcd} scales, a \ptv\ \textsc{Sherpa} 2.2.1, parton shower alternative for the signal samples, and a shape uncertainty for single-top $Wt$ DS/DR shape are directly derived.
 
 \begin{figure}[!htbp]
     \centering
@@ -147,9 +147,11 @@ where category $A$ ($\text{Cat.}^A$) is the highest purity region and $B$ ($\tex
       \label{fig:carl:resolved_closure_stopWt}
   \end{figure}
   
-  A summary of the signal and background modelling systematics considered is presented in Figure \ref{tab:syst_summary}.
+A summary of the signal and background modelling systematics considered is presented in Figure \ref{tab:syst_summary}. The rest of this section gives more details on the specificities of each process. 
 
-  \input{Tables/VH/ModUncSum.tex} % TODO, need to check the signal uncerrtainties
+\input{Tables/VH/ModUncSum.tex} % TODO, need to check the signal uncerrtainties
+
+All uncertainties are further processed before entering the fit. To remove large statistical fluctuations potentially present in shape systematics, the shapes are smoothed by iteratively rebinning the distribution until the statistical uncertainty in every merged bins of the nominal distribution is smaller than 5\%. When a systematics has a negligible impact on the distributions entering the fit, it is pruned away to ease converge and reduce the complexity. This is applied to systematics causing a normalisation effect smaller than 0.5\% or when both the up- and down-variations have the same sign. Shape uncertainties are pruned if no bin in the distribution has a deviation above 0.5\% after the overall normalisation or if only one of the up- or down-variation is non-zero. For very small background processes, both shape and normalisation uncertainties are pruned: if this is a signal-sensitive region (signal yield is > 2\% of the total in the region), the uncertainties are pruned if the process is less than 2\% of the signal, while in non-signal sensitive region the process must be less than 0.5\% of the total background.  
 
 \subsection{Signal Modelling}\label{sec-modSignal}
 The three main signal productions $qq \rightarrow WH$, $q\bar{q} \rightarrow ZH$, and $gg \rightarrow ZH$ are modelled seperately, with uncertainties modelling the production and the decay mode of the Higgs into $b\bar{b}$ or $c\bar{c}$. The goal of the analysis is to measure the fiducial cross-sections of the \vhb\ and the signal strength of the \vhc. The former objective is adressed with the adoption of the \glsfirst{stxs} in the reduced scheme of stage 1.2 \cite{badger2016les, berger2019simplified}, depicted in Figure \ref{fig:model-stxsscheme}. The bins are defined in successive regions of transverse momentum of the vector boson \ptv\ from truth information in the samples and the number of additional jets \nj\ in the event, at 0 or more than 1 additional jet.
@@ -172,10 +174,10 @@ The signal is coherently modelled across the resolved and boosted regimes and ta
     \item \textit{\gls{ps} and \gls{ue}}: parton shower and underlying event can affect the proprties of the $H \rightarrow b\bar{b} / c\bar{c}$ decay. Uncertainties are introduced to model these effects on the signal acceptance. In the resolved regime, the effects of an alternative \gls{ps} model on the signal acceptance are evaluated on truth information in a similar phase space to the analysis selection. Acceptance uncertainties are derived by comparing the signal acceptance in the analysis categories between the nominal \textsc{Pythia} 8 and the alternative \textsc{Herwig} 7. Additional sub-leading acceptance uncertainties are evaluated for \textsc{Pythia} AZNLO by tune variations. Differences in \ptv\ and $m_{bb}$ ($m_{cc}$) between \textsc{Pythia} and \textsc{Hewrig} are also considered, with the shape difference in the \gls{mva} distribution when using \textsc{Powheg}+\textsc{Herwig} 7 used in the final stage of the analysis. In the boosted regime, the same strategy with the same \gls{ps} models is employed but the full detector response and event reconstruction are simulated, with uncertainties covering modifications to the $m_J$ distribution.
 \end{itemize}
 
-\subsection{$V+$jets Modelling}\label{sec-modVjet} % TODO boosted
+\subsection[$V+$jets Modelling]{$\boldsymbol{V+}$jets Modelling}\label{sec-modVjet} % TODO boosted
 The $V+$jets process is modelled seperately depending on the flavour of the reconstructed vector boson. 
 
-\subsubsection{$Z+$jets}
+\subsubsection{$\boldsymbol{Z+}$jets}
 This background is dominant in the 0L and 2L channels, but negligible in 1L. The background is split into different components of the flavour compositions of jets selected to form the Higgs candidate, grouping compositions with similar kinematic performance as:   
 \begin{itemize}
     \item \textit{$Z+$ heavy flavours (\zhf)}: $Z+bb$ and $Z+cc$
@@ -204,7 +206,7 @@ In addition, 4 different shape uncertainties are considered:
 
 \paragraph{Boosted regime:} roughly the same modelling strategy to the resolved regime is applied, with the uncertainties fully detailed in the Appendix Table \ref{tbl:zjets_acc_fullBoos}. The \zhf\ component is left free-floating while the \zmf\ and \zlf\ components have an overall acceptance uncertainty of 35\%. The \zlf\ has no other acceptance uncertainty as it is negligible in the boosted regime. Flavour acceptance uncertainties for \zhf\ and \zmf\ are applied in 0L and 2L. The \zhf\ and \zmf\ also have channel acceptance uncertainties and \gls{sr} $\rightarrow$ topCR acceptance ratios applied in the 0L. Additional \ptv\ extrapolation uncertainties from [400, 600] GeV to $> 600$ GeV is considered in 0L and 2L. Shape uncertainties are derived similarly to the resolved regime. 
 
-\subsubsection{$W+$jets}
+\subsubsection{$\boldsymbol{W+}$jets}
 The background is dominant in the 1-lepton channel with a residual contribution in 0-lepton mostly due to hadronically decaying $\tau$-lepton. It is split equivalenty to the $Z+$jets background as:   
 \begin{itemize}
     \item \textit{$W+$ heavy flavours (\whf)}: $W+bb$ and $W+cc$
@@ -250,7 +252,7 @@ These backgrounds adress the decay of a top-quark $t$, including the \ttb\ pair-
 
 These grouping are based on the shared kinematics of the components, where the selected jets are either both directly from the top decay (a $b$-jet), 1 from a top decay and 1 from a subsequent hadronic $W$-decay or a radiated jet ($bc$ and $bl$), or neither directly from the top-decay ($cc$, $cl$, and $ll$). The $bc$ and $bl$ share indeed the same kinematics, as illustrated in Figures \ref{fig:topflavdistr_VHcc} in the signal regions of \vhc\. The top$(bq)$ background is particularly significant in the \vhc\ analysis as it peaks at the signal mass (having a mass $\sim (m_{\text{top}} + m_W) / 2 \approx m_H$) and therefore exhibits signal-like properties such as reaching high MVA scores, as shown in Figure \ref{fig:topflavdistr_VHcc}. Due to the small contribution of the top$(qq)$ component, it is merged with the top$(bq)$ into a single top$(bq/qq)$ component, with the different subcomponents shapes modelled by flavour composition uncertainties. The rest of this section details the modelling of the top backgrounds in the analysis regimes for 0L and 1L.
 
-\subsubsection{The \ttb\ and $Wt$ Resolved 0L \& 1L Modelling}
+\subsubsection{The $\boldsymbol{t\bar{t}}$ and $\boldsymbol{Wt}$ Resolved 0L \& 1L Modelling}
 There are three main contributions to the top background modelling scheme in the 0L and 1L resolved regime. Firstly, free floating normalisations are applied for the top$(bb)$ and the top$(bq/qq)$ components, constrained respectively by the \vhb\ \highdr\ CR and the $BT$-tagged Top \gls{cr}. These \gls{fn}s are separated in jet multiplicity \nj (2-jet, 3-jet, and for the 0L-channel only 4-jet) as well as \ptv, for a total of 16 \gls{fn}s. Secondly, several types of acceptance uncertainties are applied, as summarised in Table \ref{tab:summary_altsamples} and detailed in the Appendix Table \ref{tab:top_summary}:
 \begin{itemize}[leftmargin=*]
     \item Channel extrapolation 1L $\rightarrow$ 0L uncertainties: the Top is dominant in 1L, hence the \gls{fn}s derivtion is driven in the 1-lepton channel. This uncertainty is split in \ptv: 2\% in [150, 250] GeV and 8\% in [250, 400] GeV.
@@ -269,7 +271,7 @@ In addition, 5 different shape uncertainties are considered for the Top backgrou
     \item \gls{isr} and \gls{fsr} shape uncertainties are derived by varying the scales $\mu_R$ and $\mu_F$ from the nominal setup. For each, an up-variation and a down-variation are considered, with the variations being symmetric for the \gls{isr} while the down -variation of \gls{fsr} is smaller than the up-variation. % TODO treatment of symmetrised not clear.
 \end{itemize} 
 
-\subsubsection{The Single-Top $t$- \& $s$-Channels in Resolved 0L \& 1L Modelling}
+\subsubsection{The Single-Top $\boldsymbol{t}$- \& $\boldsymbol{s}$-Channels in Resolved 0L \& 1L Modelling}
 The single-top $t$- and $s$-channels are mainly negligible in the analysis, except in the \vhb\ resolved at low \ptv, where the $t$-channel reaches a total backgrounds fraction of $\sim$8\% in the 1L 75 GeV < \ptv\ < 150 GeV which quickly reduces with increasing energy\footnote{Except in the CRHigh region where the ratio stays in the 7\%-9\% range.}. In 0L and 1L, the single-top $t$- and $s$-channels are only applied cross-sections uncertainties of 17\% and 4.6\%, respectively. The single-top $t$-channel has several additional acceptance uncertainties derived by double ratio computations with alternative samples to model: 
 \begin{itemize}
     \item A channel extrapolation uncertainty of 6\% from 1L to 0L.
@@ -283,15 +285,15 @@ In addition, \gls{carl} and \gls{isr}/\gls{fsr} shape uncertainties are consider
 For the 2L \vhb\ resolved, data-driven estimates are used, deriving a template in the Top $e\mu$ region for the Top background with an 0.8\% extrapolation uncertainty to the signal region. For \vhc, the Top $e\mu$ region is used as a control region with the Top background left free-floating, to normalise the \gls{mc}-simulated samples.
 
 \subsubsection{Boosted Regime Top Backgrounds} 
-The modelling in the boosted regime, detailed in the Appendix Tables \ref{tab:ttbar_summary_boosted} and \ref{tab:stopt_summary_boosted}, covers:
+In the boosted regime, the \ttb\ benefit from a good Top \gls{cr} but not the $Wt$, and they are therefore not combined into a single Top process. The modelling in the boosted regime, detailed in the Appendix Tables \ref{tab:ttbar_summary_boosted} and \ref{tab:stopt_summary_boosted}, covers:
 \begin{itemize}[leftmargin=*]
-    \item Top (\ttb\ and $Wt$): 
+    \item \ttb: 
     \begin{itemize}
         \item 1 \gls{fn} per \ptv\ region for 0L and 1L. In 2L, a 20\% normalisation uncertainty is applied. 
         \item Channel extrapolation uncertainties are derived from 1L $\rightarrow$ 0L, split per \ptv.
         \item Region extrapolation uncertainties of 10\% are applied in 0L an 1L from the boosted TopCR to the \gls{sr}.
     \end{itemize}
-    \item Single-top $t$- and $s$-channels, in order of importance, are not free floated but insead have respectively a 10\%, and 4.6\% normalisation uncertainties.
+    \item Single-top $Wt$-, $t$- $s$-channels, in order of importance, are not free floated but insead have respectively a 25\%, 10\%, and 4.6\% normalisation uncertainties. The $Wt$ has additional acceptance uncertainties, to cover the lepton channel extrapolation and a \ptv\ extrapolation from [400, 600] GeV to $>$ 600 GeV. 
 \end{itemize}
 In addition, boosted shape uncertainties are considered simularly to what is done in the resolved regime 0L and 1L.
 

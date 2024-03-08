@@ -1,64 +1,284 @@
 
 \section{Statistical Analysis}\label{sec-fitFramework}
-After collecting the data and simulating the various samples, including the detector effects, reconstructing the physics objects, and applying the different cuts and the event categorisation, the last step in the analysis is to measure the signal yield normalised to the expected \gls{sm} yield (from theory, i.e., $\sigma \times BR$). The analysis aims to define a 95\% confidence level on the maximum signal enhancement factor $\mu$. This is done by maximising the binned-likelihood distribution in all the analysis regions simultaneously as a function of the signal strength and statistical and systematic uncertainties. The full binned-likelihood function can be decomposed into three terms \cite{Mironova:2837159}: 
-\begin{enumerate}
-\item A Poisson probability term based on the expected and observed event yields in all bins of the considered distributions tracks the signal strength: $\mathcal{L} = \prod_{i\in \textrm{bins}} \textrm{Pois}(N_i \,|\, \mu s_i + b_i)$, where $N_i$, $s_i$, and $b_i$ are respectively the number of measured data events, the expected (simulated) signal yield, and the expected background yield in bin $i$. The signal strength parameter $\mu$ is the ratio of the measured $\sigma \times \textrm{BR}$ divided by the \gls{sm} expectation for the signal process.  
-\item Systematics uncertainties enter the fit as Nuisance Parameters (NP) $\overrightarrow{\theta}$ which can modify the expected signal and background yields $s_i(\overrightarrow{\theta})$ and $b_i(\overrightarrow{\theta})$ in each bin. They are modelled as standardised Gaussian penalty terms: $\mathcal{L_{\textrm{NP}}} = \prod_{\theta \in \overrightarrow{\theta}} \frac{1}{\sqrt{2\pi}} e^{- \theta^2/2}$. After the fit, the values of the NPs can be moved upwards or downwards, and this deviation from 0 (from 1 for the normalisation factors) is called a \textit{pull}. The \textit{constraint} indicates the certainty on the value of the NP after the fit. NPs can have a prior, based on pre-existing knowledge or empirical estimates (e.g. auxiliary measurements, MC simulation model differences), or be left \textit{free-floating} (with a prefit value of 1), such as for the normalisation of the major backgrounds which is determined from data in control regions where these processes are enhanced. 
-\item Uncertainties tracking the limited available statistics of the simulations are introduced as $\gamma_i$-parameters, with one such parameter per bin. They give the fit the flexibility to adjust the expected background yield in a particular bin as $b_i(\overrightarrow{\theta}) \rightarrow \gamma_i b_i(\overrightarrow{\theta})$. They are introduced as: $\mathcal{L_{\textrm{BkgStat}}}(\overrightarrow{\gamma}) = \prod_{i \in \textrm{bins}} \textrm{Gauss}(\beta_i | \gamma_i \beta_i, \sqrt{\gamma_i \beta_i})$, where $\beta_i = 1 / \sigma^2_\textrm{rel}$ and $\sigma_\textrm{rel}$ is the relative statistical uncertainty on the expected total background yield. 
-\end{enumerate} 
-The full likelihood function is then described as the product of these three contributions as 
-\begin{equation}
-\mathcal{L} = \prod_{i\in \textrm{bins}} \textrm{Pois}(N_i \,|\, \mu s_i(\overrightarrow{\theta}) + \gamma_i b_i(\overrightarrow{\theta})) \times  \prod_{\theta \in \overrightarrow{\theta}} \frac{1}{\sqrt{2\pi}} e^{- \theta^2/2} \times \prod_{i \in \textrm{bins}} \textrm{Gauss}(\beta_i | \gamma_i \beta_i, \sqrt{\gamma_i \beta_i}).
-\end{equation}
-For the signal, as previously described, a BDT score is used as a discriminant variable. Also called a \textit{Multivariate Analysis Discriminant} (MVA), one such BDT is trained per lepton channel, separately for $VH(H\rightarrow b\bar{b})$ and $VH(H\rightarrow c\bar{c})$. For the topCRs and the $\Delta R$ control regions, the invariant mass of the candidate pair  $m_{c\bar{c}}$ is used. \\
-
-Systematic uncertainties, that act as priors and are constrained in the fit, on the simulated top background events (\textit{nominal samples}) are assessed by comparing the output of different setups of the simulator as well as using alternative simulators. Variations studied in these \textit{alternative samples} concern the matrix element generation (hard scattering), the renormalisation scale $\mu_R$ and factorisation scale $\mu_F$ for the ISR and FSR, the \textit{Parton Shower} (PS), the underlying event simulation, and multiple parton interactions \cite{Mironova:2837159}. Similar uncertainties are introduced for each of the other background processes. In addition, experimental uncertainties that affect all processes are introduced for the triggers, object reconstruction, flavour tagging, and the recorded data luminosity. They cover resolution effects, reconstruction efficiencies, and differences between data and simulations.\\
-
-The different top components normalisations in 0L and 1L are determined from data in the profile likelihood fit by free-floating norm-factors (NF). A prior normalisation uncertainty is applied to account for potential differences between 0L and 1L. Acceptance ratios, in the number of jets and also in the extrapolation from the control region to the signal region, and shape uncertainties are also applied, after being derived for the top background in the 0L and 1L. When two top components are jointly floated, the dominated component is given an extra flavour ratio uncertainty to add flexibility to the fit. For example, when floating top($bl$) with top($bc$), the normalisation is mostly driven by top($bc$), the dominating component, and a ratio $bl$/$bc$ is added to let the $bl$ components adjust to differences between the two.  \\
-
-The objective of this section is to study the impact of the modified top control regions on the combined 012L $VH(H\rightarrow c\bar{c})$ fit. The aim is to study for which top components the fit regions, and in particular the topCRs, provide enough information to determine their normalisation and constrain their shape from data. Furthermore, the data in the SRs should be sufficiently well described using the complete fit setup and the top background control regions should not significantly impact the behaviour (the NPs) of other backgrounds. While every bin of the analysis is used in the fit, bins with a large fraction of the signal (e.g., at high BDT score in the SRs) are not displayed as the analysis is still blinded. \\
-
-Several iterations of the fit studies were performed to test the new topCRs proposed in this work and in particular which components can be constrained and which NPs can be correlated. The correctness of each fit is evaluated by verifying several diagnostics information, such as changes to the constraining of non-top-related NPs and to the predicted postfit yields. In the present report, three setups are presented to represent the evolution of the implementation of the topCR:
-\begin{itemize}
-\item Nominal: this is the first implementation to use all available topCRs (BT and BL) and the $VH(H\rightarrow b\bar{b})$ High $\Delta R$ CR with minimal changes to the other NPs. Other novelties introduced here are to free-float separately the top($bc$) and top($bl$) and to float the top($bb$) normalisation. The 2-jet and 3-jet regions share the same NFs and an additional 3-to-2-jet extrapolation uncertainty is implemented and applied in 2-jet. TopCR-SR extrapolation uncertainties are applied in the SRs except for top($lq$) where it is applied in the topCR. 
-\item Baseline 2: uses only the topCR BT. Compared to the Nominal, the topCR BL is removed as it has a large $V$+jets background, especially in 0L, and impacts the NPs associated with this process, which is not the aim of the top control region. The top($bl$) is now floated jointly with top($bc$), as they are similar physics-wise since they both select a $b$-quark from the top-quark decay and a jet from the subsequent $W$ decay. An extra NP is introduced to model the $bl$ to $bc$ ratio. The main selection difference between the topCRs and the SRs is the tagging criteria. This difference should be covered by the flavour tagging uncertainties and the topCR-SR extrapolation uncertainties are therefore dropped. The flavour components represent different parts of the top components being selected as candidate jets. The difference induced in the 2-jet and 3-jet regions is not expected to be the same between the flavour components, hence the 3-to-2 jet extrapolation is decorrelated by flavour, separately for $t\bar{t}$ and $Wt$, marking the last modification with respect to the nominal setup.
-\item Baseline 2 + nJetDec: is similar to Baseline 2 but now the topCR NFs are decorrelated on the number of jets. This is the preferred scenario if the data and CRs are powerful enough for the fit to converge since it maximally exploits the knowledge from the data and altogether avoids the need for 3-to-2 jet extrapolation uncertainties. These latter uncertainties can be very large because they cover different levels of mis-reconstructed or out-of-acceptance objects involved in the distinction of the top background into the 2-jet and 3-jet regions.
+After collecting the data and various simulated samples, including detector effects, reconstructing the physics objects, and applying the complex events selection and categorisation, the final step in the analysis is to measure the different \textit{Parameters of interest} (\gls{poi}) with the modelling strategy defined in the previous section. The combined analysis targets several deliverables for measurement:
+\begin{itemize}[leftmargin=*]
+\item \textit{\vhb}: 
+    \begin{itemize}
+        \item Inclusive signal strength $\mu_{VH_{bb}}$ and significance: 1 \gls{poi}.
+        \item Signal strengths for $WH(\rightarrow b\bar{b})$ and $ZH(\rightarrow b\bar{b})$: 2 \gls{poi}s.
+        \item Fiducial \gls{stxs} measurements in the reduced stage 1.2, described in Section \ref{sec-modSignal} and Figure \ref{fig:model-stxsscheme}: 15 \gls{poi}s (8 for $ZH$, 7 for $WH$).
+        \item Constraints on Yukawa Higgs-bottom coupling modifier $\kappa_b$. % TODO define this
+    \end{itemize}
+\item \textit{\vhc}:
+    \begin{itemize}
+        \item The signal strength $\mu_{VH_{cc}}$ and upper limits at the 95\% \gls{cl} : 1 \gls{poi}.
+        \item Constraints on Yukawa Higgs-charm coupling modifier $\kappa_c$. % TODO define this
+    \end{itemize}
+\item \textit{Combined \vhbc}: 
+    \begin{itemize}
+        \item Effective field theory interpretation.
+        \item Limits on the ratio of Yukawa coupling modifiers $\kappa_c / \kappa_c$. % TODO define this
+    \end{itemize}
 \end{itemize}
 
-Figures \ref{fig:pullsTop} and \ref{fig:pullsFTAG} compare the pulls obtained by the different baselines considered. The top of Figure~\ref{fig:pullsTop} shows the floating normalisations of the top background. The [150, 250] GeV region is indicated by the \textit{BMin150} suffix and the region above 250 GeV by \textit{BMin250}, while the number of jets region is indicated by a suffix $J2$ or $J3$. All of the top components NFs are well constrained and the values obtained are consistent between the different $p_T^V$ regions and, for Baseline 2+nJetDec (in red), the number of jets regions. One small exception is the top($lq$) in Baseline 2+nJetDec. This component is however less relevant to the analysis and the top($lq$) can simply be kept inclusive in the number of jets in the final setup. Thanks to the inclusion of the CRHigh from $VH(H\rightarrow b\bar{b})$, even the top($bb$) component is well constrained in $VH(H\rightarrow c\bar{c})$. When removing the topCR BL, a small difference is induced in the NF for the V+jets background (not shown in the Figure). For example, the postfit yield of the W+jets background in the 1L [150, 250] GeV TT SR changes by 0.69\% between the Nominal and Baseline 2 + nJetDec (from 461000 to 457800 expected events). \\
+The \textit{signal strength or enhancement factor} $\mu$ is the ratio of the measurement signal yield to the expected yield in the \gls{sm}, from the process $\sigma_{VH} \times$ branching ratio of the decay.
+
+\subsection{Likelihoof Function Definition}\label{subsec-likelidef}
+All parameters of interest are the results of comparing theory-based expactations baked into \gls{mc}-simulated samples to real measured data in a fit. This fit is performed by maximising the binned-likelihood function in all the analysis regions simultaneously as a function of the signals strengths and statistical and systematic uncertainties. The full binned-likelihood function is composed of 3 terms, accounting respectively for the number of events per bin $\mathcal{L}_{\text{Events}}$, the impact of systematics $\mathcal{L}_{\text{Systematics}}$, and finally the impact of the limited statistics of the simulated sample $\mathcal{L}_{\text{MC-stats}}$. These are combined into the likelihood function of Equation \ref{eq-simp-like-func}: 
+\begin{equation}\label{eq-simp-like-func}
+    \mathcal{L} = \mathcal{L}_{\text{Events}} \times \mathcal{L}_{\text{Systematics}} \times \mathcal{L}_{\text{MC-stats}}.
+\end{equation}
+
+The events part $\mathcal{L}_{\text{Events}}$ is statistically modelled with Poisson distributed ($\mathcal{P}$) probabilities for every bin $i$ in the analaysis, comparing the number of measured data events $N_i$ to the expectations of the signal $s_i$ and backgrounds $b_i$ in simulations. The $\mu$ signals strengths \gls{poi}s enter this term as parameter modifying the expected signal contributions : \[\mathcal{L}_{\text{Events}} = \prod_{i\in \textrm{bins}} \mathcal{P}(N_i \,|\, \mu s_i + b_i) = \prod_{i\in \textrm{bins}} \frac{\left(\mu s_i + b_i\right)^{N_i}}{N_i} \, e^{-\left(\mu s_i + b_i\right)}.\] For \vhb, the several \gls{poi}s in the \gls{stxs} measurement sets the signal strengths as a vector $\boldsymbol{\mu}$ with one entry per \gls{stxs} bin.\\
+
+The systematics part $\mathcal{L}_{\text{Systematics}}$ are introduced in the fit as \gls{np} $\boldsymbol{\theta}$, accounting for possible perturbations to the expected signal and background yields $\{s_i, b_i\} \rightarrow \{s_i(\boldsymbol{\theta}), b_i(\boldsymbol{\theta})\}$ in each bin. The \gls{np}s are statistically modelled as standard Gaussian $\mathcal{N}(0, 1)$ penalties of mean 0 and unit-variance: \[ \mathcal{L}_{\text{Systematics}}(\boldsymbol{\theta}) = \prod_{\theta \in \boldsymbol{\theta}} \frac{1}{\sqrt{2\pi}} e^{- \theta^2/2}.\] The nominal value is by convention set at $\theta_0 = 0$, with $\theta = \pm 1$ representing a $\pm1$ $\sigma$ variation. The effect of each \gls{np} is determined in auxiliary measurements, following the prescriptions in the modelling Section \ref{sec-unc}. For example, if an \gls{np} tracking the normalisation of a background with a 10\% prior is moved upwards by 1 standard deviation in the fit, the yield of the background is increased by 10\%. After the fit, the central values of the \gls{np}s can be moved upwards or downwards, with a deviation from the initial central value called a \textit{pull} and defined as \[ \text{pull}_{\theta} = \frac{\hat{\theta} - \theta_0}{\sigma_{\theta_0}}, \] where the prefit value $\theta_0 = 0 $ for all \gls{np}s but the floating normalisation which have $\theta_0 = 1$, and $\sigma_{\theta_0} = 1$. The \textit{constraint} indicates the change in certainty on the \gls{np} after the fit, measured by the variance $\sigma_{\hat{\theta}}$ from the inverse Hesse matrix at the point of maximal likelihood. For the normalisation of the major backgrounds, special unconstrained \gls{np}s are included with no likelihood penalty and said to be \textit{free-floating} (\gls{fn}s). They are free to vary, and determined from data in control regions with an enhanced purity of the processes they normalised. These special \gls{np}s are denoted $\tau$ and have prefit values $\theta_0$ set at 1.  
+
+The final part covers the uncertainties linked to the limited statistics of the \gls{mc}-samples, statistically modelling $\mathcal{L}_{\text{MC-stats}}$ with $\gamma$-parameters. One such $\gamma_i$ is introduced per bin, with the freedom to modify the expected background yield as $b_i(\boldsymbol{\theta}) \rightarrow \gamma_i b_i(\boldsymbol{\theta})$. The $\boldsymbol{\gamma}$ factors are Gaussian distributed with a likelihood function: \[\mathcal{L}_{\text{MC-stats}}(\boldsymbol{\gamma}) = \prod_{i\in \textrm{bins}} \mathcal{N} \left(\beta_i \,|\, \gamma_i\beta_i, \sqrt{\gamma_i\beta_i} \right),\] with $\beta_i = 1 / \sigma_{\text{rel}}^2$ introducing the relative statistical uncertainty ($\sigma_{\text{rel}}$) on the expected yield of all backgrounds $b_i$. \\
+
+The full likelihood function of Equation \ref{eq-simp-like-func} is thus defined as
+\begin{equation}
+\mathcal{L}\left(\boldsymbol{\mu}, \boldsymbol{\theta}, \boldsymbol{\gamma}\right) = \prod_{i\in \textrm{bins}} \mathcal{P}(N_i \,|\, \boldsymbol{\mu} s_i(\boldsymbol{\theta}) + b_i(\boldsymbol{\theta}, \boldsymbol{\tau}, \boldsymbol{\gamma})) \times  \prod_{\theta \in \boldsymbol{\theta}} \mathcal{N}(\theta \,|\, 0, 1) \times \prod_{i \in \textrm{bins}} \mathcal{N}(\beta_i \,|\, \gamma_i \beta_i, \sqrt{\gamma_i \beta_i}).
+\end{equation}
+The parameters $\{\boldsymbol{\mu}, \boldsymbol{\theta}, \boldsymbol{\gamma}\}$ jointly maximising the likelihood are written as $\{\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\theta}}, \hat{\boldsymbol{\gamma}}\}$ while those maximising the likelihood condition on a fixed value of $\boldsymbol{\mu}$ are written as $\{\hat{\hat{\boldsymbol{\theta}}}, \hat{\hat{\boldsymbol{\gamma}}}\}$. These two sets are used to define a profile likelihood ratio $\lambda(\boldsymbol{\mu})$ to test a certain hypothesis about the value of $\boldsymbol{\mu}$ with
+\begin{equation}\label{eq-lik-ratio}
+    \lambda(\boldsymbol{\mu}) = \frac{\mathcal{L}\left(\boldsymbol{\mu}, \hat{\hat{\boldsymbol{\theta}}}, \hat{\hat{\boldsymbol{\gamma}}} \right)}{\mathcal{L}\left(\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\theta}}, \hat{\boldsymbol{\gamma}} \right)}.
+\end{equation}
+
+The $lambda$ is bound to the range [0, 1], with higher values implying a good agreement between the data and the chosen $\boldsymbol{\mu}$ while lower values are signs of disagreements. This pattern permits the construction of a likelihood ratio test statistics $t_{\boldsymbol{\mu}}$, defined as \cite{asympForm}
+\begin{equation}\label{eq-lik-ratio-test}
+    t_{\boldsymbol{\mu}} =
+      \begin{cases}
+        -2 \ln \lambda(\boldsymbol{\mu}) & \hat{\boldsymbol{\mu}} \geq \boldsymbol{\mu} \\
+        0 & \hat{\boldsymbol{\mu}} < \boldsymbol{\mu}
+      \end{cases},
+\end{equation}
+since in this case the signal can only have a positive contribution to the yield. This statistics is leveraged to perform two types of test: the no signal hypothesis $\mu = 0$ and the nominal signal hypothesis $\mu = 1$. In the no signal hypothesis test, also called null hypothesis, the $p$-value quantifies the compatibility of the observed data with a background-only hypothesis ($\mu = 0$) and is defined as:
+\begin{equation}
+    p_{\boldsymbol{\mu}}=\int_{t_{\boldsymbol{\mu},\mathrm{obs}}}^{\infty} f(t_{\boldsymbol{\mu}} \,| \, 0) dt_{\boldsymbol{\mu}},
+\end{equation}
+where $t_{\boldsymbol{\mu},\mathrm{obs}}$ is the observed test statistics (for the observed $\hat{\boldsymbol{\mu}}$) and $f(t_{\boldsymbol{\mu}} \,| \,0)$ is the test statiscs $t_{\boldsymbol{\mu}}$ probability density function assuming $\boldsymbol{\mu} = 0$. The $p$-vaue is the probability of finding data that is equally or more incompatible with the null hypothesis and as such a low $p$-value gives confidence to reject the null hypthosis. In particle physics, the $p$-value is often translated into the significance $Z$, measuring the number of Gaussian standard deviations ($\sigma$) above the background as
+\begin{equation}
+    Z = \Phi^{-1}(1-p_{\boldsymbol{\mu}}),
+\end{equation}
+with $\Phi^{-1}$ the inverse Gaussian cumulative distribution function. The standard for \textit{observation} of a process is abritrarily set by the community at 5 $\sigma$ (correspond to a $p$-value $\approx 3 \times 10^{-7}$), with a 3 $\sigma$ signal strength significance taken as \textit{evidence} of a process. \\
+
+To determine a 95\% upper limit \gls{cl} on a signal strength, a modified frequentist \gls{cl}$_s$ method is deployed \cite{asympForm, ALRead_2002}, based on the test statistics $\tilde{t}$ defiend as:
+\begin{equation}
+    \tilde{t} = -2 \ln \frac{\mathcal{L}_{s+b}}{\mathcal{L}_{b}} = -2 \ln \frac{\mathcal{L}\left(\mu = 1, \hat{\hat{\boldsymbol{\theta}}}(\mu = 1), \hat{\hat{\boldsymbol{\gamma}}}(\mu = 1) \right)}{\mathcal{L}\left(\mu = 0, \hat{\hat{\boldsymbol{\theta}}}(\mu = 0), \hat{\hat{\boldsymbol{\gamma}}}(\mu = 0) \right)},
+\end{equation}
+where $\mathcal{L}_{s+b}$ is the nominal signal hypothesis ($\mu = 1$) and $\mathcal{L}_{b}$ the null hypothesis ($\mu = 0$), with the conditional likelihood optimisation of $\boldsymbol{\theta}$ and $\boldsymbol{\gamma}$ distinct between the two hypotheses. The upper 95\% \gls{cl}$_s$ limit on the signal strength $\mu$ is the $\mu$ value such that the $p$-value of the test statistics $\tilde{t}$ is equal to 0.05.\\
+
+In addition to the fits performed between real and simulated datasets, so-called \textit{Asimov} fits are perfomed. These leverage the \textit{Asimov} datasets, corresponding to the sum all simulated processes (signal + backgrounds). Two such sets are used: a \textit{prefit} Asimov dataset where the nuisance parameters are set to their initial values\footnote{0 for all \gls{np}s but the \gls{fn}s, which are set at 1.}, and a \textit{postfit} Asimov dataset where the \gls{np}s take their best-fit values from the fit to the real dataset. The postfit Asimov dataset can be used to define expected results, which quantify the sensitivity of an analysis to any similarly collected real data. Fits can be perfomed either conditionally or unconditionally, by setting the \gls{poi}s to their \gls{sm} expectations or letting them free-floating. 
+
+\subsection[The \vhbc\ Fit]{The \boldvhbc\ fit}\label{subsec-subsecVHBCfit}
+There are 15 \gls{poi}s for the \vhb\ side and 1 \gls{poi} for \vhc. The binning used and regions included as well as the variables defining the underlying distributions entering the fits are detailed in Sections \ref{sec-selectionandcat} \& \ref{sec-vh-disc}. A dense summary of the full categorisation is presented in Figure \ref{fig:ana-strat-det}, underscoring the complexity of an analysis spanning 164 different regions, 84 of which are in \vhc\ (30 \gls{sr}s, 6 Top $e\mu$ CR, 10 $V+l$ CR, 48 CRHigh), 48 in the resolved \vhb\ (21 \gls{sr}s, 6 CRLow, 21 CRHigh), 12 TopCRs $BT$-tagged shared in the resolved regime, and 10 in the boosted regime (6 \gls{sr}s, 4 boosted TopCRs). Experimental and modelling uncertainties are introduced to account for any mis-modelling, as described in Section \ref{sec-unc}. The analysis described in this thesis is not yet concluded, with modifications to the modelling under active investigation at the time of writing. Consequentely, the fit is still blinded, with the data in bins most sensitive to the signal region hidden. As such, the results presented here correspond to the expected results from the postfit Asimov.  % Final sentence not clear: what am I showing?
+
+\subsubsection{\boldvhc}
+Concerning the \vhc\ signal strength measurement, the 95\% \gls{cl}$_s$ expected upper limit are shown for the different lepton channels and combined in Figure \ref{fig:fit_new_vhcclimitPostfit} for the postfit Asimov and Figure \ref{fig:fit_new_vhcclimitPrefit} for the prefit Asimov. To compare, the published ATLAS \vhc\ result is shown in Figure \ref{fig:fit_old_vhcclimit} \cite{Collaboration:2721696}.
 
 \begin{figure}[h!]
-%\hspace{-4.0cm}
-\centering
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[scale=0.43]{Images/VH/clean_pull/NP_Top.pdf}
-\caption{Top pulls.} 
-\label{fig:pullsTop}
-\end{subfigure}
- %
- \hfill
- %
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[scale=0.36]{Images/VH/clean_pull/NP_BTag.pdf}
-\caption{Flavour tagging pulls.} 
-\label{fig:pullsFTAG}
-\end{subfigure}
-\caption{Pulls for the 012L fit with the several baselines. Blue: nominal; green: baseline 2; red: baseline 2 + nJetDec.}
-\label{fig:pulls}
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/oldVHcc.png}
+        \caption{\vhc\ analysis \cite{Collaboration:2721696}.}
+        \label{fig:fit_old_vhcclimit}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/postfitVHcc.png}
+        \caption{Combined postfit Asimov.}
+        \label{fig:fit_new_vhcclimitPostfit}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/prefitVHcc.png}
+      \caption{Combined prefit Asimov.}
+      \label{fig:fit_new_vhcclimitPrefit}
+  \end{subfigure}
+    \caption{The 95\% CL$_s$ upper limit on the \vhc\ signal strength in the published analysis (left) and combined analysis posfit (centre) and prefit (right).}
+    \label{fig:fit_vhcc_limits}
 \end{figure} 
 
-The rest of Figure~\ref{fig:pullsTop} shows the most important top-related NPs. The METTrigTop, covering the differences between data and simulation in the MET trigger efficiency for top processes, is strongly pulled for all fit setups, something that requires further investigation from the analysis team. The NPs with name of the form \textit{NJetAcc\_Top*} list the nJet acceptances, a single one for the Nominal in blue and split in flavour for Baseline 2 in green. They are removed in Baseline 2 + nJetDec as in this case the NFs are floated separately for each number of jets region. This last setup is able to avoid incurring the rather large systematics induced by these 3-to-2 jets extrapolation uncertainties. Underneath the nJet acceptances, the pulls with names starting with \textit{Top\_mCC} represent shape systematics derived by considering the difference between the nominal samples and the alternative generators (such as Herwig and Powheg) or internal variations (like for the ISR). The $topCR\_extrap$ are the topCR-SR extrapolation uncertainties which are only applied in the Nominal setup. For the Baseline 2 variations, the flavour tagging NPs and associated pulls are able to cover this extrapolation with minimal changes to the Nominal, as shown in Figure~\ref{fig:pullsFTAG}. Through these different groups, the interesting observation is that the Baseline 2 + nJetDec performs similarly to the Baseline 2 and Nominal, despite having a much simpler structure without nJet acceptances nor topCR extrapolations. A closer look at other NPs, such as the b-tagging pulls, confirms there is a good agreement between the different alternatives and no over-constraining is observed. \\
+Significant improvements are expected for all lepton channels. The combination of all lepton channel leads to a remarkable improvement on the 95\% \gls{cl}$_s$ upper limit on $\mu_{VHcc}$ from 31 $\times$ \gls{sm} in the published analysis to 11.1 $\times$ \gls{sm} (10.2 $\times$ \gls{sm}) in the postfit (prefit) Asimov combined one, a factor 2.8 improvements in sensitivity. Gains are expected to be made in all lepton channels, which now have very similar sensitivity thanks to modifications to the analysis strategy. The 0-lepton channel upper limits is reduced fom 40 $\times$ \gls{sm} $\rightarrow$ 17.5 $\times$ \gls{sm}, the lepton from 60 $\times$ \gls{sm} $\rightarrow$ 18.8 $\times$ \gls{sm}, and the 2-lepton from 51 $\times$ \gls{sm} $\rightarrow$ 18.8 $\times$ \gls{sm}. These correspond to relative sensitivity improvement factors of 2.3, 3.2, and 2.7. Most of the gains are made in the 1- and 2-lepton channels, with the 0-lepton channel still the most sensitive one.
 
-The expected prefit 95\% confidence limits on the signal strength of $VH(H\rightarrow c\bar{c})$ of these conditional data fits are: 
-\begin{itemize}
-\item Nominal: $12.60^{+4.94}_{-3.52}$ × \gls{sm}
-\item Baseline 2: $12.75^{+4.99}_{-3.56}$ × \gls{sm}
-\item Baseline 2 + nJetDec: $12.71^{+4.98}_{-3.55}$ × \gls{sm}
-\end{itemize}
-These values are consistent between the different fits. Comparing the fit setups, Baseline 2 + nJetDec is preferred to serve as a new nominal thanks to its simplified fit structure, its lower number of NPs and normalisation factors, the ability to constrain the components in several number of jet regions, and the freedom to use the topCR BL region as a validation region rather than as a control region. The obtained limits are significantly improved compared to the previous ATLAS result of 26 × \gls{sm} (31 × \gls{sm}) \cite{Collaboration:2721696} and are competitive with the recent CMS results of an observed (expected) upper limit of 14 $\times$ \gls{sm} (7.6 $\times$ \gls{sm}) \cite{arXiv:2205.05550}. The analysis is however still not concluded and improvements are still being pursued by fine-tuning the event selection to avoid large uncertainties as much as possible, including new MC samples with lower MC statistical uncertainties, as well as revisiting the modelling uncertainties all while monitoring the fit behaviour and carrying out similar studies to the present one for other regions and backgrounds. 
+%\subsubsection{\vhb}
+\subsubsection{\boldvhb}
+On the \vhb\ side, combining the resolved and boosted regime, the postfit expected significance is of 7.9 $\sigma$ over the background-only prediction, corresponding to a 23\% improvement over the published expected significance at 6.3 $\sigma$ \cite{ATLAS:2021wqh}. This is achieved thanks to a postfit expected significance of 4.7 $\sigma$ in the 0-lepton channel (15\% improvement to published result), 5.3 $\sigma$ in 1-lepton (30\% improvement), and 4.4 $\sigma$ in 2-lepton (3\% improvement). The most sensitive channel is distinctively the 1-lepton in this case. \\% check the 2L improvement, seems low
 
-\section{Conclusion}
-The $VH(H\rightarrow b\bar{b}/c\bar{c})$ analysis of Run 2 provides an exciting avenue to improve the competitivity of the ATLAS measurement of the charm Yukawa coupling. While the analysis is still ongoing, the harmonisation of the $VH(H\rightarrow b\bar{b})$ and $VH(H\rightarrow c\bar{c})$, the refinement of the top control region, the introduction of MVA sas discriminating variables, and the many other modifications pursued in the Combined Analysis already indicate significant gains will be made on the previously published result. The analysis is planned to wrap up in the following months and will be described in detail in the final DPhil dissertation. 
+Separating the \vhb\ signal strength into two \gls{poi}s for $WH(H \rightarrow{b\bar{b}})$ and $ZH(H \rightarrow{b\bar{b}})$, the prefit expected significances are 5.5 $\sigma$ for $WH$ and 6.2 $\sigma$ for $ZH$. This marks the first time a $H \rightarrow b\bar{b}$ analysis is expected to reach observation-level in $WH$, thanks to the large improvement in the 1-lepton channel sensitivity. \\
 
-\clearpage
+Finally, adopting the fine splitting of the \gls{stxs} stage 1.2 with 15 bins defined by \ptv\ and additional jet multiplicity \nj, with 8 bins in $ZH$ and 7 bins in $WH$, the \vhb\ analysis reaches the per bin sensitivities listed in Table \ref{tab:exp-stxs-prefit}, with evidence-level only attained for the 150 GeV < \ptv\ < 250 GeV with no additional jet $ZH$ bin. The systematics and statistical uncertainty effect on the signal strength of the different bins are shown in Figure \ref{fig:fit-stxs-cons}.
 
+\begin{table}[h!]
+    \centering
+    \renewcommand*{\arraystretch}{1.3}
+    \begin{tabular}{c r | C{4cm} C{4cm}}
+        \hline \hline
+        $VH$ & \multicolumn{1}{c|}{Truth \ptv} & 0 additional \nj & $\geq$1 additional \nj \\
+        \hline
+        WH &  [75, 150[ GeV & \multicolumn{2}{c}{0.69 $\sigma$} \\
+        WH & [150, 250[ GeV & 2.29 $\sigma$ & 0.55 $\sigma$ \\
+        WH & [250, 400[ GeV & 2.78 $\sigma$ & 0.94 $\sigma$ \\
+        WH & [400, 600[ GeV & \multicolumn{2}{c}{1.87 $\sigma$} \\
+        WH & $\geq$ 600 GeV & \multicolumn{2}{c}{1.43 $\sigma$} \\ \hline
+
+        ZH &  [75, 150[ GeV & 1.48 $\sigma$ & 0.90 $\sigma$\\
+        ZH & [150, 250[ GeV & 3.37 $\sigma$ & 1.64 $\sigma$ \\
+        ZH & [250, 400[ GeV & 2.85 $\sigma$ & 1.49 $\sigma$ \\
+        ZH & [400, 600[ GeV & \multicolumn{2}{c}{1.91 $\sigma$} \\
+        ZH & $\geq$ 600 GeV & \multicolumn{2}{c}{1.07 $\sigma$} \\ 
+        \hline \hline
+    \end{tabular}
+    \caption{The expected prefit significance in the different STXS bins of the combined analysis.}
+    \label{tab:exp-stxs-prefit}
+\end{table}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/STXS_cons.png}
+    \caption{The constraints on the prefit STXS signal strength.}
+    \label{fig:fit-stxs-cons}
+\end{figure} 
+
+\subsubsection{The Diboson Cross-Check}\label{subsec-DibosonC}
+The diboson cross-check analysis is performed with the $VZ (\rightarrow b\bar{b})$ and $VZ (\rightarrow c\bar{c})$ as signal, in a similar fashion to the \vhbc\ fit with the intention to validate the strategy adopted. For the $VZ (\rightarrow b\bar{b})$ part, the postfit expected significance reaches a large value of 15.1 $\sigma$ when combining lepton channels. The 0-lepton channel reaches 11.2 $\sigma$, 1-lepton 6.2 $\sigma$, and 2-lepton 9 $\sigma$. On the $VZ (\rightarrow c\bar{c})$ side, the combined analysis expects to reach observation level for the first time, with a combined postfit expected significance of 5.1 $\sigma$. This represents a significant improvement of a factor 2.3 from the 2.2 $\sigma$ published expected result \cite{Collaboration:2721696}. The combined analysis reaches a postfit expected significance of 3.9 $\sigma$ in 0-lepton, 2.6 $\sigma$ in 1-lepton, and 3.1 $\sigma$ in 2-lepton.
+
+\subsubsection{Fit Analysis}
+In addition to the main results highlighted above, some further insights into the output of the fits are given before concluding this section. To verify the \gls{mc}-samples correctly reproduce the data after the fit, some posfit plots are presented in Figure \ref{fig:postfit_ptv}. Interestingly, the shown distributions in the signal regions are the \ptv\ distributions and thus not directly constrained by the fit, which receives instead the re-binned \gls{mva} distributions. The good agreement observed between data and \gls{mc} is a sign of the correct constraining by the fit. \\
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/0L_bb_2j.png}
+        \caption{\vhc\ analysis \cite{Collaboration:2721696}.}
+        \label{fig:fit_old_vhcclimit}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/1L_bb_2j.png}
+        \caption{Combined postfit Asimov.}
+        \label{fig:fit_new_vhcclimitPostfit}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/2L_bb_2j.png}
+      \caption{Combined prefit Asimov.}
+      \label{fig:fit_new_vhcclimitPrefit}
+  \end{subfigure} \\
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/0L_xt_2j.png}
+    \caption{\vhc\ analysis \cite{Collaboration:2721696}.}
+    \label{fig:fit_old_vhcclimit}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/1L_xt_2j.png}
+    \caption{Combined postfit Asimov.}
+    \label{fig:fit_new_vhcclimitPostfit}
+\end{subfigure}
+\begin{subfigure}[b]{0.32\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/Postfit/2L_xt_2j.png}
+  \caption{Combined prefit Asimov.}
+  \label{fig:fit_new_vhcclimitPrefit}
+\end{subfigure} \\
+
+    \caption{The 95\% CL$_s$ upper limit on the \vhc\ signal strength in the published analysis (left) and combined analysis posfit (centre) and prefit (right).}
+    \label{fig:postfit_ptv}
+\end{figure} 
+
+The breakdown of the uncertainties, presented in Table \ref{tab:exp-breakdown}, is a measure of the different uncertainties' contribution to the \vhbc\ analysis. The different \gls{np}s are grouped based on their origin, and their impact on the signal strength of \vhb\ or \vhc\ are assessed by iteratively re-running fits with successive groups of \gls{np}s fixed to their postfit values. The notation adopted is to label the signal strengths (one for \vhb\ and one for \vhc\ here) of the nominal maximal likelihood fit as $\hat{\mu}$ with uncertainty $\sigma_{\hat{\mu}}$, and of a re-ran fit with a group of \gls{np}s fixed as $\hat{\mu}'$ with uncertainty $\sigma_{\hat{\mu}'}$. The impact of the fixed group of \gls{np}s is defined as the change in uncertainty as 
+\begin{equation}
+    \text{Impact} = \sqrt{\sigma^2_{\hat{\mu}} - \sigma^2_{\hat{\mu'}}}.
+\end{equation}
+
+\begin{table}[h!]
+    \centering
+    \renewcommand*{\arraystretch}{1.3}
+    \begin{tabular}{l  C{2cm} C{2cm}}
+        \hline \hline
+        Source of Uncertainty & $\mu_{VH(H\rightarrow b\bar{b})}$ & $\mu_{VH(H\rightarrow c\bar{c})}$ \\
+        \hline
+        \textbf{Total}               &  0.127 & 5.089 \\
+        \textbf{Statistics}          &  0.095 & 3.791 \\
+        \textbf{Systematics }        &  0.085 & 3.395 \\ 
+        \hline \hline
+        \textbf{Statistical Uncertainties} & 0.095 & 3.791 \\
+        Data sample size             &  0.088 & 3.538 \\
+        Floating normalisations      &  0.029 & 1.247 \\
+        Top $e\mu$ CR statistics     &  0.011 & 0.130 \\ 
+        \hline \hline
+        \textbf{Systematics Uncertainties} & 0.085 & 3.395 \\ 
+        \vhbc\ Modelling         & 0.021 & 0.237 \\
+        \hline
+        \textbf{Backgrounds Modelling}    & 0.069 & 2.739 \\
+        $Z+$jets                     &  0.036 & 1.587 \\
+        $W+$jets                     &  0.036 & 1.088 \\
+        Diboson                      &  0.020 & 0.546 \\
+        \ttb\                        &  0.011 & 0.613 \\
+        single-top                   &  0.008 & 0.116 \\
+        Multi-jet                    &  0.007 & 0.691 \\
+        \hline
+        \textbf{Experimental Uncertainties} & 0.035 & 1.278 \\
+        Jet                          &  0.026 & 0.737 \\
+        Large-$R$ jet                &  0.009 & 0.206 \\
+        \etm\                        &  0.007 & 0.150 \\
+        Lepton                       &  0.004 & 0.115 \\
+        FTAG PFlow ($b$-jet)         &  0.015 & 0.258 \\
+        FTAG PFlow ($c$-jet)         &  0.008 & 0.769 \\
+        FTAG PFlow (light-jet)         &  0.003 & 0.751 \\
+        FTAG PFlow (extrap)          &  0.000 & 0.000 \\
+        FTAG VR ($b$-jet)            &  0.004 & 0.049 \\
+        FTAG VR ($c$-jet)            &  0.001 & 0.018 \\
+        FTAG VR (light-jet)            &  0.001 & 0.009 \\
+        FTAG VR (extrap)             &  0.001 & 0.037 \\
+        Pile-up                      &  0.005 & 0.052 \\
+        Luminosity                   &  0.007 & 0.035 \\
+        \hline
+        \textbf{MC-samples Size}     &  0.020 & 1.410 \\
+        \hline \hline
+    \end{tabular}
+    \caption{Breakdown of the different systematics and statistical uncertainties in the \vhbc\ analysis.}
+    \label{tab:exp-breakdown}
+\end{table}
+
+To define the impact of the statistical uncertainties, a fit is run with all \gls{np}s fixed except for the floating normalisation. The total systematics effect is set to the difference in quadrature between the total and the statistical uncertainties. For both \vhb\ and \vhc, the statistical and systematics uncertainties are of similar size, with the statistical uncertainties being slightly larger. The uncertainties are far smaller for the \vhb\ side, as expected from the larger statistics and better performance of both the experimental reconstruction and modelling. For \vhb, the largest contribution to the systematics uncertainties from modelling come from the $V+$jet and diboson modelling, and the signal modelling. The importance of the $V+$jet is expected, since the $W+$jets plays a significant role in 1-lepton and $Z+$jet the equivalent role in 0- and 2-lepton. On the experimental side, the jet uncertainties and flavour tagging are leading. For the latter the $b$-jet uncertainties contributing the most, followed by the $c$-jet, as expected from the resemblance between heavy flavour jet species. \\
+
+For \vhc, the similar observations can be made with several nuances. On the modelling side, the signal modelling is less paramount, with the top processes and multi-jet not contributing far more significantly. Additional, the $Z+$jet uncertainty is now clearly the leading one, with the $W+$jet proportionally less important. This latter observation is connected with the larger importance of the top processes, as \vhc\ has a much larger top contribution in the 1-lepton channel, competing with $W+$jet as the leading source of uncertainty there. On the experimental side, the flavour tagging uncertainties of the $c$- and light-jet are now dominant with the jet uncertainties. This is expected from the challenges of tagging $c$-jets. The statistics of the \gls{mc}-samples is far more important on the \vhc\ side, mostly due to the low $c$-tagging efficiency of the \gls{dl1r} tagger used. \\
+
+Another technique to assess the importance of different nuisance parameters on the signal strengths is to change their \gls{np} values upwards and downwards by their postfit uncertainties $\sigma_{\theta}$ and re-running the fit. For each \gls{np}, this required running two fits in addition to the nominal fit from with $\hat{\theta}$ and $\sigma_{\hat{\theta}}$ are measured: one with the specific $\hat{\theta} + \sigma_{\hat{\theta}}$ and one with $\hat{\theta} - \sigma_{\hat{\theta}}$. \gls{np}s are ranked by the difference of the best fit signal strengths between this new fit and the nominal one, as shown in Figure \ref{fig:rankingPostfit} for the postfit Asimov. In these plots, the central values of \gls{np}s are set at 0 (1 for \gls{fn}s and $\gamma$-factor) as the dataset is the Asimov set. For \vhb, the \whf\ extrapolations have a significant impact on the predicted signal strength, with several of these systematics scoring high. Shape uncertainties associated to the diboson process and Higgs modelling uncertainties as well as the $Wt$ DS-DR shape uncertainty the $b$-jet tagging uncertainty also contribute meaningfully. The floating normalisation of \whf\ in the boosted region is the only \gls{fn} to make the ranking, due to its significant pull as is shown later in Figure \ref{fig:FNback}. For \vhc, the Top process \gls{carl} shapes are the leading nuisance parameters, with the $Zcc$ shape, and the $W+$jets $cc/bb$ acceptance ratio. The \zlf\ and, to a lesser extent, \wlf\ floating normalisations have a large impact on the predicted signal strength, despite the constraining offered by the $V+l$ \gls{cr}. The light- and $c$-jets uncertainties from flavour tagging are the biggest contributors in this category. Finally, the multi-jet process normalisation enters the ranking. The $\gamma$-factor listed correspond to a bin in the 1L high \ptv \gls{sr} (shown in Figure \ref{}) where a large amount of signal is expected, and the effect of this \gls{np} should be reduced once the data is unblinded and the signal no longer constrained to its \gls{sm} expectations.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/ranking.png}
+    \caption{The 15 most highly ranked Asimov postfit nuisance parameters for the \vhb\ (left) and \vhc\ (right) signal strengths in decreasing order. Modelling NPs are in black, experimental NPs in blue, and floating normalisation (and $\gamma$-factor) in green, with values indicated by the bottom axis showing $\Delta \theta = \hat{\theta} - \theta_0$. Black points are nuisance parameters with their central value at 0 showing the pull ($\gamma$-factor with central value at 1), red points are floating normalisation with central values at 0. The error bars on the point show the 1 $\sigma$ uncertainty of the NPs. The effect of changing the NP by + 1 $\sigma$ (- 1 $\sigma$) induces the change in signal strength shown by the hashes (empty) blue rectangle, with respect to the top axis.}
+    \label{fig:rankingPostfit}
+\end{figure} 
+
+
+In the combined analysis, the major backgrounds have free-floating normalisation decorrelated across the different \ptv\ and jet multiplicity regimes. The values set by a conditional likelihood fit to data, where the\vhbc\ signals are set to the \gls{sm} expectations, are presented in Figure \ref{fig:FNback}. They are compared to the same \gls{fn}s derived for the cross-check analysis with $VZ(\rightarrow b\bar{b}/c\bar{c})$ as signals. Good agreement is observed between the two sets of floating normalisations. Some common trends per process are present. Concerning the Top backgrounds, in 0L and 1L it seems mostly overestimated in the \gls{mc} simulation, with the overestimation increasing with \ptv. In 2L, the Top process seems well estimated in the Top $e\mu$ \gls{cr}, but the lower statistics available at higher \ptv\ leads to a poor constraining of the floating normalisation. The \gls{fn} for the Top are generally better constrained in the 3-jet then the 2-jet category, as expected from the larger top yield attained in higher jet multiplicity. The Top$(bq/qq)$ and Top$(bb)$ have generally similar \gls{fn} values. Concerning the $W+$jets, the \whf\ is well modelled in 2-jet across \ptv\ but less so in the 3p-jet category, where the underestimation of the simulations grows with \ptv. The boosted \whf\ normalisation in the $\geq$ 400 GeV range is signficiantly distant from 1. The same observations hold for \wlf, which is also well modelled in 2-jet but gets higher \gls{fn} in 3-jet. The \wmf component requires the most correction from the fit, with \gls{fn} values $\sim$ 1.3 throughout the \nj\ and \ptv\ bins. The final background modelled with floating normalisations is $Z+$jets, which requires significant yield modifications from the fit in all components; jet multiplicity, and \ptv\ bin. All $Z+$jets yield are corrected up, with larger \gls{fn} values required at higher \ptv. A special case for the \zhf are the 3-jet and 3-jet-extra categories, adopted to account for the fact the \vhc\ side does not use 4-jet or separates 3- and 4p-jet in 0L and 2L while the \vhb\ combined 3-jet with 4-jet into 3p-jet in 2L. The 3-jet \gls{fn}s in the figure, labelled ``J3'', cover the $\geq$ 3-jet (for \vhb), while the 3-jet-extra, labelled ``3J\_extra'' acount only for the 3-jet category\footnote{The contribution of the \zmf\ and \zlf\ are ignored in 4-jet.}. There is therfore some overlap, with the latter set of \gls{fn}s used to correct down the large normalisation of the $\geq$ 3-jet. As for the \whf, the boosted \zhf \gls{fn} value is significantly higher than unity.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.48\textwidth]{Images/VH/Fit/fromSlides/FN/FN1.png}
+    \includegraphics[width=0.48\textwidth]{Images/VH/Fit/fromSlides/FN/FN2.png}\\
+    \includegraphics[width=0.48\textwidth]{Images/VH/Fit/fromSlides/FN/FN3.png}
+    \includegraphics[width=0.48\textwidth]{Images/VH/Fit/fromSlides/FN/FN4.png}
+    \caption{The floating normalisations of the major background in the combined analysis targeting the \vhbc in blue, versus the cross-check analysis $VZ(\rightarrow b\bar{b}/c\bar{c})$ in green.}
+    \label{fig:FNback}
+\end{figure} 
+
+There are many processes of relevance in a complex analysis such as the \vhbc. These must individually be modelled, with studies of the pulls of the different systematics required to verify the fit correctly accounts for the background's contribution to the analysis. The risk with such a complex fit structure with large numbers of \gls{np}s necessary to model a large variety of effects is to give the fit too much freedom and, in a sense, overfit to the data distributions. To highlight the process, some top-related pulls are shown in Figure \ref{fig:topPull}, with pulls displayed for both top acceptance uncertainties and \gls{carl} shape systematics. Again, there is good agreement for most pulls between the $VH$ and $VZ$ analyses. In the acceptance systematics part, a very large significant pull is observed for the so-called ``\textit{MetTrigTop}'', an \etm\ trigger related experimental uncertainty derived from the top-process, as described in \ref{sec-unc}. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/FN/top1.png}\\
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/FN/top2.png}
+    \caption{Some Top nuisance parameters related to acceptance uncertainties (top) and CARL shapes (bottom) in the combined analysis targeting the \vhbc in blue, versus the cross-check analysis $VZ(\rightarrow b\bar{b}/c\bar{c})$ in green.}
+    \label{fig:topPull}
+\end{figure} 
+
+Other uncertainties presented cover the region extrapolation for the single-top $t$ (left) and combined Top process (right), as well as \nj\ and \ptv\ (for single-top $t$), lepton channel extrapolations, and the extrapolation from the Top $e/\mu$ \gls{cr}. Most of the \gls{np}s are not signficantly pulled, with little constraining. This indicates that the fit is not very sensitive nor requires the effect they implement. One exception is the Top$(bb)$ extrapolation from the CRHigh in 75 GeV $<$ \ptv\ $<$ 150 GeV with 2-jet: the \gls{np} is largely pulled, and even more so in the $VZ$ cross-check analysis. This feature can be understood from the large presence of $V+$jets and Top in the 0L and 1L CRHigh, leading to an interplay between the two processes when shifting the focus towards the signal part of $V+$jets. 
