@@ -144,7 +144,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     Candidate jets $\Delta R$  & \multicolumn{2}{c}{Upper cut $\Delta R \leq \pi$} \\
 
     \hline \hline 
-    \multicolumn{1}{c}{} &\multicolumn{2}{c}{0-Lepton} \\
+    \multicolumn{1}{c}{} &\multicolumn{2}{c}{0-Lepton (0L)} \\
     \hline
     Trigger & \multicolumn{2}{c}{$E_T^{\textrm{miss}}$ triggers} \\
     Jets & $\leq$ 4 jets & $\leq$ 3 jets \\
@@ -161,7 +161,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     %$|\Delta\phi(E_T^{\textrm{miss}},E_{T, trk}^{\textrm{miss}})|$ & \multicolumn{2}{c}{$< 90\ensuremath{^\circ}$} \\ % TODO this is missing from the table and not mentioned in the text
 
     \hline\hline 
-    \multicolumn{1}{c}{} & \multicolumn{2}{c}{1-Lepton} \\
+    \multicolumn{1}{c}{} & \multicolumn{2}{c}{1-Lepton (1L)} \\
     \hline
     Trigger &  \multicolumn{2}{c}{$e$-channel: single electron trigger} \\
             & \multicolumn{2}{c}{$\mu$-channel: single muon trigger ($p_T^V <$ 150 GeV)} \\
@@ -177,7 +177,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     $m_T^W$ & \multicolumn{2}{c}{$>$ 20 GeV for 75 < \ptv\ < 150 GeV} \\ % TODO, in text it says 20 GeV, but table says 10
 
     \hline\hline 
-    \multicolumn{1}{c}{} & \multicolumn{2}{c}{2-Lepton}\\
+    \multicolumn{1}{c}{} & \multicolumn{2}{c}{2-Lepton (2L)}\\
     \hline
     Trigger &  \multicolumn{2}{c}{Same as 1L, \ptv\ $<$ 250 GeV for single $\mu$ trigger}\\
     Additional jets tagging & - & no $B$-tag \\
@@ -190,7 +190,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     \hline\hline
 
     \end{tabular}
-    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the resolved \vhbc regimes, adapted from the internal documentation. The common Top CR tagging definition ignore the candidate jet tagging requirements. For \vhc, an extra CR for $V+l$ changes the candidate tagging to one $L$-tag + no $T$-tag ($LN$).} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
+    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the resolved \vhbc\ regimes, adapted from the internal documentation. The common Top CR tagging definition ignore the candidate jet tagging requirements. For \vhc, an extra CR for $V+l$ changes the candidate tagging to one $L$-tag + no $T$-tag ($LN$).} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
     % There was also: Variables not presented in the text: $E_{T, trk}^{\textrm{miss}}$ is the missing transverse momentum calculated from the negative vector sum of the transverse momenta of tracks reconstructed in the inner detector and identified as originating from the primary vertex
     \label{tbl:VHbbccevSelTable}
     \end{center}
@@ -199,7 +199,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
 
 \begin{table}[htbp]
     \hspace{-0.6cm}
-    \begin{tabular}{C{3cm}|C{2.95cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
+    \begin{tabular}{C{3.2cm}|C{2.8cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
     \hline \hline
     Selection & 0-Lepton & \multicolumn{2}{c|}{1-Lepton} & \multicolumn{2}{c}{2-Lepton}  \\
     & & $e$-channel & $\mu$-channel & $e$-channel & $\mu$-channel \\ \hline \hline
@@ -228,9 +228,9 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
 Events are futher categorised following a successive decomposition into regions of defined tag, vector boson $V$ transverse momentum $p_T^V$, and number of jets (both central and forward). The full categorisation gives rise to signal and control regions that enter the statistical analysis defined in the fit framework of Section \ref{sec-fitFramework}. The control regions are defined to help constrain the modelling of specific backgrounds and the correct their yields. The definition of the regions depend on the analysis regime and the targeted Higgs decay, with Figure \ref{fig:ana-strat-det} providing a global overview of the different regions defined.
 
 \subsubsection{Resolved Regime Categorisation}
-In the resolved regime, the number of central + forward jets in an event defines different categories to maximise the signal sensitivity. A $p_T > 30$ GeV cut is considered for non-Higgs candidate jets just to determine the number of jet categorisation. This was found to limit the signal migration across \gls{stxs} bins in \vhb\ while having almost no impact on the \vhc\ sensitivity\footnote{It is nonetheless applied to harmonise the resolved regime.}.All distributions of the resolved regime regions entering the fit are presented in Appendix \ref{appsec-vh-analRegRes}.
+In the resolved regime, the number of central + forward jets in an event defines different categories to maximise the signal sensitivity. A $p_T > 30$ GeV cut is considered for non-Higgs candidate jets just to determine the number of jet categorisation. This was found to limit the signal migration across \gls{stxs} bins in \vhb\ while having almost no impact on the \vhc\ sensitivity\footnote{It is nonetheless applied to harmonise the resolved regime.}. All distributions of the resolved regime regions with processes normalised to their posfit expectations from the fit decribed in Section \ref{sec-fitFramework} are presented in Appendix \ref{appsec-vh-analRegResPosfit}.
 
-\paragraph{Resolved \vhb:} requires exactly 2 $b$-tagged jets ($BB$), with no extra $B$ nor any $T$, and events are separated into different categories based on central + forward jet multiplicity. All lepton channels have a 2-jet and 3-jet categories. The 0L channel has an addittional 4-jet category and the 2L an extra 4 or more jets (4p) category\footnote{The 4/4p-jet category in 1L overlaps with the region used to calibrate the tagger and is rejected due to the \ttb\ limiting the sensitivity.}. They are included for more sensitive \gls{stxs} measurements in bins with more than one additional jets. The regions are also split in different bins of $p_T^V$ as [75, 150] GeV (except for 0L\footnote{It is not feasible in 0L due to the trigger threshold on $E_T^{\textrm{miss}}$.}), [150, 250] GeV, and [250, 400] GeV. Some \vhb\ signal regions to the analysis are presented here in Figure \ref{fig:plots_VHbb_ex_SR}. The distributions presented in this section corresponds to the variables chosen for the fit, and are described further in Section \ref{sec-vh-disc}.
+\paragraph{Resolved \vhb:} requires exactly 2 $b$-tagged jets ($BB$), with no extra $B$ nor any $T$, and events are separated into different categories based on central + forward jet multiplicity. All lepton channels have a 2-jet and 3-jet categories. The 0L channel has an addittional 4-jet category and the 2L an extra 4 or more jets (4p) category\footnote{The 4/4p-jet category in 1L overlaps with the region used to calibrate the tagger and is rejected due to the \ttb\ limiting the sensitivity.}. They are included for more sensitive \gls{stxs} measurements in bins with more than one additional jets. The regions are also split in different bins of $p_T^V$ as [75, 150] GeV (except for 0L\footnote{It is not feasible in 0L due to the trigger threshold on $E_T^{\textrm{miss}}$.}), [150, 250] GeV, and [250, 400] GeV. Some \vhb\ signal regions to the analysis are presented here in Figure \ref{fig:plots_VHbb_ex_SR}. The distributions presented in this section are blinded and correspond to the variables chosen for the fit, and are described further in Section \ref{sec-vh-disc}.
 
 \begin{figure}[h!]
   \centering
@@ -257,7 +257,7 @@ In the resolved regime, the number of central + forward jets in an event defines
 \end{figure} 
 
 
-\paragraph{Resolved \vhc:} adopts a similar event categorisation to the resolved \vhb, with now at least one candidate jet being tight c-tagged. The categorisation of the signal region is split based on the remaining candidate tag into a 2 $c$-tags region and a 1 $c$-tag region: the former requiring an extra loose ($LT$) or tight $c$-tag ($TT$), the latter an additional non-tagged jet $N$ ($NT$). The $p_T^V$ bins are similar to \vhb, except for the higgest $p_T^V$ one that is relaxed to $\geq 250$ GeV given the limited impact of the overlap with the boosted \vhb. Adding the \ptv\ region above 400 GeV was found to increase the total \vhc\ sensitivity by 10\%. The jet multiplicity is used to define a 2 and a 3 jets categories, with the latter being 3 or more jets (3p) in 2L only thanks to a reduced \ttb\ background. A selection of 2 $c$-tags signal regions is presented in Figure \ref{fig:plots_VHcc_ex_SR_2C}, with Figure \ref{} presenting some 1 $c$-tag signal regions.
+\paragraph{Resolved \vhc:} adopts a similar event categorisation to the resolved \vhb, with now at least one candidate jet being tight c-tagged. The categorisation of the signal region is split based on the remaining candidate tag into a 2 $c$-tags region and a 1 $c$-tag region: the former requiring an extra loose ($LT$) or tight $c$-tag ($TT$), the latter an additional non-tagged jet $N$ ($NT$). The $p_T^V$ bins are similar to \vhb, except for the higgest $p_T^V$ one that is relaxed to $\geq 250$ GeV given the limited impact of the overlap with the boosted \vhb. Adding the \ptv\ region above 400 GeV was found to increase the total \vhc\ sensitivity by 10\%. The jet multiplicity is used to define a 2 and a 3 jets categories, with the latter being 3 or more jets (3p) in 2L only thanks to a reduced \ttb\ background. A selection of 2 $c$-tags signal regions is presented in Figure \ref{fig:plots_VHcc_ex_SR_2C}, with Figure \ref{fig:plots_VHcc_ex_SR_1C} presenting some 1 $c$-tag signal regions.
 
 \begin{figure}[h!]
   \centering
@@ -304,11 +304,9 @@ In the resolved regime, the number of central + forward jets in an event defines
     \caption{2-lepton, $\geq$ 3 jets.}
     \label{fig:plots_VHcc_ex_2L_SR_1C}
 \end{subfigure}
-  \caption{Some 1 $c$-tagged 250 < \ptv signal regions in the different lepton channels.}
+  \caption{Some 1 $c$-tagged 250 < \ptv\ signal regions in the different lepton channels.}
   \label{fig:plots_VHcc_ex_SR_1C}
 \end{figure} 
-
-
 
 \paragraph{The High $\Delta R$ Control region:} is designed to constrain the $V+$jets and \ttb\ background in \vhb\ normalisation and shape. It is defined by a further categorisation based on the angular separation $\Delta R(j_1, j_2)$\footnote{$\Delta R(j_1, j_2) = \sqrt{(\eta_{j_1} - \eta_{j_2})^2 + (\phi_{j_1} - \phi_{j_2})^2 }$.} between the Higgs-candidate jets. This split is governed by a $p_T^V$ dependent cut on the $\Delta R$ that is derived to give a specific signal purity in the \gls{sr}: 95\% (85\%) of the signal should enter the \gls{sr} in the 2-jet (3 or more jets) category. The mathematical expression of the cuts are presented in Table \ref{tbl:CRhigh_definition}, and illustrated in Figure~\ref{fig:drccptvCutsVHcc} with more details in Appendix~\ref{ap-sec-vh-deltaR}. Events with a $\Delta R$ below the cutting line enter the signal region, while those above go in the \highdr\ \gls{cr}, also called \textit{HighCR}. To avoid some mis-modeling effect at \highdr\ and keep the \highdr\ \gls{cr} kinematically close to the \gls{sr}, an upper cut of $\Delta R = \pi$ is applied to all events. This effectively remove $\sim 40$\% of events in the \highdr\ \gls{cr} with negligible impact on the signal region. For \vhc, the $TT$ and $LT$ events are separated in the HighCR to constrain the $V+$hf and $V$+mf, while they are merged into the 2 $c$-tags in the \gls{sr}. In \vhb, the HighCRs are used to extract the normalisation of the backgrounds while in \vhc\ the shape of the $m_{c\bar{c}}$ or \ptv\ spectrum are also used. Some \highdr\ \gls{cr}s are shown in Figure \ref{fig:plots_VHcc_ex_CRH}.
 
@@ -419,7 +417,9 @@ In the resolved regime, the number of central + forward jets in an event defines
 \end{figure} 
 
 \subsubsection{Boosted Regime Categorisation}
-In the boosted \vhb, two \ptv\ bins are defined above 400 GeV to avoid overlap with the resolved \vhb: [400, 600] GeV and $\geq$ 600 GeV. The \gls{sr}s are defined by requiring exactly two of the three leading subjets associated to a single learding large-$R$ jet to be $b$-tagged, with no additional jet outside the large-$R$ jet being $B$-tagged to enhance the top background rejection. The \gls{sr}s are further split into a \textit{high-purity signal region} (HP SR) and a \textit{low-purity signal region} (LP SR) depending on the number of small-$R$ jets outside the large-$R$ jet. All boosted regions are presented in Appendix \ref{appsec-vh-analRegBoo}. 
+In the boosted \vhb, two \ptv\ bins are defined above 400 GeV to avoid overlap with the resolved \vhb: [400, 600] GeV and $\geq$ 600 GeV. The \gls{sr}s are defined by requiring exactly two of the three leading subjets associated to a single learding large-$R$ jet to be $b$-tagged, with no additional jet outside the large-$R$ jet being $B$-tagged to enhance the top background rejection. The boosted regions with processes normalised to their postfit expectations are presented in Appendix Section \ref{appsec-vh-analRegBooPosfit}.
+
+%The \gls{sr}s are the combination of two sub-signal regions depending on the number of small-$R$ jets outside the large-$R$ jet: a \textit{high-purity signal region} (HP SR) and a \textit{low-purity signal region} (LP SR). . THey are presented separately in Appendix \ref{appsec-vh-analRegBoo}. % TODO if you change the prefit to adopt postfit, it does not have the separation and you should remove the HP LP.
 
 \begin{figure}[h!]
   \centering
@@ -458,97 +458,6 @@ define the boosted Top control regions in 0L and 1L. The \ttb\ background is the
 \end{sidewaysfigure}
 
 \clearpage
-
-\subsection{Truth Tagging}
-The tagging method described in Section \ref{sec-selectionandcat}, referred to as \textit{direct tagging}, is a cut-based method where a jet passes or fails a threshold cut, as defined by dedicated working points in the \gls{pcft} or PCBT schemes. These \gls{wp} have a large rejection for $b$-tagging due to the good performance of the method. For $c$-jets, the tagging efficiency is low and many $c$-jets end up rejected by the selection. This problem is compounded by the event selection criteria, requiring two $b$-tags or at least one tight $c$-tag to enter the analysis' regions. Only a part of the events in the simulated samples satisfy these requirements, and most are discarded from the analysis. Having sufficient \gls{mc} statistics in all regions is essential to effectively model the backgrounds and reduce the \gls{mc} statistical uncertainty. An alternative approach to direct tagging used in the analysis to retain the large \gls{mc} statistics is \textit{truth tagging}. Rather than applying a pass-fail decision, truth tagging reweighs events by their probability of being selected at a specific working point, based on truth information only available in the simulated samples. The tagging scale factors are applied in the analysis after truth tagging. \\
-
-Mathematically, truth tagging derives a per event weight $w$ from the tagging efficiency $\epsilon_j(\textbf{x}, \theta)$ for a given flavour jet $j$ to be tagged at a given working point of a classifier trained on a set of input variables $\textbf{x}$, with the assumption that the efficiency is parametrisable as a function of several variables $\theta$, such as the jet $p_T$, $\eta$, ... For a set of $m$ jets with a tagged subset $T_i$ of cardinality $|T_i| = n$, and defining the efficiency at tagging the tagged jets as \[\epsilon(T_i,\textbf{x},\theta) = \prod_{j\in T_i} \epsilon_j(\textbf{x},\theta),\] and the efficiency at not tagging the set of untagged jets $\tilde{T}$, with $|\tilde{T}_i| = m-n$, \[ \epsilon_{in}(\tilde{T}_i,\textbf{x}, \theta) = \prod_{j\in \tilde{T}_i} (1-\epsilon_j(\textbf{x}, \theta)),\] the expression for $w$ can be factorised as \cite{ATL-PHYS-PUB-2022-041}: 
-
-\begin{equation}
-  \label{eq:truthtagging1}
-      w = \sum_i^C \epsilon(T_i,\textbf{x},\theta)\cdot \epsilon_{in}(\tilde{T}_i,\textbf{x},\theta),
-  \end{equation}
-where the sum is over all possible permutations of tags $C$. The probability of a specific configuration $i$ is given by \[ P_i = \frac{ \epsilon(T_i,\textbf{x},\theta)\cdot \epsilon_{in}(\tilde{T}_i,\textbf{x},\theta)}{w}.\] When deploying the technique, one possible permutation is randomly sampled to keep distinct bins uncorrelated in the fit and the whole weight $w$ is applied to it. \\
-
-Technically, truth tagging was deployed with map-based 2D histograms $p_T - \eta$ parametrising the tagging efficiency of the jets in the latest standalone \vhb\ and \vhc\ analysis \cite{ATLAS:2020fcp, Collaboration:2721696}. Such histograms are called \textit{efficiency map}, leading to the implementation being referred to \textit{map-based truth tagging}. These maps were derived individually for each $b$-, $c$-, light-, and $\tau$-jets flavour and each working point. A further possibility is to combine direct tagging with truth tagging into the so-called \textit{hybrid tagging} strategy, in which a portion of the events are direct tagged and the rest is truth tagged. This last approach limits the mis-modelling incurred by truth tagging and remove the need to correct for non-closure effects. \\
-
-A new approach considered for the combined analysis relies on a \gls{gnn} to perform the so-called \textit{GNN truth tagging} \cite{ATL-PHYS-PUB-2022-041}. This removes the statistical dispersion limitation of high-dimension efficiency maps. Interestingly, it also becomes possible to include more variables to parametrise the efficiency, leading to better agreement with the direct tagging distribution comparing to map-based truth tagging. The network builds a fully-connected graph with several layers message-passing updates \cite{graphInductiveBias}, where each node represents a jet in the event\footnote{Only central jets in the resolved regime and track-jets associated with the large-$R$ jet in the boosted regime.}. The features per node are the jet-level and event-level variables listed in Table~\ref{tbl:gnn-features}, with the angular separation between the jets set as edge between the nodes. Finally, a fully-connected \gls{nn} receives the last update graph and outputs all track-jets or jets flavour-tagging efficiencies.
-
-\begin{table}[tbp]
-  \begin{center}
-      \begin{tabular}{C{8cm}C{5cm}} \hline \hline
-        Jet features & Type of variable \\ 
-        \hline
-        Jet $p_T$ & \\
-        Jet $\eta$ & \\
-        Jet $\phi$ & \\
-        Jet flavour label & Jet level feature \\
-        Mass of $p_T$ leading b or c hadron in the jet $\phi$ & \\
-        $p_T$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
-        $\eta$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
-        $\phi$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
-        \hline
-        Average number of interactions per event $\langle \mu \rangle$ & Event level variable\\
-        \hline
-        Angular separation between two jets $\Delta R$ & Jet-pair variable\\
-        \hline \hline
-      \end{tabular}
-    \caption{The input features to parametrise the efficiency in GNN truth tagging.}
-    \label{tbl:gnn-features}
-  \end{center}
-\end{table}
-
-In the combined analysis, truth tagging is deployed in all regimes and trained independently for samples with different \gls{mc} generators\footnote{Since the \glsfirst{sf} are derived per generator.}, inclusively in all lepton channels. In the resolved regime, the training is further separated for each background samples. The GNN truth tagging is seen to improve the parametrisation of the efficiency, showing better closure with the direct-tagged distributions than the map-based approach. However, some unclosure remain for particular flavours. To limit this effect, hybrid tagging is also deployed in the combined analysis with GNN truth tagging. In this hybrid tagging, $b$-jets are direct tagged and other jets are GNN truth tagged in the resolved regime. In the boosted regime, all jets are truth tagged due to the limited \gls{mc} statistics. The strategies deployed in the different regimes of the analysis are summarised in Table \ref{tbl:gnn-strategy}.
-
-\begin{table}[!htbp]
-  \begin{center}
-      \begin{tabular}{c|c|c|c} \hline \hline
-        & \vhb\ Resolved & \vhc\ & \vhb\ Boosted\\ 
-        \hline
-        Hybrid tagging & Yes ($b$-jets are DT) & No (fully TT) & No (fully TT)  \\
-        Truth tag \gls{wp} & 70\% $b$ \& 70\% $b$ & $c$-tight \& $c$-tight & 85\% $b$ \& 85\% $b$ \\
-        MC stat. \% for TT regions & 100\% & 8\% & 100\%\\
-        \hline
-        $V+$jets & HT & TT & TT\\
-        single-top $s/t$ & HT & TT & TT\\
-        single-top $Wt$ & DT & DT & TT\\
-        \ttb\ & DT & DT & TT\\
-        diboson & DT & DT & TT\\
-        signal & DT & DT & DT\\
-        \hline \hline
-      \end{tabular}
-    \caption{The tagging strategies to be used in the different regimes of the analysis, with truth tagging (TT), direct tagging (DT), and hybrid tagging (HT).}
-    \label{tbl:gnn-strategy}
-  \end{center}
-\end{table}
-
-The tagging strategy is optimised to maximise the \gls{mc} statistics of the different regions and boost the sensitivity. Truth and hybrid tagging are only deployed when they deliver a meaningful improvement to the analysis. The full tagging strategy of the analysis is:
-\begin{itemize}
-  \item Resolved \vhb: direct tagging is used except for the $V+$jets and single-top $s/t$ process where hybrid tagging is deployed, with both $b$-jets being direct tagged at the 70\% \gls{wp}.
-  \item \vhc: similar to the resolved \vhb, with the $V+$jets and single-top $s/t$ now fully GNN truth tagged. For \vhc, the samples are split based on the tag region to avoid reusing an event twice. For example, an initially $LN$ direct-tagged event could enter the $TT$ region with a low truth tag weight, thereby removing the statistical independence assumed between \gls{mc} events. To correct this, only 8\% of the \gls{mc} statistics is randomly sampled and truth tagged to the $TT$-tag region, and the rest is passed to direct tagging (for the $TL$, $NT$, $LN$, and $BT$ tags). 
-  \item Boosted \vhb: GNN truth tagging is applied for all background except the signal samples that are direct tagged.
-\end{itemize}
-Unfortunately, at the time of writing this thesis the analysis samples were not yet fully updated to the tagging scheme described here. Instead, the resolved \vhbc all use direct tagging everywhere and the boosted regime uses full GNN truth tagging. Moving to the full tagging scheme outlined above should have a small positive effect on \gls{mc} statistics uncertainty and bring smoother \gls{mc} templates, reducing the noise in the fit.
-% TODO: this is not true: the main note was including this only for truth tagging, not for the rest: The above outlined strategy outlines the final strategy. The plots and yield tables - and correspondingly fit results - do not reflect this strategy yet and instead direct tagging is used for resolved \vhbb and \vhcc regimes and full GNN truth tagging for the boosted \vhbb regime, since fit inputs were not ready in time for this version of the note. The expected differences on the sensitivity are small (small decrease in the impact of MC stat. uncertainty and smoother MC templates that will make the fit less prone to statistical ``noise'' making the fit more robust.)}
-
-To showcase the effectiveness of the method, the direct tagged, GNN truth tagged, and map-based truth tagged $m_{cc}$ distributions of the \textsc{Sherpa} 2.2.11 simulated $W+$jets in the 1-lepton 2-jet CRHigh \ptv\ $\in [250, 400]$ GeV region of the \vhc\ is displayed in Figure \ref{fig:truthtaggingW1LVHcc}. The GNN truth tagging is found to be in better agreement with the direct tagged distributions in the regions of sufficient statistics. In the $W+l$ region, direct tagging leads to statistically depleted regions with large uncertainties: this is effectively corrected by the GNN-based truth tagging approach. No significant non-closures are observed for from GNN truth tagging with the outlined strategy.
-
-\begin{figure}[h!]
-  \begin{subfigure}[b]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{Images/VH/Tagging/Whf_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
-  \caption{$W+$hf in CRHigh.} 
-  \end{subfigure}
-  \begin{subfigure}[b]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{Images/VH/Tagging/Wmf_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
-    \caption{$W+$mf in CRHigh.}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{Images/VH/Tagging/Wl_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
-    \caption{$W+l$ in CRHigh.}
-  \end{subfigure}
-  \caption{Comparing the tagged $m_{cc}$ distribution for the \vhc\ of the \textsc{Sherpa} 2.2.11 simulated $W+$jets in 1L CRHigh 2-jet region, in the 250 GeV $<$ \ptv\ $< 400$ GeV region. TT stands for truth tagging.}
-  \label{fig:truthtaggingW1LVHcc}
-\end{figure} 
 
 \section{Tagged-jets corrections}\label{sec-vh-jetcor}
 Several corrections to the energy are applied to tagged jet from the previously introduced selection. The objective is to improve the energy resolution of the pair of jets selected to form the Higgs candidate. All jets benefit from a default jet energy calibration called the \textit{Global Sequential Calibration (GSC)} \cite{PhysRevD.96.072002}, as introduced in Section \ref{}. This correction applies to all jets and is not optimal for $b$- and $c$-jets that benefit from special features, motivating the use of additional dedicated corrections for tagged jets. Table \ref{tab:bjetcorrectionregions} summarised the additional corrections presented in this section. % TODO Add a ref to exp chapter, jet section

@@ -145,6 +145,97 @@ In the \textit{AllSignal} strategy, the Higgs candidates in the topCR are always
 For $VH(H\rightarrow c\bar{c})$, the $bc$ and $bl$ components are the most important to constrain. In $VH(H\rightarrow b\bar{b})$, while the $bc$ component is also significant and can benefit from the topCRs, the most important contribution comes from the $bb$ one and is well constrained by the High $\Delta R$ CR, since in a $t\bar{t}$ decay the two produced $b$-jets tend to be separated by a large $\Delta R$ due to the event topology. For the Combined Analysis, the SRs and CRs of both analyses will be considered simultaneously. To show the impact on the $VH(H\rightarrow c\bar{c})$ standalone analysis, the High $\Delta R$ CR from  $VH(H\rightarrow b\bar{b})$ is included to study the effect on the $bc$ and $bl$ components. The aim is to demonstrate these and the $bb$ component can be well constrained with these regions alone, and in particular without the SRs of $VH(H\rightarrow b\bar{b})$. The $VH(H\rightarrow b\bar{b})$ High $\Delta R$ control regions are taken as a single bin of $p_T^V$, because the interest is solely to constrain the top($bb$) normalisation. Figure~\ref{fig:vhbbDRCR} displays the 1L $VH(H\rightarrow b\bar{b})$ High $\Delta R$ CR, which is visibly dominated by the top($bb$). Figure~\ref{fig:vhbbDRCR02L} shows the same region for the [150, 250] GeV $p_T^V$ range with 3 jets in 0L and 2L, showing a significant proportion of $Z$+jets is also included in these regions.  \\
 
 
+\subsection{Truth Tagging}
+The tagging method described in Section \ref{sec-selectionandcat}, referred to as \textit{direct tagging}, is a cut-based method where a jet passes or fails a threshold cut, as defined by dedicated working points in the \gls{pcft} or PCBT schemes. These \gls{wp} have a large rejection for $b$-tagging due to the good performance of the method. For $c$-jets, the tagging efficiency is low and many $c$-jets end up rejected by the selection. This problem is compounded by the event selection criteria, requiring two $b$-tags or at least one tight $c$-tag to enter the analysis' regions. Only a part of the events in the simulated samples satisfy these requirements, and most are discarded from the analysis. Having sufficient \gls{mc} statistics in all regions is essential to effectively model the backgrounds and reduce the \gls{mc} statistical uncertainty. An alternative approach to direct tagging used in the analysis to retain the large \gls{mc} statistics is \textit{truth tagging}. Rather than applying a pass-fail decision, truth tagging reweighs events by their probability of being selected at a specific working point, based on truth information only available in the simulated samples. The tagging scale factors are applied in the analysis after truth tagging. \\
+
+Mathematically, truth tagging derives a per event weight $w$ from the tagging efficiency $\epsilon_j(\textbf{x}, \theta)$ for a given flavour jet $j$ to be tagged at a given working point of a classifier trained on a set of input variables $\textbf{x}$, with the assumption that the efficiency is parametrisable as a function of several variables $\theta$, such as the jet $p_T$, $\eta$, ... For a set of $m$ jets with a tagged subset $T_i$ of cardinality $|T_i| = n$, and defining the efficiency at tagging the tagged jets as \[\epsilon(T_i,\textbf{x},\theta) = \prod_{j\in T_i} \epsilon_j(\textbf{x},\theta),\] and the efficiency at not tagging the set of untagged jets $\tilde{T}$, with $|\tilde{T}_i| = m-n$, \[ \epsilon_{in}(\tilde{T}_i,\textbf{x}, \theta) = \prod_{j\in \tilde{T}_i} (1-\epsilon_j(\textbf{x}, \theta)),\] the expression for $w$ can be factorised as \cite{ATL-PHYS-PUB-2022-041}: 
+
+\begin{equation}
+  \label{eq:truthtagging1}
+      w = \sum_i^C \epsilon(T_i,\textbf{x},\theta)\cdot \epsilon_{in}(\tilde{T}_i,\textbf{x},\theta),
+  \end{equation}
+where the sum is over all possible permutations of tags $C$. The probability of a specific configuration $i$ is given by \[ P_i = \frac{ \epsilon(T_i,\textbf{x},\theta)\cdot \epsilon_{in}(\tilde{T}_i,\textbf{x},\theta)}{w}.\] When deploying the technique, one possible permutation is randomly sampled to keep distinct bins uncorrelated in the fit and the whole weight $w$ is applied to it. \\
+
+Technically, truth tagging was deployed with map-based 2D histograms $p_T - \eta$ parametrising the tagging efficiency of the jets in the latest standalone \vhb\ and \vhc\ analysis \cite{ATLAS:2020fcp, Collaboration:2721696}. Such histograms are called \textit{efficiency map}, leading to the implementation being referred to \textit{map-based truth tagging}. These maps were derived individually for each $b$-, $c$-, light-, and $\tau$-jets flavour and each working point. A further possibility is to combine direct tagging with truth tagging into the so-called \textit{hybrid tagging} strategy, in which a portion of the events are direct tagged and the rest is truth tagged. This last approach limits the mis-modelling incurred by truth tagging and remove the need to correct for non-closure effects. \\
+
+A new approach considered for the combined analysis relies on a \gls{gnn} to perform the so-called \textit{GNN truth tagging} \cite{ATL-PHYS-PUB-2022-041}. This removes the statistical dispersion limitation of high-dimension efficiency maps. Interestingly, it also becomes possible to include more variables to parametrise the efficiency, leading to better agreement with the direct tagging distribution comparing to map-based truth tagging. The network builds a fully-connected graph with several layers message-passing updates \cite{graphInductiveBias}, where each node represents a jet in the event\footnote{Only central jets in the resolved regime and track-jets associated with the large-$R$ jet in the boosted regime.}. The features per node are the jet-level and event-level variables listed in Table~\ref{tbl:gnn-features}, with the angular separation between the jets set as edge between the nodes. Finally, a fully-connected \gls{nn} receives the last update graph and outputs all track-jets or jets flavour-tagging efficiencies.
+
+\begin{table}[tbp]
+  \begin{center}
+      \begin{tabular}{C{8cm}C{5cm}} \hline \hline
+        Jet features & Type of variable \\ 
+        \hline
+        Jet $p_T$ & \\
+        Jet $\eta$ & \\
+        Jet $\phi$ & \\
+        Jet flavour label & Jet level feature \\
+        Mass of $p_T$ leading b or c hadron in the jet $\phi$ & \\
+        $p_T$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
+        $\eta$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
+        $\phi$ of $p_T$ leading b or c hadron in the jet $\phi$ & \\
+        \hline
+        Average number of interactions per event $\langle \mu \rangle$ & Event level variable\\
+        \hline
+        Angular separation between two jets $\Delta R$ & Jet-pair variable\\
+        \hline \hline
+      \end{tabular}
+    \caption{The input features to parametrise the efficiency in GNN truth tagging.}
+    \label{tbl:gnn-features}
+  \end{center}
+\end{table}
+
+In the combined analysis, truth tagging is deployed in all regimes and trained independently for samples with different \gls{mc} generators\footnote{Since the \glsfirst{sf} are derived per generator.}, inclusively in all lepton channels. In the resolved regime, the training is further separated for each background samples. The GNN truth tagging is seen to improve the parametrisation of the efficiency, showing better closure with the direct-tagged distributions than the map-based approach. However, some unclosure remain for particular flavours. To limit this effect, hybrid tagging is also deployed in the combined analysis with GNN truth tagging. In this hybrid tagging, $b$-jets are direct tagged and other jets are GNN truth tagged in the resolved regime. In the boosted regime, all jets are truth tagged due to the limited \gls{mc} statistics. The strategies deployed in the different regimes of the analysis are summarised in Table \ref{tbl:gnn-strategy}.
+
+\begin{table}[!htbp]
+  \begin{center}
+      \begin{tabular}{c|c|c|c} \hline \hline
+        & \vhb\ Resolved & \vhc\ & \vhb\ Boosted\\ 
+        \hline
+        Hybrid tagging & Yes ($b$-jets are DT) & No (fully TT) & No (fully TT)  \\
+        Truth tag \gls{wp} & 70\% $b$ \& 70\% $b$ & $c$-tight \& $c$-tight & 85\% $b$ \& 85\% $b$ \\
+        MC stat. \% for TT regions & 100\% & 8\% & 100\%\\
+        \hline
+        $V+$jets & HT & TT & TT\\
+        single-top $s/t$ & HT & TT & TT\\
+        single-top $Wt$ & DT & DT & TT\\
+        \ttb\ & DT & DT & TT\\
+        diboson & DT & DT & TT\\
+        signal & DT & DT & DT\\
+        \hline \hline
+      \end{tabular}
+    \caption{The tagging strategies to be used in the different regimes of the analysis, with truth tagging (TT), direct tagging (DT), and hybrid tagging (HT).}
+    \label{tbl:gnn-strategy}
+  \end{center}
+\end{table}
+
+The tagging strategy is optimised to maximise the \gls{mc} statistics of the different regions and boost the sensitivity. Truth and hybrid tagging are only deployed when they deliver a meaningful improvement to the analysis. The full tagging strategy of the analysis is:
+\begin{itemize}
+  \item Resolved \vhb: direct tagging is used except for the $V+$jets and single-top $s/t$ process where hybrid tagging is deployed, with both $b$-jets being direct tagged at the 70\% \gls{wp}.
+  \item \vhc: similar to the resolved \vhb, with the $V+$jets and single-top $s/t$ now fully GNN truth tagged. For \vhc, the samples are split based on the tag region to avoid reusing an event twice. For example, an initially $LN$ direct-tagged event could enter the $TT$ region with a low truth tag weight, thereby removing the statistical independence assumed between \gls{mc} events. To correct this, only 8\% of the \gls{mc} statistics is randomly sampled and truth tagged to the $TT$-tag region, and the rest is passed to direct tagging (for the $TL$, $NT$, $LN$, and $BT$ tags). 
+  \item Boosted \vhb: GNN truth tagging is applied for all background except the signal samples that are direct tagged.
+\end{itemize}
+Unfortunately, at the time of writing this thesis the analysis samples were not yet fully updated to the tagging scheme described here. Instead, the resolved \vhbc\ all use direct tagging everywhere and the boosted regime uses full GNN truth tagging. Moving to the full tagging scheme outlined above should have a small positive effect on \gls{mc} statistics uncertainty and bring smoother \gls{mc} templates, reducing the noise in the fit.
+% TODO: this is not true: the main note was including this only for truth tagging, not for the rest: The above outlined strategy outlines the final strategy. The plots and yield tables - and correspondingly fit results - do not reflect this strategy yet and instead direct tagging is used for resolved \vhbb and \vhcc regimes and full GNN truth tagging for the boosted \vhbb regime, since fit inputs were not ready in time for this version of the note. The expected differences on the sensitivity are small (small decrease in the impact of MC stat. uncertainty and smoother MC templates that will make the fit less prone to statistical ``noise'' making the fit more robust.)}
+
+To showcase the effectiveness of the method, the direct tagged, GNN truth tagged, and map-based truth tagged $m_{cc}$ distributions of the \textsc{Sherpa} 2.2.11 simulated $W+$jets in the 1-lepton 2-jet CRHigh \ptv\ $\in [250, 400]$ GeV region of the \vhc\ is displayed in Figure \ref{fig:truthtaggingW1LVHcc}. The GNN truth tagging is found to be in better agreement with the direct tagged distributions in the regions of sufficient statistics. In the $W+l$ region, direct tagging leads to statistically depleted regions with large uncertainties: this is effectively corrected by the GNN-based truth tagging approach. No significant non-closures are observed for from GNN truth tagging with the outlined strategy.
+
+\begin{figure}[h!]
+  \begin{subfigure}[b]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{Images/VH/Tagging/Whf_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
+  \caption{$W+$hf in CRHigh.} 
+  \end{subfigure}
+  \begin{subfigure}[b]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{Images/VH/Tagging/Wmf_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
+    \caption{$W+$mf in CRHigh.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{Images/VH/Tagging/Wl_2tttag2jet_250_400ptv_CRHigh_mCC.pdf}
+    \caption{$W+l$ in CRHigh.}
+  \end{subfigure}
+  \caption{Comparing the tagged $m_{cc}$ distribution for the \vhc\ of the \textsc{Sherpa} 2.2.11 simulated $W+$jets in 1L CRHigh 2-jet region, in the 250 GeV $<$ \ptv\ $< 400$ GeV region. TT stands for truth tagging.}
+  \label{fig:truthtaggingW1LVHcc}
+\end{figure} 
+
 \section{MVA Variables}\label{ap-MVA}
 This section is dedicated to the set of variables used to train the various MVAs used in the analysis. Notice that the $H$ candidate is reconstructed by the selected jets sorted by $\pT$ and labelled $j_1$ and $j_2$.
 
@@ -217,4 +308,18 @@ This section is dedicated to the set of variables used to train the various MVAs
 \input{Appendices/B_VH_unc.tex}
 
 \clearpage
-\input{Appendices/B_VHbb_regPres.tex}
+\input{Appendices/B_VHbb_regPresPosfit.tex}
+
+\newpage
+\section{Top Modelling Uncertainties in the Fit}
+There are many processes of relevance in a complex analysis such as the \vhbc. These must individually be modelled, with studies of the pulls of the different systematics required to verify the fit correctly accounts for the background's contribution to the analysis. The risk with such a complex fit structure with large numbers of \gls{np}s necessary to model a large variety of effects is to give the fit too much freedom and, in a sense, overfit to the data distributions. To highlight the process, some top-related pulls are shown in Figure \ref{fig:topPull}, with pulls displayed for both top acceptance uncertainties and \gls{carl} shape systematics. Again, there is good agreement for most pulls between the $VH$ and $VZ$ analyses. In the acceptance systematics part, a very large significant pull is observed for the so-called ``\textit{MetTrigTop}'', an \etm\ trigger related experimental uncertainty derived from the top-process, as described in \ref{sec-unc}. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/FN/top1.png}\\
+    \includegraphics[width=\textwidth]{Images/VH/Fit/fromSlides/FN/top2.png}
+    \caption{Some Top nuisance parameters related to acceptance uncertainties (top) and CARL shapes (bottom) in the combined analysis targeting the \vhbc in blue, versus the cross-check analysis $VZ(\rightarrow b\bar{b}/c\bar{c})$ in green.}
+    \label{apfig:topPull}
+\end{figure} 
+
+Other uncertainties presented cover the region extrapolation for the single-top $t$ (left) and combined Top process (right), as well as \nj\ and \ptv\ (for single-top $t$), lepton channel extrapolations, and the extrapolation from the Top $e/\mu$ \gls{cr}. Most of the \gls{np}s are not signficantly pulled, with little constraining. This indicates that the fit is not very sensitive nor requires the effect they implement. One exception is the Top$(bb)$ extrapolation from the CRHigh in 75 GeV $<$ \ptv\ $<$ 150 GeV with 2-jet: the \gls{np} is largely pulled, and even more so in the $VZ$ cross-check analysis. This feature can be understood from the large presence of $V+$jets and Top in the 0L and 1L CRHigh, leading to an interplay between the two processes when shifting the focus towards the signal part of $V+$jets. This interplay is visible in the correlation of the boosted \ttb\ and \whf\ in Figure \ref{fig:FNcorr}.
