@@ -1,20 +1,22 @@
 
 \section{Selection and Categorisation}\label{sec-selectionandcat}
-\subsection{Object Selection}\label{sec-obj}
-As introduced in Chapter \ref{chapter-ATLAS}, different types of information is collected by different sub-detectors of ATLAS. These must be combined to reconstruct physics objects. For the $VH (H\rightarrow c\bar{c})$ analysis, the reconstruction strategies of the most important objects are presented in this section. 
+Data collected by the ATLAS reconstruction consists of different types of low-level information measured in various sub-detectors. Different processing steps, collectively referred to as \textit{reconstruction}, must be applied to unlock a higher-level physical interpretation of the information: constructing tracks from hit in the silicon detectors, identifying electrons and muons, etc. This section introduces the object selection, listing the recipes applied to identify the different relevant physics objects. The analysis event selection, requiring different reconstructed objects to be identified in data and simulations, is then presented as well as the final categorisation seperating events into defined analysis regions.
 
-\paragraph{Primary Vertex:} events considered in the analysis are required to have at least one primary vertex reconstructed from tracks in the \gls{id} \cite{ATL-PHYS-PUB-2015-026}.
+\subsection{Object Selection}\label{sec-obj}% TODO when writing the object part of detector, might have to simplify stuff % TODO should I mention truth tagging?
+As introduced in Chapter \ref{chapter-ATLAS}, the ATLAS software allows for different object reconstruction techniques. The reconstruction strategies of the relevant objects to the \vhbc\ analysis are presented in this section. 
 
-\paragraph{Electrons:} are reconstructed by matching a deposit in the EM calorimeter with a track in the \gls{id} \cite{Aaboud:2657964, Aad_2019}. Electrons are required to have a $p_T > 7$ GeV and $|\eta|<2.47$. They are identified with the \textit{loose} working point of a likelihood discriminant, matching the calorimeter shower shape and the track. The $e$ candidates must satisfy $p_T$-dependent isolation criteria in both the \gls{id} and calorimeter. In the 1L channel, the \textit{tight} likelihood criterion is used with stricter calorimeter isolation requirements to better reject the multi-jet background. The further requirements on the electron selection are lepton channel-dependent and summarised in Table~\ref{tbl:elOb}. %reference the electron segment earlier in the thesis.
+\paragraph{Primary Vertex:} all events considered in the analysis are required to have at least one primary vertex reconstructed from tracks in the \gls{id} \cite{ATL-PHYS-PUB-2015-026}.
+
+\paragraph{Electrons:} are reconstructed by matching a deposit in the electromagnetic calorimeter with a track in the \gls{id} \cite{Aaboud:2657964, Aad_2019}. Electrons are required to have $p_T > 7$ GeV and $|\eta|<2.47$. They are identified with a \textit{loose} working point of a likelihood discriminant, matching the calorimeter shower shape to an associated track. The $e$ candidates must satisfy $p_T$-dependent isolation criteria in both the \gls{id} and calorimeter. In the 1L channel, the \textit{tight} likelihood criterion is used with stricter calorimeter isolation requirements to better reject the multi-jet background. Additional requirements on the electron selection are lepton channel-dependent and summarised in Table~\ref{tbl:elOb}. $VH$-Loose electrons require a loose likelihood identification is and are applied in all channels. Additionally, the $WH$-Signal and $ZH$-Signal criteria are respectively applied in the 1L and 2L channels, with a tighter $p_T$ due to the trigger threshold. The 1L likelihood identification and isolation selections are tighter to suppress the multi-jet background. % TODO reference the electron segment earlier in the thesis. % TODO Isolation should be define
 
 \begin{table}[!htbp]
   \begin{center}
     \resizebox{0.99\textwidth}{!}{
       \begin{tabular}{ccccccc} \hline \hline
         Selection & $p_T$ & $\eta$ & ID & $d_{0}^{\mathrm sig}$ w.r.t. BL &  $|\Delta{z_{0}}\sin\theta|$ & Isolation \\ \hline
-        VH-Loose & $>$7 GeV & $|\eta|< 2.47$ & \textit{Loose} & $ <5$ & $<0.5$ mm & Loose\_VarRad \\
-        ZH-Signal & $>$27 GeV & $|\eta|< 2.47$ & \multicolumn{3}{c}{Same as VH-Loose} \\
-        WH-Signal & \multicolumn{2}{c}{Same as ZH-Signal} & \textit{Tight} & \multicolumn{2}{c}{Same as ZH-Signal} & HighPtCaloOnly \\
+        $VH$-Loose & $>$7 GeV & $|\eta|< 2.47$ & \textit{Loose} & $ <5$ & $<0.5$ mm & Loose \\ % Loose\_VarRad
+        $ZH$-Signal & $>$27 GeV & $|\eta|< 2.47$ & \multicolumn{3}{c}{Same as $VH$-Loose} \\
+        $WH$-Signal & \multicolumn{2}{c}{Same as $ZH$-Signal} & \textit{Tight} & \multicolumn{2}{c}{Same as $ZH$-Signal} & Strict \\ %HighPtCaloOnly
         \hline\hline
       \end{tabular}
     }
@@ -23,19 +25,17 @@ As introduced in Chapter \ref{chapter-ATLAS}, different types of information is 
   \end{center}
 \end{table}
 
-A $VH$-Loose with loose likelihood identification is applied to electrons in all channels. Additionally, the $WH$-Signal and $ZH$-Signal criteria are applied in the 1L and 2L channels respectively, with a tighter $p_T$ due to the trigger threshold. The 1L likelihood identification and isolation selections are tighter to suppress the multi-jet background.
-
-\paragraph{Muons:} are reconstructed by matching an energy deposit in the muon detector with information from the \gls{id} and \glsfirst{ms} \cite{Aad:2746302}. They are required to have a $p_T >$ 7 GeV, $|\eta| < 2.7$, to satisfy a \textit{loose} identification criteria and be isolated according to $p_T$ dependant criteria in the \gls{id}. Requirements are summarised in Table~\ref{tbl:muonOb} and vary depending on the lepton channel as for electrons. The $VH$-Loose requirement is applied to muons in all channels. The $WH$-Signal and $ZH$-Signal are additionally applied to the 1L and 2L channels respectively, with a stricter track-based isolation used in 1L.
+\paragraph{Muons:} are reconstructed by matching an energy deposit in the muon detector with information from the \gls{id} and \glsfirst{ms} \cite{Aad:2746302}. They are required to have $p_T >$ 7 GeV, $|\eta| < 2.7$, to satisfy a \textit{loose} identification criteria, and be isolated in the \gls{id} according to $p_T$-dependant criteria. These requirements are summarised in Table~\ref{tbl:muonOb}, and vary depending on the lepton channel simularly to the electron requirements. The $VH$-Loose requirements are applied to muons in all channels. The $WH$-Signal and $ZH$-Signal are additionally applied to the 1L and 2L channels respectively, with a stricter track-based isolation used in 1L to suppress the multi-jet background.
 
 \begin{table}[!htbp]
     \begin{center}
       \resizebox{0.99\textwidth}{!}{
         \begin{tabular}{ccccccc} \hline \hline
           Selection & $p_T$ & $\eta$ & ID & $d_{0}^{\mathrm sig}$ w.r.t. BL  & $|\Delta{z_{0}}\sin\theta|$ & Isolation \\ \hline
-          VH-Loose & $>$7 GeV & $|\eta|< 2.7$ & Loose quality & $ <3$ & $<0.5$ mm & Loose\_VarRad \\
-          ZH-Signal & $>$27 GeV & $|\eta| < 2.5$ & \multicolumn{4}{c}{Same as VH-Loose} \\
+          $VH$-Loose & $>$7 GeV & $|\eta|< 2.7$ & Loose quality & $ <3$ & $<0.5$ mm & Loose \\ % Loose\_VarRad
+          $ZH$-Signal & $>$27 GeV & $|\eta| < 2.5$ & \multicolumn{4}{c}{Same as $VH$-Loose} \\
           %WH-Signal & $>$25 GeV ($>$27 when $p_T^V<$ 150 GeV) & $|\eta|< 2.5$ & Medium quality & $ <3$ & $<0.5$ mm & HighPtTrackOnly \\
-          WH-Signal & \makecell[c]{$>$25 GeV if $p_T^V>$ 150 GeV\\ $>$27 GeV if $p_T^V<$ 150 GeV} & $|\eta|< 2.5$ & Medium quality & $ <3$ & $<0.5$ mm & HighPtTrackOnly \\
+          $WH$-Signal & \makecell[c]{$>$25 GeV if $p_T^V>$ 150 GeV\\ $>$27 GeV if $p_T^V<$ 150 GeV} & $|\eta|< 2.5$ & Medium quality & $ <3$ & $<0.5$ mm & Strict \\
           \hline\hline
         \end{tabular}
       }
@@ -44,21 +44,21 @@ A $VH$-Loose with loose likelihood identification is applied to electrons in all
     \end{center}
   \end{table}
   
-\paragraph{Taus:} hadronically decaying $\tau$-leptons are identified and vetoed in 1L using an \gls{rnn}-based tagger \cite{ATL-PHYS-PUB-2019-033}. Taus are required to have a $p_T >$ 20 GeV, $|eta| <$ 2.5, and to have 1 or 3 associated tracks. In 0L and 2L, if the jet passes a \textit{loose} working point requirement for hadronically decaying $\tau$-leptons, it is no longer considered as a jet and cannot be considered as a candidate for reconstruction of the Higgs boson. % TODO find more info from the object notes. % TODO also clarify this last thing about inclusive of tau events.
+\paragraph{Taus:} hadronically decaying $\tau$-leptons are identified and vetoed in 1L using an \gls{rnn}-based tagger \cite{ATL-PHYS-PUB-2019-033}. Taus are required to have a $p_T >$ 20 GeV, $|\eta| <$ 2.5, and to have 1 or 3 associated tracks. In 0L and 2L, if the jet passes a \textit{loose} working point requirement for hadronically decaying $\tau$-leptons, it is no longer considered as a jet and cannot be considered as a candidate for reconstruction of the Higgs boson. % TODO find more info from the object notes. % TODO also clarify this last thing about inclusive of tau events.
 
-\paragraph{Missing Transverse Energy:} neutrinos are not detectable in ATLAS and their presence is inferred from momentum imbalance in the transverse plane to the beam axis. $E_T^{\textrm{miss}}$, also called MET, is the negative vectorial sum of the transverse momentum of physics objects\footnote{Electrons, muons, hadronic $\tau$, and jets.} and a track-based \textit{soft term}, to include a contribution from good quality tracks associated with the \glsfirst{pv} but not with any reconstructed physics object \cite{ATLASmetReco}. % TODO This citation is from the VHcc, check in object note it's still relevant.
+\paragraph{Missing Transverse Energy:} neutrinos are not detectable in ATLAS and their presence is inferred from momentum imbalance in the transverse plane to the beam axis. $E_T^{\textrm{miss}}$, also called MET, is the negative vectorial sum of the transverse momentum of physics objects, namely electrons, muons, hadronic $\tau$, and jets. An additional track-based \textit{soft term} is added, to include a contribution from good quality tracks associated with the \glsfirst{pv} but not to any reconstructed physics object \cite{ATLASmetReco}. % TODO This citation is from the VHcc, check in object note it's still relevant.
 
-\paragraph{Jets:} the analysis uses 3 types of jets, reconstructed with the anti-$k_t$ algorithm \cite{Cacciari:2008gp}:
+\paragraph{Jets} Three types of jets are used by the analysis, all reconstructed with the anti-$k_t$ algorithm \cite{Cacciari:2008gp}:
 \begin{enumerate}
-  \item Small-$R$ jets: are reconstructed from topological clusters of energy deposit in the calorimeter based on the PFlow objects with a radius $R = 0.4$. Used in the resolved regime to reconstruct the Higgs candidate. A jet is considered as \textit{central} if $|\eta| < 2.5$ and $p_T$ > 20 GeV, and as \textit{forward} if 2.5 $\leq |\eta|$ < 4.5 and $p_T > 30$ GeV. Central (forward) jets with a $p_T < 60$ GeV ($p_T < 120$ GeV) are required to originate for the primary vertex as identified by the jet vertex tagger (\gls{jvt}) to limit the pile-up background \cite{atlasPUJVT}. \textit{Tight} jet cleaning criteria are applied to suppress non-collision background. % TODO more detail on jet cleaning criteria.
-  \item Large-$R$ jets: are similar to small-$R$ jets with a larger radius $R = 1.0$, and required to have a $p_T > 250$ GeV and $|\eta| < 2$. They are used in the boosted regime to reconstruct the Higgs candidate. 
-  \item Variable-$R$ (\gls{vr}) track-jets: are reconstructed with a $p_T$-dependent radius, optimised for double $b$-labelling efficiency of the boosted $H \rightarrow b\bar{b}$ decays \cite{ATL-PHYS-PUB-2017-010}. They are required to have a $p_T > 10$ GeV and $|\eta| < 2.5$. These track-jets are used to reconstruct the $b$-tagged objects inside the large-$R$ jet and for the boosted top-enriched \gls{cr}. 
+  \item Small-$R$ jets: are reconstructed from topological clusters of energy deposit in the hadrnoic calorimeter based on the reconstructed PFlow objects with a radius $R = 0.4$. A jet is considered as \textit{central} if $|\eta| < 2.5$ and $p_T$ > 20 GeV, and as \textit{forward} if 2.5 $\leq |\eta|$ < 4.5 and $p_T > 30$ GeV. Central (forward) jets with a $p_T < 60$ GeV ($p_T < 120$ GeV) are required to originate for the primary vertex as identified by the jet vertex tagger (\gls{jvt}) to limit the pile-up background \cite{atlasPUJVT}. \textit{Tight} jet cleaning criteria are applied to suppress non-collision background. Central jets are used in the resolved regime to reconstruct the Higgs candidate, based on flavour tagging. % TODO more detail on jet cleaning criteria.
+  \item Large-$R$ jets: are similar to small-$R$ jets with a larger radius $R = 1.0$, and required to have $p_T > 250$ GeV and $|\eta| < 2$. They are used in the boosted regime to reconstruct the Higgs candidate. 
+  \item Variable-$R$ (\gls{vr}) track-jets: are reconstructed with a $p_T$-dependent radius, optimised for double $b$-tagging efficiency of the boosted $H \rightarrow b\bar{b}$ decays \cite{ATL-PHYS-PUB-2017-010}. They are required to have $p_T > 10$ GeV and $|\eta| < 2.5$. These track-jets are used to reconstruct the $b$-tagged objects inside the large-$R$ jet and to define a boosted control regions rich in top background. 
 \end{enumerate}
 %TODO missing all of the corrections 
 
-\paragraph{Flavour Tagging:} Jet flavour tagging is perhaps the most important part of the object reconstruction. The latest available Run 2 \gls{dl1r} tagger is used in the analysis for both $b$- and $c$-tagging in the resolved and boosted regime \cite{atlas:FTAGRUN2}. The methodology differs slightly between the two regimes of the analysis due to the different flavour tagging needs:  % TODO the calibration must be more detailed
+\paragraph{Flavour Tagging:} Jet flavour tagging is perhaps the most important part of the object reconstruction. The latest available \gls{dl1r} tagger from Run 2 is used in the analysis for both $b$- and $c$-tagging in the resolved and boosted regime \cite{atlas:FTAGRUN2}. The methodology differs slightly between the two regimes of the analysis due to the different flavour tagging needs:  % TODO the calibration must be more detailed
 \begin{itemize}
-  \item In the resolved \vhb\ and \vhc, \gls{dl1r} is used to tag both $b$- and $c$-jets. The so-called \glsfirst{pcft} scheme, illustrated in Figure~\ref{fig:pseudotag}, is deployed to allow for a coherent joint definition and simultaneous calibration of $b$- and $c$-tagged jets, adopting the technique first introduced for 2D $c$-tagging in the \vhc\ \cite{Collaboration:2721696}. The \gls{dl1r} tagger assigns a $b$-score\footnote{With an $f_c = 0.018$ value.} and a $c$-score\footnote{With an $f_b = 0.3$ value.} to every selected jets. To tag a jet, the associated score must be higher than a specific cutoff value, defined to give a specific selection efficiency in simulated data, also known as a \glsfirst{wp}. From this score, the jet is assigned one of 4 possible labels, base on 2 $b$-tagging \gls{wp} and 2 $c$-tagging \gls{wp} tested in strict successive order. First a 60\% tight $b$-tagging working point (bin 4) is tested, followed by a looser 70\% $b$-\gls{wp} (bin 3). A jet passing these selections is labelled $B$\footnote{The difference between the $b$-tagged bins 3 and 4 is used in the discriminant \gls{bdt} of the analysis}. Otherwise, it is considered for $c$-tagging with first a \textit{tight} working point at 20\% efficiency (bin 2), followed by a \textit{loose} \gls{wp} at an exclusive efficiency of 20\% (bin 1) on the remaining jets - so that 40\% of $c$-jets are effectively selected in the combined tight and loose bins. A jet selected by the tight $c$-tagging \gls{wp} is labelled $T$, and $L$ if it passes the loose \gls{wp}. A jet failing to pass all \gls{wp}s is not tagged and labelled $N$ (bin 0). The $b$-tagging \gls{wp}s are official ATLAS ones for \gls{dl1r}, while those for $c$-tagging are optimised for the purpose of the analysis. The tagging efficiency of each bin is displayed in Table~\ref{tbl:PCFTtageff} displayed the tagging of each bin for the main flavours and $\tau$-leptons.
+  \item In the resolved \vhbc, \gls{dl1r} is used to tag both $b$- and $c$-jets. The so-called \glsfirst{pcft} scheme, illustrated in Figure~\ref{fig:pseudotag}, is deployed to allow for a coherent joint definition and simultaneous calibration of $b$- and $c$-tagged jets, adopting the technique first introduced for 2D $c$-tagging in the \vhc\ analysis \cite{Collaboration:2721696}. The \gls{dl1r} tagger assigns a $b$-score\footnote{With an $f_c = 0.018$ value.} and a $c$-score\footnote{With an $f_b = 0.3$ value.} to every selected jets. To tag a jet, the associated score must be higher than a specific cutoff value, defined to give a specific selection efficiency in simulated data, also known as a \glsfirst{wp}. From this score, the jet is assigned one of 4 possible labels, base on 2 $b$-tagging \gls{wp} and 2 $c$-tagging \gls{wp}. These \gls{wp} aretested in strict successive order, with first a 60\% tight $b$-tagging working point (bin 4) followed by a looser 70\% $b$-\gls{wp} (bin 3). A jet passing these selections is labelled $B$\footnote{The difference between these $b$-tagged is used in the discriminant \gls{mva} of the analysis}. Otherwise, it is considered for $c$-tagging with first a \textit{tight} working point at 20\% efficiency (bin 2), followed by a \textit{loose} \gls{wp} at an exclusive efficiency of 20\% (bin 1) on the remaining jets - so that 40\% of the $c$-jets are effectively selected in the combined tight and loose bins. A jet selected by the tight $c$-tagging \gls{wp} is labelled $T$, and $L$ if it only passes the loose \gls{wp}. A jet failing to pass all \gls{wp}s is not tagged and labelled $N$ (bin 0). The $b$-tagging \gls{wp}s correspond to official ATLAS ones for \gls{dl1r} \cite{atlas:FTAGRUN2}, while those for $c$-tagging are optimised for the purpose of the analysis. The tagging efficiency of each bin is displayed in Table~\ref{tbl:PCFTtageff}, shown for the main flavours as well as $\tau$-leptons reconstructed as jets.
   \begin{table}[h!]
     \begin{center}
         \begin{tabular}{c|c|cccc}
@@ -72,64 +72,66 @@ A $VH$-Loose with loose likelihood identification is applied to electrons in all
           4 & $b$-60\%  & 58\%   & 2.65\% & 0.051\% & 0.49\%\\
           \hline \hline
         \end{tabular}
-      \caption{Jet tagging efficiency for $b$-jet, $c$-jet, light-jet and $\tau$-jet in the \gls{pcft} bins, measured from a PowhegPythia8 simulated sample of semi-leptonic \ttb\ events, from the internal documentation.}
-     \label{tbl:PCFTtageff}
+      \caption{Jet tagging efficiency for $b$-jet, $c$-jet, light-jet and $\tau$-jet in the \glsfirst{pcft} bins, measured from a \textsc{Powheg}+\textsc{Pythia} 8 simulated sample of semi-leptonic \ttb\ events.}
+     \label{tbl:PCFTtageff} % Don't understand why thigh is not at 20\%
     \end{center}
   \end{table}
-
-  The calibration of all five bins of Figure~\ref{fig:pseudotag} was performed simultaneously for the analysis following the methodology described in Ref \cite{atlas:FTAGRUN2}, with some results presented in Appendix \ref{appsec-vh-ftagcal}.
-  
+  The calibration of all five bins of Figure~\ref{fig:pseudotag} is performed simultaneously for the analysis following the methodology described in Ref \cite{atlas:FTAGRUN2}, with some results presented in Appendix \ref{appsec-vh-ftagcal}.
   \begin{figure}[h!]
     \center
       \begin{minipage}[c]{0.69\textwidth}
         \includegraphics[width=0.98\textwidth]{Images/VH/pseudocontinuous.png}
       \end{minipage}
       \begin{minipage}[c]{0.3\textwidth}
-        \caption{The \glsfirst{pcft} scheme used to simultaneously define 2 $b$-tagged, a tight $c$-tagged, a loose $c$-tagged, and a non-tagged bins, from the internal documentation. } 
+        \caption{The \glsfirst{pcft} scheme used to simultaneously define 2 $b$-tagged, a tight $c$-tagged, a loose $c$-tagged, and a non-tagged bins.} 
         \label{fig:pseudotag}
       \end{minipage}
   \end{figure}
-  \item The boosted regime only targets $b$-jets, following the single-purpose tagging used in the standard calibration of the tagger. As such, the standard pseudo-continuous $b$-tagging method is used. The track-jets associated to the leading large-$R$ jet are given a $b$-score based on the per-flavour probabilities outputted by \gls{dl1r}. The 85\% working point is adopted to maximise the signal yield, due to the important statistical limitations in the boosted regime. Track-jets passing this working point are $B$-tagged, otherwise they are untagged $N$. Studies showed that the very loose \gls{dl1r} \gls{wp} gives a better expected statistical significance than the then-available $X_{bb}$ tagger. The official calibration from Ref \cite{atlas:FTAGRUN2} is used, and extended to higher $p_T$ due to the wide range of $p_T$ probed in the analysis using uncertainty extrapolation, as presented in Appendix \ref{appsec-vh-ftagcal}.
+
+  \item The boosted regime only targets $b$-jets, with the single-jet \gls{dl1r} tagger used. As such, the standard pseudo-continuous $b$-tagging method is used \cite{atlas:FTAGRUN2}. The track-jets associated to the leading large-$R$ jet are given a $b$-score based on the per-flavour probabilities outputted by \gls{dl1r}. The 85\% working point is adopted to maximise the signal yield, due to the important statistical limitations in the boosted regime. Track-jets passing this working point are $B$-tagged, otherwise they are untagged $N$. Studies showed that the very loose \gls{dl1r} \gls{wp} gives a better expected statistical significance than the then-available $X_{bb}$ tagger. The official calibration from Ref \cite{atlas:FTAGRUN2} is used and extended to higher $p_T$ with uncertainty extrapolation due to the wide range of $p_T$ probed in the analysis, as presented in Appendix \ref{appsec-vh-ftagcal}.
 \end{itemize}
 While the analysis was underway, the superior single-jet \gls{gnn} taggers and the boosted objects $GN2X$ tagger introduced in Chapter \ref{chap-ftag} were not yet available as their calibration was an ongoing effort. Furthermore, switching to these new taggers was not feasible from a practical point of view in the timing of the analysis. They represent, however, an exciting avenue for progress in future iterations of this search, in both the resolved and boosted regimes. \\ % TODO check how the wp are defined %TODO also check the fc alue
 
-\paragraph{Object Overlap:} overlap removal is applied to avoid double-counting electrons, muons, small-$R$ and large-$R$ jets, and hadronically decaying $\tau$'s that pass the object selection.
+\paragraph{Object Overlap:} overlap removal is applied to avoid double-counting electrons, muons, small-$R$ and large-$R$ jets, and hadronically decaying $\tau$-leptons passing the object selection.
 
 \subsection{Event Selection}\label{sec-regimeCat}
-The trigger selections of the \vhb\ and \vhc\ have been harmonised for the combined analysis, and are specified per lepton channel in 0-lepton (0L), 1-lepton (1L), and 2-lepton (2L). Further details on the trigger setup are given in Table~\ref{aptab:trigs2015_to_2018} of the Appendix. In 0L, events are selected using the lowest un-prescaled \etm trigger, with increasing threshold rising from 70 GeV for data recorded in 2015, 90 to 110 GeV for 2016, and to 110 GeV for 2017 and 2018 due to higher trigger rate later in Run 3. The 1L channel triggers cover both the $e$ and the $\mu$ sub-channels. For the $e$-channel, single electron events must be triggered by the lwoest un-prescaled single electron triggers. For muons, the \etm trigger of 0L is used for events with \ptv\ > 150 GeV, while the lowest un-prescaled single muon trigger is used for events with a lower \ptv. Finally, the triggers for 2L are equivalent to 1L except for the muon channel where the \ptv\ threshold for switching between triggers is raised to 250 GeV. The use of \etm trigger at high \ptv\ for muons was shown to increase signal acceptancy by $\sim$ 5\%.\\ % TODO missing boosted no?
+A subset of all the events recorded by ATLAS during Run 2 is selected for further selection based on specific triggers. The trigger selections of the \vhb\ and \vhc\ have been harmonised for the combined analysis, and are specified per lepton channel in 0-lepton (0L), 1-lepton (1L), and 2-lepton (2L). In 0L, events are selected using the lowest un-prescaled \etm\ trigger, with an increasing lower threshold rising from 70 GeV for data recorded in 2015, 90 to 110 GeV for 2016, and to 110 GeV for 2017 and 2018 due to higher trigger rate later in Run 3. The 1L channel triggers cover both the $e$ and the $\mu$ sub-channels. For the $e$-channel, single electron events must be triggered by the lowest un-prescaled single electron trigger. For muons, the \etm\ trigger of 0L is used for events with \ptv\ > 150 GeV, while the lowest un-prescaled single muon trigger is used for events with a lower \ptv. Finally, the triggers for 2L are equivalent to 1L except for the muon channel where the \ptv\ threshold for switching between triggers is raised to 250 GeV. The use of \etm\ trigger at high \ptv\ for muons was shown to increase the signal acceptance by $\sim$ 5\%.\\ % TODO missing boosted no? % Hidding this trigger thingFurther details on the trigger setup are given in Table~\ref{aptab:trigs2015_to_2018} of the Appendix.
 
 
-The different regimes of the analysis are defined by flavour tagging and the strategy to reconstruct the Higgs boson. In the resolved regime, an event must have at least two central jets. Two candidate jets are selected to reconstruct the Higgs using the so-called \textit{All Signal Jets} strategy, and define an event-tag by combining their individual tags. A hierarchy of tags is introduced, following the ordering: $B$ > $T$ > $L$ > $N$. The pair of candidates is selected from the two central jets having the highest tags, and the highest $p_T$ in case of ties. Events are labelled based on the tag of the selected jets, e.g., $TT$ is assigned to events with 2 tight $c$-tagged jet and $BL$ to events with a $b$-tagged and a loose $c$-tagged jets. In the boosted regime, at least to track-jets are required to be associated to the large-$R$ jet leading by $p_T$, and the tags of the 3 track-jets with the highest $p_T$ are considered for the event. This labelling and the reconstructed \ptv\ defines the different regimes of the resolved and boosted \vhb\ and \vhc\ parts of the cobpined analysis. To fully reconstruct the Higgs boson from the two candidates, additional selections are applied.
+The different regimes of the analysis are defined by flavour tagging and the strategy to reconstruct the Higgs boson. In the resolved regime, an event must have at least two central jets. Two candidate jets are selected to reconstruct the Higgs using the so-called \textit{All Signal Jets} strategy, and define an event-tag by combining their individual tags. A hierarchy of tags is introduced, following the ordering: $B$ > $T$ > $L$ > $N$. The pair of candidates is selected from the two central jets having the highest tags, and the highest $p_T$ in case of ties. Events are labelled based on the tag of the selected jets, e.g., $TT$ is assigned to events with 2 tight $c$-tagged jet and no $b$-jet and $BL$ to events with a $b$-tagged and a loose $c$-tagged jets. In the boosted regime, at least 2 track-jets are required to be associated to the large-$R$ jet leading by $p_T$, and the tags of the 3 track-jets with the highest $p_T$ are considered for the event. This labelling and the reconstructed \ptv\ define the different regimes of the resolved and boosted \vhb\ and \vhc\ parts of the combined analysis. To fully reconstruct the Higgs boson from the two candidates jets or the large-$R$ jet, additional selections are applied.
 
-\paragraph{Higgs candidates in resolved regime:} for \vhb, the two candidates must be $b$-tagged (bins 3 and 4) with no additional $B$- and tight $c$-tagged jets allowed\footnote{In 2L, additional $T$-tagged jets are allowed due to the limited statistics and the different derivation of the top \gls{cr} in 2L, requiring mixed leptons $e\mu$.}, while in \vhc\ no $b$-tagged jets - neither candidate nor additional - is allowed and one of the candidate must have a tight $T$-tag. As described in the next section, two control regions are defined by changing this flavour selection: the topCR, combining a $B$-tag with a $T$-tag and the $V+l$ require loose $L$-tagged jet with an untagged $N$ jet for \vhc.. The Higgs candidates are sorted by $p_T$ into a leading $j_1$ and sub-leading $j_2$ candidates. The leading candidate must have $p_T > 45$ GeV, while other jets are required to have $p_T > 20 GeV$. The invariant mass of the Higgs candidate as measured by $m_{bb}$ ($m_{cc}$) for \vhb\ (\vhc) must be above 50 GeV before reconstruction techniques are applied to the candidate, to avoid the $V$+jets gluon splitting mis-modelling at low masses.  \\ %TODO bc overlap in 2L VHbb: tight c jets are allowed? % TODO check V+l has LL LN, ... % TODO the additional jet cut is not clearly mentioned in the text: it seems it's only 20 geV
-\paragraph{Higgs candidates in boosted regime:} the selection requires exactly two $B$ tags among the at-most 3 leading track-jets by $p_T$ associated to the leading large-$R$. The reconstructed mass of the Higgs candidate based on the leading-$R$ jet mass is required to be $m_J > 50$ GeV with a leading large-$R$ jet $p_T > 250$ GeV. \\
+\paragraph{Higgs candidates in resolved regime:} for \vhb, the two candidates must be $b$-tagged (bins 3 and 4) with no additional $B$- and tight $c$-tagged jets allowed\footnote{In 2L, additional $T$-tagged jets are allowed due to the limited statistics and the different derivation of the top \gls{cr} in 2L, requiring mixed leptons $e\mu$.}, while in \vhc\ no $b$-tagged jet is allowed and at least one of the candidate must be tight $c$-tagged ($T$). As described in the next section, two control regions are defined by changing this flavour selection: a Top \gls{cr}, combining at least 1 $B$-tag with at least 1 $T$-tag, and the $V+l$ requiring 1 loose $c$-tagged jet ($L$) with an untagged $N$ jet for \vhc. The Higgs candidates are sorted by $p_T$ into a leading $j_1$ and sub-leading $j_2$ candidates. The leading candidate must have $p_T > 45$ GeV, while other jets are required to have $p_T > 20 GeV$. The invariant mass of the Higgs candidate as measured by $m_{bb}$ ($m_{cc}$) must be above 50 GeV before applying energy corrections, to avoid the $V$+jets gluon splitting mis-modelling at low masses.  % TODO bc overlap in 2L VHbb: tight c jets are allowed? % TODO check V+l has LL LN, ... 
+\paragraph{Higgs candidates in boosted regime:} the selection requires exactly 2 $B$-tags among the 3 track-jets leading by $p_T$ associated to the leading large-$R$ jet. The reconstructed mass of the Higgs candidate based on the leading-$R$ jet mass $m_J$ must satisfy $m_J > 50$ GeV, with a leading large-$R$ jet $p_T > 250$ GeV. \\
 
-In all regimes, the number of reconstructed charged lepton in the final state defines three channels as the 0-lepton (0L), 1-lepton (1L), and 2-lepton (2L). The objective of this leptonic selection is to reconstruct the associated $V$ boson. The selection of events in the resolved regime is presented in Table~\ref{tbl:VHbbccevSelTable} and in the boosted regime in Table~\ref{tbl:VHbbBoostevSelTable}. Additional channel-specific requirements are also introduced to limit backgrounds contamination and are reviewed in the rest of this section.
+In all regimes, the number of reconstructed charged lepton in the final state defines three channels as the 0-lepton (0L), 1-lepton (1L), and 2-lepton (2L). The objective of this leptonic selection is to reconstruct the associated $V$-boson. The selection of events in the resolved regime is presented in Table~\ref{tbl:VHbbccevSelTable} and in Table~\ref{tbl:VHbbBoostevSelTable} for the boosted regime. Additional channel-specific requirements are also introduced to limit backgrounds contamination and reviewed in this section.
 
 \subsubsection{Selection specific to the 0-lepton channel}\label{subsubsec-0Lsel}
-In the 0-lepton chanenel, 0 $VH$-loose leptons should be selected and \etm should be larger than 150 GeV (250 GeV) in the resolved (boosted) regime to target a $Z \rightarrow \nu\nu$ (with $H \rightarrow b\bar{b}/c\bar{c}$). \\ % TODO Conflict in the main note: selection is 200 in text for boosted and 250 in the table.
-
-In the resolved regime, the scalar sum of the jet $p_T$ in the events $S_T$ is required to be $> 120$ GeV ($> 150$ GeV) for 2-jets (3 or more jets) to avoid a mis-modelled region in simulation due to triggers. When a $W \rightarrow \tau \nu$ with a hadronic decay of the $\tau$-lepton reconstructed as a jet, no electron nor muon is reconstructed. To limit this fake $\tau$ contamination in the 0L channel, an extra selection is applied when at least 1 hadronic $\tau$ is reconstructed: the reconstructed transverse $W$ mass \[ m_T^W = \sqrt{2 p_T^l E_T^{\textrm{miss}} (1 - \cos(\Delta \phi(l, E_T^{\textrm{miss}} ) ) ) } \] is required to be higher than 10 GeV, with the $W$-boson $p_T$ estimated from the vectorial sum of the leading hadronic $\tau$ ($p_T^l$) and \etm instead of \ptv.
+In the 0-lepton channel, 0 $VH$-loose leptons should be selected and \etm\ should be $>$ 150 GeV ($>$ 250 GeV) in the resolved (boosted) regime, to identify the decay $Z \rightarrow \nu\nu$. \\ % TODO Conflict in the main note: selection is 200 in text for boosted and 250 in the table.
+ 
+In the resolved regime, the scalar sum $S_T$ of the jet $p_T$ in the events must be $> 120$ GeV ($> 150$ GeV) for 2-jets ($\geq$ 3 jets) to avoid a mis-modelled region in simulation due to the triggers. In the case of a decaying $W \rightarrow \tau \nu$ followed by a hadronic decay of the $\tau$-lepton which is reconstructed as a jet, there are no electron nor muon in the final state. To limit this $\tau$-contamination in the 0L channel, an extra selection is applied when at least 1 hadronic $\tau$ is reconstructed: the reconstructed transverse $W$ mass \[ m_T^W = \sqrt{2 p_T^l E_T^{\textrm{miss}} (1 - \cos(\Delta \phi(l, E_T^{\textrm{miss}} ) ) ) } \] is required to be $m_T^W \geq$ 10 GeV, with the $W$-boson $p_T$ estimated from the vectorial sum of the leading hadronic $\tau$ momentum ($p_T^l$) and \etm\ instead of \ptv.\\
 
 To limit the multi-jet background, so-called \textit{anti-QCD cuts} using the azimuthal angle $\phi$ are applied in all regimes:
-\begin{itemize}
+\begin{itemize} % TODO what is this azimuthal angle
     \item For resolved only, $|\Delta \phi(j_1, j_2)| < 140 \ensuremath{^\circ}$.
-    \item $|\Delta \phi(E_t^{\textrm{miss}}, H)| > 120 \ensuremath{^\circ}$,
+    \item $|\Delta \phi(E_t^{\textrm{miss}}, H)| > 120 \ensuremath{^\circ}$.
     \item $\textrm{min}|\Delta \phi (E_T^{\textrm{miss}}, \textrm{ jet})|$ must be $> 20\ensuremath{^\circ}$ ($> 30 \ensuremath{^\circ}$) for resolved 2-jet (3-jet) events and $> 30\ensuremath{^\circ}$ for the boosted regime.
 \end{itemize}
-The cuts were tuned to limit the multi-jet contamination to a fraction of order 1\% of the total background in 0L. Consequently, the mutli-jet is deemed negligible in 0L. 
+The cuts are tuned to limit the multi-jet contamination to a fraction of order 1\% of the total background in 0L, making the mutli-jet negligible in the 0-lepton channel. 
 
 \subsubsection{Selection specific to the 1-lepton channel}
-In the 1L channel, the targeted decaying vector boson is a $W \rightarrow \ell\nu$, with the $\ell = e, \mu$. Exactly 1 $WH$-signal lepton is required, with events having more than 1 $VH$-loose lepton vetoed. The vector boson is reconstructed from the vectorial sum of the \etm and the lepton tranverse momentum identified in the event, with a $p_T^W > 75$ GeV. To suppres the multi-jet background, events with an electron are required to have an \etm $>$ 30 GeV in the resolved and $> 50$ GeV in the boosted regime, with a reconstructed $m_T^W > 20$ GeV for events with low $W$ transverse momentum, $p_T^W \in [75, 150]$ GeV. For the resolved $\mu$-channel, as the same \etm trigger is used as in the 0L, the scalar sum of $p_T$ is similarly restrained as in 0L: $S_T > 120$ GeV ($> 150$ GeV) for 2-jets (3 or more jets). A significant background is the \ttb, with both $t$ decaying into a $W$ boson and a $b$-quark. Events where one of the $W$ boson decay follows $W \rightarrow \tau \nu$ with the $\tau$ decaying hadronically and the other $W$ decays into an $e$ or a $\mu$ have the same signature as the searched signal. A hadronic $\tau$-veto is applied in all regimes to suppress this background. Events passing the 0-lepton selection with $\geq 1$ hadronic taus are moved to the 1-lepton channel with the leading hadronic $tau$ used to reconstruct variables requiring an $e/\mu$. This migration is performed to recover the estimated $~10$\% ($\sim$ 20\%) of $WH$ signal with $W\rightarrow \tau \nu$ with hadronically decaying $\tau$-lepton in the resolved (boosted) regime and decorrelated the 0L and 1L channels.
+In the 1L channel, the targeted decaying vector boson is a $W \rightarrow \ell\nu$, with $\ell = e, \mu$. Exactly 1 $WH$-signal lepton is required, with events having more than 1 $VH$-loose lepton vetoed\footnote{The $VH$-loose lepton is at best the $WH$-signal lepton.}. The vector boson is reconstructed from the vectorial sum of the \etm\ and the lepton transverse momentum identified in the event, with a \ptv\ $> 75$ GeV. To suppress the multi-jet background, events with one electron are required to have an \etm\ $>$ 30 GeV ($> 50$ GeV) in the resolved (boosted) regime, with a reconstructed $m_T^W > 20$ GeV for events with low $W$ transverse momentum $p_T^V < 150$ GeV. For the resolved $\mu$-channel, as the same \etm\ trigger is used as in the 0L, the scalar sum of $p_T$ is similarly restrained with $S_T > 120$ GeV ($> 150$ GeV) for 2-jets ($\geq$ 3 jets). A significant background in the 1-lepton channel is the \ttb, with both $t$-quarks decaying into a $W$ boson and a $b$-quark. Events where one of the $W$ boson decay follows $W \rightarrow \tau \nu$ with the $\tau$ decaying hadronically and the other $W$ decays into an $e$ or a $\mu$ have the same leptonic signature as the signal. A strict hadronic $\tau$-veto is applied in all regimes to suppress this background. Events passing the 0-lepton selection with $\geq 1$ hadronic taus are moved to the 1-lepton channel with the leading hadronic $\tau$ used to reconstruct variables requiring an $e$ or a $\mu$. This migration is performed to recover the estimated $~10$\% ($\sim$ 20\%) of $WH$ signal whre $W\rightarrow \tau \nu$ with a hadronically decaying $\tau$-lepton in the resolved (boosted) regime, and help decorrelate the $WH$ and $ZH$ measurements in the \vhb\ side.
 
 \subsubsection{Selection specific to the 2-lepton channel}
-The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, with the $Z$ reconstructed from two $VH$-loose leptons required to have the same flavour, with at least one passing the $VH$-signal lepton requirements. In the di-muon channel, the leptons are further required to be of opposite charge\footnote{This is not applied to the di-electron system due to the higher charge mis-identification.}. The invariant mass of the di-lepton system is required to be consistent with the $Z$ mass with $81 < m_{ll} < 101$ GeV in resolved and $66 < m_{ll} < 111$ GeV in boosted, to suppress non-resonant lepton-pair producing background, such a \ttb\ and multi-jet. The leptons must satisfy $p_T > 25$ GeV and the stricter $p_T > 27$ GeV for the leading muon when the event is selected by the muon trigger.
+The 2L channel targets the associated bosonic decay where $Z \rightarrow\ell\ell$, with the $Z$ reconstructed from two $VH$-loose leptons required to have the same flavour, with at least one passing the $ZH$-signal lepton requirements. In the di-muon channel, the leptons are further required to be of opposite charges\footnote{This is not applied to the di-electron channel due to a significantly higher charge mis-identification.}. The invariant mass of the di-lepton system is required to be consistent with the $Z$ mass with $81 < m_{ll} < 101$ GeV in the resolved and $66 < m_{ll} < 111$ GeV in the boosted regime, to suppress non-resonant lepton-pair producing background such a \ttb\ and multi-jet. The leptons must satisfy $p_T > 25$ GeV, with a stricter $p_T > 27$ GeV required for the leading muon when the event is selected by the muon trigger.
 
 \clearpage
-%
-% From: https://gitlab.cern.ch/atlas-physics-office/HIGG/ANA-HIGG-2020-20/ANA-HIGG-2020-20-INT1/-/blob/master/Tex/Texsection/Selection/VHbbccevSelTable.tex
+
 \begin{table}[h!]
     \begin{center}
+    \resizebox{1\textwidth}{!}
+    {
+
+    \renewcommand*{\arraystretch}{1.1}
     \begin{tabular}{C{6cm}|C{4cm}|C{4cm}}
     \hline \hline
     Resolved Analysis Regime & $VH(H\rightarrow b\bar{b})$ & $VH(H\rightarrow c\bar{c})$ \\
@@ -140,7 +142,7 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     Leading Higgs ($H$) candidate jet $p_T$ & \multicolumn{2}{c}{$>$ 45 GeV} \\
     Sub-leading $H$ candidate jet $p_T$ & \multicolumn{2}{c}{$>$ 20 GeV} \\
     $m_{bb}$ or $m_{cc}$ & \multicolumn{2}{c}{> 50 GeV (before correction)} \\ 
-    Non-$H$ candidate jet $p_T$ & \multicolumn{2}{c}{$>$ 20 GeV ($> 30$ GeV for nJet categorisation only)} \\ % TODO seems to be gone and fixed at 20 
+    Non-$H$ candidate jet $p_T$ & \multicolumn{2}{c}{$>$ 20 GeV ($> 30$ GeV for nJet categorisation only)} \\
     Candidate jets $\Delta R$  & \multicolumn{2}{c}{Upper cut $\Delta R \leq \pi$} \\
 
     \hline \hline 
@@ -153,12 +155,11 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     Leptons & \multicolumn{2}{c}{0 $VH$-loose lepton} \\
     $E_T^{\textrm{miss}}$ & \multicolumn{2}{c}{$>$ 150~GeV}  \\
     $E_{T, trk}^{\textrm{miss}}$  & - & $>$ 30~GeV \\
-    $S_T = \sum p_T^{\textrm{jets}}$ & \multicolumn{2}{c}{$>$ 120 GeV (2 jets), $>$150 GeV ($\geq3$ jets)}  \\ % Adapt: in object introduce S_T
+    $S_T = \sum p_T^{\textrm{jets}}$ & \multicolumn{2}{c}{$>$ 120 GeV (2 jets), $>$150 GeV ($\geq3$ jets)}  \\ 
     $m_T^W$ & \multicolumn{2}{c}{$>$ 10 GeV when $\geq$ 1 hadronic $\tau$} \\
     $|\Delta\phi(j_1, j_2)|$ & \multicolumn{2}{c}{$< 140\ensuremath{^\circ}$} \\
     $|\Delta\phi(E_T^{\textrm{miss}}, H)|$ & \multicolumn{2}{c}{$> 120\ensuremath{^\circ}$} \\
     $\textrm{min}|\Delta \phi (E_T^{\textrm{miss}}, \textrm{jet})|$& \multicolumn{2}{c}{$>20\ensuremath{^\circ}$ (2 jets), $> 30\ensuremath{^\circ}$(3 jets)} \\
-    %$|\Delta\phi(E_T^{\textrm{miss}},E_{T, trk}^{\textrm{miss}})|$ & \multicolumn{2}{c}{$< 90\ensuremath{^\circ}$} \\ % TODO this is missing from the table and not mentioned in the text
 
     \hline\hline 
     \multicolumn{1}{c}{} & \multicolumn{2}{c}{1-Lepton (1L)} \\
@@ -171,10 +172,10 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     Top CR tagging & \multicolumn{2}{c}{$\geq$1 $B$-tag + 1 $T$-tag} \\ % TODO fix the footnoteref
     hadronic $\tau$-veto & \multicolumn{2}{c}{no hadronic $\tau$} \\ 
     Leptons & \multicolumn{2}{c}{1 $WH$-signal lepton} \\
-            &  \multicolumn{2}{c}{$>1$~$VH$-loose lepton veto} \\
-    $E_T^{\textrm{miss}}$   & \multicolumn{2}{c}{$>$ 30~GeV ($e$ channel)} \\
-    $S_T$ & \multicolumn{2}{c}{Same as 0L for $\mu$ with \etm trigger}  \\ 
-    $m_T^W$ & \multicolumn{2}{c}{$>$ 20 GeV for 75 < \ptv\ < 150 GeV} \\ % TODO, in text it says 20 GeV, but table says 10
+            &  \multicolumn{2}{c}{veto if $>1$~$VH$-loose lepton} \\
+    $E_T^{\textrm{miss}}$   & \multicolumn{2}{c}{$>$ 30~GeV ($e$-channel)} \\
+    $S_T$ & \multicolumn{2}{c}{Same as 0L for $\mu$ with \etm\ trigger}  \\ 
+    $m_T^W$ & \multicolumn{2}{c}{$>$ 20 GeV for 75 < \ptv\ < 150 GeV} \\ 
 
     \hline\hline 
     \multicolumn{1}{c}{} & \multicolumn{2}{c}{2-Lepton (2L)}\\
@@ -185,25 +186,24 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
             & \multicolumn{2}{c}{($\geq$ 1 $ZH$-signal lepton)} \\
             & \multicolumn{2}{c}{Same flavour, opposite-charge for $\mu\mu$} \\
     Top CR  & \multicolumn{2}{c}{Mixed $e\mu$ flavour} \\ 
-    $m_{ll}$   & \multicolumn{2}{c}{81 $<$ $m_{ll}$ $<$ 101~GeV} \\
-    %$E_T^{\textrm{miss}}$ significance (cut-based)  & \multicolumn{2}{c}{E_T^{\textrm{miss}}$/\sqrt{\textrm{HT}} < 3.5\sqrt{GeV}$} \\
+    $m_{\ell\ell}$   & \multicolumn{2}{c}{81 $<$ $m_{\ell\ell}$ $<$ 101~GeV} \\
     \hline\hline
-
     \end{tabular}
-    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the resolved \vhbc\ regimes, adapted from the internal documentation. The common Top CR tagging definition ignore the candidate jet tagging requirements. For \vhc, an extra CR for $V+l$ changes the candidate tagging to one $L$-tag + no $T$-tag ($LN$).} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
-    % There was also: Variables not presented in the text: $E_{T, trk}^{\textrm{miss}}$ is the missing transverse momentum calculated from the negative vector sum of the transverse momenta of tracks reconstructed in the inner detector and identified as originating from the primary vertex
+    }
+    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the resolved \vhbc\ regimes. The resolved 1L \& 2L Top CR tagging definition ignores the candidate jet tagging requirements For \vhc, an extra CR for \vlf\ changes the candidates tagging to one $L$-tag + no-tag ($LN$).} 
     \label{tbl:VHbbccevSelTable}
     \end{center}
 \end{table}
-%
 
-\begin{table}[htbp]
-    \hspace{-0.6cm}
-    \begin{tabular}{C{3.2cm}|C{2.8cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
+\begin{table}[htbp] % TODO maybe vertical alignment?
+    \resizebox{1\textwidth}{!}
+    {
+    \renewcommand*{\arraystretch}{1.1}
+    \begin{tabular}{C{3.3cm}|C{2.8cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
     \hline \hline
     Selection & 0-Lepton & \multicolumn{2}{c|}{1-Lepton} & \multicolumn{2}{c}{2-Lepton}  \\
     & & $e$-channel & $\mu$-channel & $e$-channel & $\mu$-channel \\ \hline \hline
-    Trigger & \etm & Single electron & \etm & Single electron & \etm \\
+    Trigger & \etm\ & Single electron & \etm\ & Single electron & \etm\ \\
     Leptons & 0 $VH$-loose lepton & \multicolumn{2}{c|}{1 $WH$-signal lepton} & \multicolumn{2}{c}{$\geq$ 1 $ZH$-signal lepton} \\
      & & \multicolumn{2}{c|}{No second $VH$-loose lepton} & \multicolumn{2}{c}{2 $VH$-loose leptons} \\
      &  & \multicolumn{2}{c|}{No hadronic $\tau$} & \multicolumn{2}{c}{Same flavour leptons} \\
@@ -213,18 +213,17 @@ The 2L channel targets the associated bosonic decay $Z \rightarrow\ell\ell$, wit
     Track-Jets & \multicolumn{5}{c}{$\geq$ 2 track-jets ($p_T > 10$ GeV, $|\eta| < 2.5$) matched to the leading large-$R$ jet} \\
     Tagging & \multicolumn{5}{c}{Exactly 2 of the 3 leading track-jets matched to the large-$R$ jet must be $b$-tagged} \\
     $m_J$ & \multicolumn{5}{c}{$> 50$ GeV} \\ \hline
-    \etm & $>$ 200 GeV & $>$ 50 GeV & - & \multicolumn{2}{c}{-} \\ % TODO For 0L, it's 200 in the text but 250 in the table
+    \etm\ & $>$ 200 GeV & $>$ 50 GeV & - & \multicolumn{2}{c}{-} \\ % TODO For 0L, it's 200 in the text but 250 in the table
     $|\Delta\phi(E_T^{\textrm{miss}}, H)|$ & $> 120\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
     $\min |\Delta\phi(E_T^{\textrm{miss}}, \textrm{jets})|$ & $> 30\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
-    $m_{ll}$ & - & \multicolumn{2}{c|}{-} &  \multicolumn{2}{c}{$66$ GeV $< m_{ll} < 116 $ GeV} \\ \hline \hline
+    $m_{\ell\ell}$ & - & \multicolumn{2}{c|}{-} &  \multicolumn{2}{c}{$66$ GeV $< m_{\ell\ell} < 116 $ GeV} \\ \hline \hline
     \end{tabular}
-    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the boosted \vhb\ regime, adapted from the internal documentation.} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
+    }
+    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the boosted \vhb\ regime.} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
     \label{tbl:VHbbBoostevSelTable}
 \end{table}
 
-
 \subsection{Event Categorisation}\label{sec-eventCat}
-% TODO topCR here, say the candidates are highest pT B and highest pT T
 Events are futher categorised following a successive decomposition into regions of defined tag, vector boson $V$ transverse momentum $p_T^V$, and number of jets (both central and forward). The full categorisation gives rise to signal and control regions that enter the statistical analysis defined in the fit framework of Section \ref{sec-fitFramework}. The control regions are defined to help constrain the modelling of specific backgrounds and the correct their yields. The definition of the regions depend on the analysis regime and the targeted Higgs decay, with Figure \ref{fig:ana-strat-det} providing a global overview of the different regions defined.
 
 \subsubsection{Resolved Regime Categorisation}
