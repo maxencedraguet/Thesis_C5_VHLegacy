@@ -124,6 +124,34 @@ In the 1L channel, the targeted decaying vector boson is a $W \rightarrow \ell\n
 \subsubsection{Selection specific to the 2-lepton channel}
 The 2L channel targets the associated bosonic decay where $Z \rightarrow\ell\ell$, with the $Z$ reconstructed from two $VH$-loose leptons required to have the same flavour, with at least one passing the $ZH$-signal lepton requirements. In the di-muon channel, the leptons are further required to be of opposite charges\footnote{This is not applied to the di-electron channel due to a significantly higher charge mis-identification.}. The invariant mass of the di-lepton system is required to be consistent with the $Z$ mass with $81 < m_{ll} < 101$ GeV in the resolved and $66 < m_{ll} < 111$ GeV in the boosted regime, to suppress non-resonant lepton-pair producing background such a \ttb\ and multi-jet. The leptons must satisfy $p_T > 25$ GeV, with a stricter $p_T > 27$ GeV required for the leading muon when the event is selected by the muon trigger.
 
+\begin{table}[htbp] % TODO maybe vertical alignment?
+  \resizebox{1\textwidth}{!}
+  {
+  \renewcommand*{\arraystretch}{1.1}
+  \begin{tabular}{C{3.3cm}|C{2.8cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
+  \hline \hline
+  Selection & 0-Lepton & \multicolumn{2}{c|}{1-Lepton} & \multicolumn{2}{c}{2-Lepton}  \\
+  & & $e$-channel & $\mu$-channel & $e$-channel & $\mu$-channel \\ \hline \hline
+  Trigger & \etm\ & Single electron & \etm\ & Single electron & \etm\ \\
+  Leptons & 0 $VH$-loose lepton & \multicolumn{2}{c|}{1 $WH$-signal lepton} & \multicolumn{2}{c}{$\geq$ 1 $ZH$-signal lepton} \\
+   & & \multicolumn{2}{c|}{No second $VH$-loose lepton} & \multicolumn{2}{c}{2 $VH$-loose leptons} \\
+   &  & \multicolumn{2}{c|}{No hadronic $\tau$} & \multicolumn{2}{c}{Same flavour leptons} \\
+   &  &  \multicolumn{2}{c|}{} & \multicolumn{2}{c}{Opposite charge for $\mu\mu$} \\ \hline
+  \ptv\ &  \multicolumn{5}{c}{$>$ 400 GeV} \\
+  Large-$R$ jet & \multicolumn{5}{c}{$\geq$ 1 large-$R$ jet ($R$ = 1.0), $p_T >$ 250 GeV, $|\eta| < 2$} \\
+  Track-Jets & \multicolumn{5}{c}{$\geq$ 2 track-jets ($p_T > 10$ GeV, $|\eta| < 2.5$) matched to the leading large-$R$ jet} \\
+  Tagging & \multicolumn{5}{c}{Exactly 2 of the 3 leading track-jets matched to the large-$R$ jet must be $b$-tagged} \\
+  $m_J$ & \multicolumn{5}{c}{$> 50$ GeV} \\ \hline
+  \etm\ & $>$ 200 GeV & $>$ 50 GeV & - & \multicolumn{2}{c}{-} \\ % TODO For 0L, it's 200 in the text but 250 in the table
+  $|\Delta\phi(E_T^{\textrm{miss}}, H)|$ & $> 120\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
+  $\min |\Delta\phi(E_T^{\textrm{miss}}, \textrm{jets})|$ & $> 30\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
+  $m_{\ell\ell}$ & - & \multicolumn{2}{c|}{-} &  \multicolumn{2}{c}{$66$ GeV $< m_{\ell\ell} < 116 $ GeV} \\ \hline \hline
+  \end{tabular}
+  }
+  \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the boosted \vhb\ regime.} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
+  \label{tbl:VHbbBoostevSelTable}
+\end{table}
+
 \clearpage
 
 \begin{table}[h!]
@@ -195,41 +223,14 @@ The 2L channel targets the associated bosonic decay where $Z \rightarrow\ell\ell
     \end{center}
 \end{table}
 
-\begin{table}[htbp] % TODO maybe vertical alignment?
-    \resizebox{1\textwidth}{!}
-    {
-    \renewcommand*{\arraystretch}{1.1}
-    \begin{tabular}{C{3.3cm}|C{2.8cm}|C{2.5cm}|C{1.8cm}|C{2.5cm}|C{1.8cm}}
-    \hline \hline
-    Selection & 0-Lepton & \multicolumn{2}{c|}{1-Lepton} & \multicolumn{2}{c}{2-Lepton}  \\
-    & & $e$-channel & $\mu$-channel & $e$-channel & $\mu$-channel \\ \hline \hline
-    Trigger & \etm\ & Single electron & \etm\ & Single electron & \etm\ \\
-    Leptons & 0 $VH$-loose lepton & \multicolumn{2}{c|}{1 $WH$-signal lepton} & \multicolumn{2}{c}{$\geq$ 1 $ZH$-signal lepton} \\
-     & & \multicolumn{2}{c|}{No second $VH$-loose lepton} & \multicolumn{2}{c}{2 $VH$-loose leptons} \\
-     &  & \multicolumn{2}{c|}{No hadronic $\tau$} & \multicolumn{2}{c}{Same flavour leptons} \\
-     &  &  \multicolumn{2}{c|}{} & \multicolumn{2}{c}{Opposite charge for $\mu\mu$} \\ \hline
-    \ptv\ &  \multicolumn{5}{c}{$>$ 400 GeV} \\
-    Large-$R$ jet & \multicolumn{5}{c}{$\geq$ 1 large-$R$ jet ($R$ = 1.0), $p_T >$ 250 GeV, $|\eta| < 2$} \\
-    Track-Jets & \multicolumn{5}{c}{$\geq$ 2 track-jets ($p_T > 10$ GeV, $|\eta| < 2.5$) matched to the leading large-$R$ jet} \\
-    Tagging & \multicolumn{5}{c}{Exactly 2 of the 3 leading track-jets matched to the large-$R$ jet must be $b$-tagged} \\
-    $m_J$ & \multicolumn{5}{c}{$> 50$ GeV} \\ \hline
-    \etm\ & $>$ 200 GeV & $>$ 50 GeV & - & \multicolumn{2}{c}{-} \\ % TODO For 0L, it's 200 in the text but 250 in the table
-    $|\Delta\phi(E_T^{\textrm{miss}}, H)|$ & $> 120\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
-    $\min |\Delta\phi(E_T^{\textrm{miss}}, \textrm{jets})|$ & $> 30\ensuremath{^\circ}$ & \multicolumn{2}{c|}{-} & \multicolumn{2}{c}{-} \\
-    $m_{\ell\ell}$ & - & \multicolumn{2}{c|}{-} &  \multicolumn{2}{c}{$66$ GeV $< m_{\ell\ell} < 116 $ GeV} \\ \hline \hline
-    \end{tabular}
-    }
-    \caption{Summary of the event selection in the 0-, 1- and 2-lepton channels of the boosted \vhb\ regime.} % TODO ADAPT THE LEGEND FOR WHAT IS PRESENTED
-    \label{tbl:VHbbBoostevSelTable}
-\end{table}
-
+\clearpage 
 \subsection{Event Categorisation}\label{sec-eventCat}
-Events are futher categorised following a successive decomposition into regions of defined tag, vector boson $V$ transverse momentum $p_T^V$, and number of jets (both central and forward). The full categorisation gives rise to signal and control regions that enter the statistical analysis defined in the fit framework of Section \ref{sec-fitFramework}. The control regions are defined to help constrain the modelling of specific backgrounds and the correct their yields. The definition of the regions depend on the analysis regime and the targeted Higgs decay, with Figure \ref{fig:ana-strat-det} providing a global overview of the different regions defined.
+Selected events are futher categorised following a successive decomposition into regions of defined tag, vector boson $V$ transverse momentum $p_T^V$, and number of jets \nj. The full categorisation gives rise to signal and control regions that enter the statistical analysis defined in the fit framework of Section \ref{sec-fitFramework}. The control regions are defined to help constrain the modelling of specific backgrounds, such as by correcting their yields. The definition of the regions depend on the analysis regime and the targeted Higgs decay, with Figure \ref{fig:ana-strat-det} providing a condensed global overview of the different regions defined.
 
 \subsubsection{Resolved Regime Categorisation}
-In the resolved regime, the number of central + forward jets in an event defines different categories to maximise the signal sensitivity. A $p_T > 30$ GeV cut is considered for non-Higgs candidate jets just to determine the number of jet categorisation. This was found to limit the signal migration across \gls{stxs} bins in \vhb\ while having almost no impact on the \vhc\ sensitivity\footnote{It is nonetheless applied to harmonise the resolved regime.}. All distributions of the resolved regime regions with processes normalised to their posfit expectations from the fit decribed in Section \ref{sec-fitFramework} are presented in Appendix \ref{appsec-vh-analRegResPosfit}.
+In the resolved regime, the number of central + forward jets in an event defines different \nj\ categories, separated to maximise the signal sensitivity. A $p_T > 30$ GeV cut is considered for non-Higgs candidate jets just to determine this number of jet categorisation. This was found to limit the signal migration across \gls{stxs} bins in \vhb\ while having almost no impact on the \vhc\ sensitivity\footnote{It is nonetheless applied to harmonise the resolved regime.}. All distributions of the resolved regime regions with processes normalised to their posfit expectations from the fit decribed in Section \ref{sec-fitFramework} are presented in Appendix \ref{appsec-vh-analRegResPosfit}. The distributions presented in this section are blinded and correspond to the variables chosen for the fit, as detailed in Section \ref{sec-vh-disc}. The different regions are reviewed in this section.
 
-\paragraph{Resolved \vhb:} requires exactly 2 $b$-tagged jets ($BB$), with no extra $B$ nor any $T$, and events are separated into different categories based on central + forward jet multiplicity. All lepton channels have a 2-jet and 3-jet categories. The 0L channel has an addittional 4-jet category and the 2L an extra 4 or more jets (4p) category\footnote{The 4/4p-jet category in 1L overlaps with the region used to calibrate the tagger and is rejected due to the \ttb\ limiting the sensitivity.}. They are included for more sensitive \gls{stxs} measurements in bins with more than one additional jets. The regions are also split in different bins of $p_T^V$ as [75, 150] GeV (except for 0L\footnote{It is not feasible in 0L due to the trigger threshold on $E_T^{\textrm{miss}}$.}), [150, 250] GeV, and [250, 400] GeV. Some \vhb\ signal regions to the analysis are presented here in Figure \ref{fig:plots_VHbb_ex_SR}. The distributions presented in this section are blinded and correspond to the variables chosen for the fit, and are described further in Section \ref{sec-vh-disc}.
+\paragraph{Resolved \boldvhb\ SRs:} requires exactly 2 $b$-tagged jets ($BB$), with no extra $B$- nor any $T$-tags, and events are separated into different categories based on \nj. All lepton channels have a 2-jet and a 3-jet categories. The 0L channel has an addittional 4-jet category, and the 2L an extra 4 or more jets (4p or $\geq$4) category\footnote{The 4/4p-jet category in 1L overlaps with the region used to calibrate the tagger and is rejected due to the \ttb\ limiting the sensitivity.}. They are included to improve the \gls{stxs} measurements sensitivy in bins with at least one additional jets. All regions are further split into different bins of $p_T^V$ as [75, 150] GeV (except for 0L\footnote{It is not feasible in 0L due to the trigger threshold on $E_T^{\textrm{miss}}$.}), [150, 250] GeV, and [250, 400] GeV. Selected \vhb\ signal regions in the analysis are presented in Figure \ref{fig:plots_VHbb_ex_SR}. % TODO make sure that the ptv and nj are well alligned. It's more difficult as some nj are there only at some ptv.
 
 \begin{figure}[h!]
   \centering
@@ -251,12 +252,12 @@ In the resolved regime, the number of central + forward jets in an event defines
     \caption{2-lepton.}
     \label{fig:plots_VHbb_ex_2L_SR}
 \end{subfigure}
-  \caption{The $BB$-tagged 2-jet 150 < \ptv\ < 250 GeV signal regions in the different lepton channels.}
+  \caption{$BB$-tagged 2-jet 150 < \ptv\ < 250 GeV signal regions in all lepton channels.}
   \label{fig:plots_VHbb_ex_SR}
 \end{figure} 
 
 
-\paragraph{Resolved \vhc:} adopts a similar event categorisation to the resolved \vhb, with now at least one candidate jet being tight c-tagged. The categorisation of the signal region is split based on the remaining candidate tag into a 2 $c$-tags region and a 1 $c$-tag region: the former requiring an extra loose ($LT$) or tight $c$-tag ($TT$), the latter an additional non-tagged jet $N$ ($NT$). The $p_T^V$ bins are similar to \vhb, except for the higgest $p_T^V$ one that is relaxed to $\geq 250$ GeV given the limited impact of the overlap with the boosted \vhb. Adding the \ptv\ region above 400 GeV was found to increase the total \vhc\ sensitivity by 10\%. The jet multiplicity is used to define a 2 and a 3 jets categories, with the latter being 3 or more jets (3p) in 2L only thanks to a reduced \ttb\ background. A selection of 2 $c$-tags signal regions is presented in Figure \ref{fig:plots_VHcc_ex_SR_2C}, with Figure \ref{fig:plots_VHcc_ex_SR_1C} presenting some 1 $c$-tag signal regions.
+\paragraph{Resolved \boldvhc\ SRs:} adopts a similar event categorisation to the resolved \vhb, with now at least one candidate jet being tight c-tagged $T$. The categorisation of the signal region is then split based on the remaining candidate tag into a 2 $c$-tags region and a 1 $c$-tag region: the former requiring an extra loose ($LT$) or tight $c$-tag ($TT$)\footnote{ The 2 $c$-tagged labelled $LT+TT$ is summarised as $XT$ in the plots.}, the latter an additional non-tagged jet $N$ ($NT$). The $p_T^V$ bins are similar to \vhb, except for the higgest $p_T^V$ one that is relaxed to $\geq 250$ GeV given the limited impact of the overlap with the boosted \vhb. Adding the \ptv\ region above 400 GeV was found to increase the total \vhc\ sensitivity by 10\%. The jet multiplicity \nj\ defines a 2 and a 3 jets categories, with the latter being 3 or more jets (3p or $\geq$3) only in 2L thanks to a reduced \ttb\ background. A selection of 2 $c$-tagged signal regions is presented in Figure \ref{fig:plots_VHcc_ex_SR_2C}, with Figure \ref{fig:plots_VHcc_ex_SR_1C} presenting some 1 $c$-tagged signal regions.
 
 \begin{figure}[h!]
   \centering
@@ -278,7 +279,7 @@ In the resolved regime, the number of central + forward jets in an event defines
     \caption{2-lepton, 2-jet.}
     \label{fig:plots_VHcc_ex_2L_SR_2C}
 \end{subfigure}
-  \caption{Some 2 $c$-tagged ($TT$ or $LT$) 150 < \ptv\ < 250 GeV signal regions in the different lepton channels.}
+  \caption{Selection of 2 $c$-tagged ($TT$ + $LT$) 150 < \ptv\ < 250 GeV signal regions.}
   \label{fig:plots_VHcc_ex_SR_2C}
 \end{figure} 
 
@@ -300,38 +301,38 @@ In the resolved regime, the number of central + forward jets in an event defines
   \begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Images/VH/Own_fit/prefit_VHcc/Region_distmva_BMin250_DSR_J3_TTypext_incJet1_T2_L2_Y6051_Prefit.png}
-    \caption{2-lepton, $\geq$ 3 jets.}
+    \caption{2-lepton, $\geq$ 3 (3p) jets.}
     \label{fig:plots_VHcc_ex_2L_SR_1C}
 \end{subfigure}
-  \caption{Some 1 $c$-tagged 250 < \ptv\ signal regions in the different lepton channels.}
+  \caption{Selection of 1 $c$-tagged 250 < \ptv\ signal regions.}
   \label{fig:plots_VHcc_ex_SR_1C}
 \end{figure} 
 
-\paragraph{The High $\Delta R$ Control region:} is designed to constrain the $V+$jets and \ttb\ background in \vhb\ normalisation and shape. It is defined by a further categorisation based on the angular separation $\Delta R(j_1, j_2)$\footnote{$\Delta R(j_1, j_2) = \sqrt{(\eta_{j_1} - \eta_{j_2})^2 + (\phi_{j_1} - \phi_{j_2})^2 }$.} between the Higgs-candidate jets. This split is governed by a $p_T^V$ dependent cut on the $\Delta R$ that is derived to give a specific signal purity in the \gls{sr}: 95\% (85\%) of the signal should enter the \gls{sr} in the 2-jet (3 or more jets) category. The mathematical expression of the cuts are presented in Table \ref{tbl:CRhigh_definition}, and illustrated in Figure~\ref{fig:drccptvCutsVHcc} with more details in Appendix~\ref{ap-sec-vh-deltaR}. Events with a $\Delta R$ below the cutting line enter the signal region, while those above go in the \highdr\ \gls{cr}, also called \textit{HighCR}. To avoid some mis-modeling effect at \highdr\ and keep the \highdr\ \gls{cr} kinematically close to the \gls{sr}, an upper cut of $\Delta R = \pi$ is applied to all events. This effectively remove $\sim 40$\% of events in the \highdr\ \gls{cr} with negligible impact on the signal region. For \vhc, the $TT$ and $LT$ events are separated in the HighCR to constrain the $V+$hf and $V$+mf, while they are merged into the 2 $c$-tags in the \gls{sr}. In \vhb, the HighCRs are used to extract the normalisation of the backgrounds while in \vhc\ the shape of the $m_{c\bar{c}}$ or \ptv\ spectrum are also used. Some \highdr\ \gls{cr}s are shown in Figure \ref{fig:plots_VHcc_ex_CRH}.
+\paragraph{The High $\Delta R$ Control Regions:} are designed for the resolved regime to constrain the normalisation and shape of the $V+$jets and the \ttb\ background when the 2 candidate jets are the $b$-quarks. They are defined by a further split from the \gls{sr}s based on the angular separation $\Delta R(j_1, j_2)$\footnote{$\Delta R(j_1, j_2) = \sqrt{(\eta_{j_1} - \eta_{j_2})^2 + (\phi_{j_1} - \phi_{j_2})^2 }$.} (shortened as $\Delta R$ in this document) between the Higgs-candidate jets. This split is governed by a $p_T^V$-dependent cut on the $\Delta R$ that is derived to give a specific signal purity in the \gls{sr}: keeping 95\% (85\%) of the signal yield in the 2-jet (3 or more jets) \gls{sr}s. The mathematical expression of the cuts are presented in Table \ref{tbl:CRhigh_definition}, and illustrated in Figure~\ref{fig:drccptvCutsVHcc}, with more details given in Appendix~\ref{ap-sec-vh-deltaR}. Events with a $\Delta R$ below the cutting line enter the signal region, while those above go in a \highdr\ \gls{cr}, also called \textit{HighCR}. To avoid some mis-modeling effect at high $\Delta R$ and keep the \highdr\ \gls{cr} kinematically close to the \gls{sr}, an upper cut of $\Delta R \leq \pi$ is applied to all events. This effectively remove $\sim 40$\% of events in the \highdr\ \gls{cr}, with a negligible impact on the signal region. For \vhc, the $TT$- and $LT$-tagged events are separated in the HighCR to respectively constrain the \vhf\ and \vmf, while they are merged as the 2 $c$-tags in the \gls{sr}. In \vhb, the HighCRs are used to extract the normalisation of the backgrounds while in \vhc\ the shapes of the $m_{c\bar{c}}$ and \ptv\ spectrum are also used, as detailed in Section \ref{sec-vh-disc}. Some \highdr\ \gls{cr}s are shown in Figure \ref{fig:plots_VHcc_ex_CRH}.
 
 \begin{table}[htbp]
     \centering
     \begin{tabular}{c|c|c}
       \hline
       \hline
-      Category & \highdr\ Cut & \lowdr Cut\\ \hline
-      $2-jet$ & $ \Delta R > 0.787 + e^{1.387 - 0.0070 \times p_{T}^{V} } $      &  $ \Delta R < 0.410 + e^{ 0.818 - 0.0106  \times p_{T}^{V} } $        \\
-      $3-jet$ & $ \Delta R > 0.684 + e^{1.204 - 0.0060 \times p_{T}^{V} } $      &  $ \Delta R < 0.430 + e^{ 0.399 - 0.0093  \times p_{T}^{V} } $        \\
-      $4-jet$ & $ \Delta R > 0.863 + e^{0.984 - 0.0041 \times p_{T}^{V} } $ &  $ \Delta R < 0.411 + e^{ 1.204 - 0.0060  \times p_{T}^{V} } $        \\
-      $5p-jet$ & $ \Delta R > 1.667 + e^{0.519 - 0.0050 \times p_{T}^{V} } $ &  $ \Delta R < 0.501 + e^{ 1.192 - 0.0075  \times p_{T}^{V} } $      \\
+      Category & \highdr\ Cut & \lowdr\ Cut\\ \hline
+      $2$-jet & $ \Delta R > 0.787 + e^{1.387 - 0.0070 \times p_{T}^{V} } $      &  $ \Delta R < 0.410 + e^{ 0.818 - 0.0106  \times p_{T}^{V} } $        \\
+      $3$-jet & $ \Delta R > 0.684 + e^{1.204 - 0.0060 \times p_{T}^{V} } $      &  $ \Delta R < 0.430 + e^{ 0.399 - 0.0093  \times p_{T}^{V} } $        \\
+      $4$-jet & $ \Delta R > 0.863 + e^{0.984 - 0.0041 \times p_{T}^{V} } $ &  $ \Delta R < 0.411 + e^{ 1.204 - 0.0060  \times p_{T}^{V} } $        \\
+      $\geq$5-jet & $ \Delta R > 1.667 + e^{0.519 - 0.0050 \times p_{T}^{V} } $ &  $ \Delta R < 0.501 + e^{ 1.192 - 0.0075  \times p_{T}^{V} } $      \\
       \hline
       \hline
     \end{tabular}
-    \caption{Cuts defining the \highdr\ (centre) and \lowdr (right) control regions (CRHigh and CRLow).}
+    \caption{Cuts defining the \highdr\ (centre) and \lowdr\ (right) control regions, CRHigh \& CRLow. The inequalities are set to enter the control regions, with \ptv\ expressed in GeV.}
     \label{tbl:CRhigh_definition}
-  \end{table}
+  \end{table} % TODO: units of \ptv ???
   
 \begin{figure}[h!]
     %\hspace{-2.0cm}
     \center
     \includegraphics[width=0.48\textwidth]{Images/VH/dRccpTV/sr1.png}
     \includegraphics[width=0.48\textwidth]{Images/VH/dRccpTV/sr2.png}
-    \caption{The $p_T^V$-$\Delta R_{c\bar{c}}$ 2D-histograms showing the signal yield of the 1-lepton $VH(H\rightarrow c\bar{c})$, for the 2-jet (left) and 3-jet (right) signal regions. The lines are the results of fitting the high and low $\Delta R_{c\bar{c}}-p_T^V$ cuts for various signal tags, with the yellow curve showing the $VH(H\rightarrow b\bar{b})$ $p_T^V$-$\Delta R_{b\bar{b}}$ cut.} 
+    \caption{The $p_T^V$-$\Delta R_{c\bar{c}}$ 2D signal yield map of the 1-lepton \vhc, for the 2-jet (left) and 3-jet (right) regions. The lines are the results of fitting the high and low $\Delta R_{c\bar{c}}(p_T^V)$ cuts for various signal tags, with the yellow curve showing the \vhb\ $\Delta R_{b\bar{b}}$ cut used in the analysis, with the HighCR above the top yellow line, and the SR below. A \lowdr\ CR can be defined by the bottom lines, splitting an extra region from the signal region for the \vhb\ only.} 
     \label{fig:drccptvCutsVHcc}
 \end{figure}
 
@@ -359,7 +360,7 @@ In the resolved regime, the number of central + forward jets in an event defines
   \label{fig:plots_VHcc_ex_CRH}
 \end{figure} 
 
-\paragraph{The Low $\Delta R$ Control region:} an extra low-$\Delta R$ control region (CRLow) is used in \vhb\ 1L to better control the $W+$hf contribution. This cut is defined similarly to the \highdr\ one with objective to let 90\% of the diboson events in the signal region, as presented in the bottom part of the plots in Figure \ref{fig:drccptvCutsVHcc}. The cuts used are defined in the right of Table \ref{tbl:CRhigh_definition}, where events with a $\Delta R$ above the cutting line enter the signal region, while those below go in the CRLow. In \vhc\ and the 0L and 1L \vhb, the CRLow is merged with the signal region as it has little impact. An example of a CRLow region is presented in the left of Figure \ref{fig:plots_VH_ex_CRL_CRvl}.
+\paragraph{The Low $\Delta R$ Control Regions:} extra low-$\Delta R$ control regions (\textit{CRLow}) are used in \vhb\ 1L to better control the $W+$hf contribution. They are based on \ptv-dependant cuts defined similarly to the \highdr\ ones, separating 10\% of the diboson events from the signal regions, as displayed in the bottom parts of the plots in Figure \ref{fig:drccptvCutsVHcc}. The cuts used are defined in the right of Table \ref{tbl:CRhigh_definition}, where events with a $\Delta R$ above the cutting line enter the signal region, while those below go in the CRLow. In \vhc\ and the 0L and 1L \vhb, the CRLow is merged with the signal region as it has little impact. An example of a CRLow region is presented in the left of Figure \ref{fig:plots_VH_ex_CRL_CRvl}.
 
 \paragraph{Top Control Regions in 0L and 1L:} they are defined to better control the Top background Top($bc$) and Top($bl$) components\footnote{The component in the parenthesis refers to the flavour of the Higgs candidates.}. The so-called \textit{Top(bc) CRs} are shared by resolved \vhb\ and \vhc, with similar \ptv\ and jet multiplicity categorisation as the \gls{sr}. In 0L and 1L, they are defined by requiring events to have at least one $B$-tag and at least one tight $c$-tag $T$, making them orthogonal to the signal regions. The Higgs candidate is reconstructed from the leading $B$ jet among $B$-tagged jet and leading $T$ jet among $T$-tagged jet, for kinematic similarity with the \gls{sr}. The Top($bb$) component, which is significant for \vhb, is controlled from the previously defined HighCRs in 0L and 1L, thanks to the large $\Delta R$ between the produced $b$ jets in a \ttb as shown in Figure \ref{fig:plots_VHcc_ex_OL_CRH}. Two examples of Top $BT$ control regions are presented in the left of Figure \ref{fig:plots_VHcc_ex_TopCR}.
 
