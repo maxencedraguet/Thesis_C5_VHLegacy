@@ -2,93 +2,94 @@
     \centering
     \renewcommand{\arraystretch}{1.2}
     \resizebox{\textwidth}{!}{%
-      \begin{tabular}{lll}
+      \begin{tabular}{llr}
         \hline \hline
         Systematic uncertainty name & $\quad\quad\quad\quad\quad$ Description & Regime \\
         \hline
         \multicolumn{3}{c}{Luminosity \& Pile-up}\\
         \hline
-        \texttt{LUMI\_2015\_2018 }& Uncertainty on total integrated luminosity & all \\
-        \texttt{PRW\_DATASF}& Uncertainty on pile-up modelling & all \\
+        \texttt{LUMI\_2015\_2018 }& Uncertainty on total integrated luminosity & All \\
+        \texttt{PRW\_DATASF}& Uncertainty on pile-up modelling & All \\
         \hline
         \multicolumn{3}{c}{\etm and $\textbf{E}_{\text{T,trk}}^{\text{miss}}$}\\
         \hline
-        \texttt{MET\_SoftTrk\_ResoPara(Perp)}&  Soft term-related longitudinal(transverse) resolution uncertainty & all \\
-        \texttt{MET\_SoftTrk\_Scale   }&  Soft term-related scale uncertainty & all \\
-        \texttt{MET\_JetTrk\_Scale    }& $\textbf{E}_{\text{T,trk}}^{\text{miss}}$ scale uncertainty & all \\
-        \texttt{METTrig\{Stat,Top,Z,Sumpt\}} & Trigger efficiency uncertainty & resolved \\
+        \texttt{MET\_SoftTrk\_ResoPara(Perp)}&  Soft term longitudinal (transverse) resolution uncertainty & All \\
+        \texttt{MET\_SoftTrk\_Scale   }&  Soft term scale uncertainty & All \\
+        \texttt{MET\_JetTrk\_Scale    }& $\textbf{E}_{\text{T,trk}}^{\text{miss}}$ scale uncertainty & All \\
+        \texttt{METTrig\{Stat,Top,Z,Sumpt\}} & Trigger efficiency uncertainty & Resolved \\
         \hline
         \multicolumn{3}{c}{Electrons}\\
         \hline
-        \texttt{EL\_EFF\_Trigger\_TOTAL}&  Trigger efficiency uncertainty & all \\
-        \texttt{EL\_EFF\_Reco\_TOTAL}&  Reconstruction (reco.) efficiency uncertainty & all \\
-        \texttt{EL\_EFF\_ID\_TOTAL}&  Identification (id.) efficiency uncertainty & all \\
-        \texttt{EL\_EFF\_Iso\_TOTAL}&  Isolation efficiency uncertainty & all \\
+        \texttt{EL\_EFF\_Trigger\_TOTAL}&  Trigger efficiency uncertainty & All \\
+        \texttt{EL\_EFF\_Reco\_TOTAL}&  Reconstruction efficiency uncertainty & All \\
+        \texttt{EL\_EFF\_ID\_TOTAL}&  Identification (ID) efficiency uncertainty & All \\
+        \texttt{EL\_EFF\_Iso\_TOTAL}&  Isolation efficiency uncertainty & All \\
         \texttt{EG\_SCALE\_ALL}&        Energy scale uncertainty   &  all  \\
-        \texttt{EG\_RESOLUTION\_ALL}&    Energy resolution uncertainty  & all \\
+        \texttt{EG\_RESOLUTION\_ALL}&    Energy resolution uncertainty  & All \\
         \hline
         \multicolumn{3}{c}{Muons}\\
         \hline
-        \texttt{MUON\_EFF\_RECO\_\{STAT,SYS\} }& {Reconstruction and ID efficiency uncertainty for muons with $p_T > 15$ GeV} & all \\
-        \texttt{MUON\_EFF\_RECO\_\{STAT,SYS\}\_LOWPT }&{Reco. and ID efficiency uncertainty for muons with $p_T \leq 15$ GeV} & all \\
-        \texttt{MUON\_EFF\_ISO\_\{STAT,SYS\} }& {Isolation efficiency uncertainty} & all \\
-        \texttt{MUON\_EFF\_TTVA\_\{STAT,SYS\} }& {Track-to-vertex association efficiency uncertainty} & all \\
-        \texttt{MUON\_SCALE}&    Momentum scale uncertainty & all \\
-        \texttt{MUON\_SAGITTA\_RHO(RESBIAS)} & Momentum scale uncertainty to cover charge-dependent local misalignment effects & all \\
-        \texttt{MUON\_ID(MS) }& Momentum resolution uncertainty of the inner detector (muon spectrometer) & all \\
-        \texttt{MUON\_EFF\_Trig\{Stat,Sys\}Uncertainty} & Trigger efficiency uncertainty & all \\
+        \texttt{MUON\_EFF\_RECO\_\{STAT,SYS\} }& {Reconstruction and ID efficiency uncertainty for muons with $p_T > 15$ GeV} & All \\
+        \texttt{MUON\_EFF\_RECO\_\{STAT,SYS\}\_LOWPT }&{Reconstruction and ID efficiency uncertainty for muons with $p_T \leq 15$ GeV} & All \\
+        \texttt{MUON\_EFF\_ISO\_\{STAT,SYS\} }& {Isolation efficiency uncertainty} & All \\
+        \texttt{MUON\_EFF\_TTVA\_\{STAT,SYS\} }& {Track-to-vertex association efficiency uncertainty} & All \\
+        \texttt{MUON\_SCALE}&    Momentum scale uncertainty & All \\
+        \texttt{MUON\_SAGITTA\_RHO(RESBIAS)} & Momentum scale uncertainty to cover charge-dependent local misalignment effects & All \\
+        \texttt{MUON\_ID(MS) }& Momentum resolution uncertainty of the inner detector (muon spectrometer) & All \\
+        \texttt{MUON\_EFF\_Trig\{Stat,Sys\}Uncertainty} & Trigger efficiency uncertainty & All \\
         \hline
         \multicolumn{3}{c}{Taus}\\
         \hline
-        \texttt{TAUS\_TRUEHADTAU\_EFF\_RECO\_TOTAL}& {Reconstruction efficiency} & all \\
-        \texttt{TAUS\_TRUEHADTAU\_EFF\_RNNID\_*}& {RNN ID efficiency} & all \\
-        \texttt{TAUS\_TRUEHADTAU\_SME\_TES\_*}& {In-Situ Tau Energy Scale correction} & all \\
-        \texttt{TAUS\_TRUEELECTRON\_EFF\_ELEBDT\_*}& {Electron Veto efficiency SF} & all \\
+        \texttt{TAUS\_TRUEHADTAU\_EFF\_RECO\_TOTAL}& {Reconstruction efficiency} & All \\
+        \texttt{TAUS\_TRUEHADTAU\_EFF\_RNNID\_*}& {RNN ID efficiency} & All \\
+        \texttt{TAUS\_TRUEHADTAU\_SME\_TES\_*}& {In-Situ tau energy scale correction} & All \\
+        \texttt{TAUS\_TRUEELECTRON\_EFF\_ELEBDT\_*}& {Electron Veto efficiency SF} & All \\
         \hline
         \multicolumn{3}{c}{Small-R jets}\\
         \hline
-        \texttt{JET\_CR\_BJES\_Response }& Energy scale uncertainties for $b$-jets & all \\
-        \texttt{JET\_CR\_EffectiveNP\_Detector\{1-2\} }& Energy scale uncertainties due to in-situ calibration & all \\
-        \texttt{JET\_CR\_EffectiveNP\_Mixed\{1-3\} }& Energy scale uncertainties due to in-situ calibration & all  \\
-        \texttt{JET\_CR\_EffectiveNP\_Modelling\{1-4\} }& Energy scale uncertainties due to in-situ calibration & all \\
-        \texttt{JET\_CR\_EffectiveNP\_Statistical\{1-6\} }& Energy scale uncertainties due to in-situ calibration & all \\
-        \texttt{JET\_CR\_EtaIntercal\_Modelling}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & all \\
-        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_highE}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & all \\
-        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_negEta}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & all \\
-        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_posEta}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & all \\
-        \texttt{JET\_CR\_EtaIntercal\_TotalStat}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & all \\
-        \texttt{JET\_CR\_Flav\_Comp(Flavor\_Response) }& Energy scale uncertainty related to flavour composition (response) & all \\
-        \texttt{JET\_CR\_PunchTroughMC16 }& Energy scale uncertainty for 'punch-through' & all \\
-        \texttt{JET\_CR\_SingleParticle\_HighPt }& Energy scale uncertainty for the behavior of high-\pt\ single hadrons & all \\
-        \texttt{JET\_CR\_JER\_DataVsMC}& Energy resolution total uncertainty  & all \\
-        \texttt{JET\_CR\_JER\_EffectiveNP\_\{1-6,7restTerm\}}& Energy resolution total uncertainties & all \\
-        \texttt{JET\_JvtEfficiency}& JVT efficiency uncertainty  & all \\
-        \texttt{JET\_PU\_\{OffsetMu(NPV),PtTerm,RhoTopology\}}& Energy scale uncertainties due to pile-up effects & all \\
+        \texttt{JET\_CR\_BJES\_Response }& Energy scale uncertainties for $b$-jets & All \\
+        \texttt{JET\_CR\_EffectiveNP\_Detector\{1-2\} }& Energy scale uncertainties due to in-situ calibration & All \\
+        \texttt{JET\_CR\_EffectiveNP\_Mixed\{1-3\} }& Energy scale uncertainties due to in-situ calibration & All  \\
+        \texttt{JET\_CR\_EffectiveNP\_Modelling\{1-4\} }& Energy scale uncertainties due to in-situ calibration & All \\
+        \texttt{JET\_CR\_EffectiveNP\_Statistical\{1-6\} }& Energy scale uncertainties due to in-situ calibration & All \\
+        \texttt{JET\_CR\_EtaIntercal\_Modelling}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & All \\
+        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_highE}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & All \\
+        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_negEta}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & All \\
+        \texttt{JET\_CR\_EtaIntercal\_NonClosure\_posEta}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & All \\
+        \texttt{JET\_CR\_EtaIntercal\_TotalStat}& Energy scale uncertainties to cover $\eta$-intercalibration non-closure & All \\
+        \texttt{JET\_CR\_Flav\_Comp(Flavor\_Response) }& Energy scale uncertainty related to flavour composition (response) & All \\
+        \texttt{JET\_CR\_PunchTroughMC16 }& Energy scale uncertainty for 'punch-through' & All \\
+        \texttt{JET\_CR\_SingleParticle\_HighPt }& Energy scale uncertainty for the behavior of high-\pt\ single hadrons & All \\
+        \texttt{JET\_CR\_JER\_DataVsMC}& Energy resolution total uncertainty  & All \\
+        \texttt{JET\_CR\_JER\_EffectiveNP\_\{1-6,7restTerm\}}& Energy resolution total uncertainties & All \\
+        \texttt{JET\_JvtEfficiency}& JVT efficiency uncertainty  & All \\
+        \texttt{JET\_PU\_\{OffsetMu(NPV),PtTerm,RhoTopology\}}& Energy scale uncertainties due to pile-up effects & All \\
         \hline
         \multicolumn{3}{c}{Large-R jets}\\
         \hline
-        \texttt{FJ\_JMSJES\_Baseline\_Kin }&  {Energy and mass scale uncertainty due to basic data-simulation differences} & boosted \\
-        \texttt{FJ\_JMSJES\_Modelling\_Kin }& {Energy and mass scale uncertainty due to simulation differences} & boosted \\
-        \texttt{FJ\_JMSJES\_Tracking\_Kin }&  {Energy and mass scale uncertainty on reference tracks} & boosted \\
-        \texttt{FJ\_JMSJES\_TotalStat\_Kin }& {Energy and mass scale uncertainty from stat. unc. on the measurement} & boosted \\
-        \texttt{FJ\_JER }&  Energy resolution uncertainty & boosted \\
-        \texttt{FJ\_JMR }&  Mass resolution uncertainty & boosted \\
+        \texttt{FJ\_JMSJES\_Baseline\_Kin }&  {Energy and mass scale uncertainty due to basic data-simulation differences} & Boosted \\
+        \texttt{FJ\_JMSJES\_Modelling\_Kin }& {Energy and mass scale uncertainty due to simulation differences} & Boosted \\
+        \texttt{FJ\_JMSJES\_Tracking\_Kin }&  {Energy and mass scale uncertainty on reference tracks} & Boosted \\
+        \texttt{FJ\_JMSJES\_TotalStat\_Kin }& {Energy and mass scale uncertainty from stat. unc. on the measurement} & Boosted \\
+        \texttt{FJ\_JER }&  Energy resolution uncertainty & Boosted \\
+        \texttt{FJ\_JMR }&  Mass resolution uncertainty & Boosted \\
         \hline
         \multicolumn{3}{c}{Flavour tagging: PFlow jets }\\
         \hline
-        \texttt{FT\_EFF\_PFlow\_Eigen\_B\_\{0-44\}}& {$b$-tagging efficiency uncertainties for $b$-jets} & resolved \\
-        \texttt{FT\_EFF\_PFlow\_Eigen\_C\_\{0-19\}}&{$b$-tagging efficiency uncertainties for $c$-jets} & resolved \\
-        \texttt{FT\_EFF\_PFlow\_Eigen\_Light\_\{0-19\}}&{$b$-tagging efficiency uncertainties for light-jets} & resolved \\
-        \texttt{FT\_EFF\_PFlow\_extrapolation }& $b$-tagging efficiency uncertainty for high-\pt jets & resolved \\
+        \texttt{FT\_EFF\_PFlow\_Eigen\_B\_\{0-44\}}& {Tagging efficiency uncertainties for $b$-jets} & Resolved \\
+        \texttt{FT\_EFF\_PFlow\_Eigen\_C\_\{0-19\}}&{Tagging efficiency uncertainties for $c$-jets} & Resolved \\
+        \texttt{FT\_EFF\_PFlow\_Eigen\_Light\_\{0-19\}}&{Tagging efficiency uncertainties for light-jets} & Resolved \\
+        \texttt{FT\_EFF\_PFlow\_extrapolation }& Tagging efficiency uncertainty for high-\pt\ jets & Resolved \\
         \hline
         \multicolumn{3}{c}{$b$-tagging: VR track jets}\\
         \hline
-        \texttt{FT\_EFF\_VR\_Eigen\_B\_\{0-4\}}& {$b$-tagging efficiency uncertainties for $b$-jets} & boosted \\
-        \texttt{FT\_EFF\_VR\_Eigen\_C\_\{0-3\}}&{$b$-tagging efficiency uncertainties for $c$-jets} & boosted \\
-        \texttt{FT\_EFF\_VR\_Eigen\_Light\_\{0-3\}}&{$b$-tagging efficiency uncertainties for light-jets} & boosted \\
-        \texttt{FT\_EFF\_VR\_extrapolation }& $b$-tagging efficiency uncertainty for high-\pt jets & boosted \\
+        \texttt{FT\_EFF\_VR\_Eigen\_B\_\{0-4\}}& {$b$-tagging efficiency uncertainties for $b$-jets} & Boosted \\
+        \texttt{FT\_EFF\_VR\_Eigen\_C\_\{0-3\}}&{$b$-tagging efficiency uncertainties for $c$-jets} & Boosted \\
+        \texttt{FT\_EFF\_VR\_Eigen\_Light\_\{0-3\}}&{$b$-tagging efficiency uncertainties for light-jets} & Boosted \\
+        \texttt{FT\_EFF\_VR\_extrapolation }& $b$-tagging efficiency uncertainty for high-\pt\ jets & Boosted \\
         \hline \hline
-    \end{tabular}}
+    \end{tabular}
+    }
     \caption{Summary of all experimental systematic uncertainties. }
     \label{tab:ExpSysts}
     \renewcommand{\arraystretch}{1.0}
